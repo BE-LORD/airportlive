@@ -3,6 +3,8 @@ import "./globals.css";
 import { constructMetadata } from "@/lib/seo";
 import { buildAllSchemas } from "@/lib/schema";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import CustomCursor from "@/components/layout/CustomCursor";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -46,9 +48,12 @@ export default function RootLayout({
         ))}
       </head>
       <body className="font-sans bg-sona-cream text-sona-text antialiased">
-        <div className="grain-overlay" aria-hidden="true" />
-        {children}
-        <WhatsAppFloat />
+        <CustomCursor />
+        <SmoothScroll>
+          <div className="grain-overlay" aria-hidden="true" />
+          {children}
+          <WhatsAppFloat />
+        </SmoothScroll>
       </body>
     </html>
   );

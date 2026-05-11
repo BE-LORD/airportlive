@@ -157,10 +157,10 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.028;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  mix-blend-mode: multiply;
+  mix-blend-mode: overlay;
 }
 
 /* ═══════════════════════════════════════════════
@@ -228,4 +228,58 @@ body {
 
 .gold-glow-hover:hover {
   box-shadow: 0 8px 40px var(--glow-gold);
+}
+
+/* ═══════════════════════════════════════════════
+   Lenis & Custom Cursor Styles
+   ═══════════════════════════════════════════════ */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hide default cursor on desktop devices when CustomCursor is active */
+@media (pointer: fine) {
+  body, a, button, [role="button"], input, select, textarea, [data-cursor] {
+    cursor: none !important;
+  }
+}
+
+/* Luxury Noise Texture Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Kinetic reveal animations */
+.kinetic-reveal {
+  overflow: hidden;
+}
+
+.kinetic-reveal > span {
+  display: block;
 }

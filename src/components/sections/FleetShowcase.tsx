@@ -1,11 +1,8 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { Users, Luggage, Star, ArrowRight } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const FLEET_DETAILED = [
   {
@@ -80,118 +77,182 @@ const FLEET_DETAILED = [
   },
 ];
 
-export default function FleetShowcase() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+// 3D Tilt Card Component
+function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.fleet-card', {
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 60%',
-        }
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-  const whatsappMsg = (vehicleName: string) =>
-    encodeURIComponent(`Hi ${BUSINESS.name}, I want to book a ${vehicleName}.\n\nPickup: \nDrop: \nDate: `);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
+
+  const whatsappMsg = encodeURIComponent(
+    `Hi ${BUSINESS.name}, I want to book a ${vehicle.name}.\n\nPickup: \nDrop: \nDate: `
+  );
 
   return (
-    <section ref={sectionRef} id="fleet" className="py-24 md:py-32 bg-[#171717] text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-16 md:mb-20 text-center">
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">100+ Vehicles Network</p>
-          <h2 className="text-4xl md:text-6xl font-serif mb-6">Choose Your <span className="italic text-[#B88A44]">Ride</span></h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/60 font-sans">
-            Every vehicle is selected for the trip it serves best. Compare comfort, capacity, and suitability.
-          </p>
+    <motion.div
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-w-[320px] md:min-w-[400px] bg-[#101010] border border-white/10 rounded-[24px] overflow-hidden group cursor-grab active:cursor-grabbing flex flex-col"
+    >
+      {/* Image Parallax Container */}
+      <div 
+        className="h-[280px] relative overflow-hidden"
+        style={{ transform: "translateZ(30px)" }}
+      >
+        <motion.div
+          className="absolute inset-[-10%] bg-cover bg-center"
+          animate={{ scale: isHovered ? 1.1 : 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ backgroundImage: `url(${vehicle.image})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#101010] via-black/40 to-transparent" />
+        
+        <div className="absolute bottom-6 left-6" style={{ transform: "translateZ(40px)" }}>
+          <span className="bg-[#B88A44] text-white text-[10px] font-mono uppercase tracking-wider px-4 py-1.5 rounded-full">
+            {vehicle.comfort}
+          </span>
         </div>
+      </div>
 
-        {/* Fleet Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FLEET_DETAILED.map((vehicle) => (
-            <div
-              key={vehicle.id}
-              className="fleet-card bg-white/5 border border-white/10 rounded-[20px] overflow-hidden hover:border-[#B88A44]/30 transition-all duration-500 group flex flex-col"
-            >
-              {/* Image */}
-              <div className="h-48 md:h-56 relative overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${vehicle.image})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#171717] to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <span className="bg-[#B88A44] text-white text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded-full">
-                    {vehicle.comfort}
-                  </span>
-                </div>
-              </div>
+      {/* Content */}
+      <div className="p-8 flex-grow flex flex-col relative z-10" style={{ transform: "translateZ(20px)" }}>
+        <p className="text-[#B88A44] font-mono text-xs uppercase tracking-widest mb-2">{vehicle.tagline}</p>
+        <h3 className="text-3xl font-serif mb-2 text-white">{vehicle.name}</h3>
+        <p className="text-xs text-white/40 mb-6 font-mono">{vehicle.vehicles}</p>
 
-              {/* Content */}
-              <div className="p-6 flex-grow flex flex-col">
-                <p className="text-[#B88A44] font-mono text-xs uppercase tracking-widest mb-1">{vehicle.tagline}</p>
-                <h3 className="text-2xl font-serif mb-4">{vehicle.name}</h3>
-
-                {/* Specs Grid */}
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <Users className="h-3.5 w-3.5 text-[#B88A44]" />
-                    {vehicle.seats}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <Luggage className="h-3.5 w-3.5 text-[#B88A44]" />
-                    {vehicle.luggage}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <Star className="h-3.5 w-3.5 text-[#B88A44]" />
-                    {vehicle.bestFor}
-                  </div>
-                </div>
-
-                {/* Suitability */}
-                <div className="flex gap-2 mb-4">
-                  {vehicle.airport && (
-                    <span className="text-[10px] bg-white/10 px-2 py-1 rounded-full uppercase tracking-wider">Airport ✓</span>
-                  )}
-                  {vehicle.outstation && (
-                    <span className="text-[10px] bg-white/10 px-2 py-1 rounded-full uppercase tracking-wider">Outstation ✓</span>
-                  )}
-                </div>
-
-                {/* Vehicles */}
-                <p className="text-xs text-white/40 mb-6 font-mono">{vehicle.vehicles}</p>
-
-                {/* Features */}
-                <ul className="space-y-2 mb-6 flex-grow">
-                  {vehicle.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-white/70">
-                      <span className="w-1 h-1 bg-[#B88A44] rounded-full flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <a
-                  href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg(vehicle.name)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-[#B88A44] text-white py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition-colors"
-                >
-                  Choose {vehicle.name} <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
+        {/* Specs Reveal (Hidden by default, expands on hover) */}
+        <motion.div 
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: isHovered ? 'auto' : 0, opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="overflow-hidden mb-6"
+        >
+          <div className="grid grid-cols-2 gap-4 pb-4 border-b border-white/10">
+            <div className="flex flex-col gap-1 text-sm text-white/70">
+              <span className="flex items-center gap-2 text-white"><Users className="h-4 w-4 text-[#B88A44]" /> Seats</span>
+              <span className="text-xs">{vehicle.seats}</span>
             </div>
-          ))}
+            <div className="flex flex-col gap-1 text-sm text-white/70">
+              <span className="flex items-center gap-2 text-white"><Luggage className="h-4 w-4 text-[#B88A44]" /> Luggage</span>
+              <span className="text-xs">{vehicle.luggage}</span>
+            </div>
+            <div className="flex flex-col gap-1 text-sm text-white/70 col-span-2">
+              <span className="flex items-center gap-2 text-white"><Star className="h-4 w-4 text-[#B88A44]" /> Best For</span>
+              <span className="text-xs">{vehicle.bestFor}</span>
+            </div>
+          </div>
+          
+          <ul className="space-y-2 mt-4">
+            {vehicle.features.map((feature, i) => (
+              <li key={i} className="flex items-center gap-3 text-xs text-white/70">
+                <span className="w-1 h-1 bg-[#B88A44] rounded-full flex-shrink-0" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* CTA */}
+        <div className="mt-auto">
+          <a
+            href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="Book"
+            className="w-full flex items-center justify-between bg-white/5 hover:bg-[#B88A44] border border-white/10 hover:border-transparent text-white py-4 px-6 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300"
+          >
+            Choose {vehicle.name} <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function FleetShowcase() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // We use Framer Motion's drag to make it natively interactive without react-use-gesture
+  return (
+    <section ref={containerRef} id="fleet" className="py-32 bg-[#171717] text-white overflow-hidden relative" data-cursor="Drag">
+      <div className="max-w-7xl mx-auto px-4 relative z-10 pointer-events-none">
+        <div className="mb-12">
+          <motion.p 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+          >
+            100+ Vehicles Network
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-7xl font-serif mb-6"
+          >
+            Choose Your <span className="italic text-[#B88A44]">Ride</span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="max-w-xl text-lg text-white/50 font-sans"
+          >
+            Drag to explore our premium fleet. Hover over any vehicle to reveal specifications.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Draggable Carousel */}
+      <div className="pl-4 md:pl-0 md:ml-[calc((100vw-80rem)/2)] pb-12 cursor-grab active:cursor-grabbing">
+        <motion.div 
+          ref={carouselRef}
+          className="flex gap-6 pr-8"
+          drag="x"
+          dragConstraints={{ right: 0, left: -1800 }} // We will rely on approximate width for drag constraints
+          whileTap={{ cursor: "grabbing" }}
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          {FLEET_DETAILED.map((vehicle) => (
+            <FleetCard key={vehicle.id} vehicle={vehicle} />
+          ))}
+          {/* Spacer for right edge */}
+          <div className="min-w-[1px] md:min-w-[40px]" />
+        </motion.div>
       </div>
     </section>
   );

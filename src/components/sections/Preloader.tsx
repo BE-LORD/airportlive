@@ -1,28 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BUSINESS } from "@/lib/constants";
 
-/**
- * Preloader — Spec: §11.1 FRAMER_PREMIUM_FRONTEND_REDESIGN_MASTER.md
- * "A quiet premium start."
- *
- * Timeline:
- *   0ms → warm black screen
- * 200ms → "V3" appears (scale + opacity)
- * 700ms → "TOUR & TRAVELS" fades in
- * 1100ms → gold progress line draws
- * 1600ms → logo moves upward
- * 1900ms → cream wipe reveals hero
- *
- * Shows once per session via sessionStorage.
- */
-
 export function Preloader() {
+  const [count, setCount] = useState(0);
   const [visible, setVisible] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Only show once per session
@@ -32,107 +16,92 @@ export function Preloader() {
       return;
     }
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReduced) {
-      sessionStorage.setItem("v3-preloader-seen", "true");
-      setVisible(false);
-      return;
-    }
-
-    // Cinematic GSAP timeline
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          sessionStorage.setItem("v3-preloader-seen", "true");
-          setVisible(false);
-        },
+    const interval = setInterval(() => {
+      setCount((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setVisible(false);
+            sessionStorage.setItem("v3-preloader-seen", "true");
+          }, 800);
+          return 100;
+        }
+        // Random increment for organic feel
+        const inc = Math.floor(Math.random() * 15) + 5;
+        return Math.min(prev + inc, 100);
       });
+    }, 150);
 
-      // Initial state
-      gsap.set("[data-preloader-v3]", { opacity: 0, scale: 0.8 });
-      gsap.set("[data-preloader-tagline]", { opacity: 0, y: 10 });
-      gsap.set("[data-preloader-line]", { scaleX: 0, transformOrigin: "left center" });
-
-      // 200ms — V3 logo appears
-      tl.to("[data-preloader-v3]", {
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "back.out(1.5)",
-        delay: 0.2,
-      })
-        // 700ms — Tagline fades in
-        .to("[data-preloader-tagline]", {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power3.out",
-        }, "-=0.1")
-        // 1100ms — Gold line draws
-        .to("[data-preloader-line]", {
-          scaleX: 1,
-          duration: 0.8,
-          ease: "power2.inOut",
-        }, "-=0.2")
-        // 1600ms — Content moves up
-        .to(contentRef.current, {
-          y: -30,
-          opacity: 0,
-          duration: 0.4,
-          ease: "power3.in",
-        }, "+=0.2")
-        // 1900ms — Cream wipe out
-        .to(containerRef.current, {
-          yPercent: -100,
-          duration: 0.6,
-          ease: "power4.inOut",
-        }, "-=0.1");
-    }, containerRef);
-
-    return () => ctx.revert();
+    return () => clearInterval(interval);
   }, []);
 
   if (!visible) return null;
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1A1208]"
-      aria-hidden="true"
-    >
-      <div ref={contentRef} className="text-center">
-        {/* V3 Logo */}
-        <h1
-          data-preloader-v3
-          className="font-[family-name:var(--font-cormorant)] text-6xl font-light tracking-tight text-[#F6F1E7] sm:text-7xl"
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{ 
+            y: "-100%",
+            transition: { duration: 1, ease: [0.76, 0, 0.24, 1] }
+          }}
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#101010]"
         >
-          V3
-        </h1>
+          {/* Grain overlay for luxury feel */}
+          <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-10 mix-blend-overlay pointer-events-none" />
 
-        {/* Tagline */}
-        <p
-          data-preloader-tagline
-          className="mt-3 font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.35em] text-[#C8780A]"
-        >
-          {BUSINESS.tagline}
-        </p>
+          <div className="relative z-10 text-center w-full max-w-sm px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="font-serif text-5xl md:text-7xl text-white mb-2 tracking-tighter">
+                {BUSINESS.brand.toUpperCase()}
+              </h1>
+              <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-[#B88A44] mb-12">
+                Tour & Travels
+              </p>
+            </motion.div>
 
-        {/* Gold progress line */}
-        <div className="mt-10 mx-auto h-0.5 w-32 overflow-hidden rounded-full bg-white/5">
-          <div
-            data-preloader-line
-            className="h-full w-full bg-gradient-to-r from-[#C8780A] to-[#F0B429]"
-          />
-        </div>
+            {/* Counter */}
+            <div className="overflow-hidden h-[120px] md:h-[160px] flex items-center justify-center">
+              <motion.span 
+                key={count}
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                className="font-serif text-[80px] md:text-[120px] text-white leading-none inline-block"
+              >
+                {count}%
+              </motion.span>
+            </div>
 
-        {/* Sub-brand */}
-        <p className="mt-6 font-[family-name:var(--font-jetbrains-mono)] text-[9px] uppercase tracking-[0.2em] text-white/20">
-          Tour & Travels
-        </p>
-      </div>
-    </div>
+            {/* Progress bar */}
+            <div className="mt-8 w-full h-[1px] bg-white/10 relative overflow-hidden">
+              <motion.div 
+                className="absolute top-0 left-0 h-full bg-[#B88A44]"
+                initial={{ width: 0 }}
+                animate={{ width: `${count}%` }}
+                transition={{ duration: 0.5 }}
+              />
+            </div>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              className="mt-6 font-mono text-[9px] uppercase tracking-widest text-white"
+            >
+              Initializing Premium Fleet
+            </motion.p>
+          </div>
+
+          {/* Decorative background numbers */}
+          <div className="absolute bottom-10 right-10 opacity-5 font-serif text-[20vw] text-white select-none pointer-events-none leading-none">
+            {count}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

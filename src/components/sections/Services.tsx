@@ -1,5 +1,8 @@
 'use client';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Plane, MapPin, Briefcase, Users, PartyPopper, Car, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const SERVICES = [
   {
@@ -9,14 +12,18 @@ const SERVICES = [
     icon: Plane,
     route: 'Delhi, Chandigarh, Amritsar Airports',
     href: '/airport-taxi',
+    colSpan: 'md:col-span-2 lg:col-span-2',
+    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop',
   },
   {
     title: 'Outstation Taxi',
     desc: 'Comfortable long-route travel for family, business, and personal journeys across North India.',
-    bestFor: 'Intercity travel, hill stations, pilgrimages',
+    bestFor: 'Intercity travel, hill stations',
     icon: MapPin,
     route: 'Punjab, Himachal, Delhi NCR',
     href: '/routes',
+    colSpan: 'md:col-span-1 lg:col-span-1',
+    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop',
   },
   {
     title: 'Corporate Travel',
@@ -24,75 +31,137 @@ const SERVICES = [
     bestFor: 'Executives, teams, business events',
     icon: Briefcase,
     route: 'GST invoices available',
-    href: '/contact',
+    href: '/corporate-travel',
+    colSpan: 'md:col-span-1 lg:col-span-1',
+    image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop',
   },
   {
     title: 'Family Tours',
     desc: 'Spacious, clean vehicles for relaxed family travel, planned trips, and pilgrimage journeys.',
-    bestFor: 'Weekend getaways, religious trips, family visits',
+    bestFor: 'Weekend getaways, religious trips',
     icon: Users,
     route: 'Customizable routes',
-    href: '/fleet',
+    href: '/family-tours',
+    colSpan: 'md:col-span-2 lg:col-span-2',
+    image: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2070&auto=format&fit=crop',
   },
   {
-    title: 'Wedding & Event Transport',
+    title: 'Event Transport',
     desc: 'Reliable multi-vehicle coordination for guest pickups, decorated cars, and event logistics.',
-    bestFor: 'Weddings, receptions, guest coordination',
+    bestFor: 'Weddings, receptions',
     icon: PartyPopper,
     route: 'Multi-city fleet management',
     href: '/contact',
+    colSpan: 'md:col-span-2 lg:col-span-1',
+    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop',
   },
   {
     title: 'Local City Rides',
     desc: 'Premium vehicles for local shopping, meetings, hospital visits, or day-to-day premium travel.',
-    bestFor: 'Shopping, meetings, daily premium travel',
+    bestFor: 'Shopping, daily premium travel',
     icon: Car,
     route: 'Within Ludhiana & nearby',
     href: '/contact',
+    colSpan: 'md:col-span-1 lg:col-span-2',
+    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop',
   },
 ];
 
+function BentoCard({ service, index }: { service: typeof SERVICES[0], index: number }) {
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const Icon = service.icon;
+
+  return (
+    <Link 
+      href={service.href}
+      ref={cardRef}
+      data-cursor="Explore"
+      className={`group relative overflow-hidden rounded-[32px] border border-[#DEDBD2] bg-[#101010] flex flex-col justify-end min-h-[360px] md:min-h-[420px] ${service.colSpan} transition-transform duration-500 hover:scale-[0.98]`}
+    >
+      {/* Parallax Background */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-[-20%] z-0"
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center grayscale-[80%] opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700 ease-in-out"
+          style={{ backgroundImage: `url(${service.image})` }}
+        />
+      </motion.div>
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#101010] via-[#101010]/60 to-transparent" />
+
+      {/* Content */}
+      <div className="relative z-20 p-8 md:p-10 flex flex-col h-full justify-end">
+        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-[#B88A44] transition-colors duration-500">
+          <Icon className="w-5 h-5 text-white" />
+        </div>
+        
+        <h3 className="text-2xl md:text-3xl font-serif text-white mb-3">{service.title}</h3>
+        <p className="text-white/70 text-sm md:text-base mb-6 leading-relaxed max-w-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+          {service.desc}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 items-center opacity-100 group-hover:opacity-0 group-hover:-translate-y-4 transition-all duration-500 absolute bottom-8 left-8 right-8">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#B88A44] bg-[#B88A44]/10 px-3 py-1.5 rounded-full backdrop-blur-md border border-[#B88A44]/20">
+            {service.bestFor}
+          </span>
+          <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-md">
+            {service.route}
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-[#F8F7F3]">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-16 text-center">
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Signature Services</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-[#101010]">Crafted for the Modern Traveler</h2>
+    <section id="services" className="py-32 bg-[#F8F7F3] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <div className="mb-20 text-center">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+          >
+            Signature Services
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-7xl font-serif text-[#101010]"
+          >
+            Crafted for the <br/>
+            <span className="italic text-[#B88A44]">Modern Traveler</span>
+          </motion.h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICES.map((service, i) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={i}
-                className="bg-white p-6 md:p-8 rounded-[20px] border border-[#DEDBD2] hover:border-[#B88A44]/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-500 group flex flex-col"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-[#EFEEE8] group-hover:bg-[#B88A44]/10 flex items-center justify-center mb-5 transition-colors">
-                  <Icon className="w-5 h-5 text-[#B88A44]" />
-                </div>
-                <h3 className="text-xl font-serif text-[#101010] mb-3">{service.title}</h3>
-                <p className="text-[#6F6B63] text-sm mb-4 leading-relaxed">{service.desc}</p>
-
-                {/* Best For */}
-                <div className="bg-[#EFEEE8] rounded-xl px-4 py-3 mb-4">
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-[#6F6B63] mb-1">Best for</p>
-                  <p className="text-sm text-[#101010] font-medium">{service.bestFor}</p>
-                </div>
-
-                {/* Route hint */}
-                <p className="text-xs text-[#6F6B63]/60 font-mono uppercase tracking-wider mb-6">{service.route}</p>
-
-                {/* CTA */}
-                <a
-                  href={service.href}
-                  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#101010] group-hover:text-[#B88A44] transition-colors"
-                >
-                  Explore <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            );
-          })}
+        
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
+          {SERVICES.map((service, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, delay: i * 0.1 }}
+              className={service.colSpan}
+            >
+              <BentoCard service={service} index={i} />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,10 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BUSINESS } from "@/lib/constants";
-import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
 import {
   buildWhatsAppUrl,
@@ -13,10 +11,8 @@ import {
   buildBookingEmailBody,
 } from "@/lib/booking";
 import { trackEvent } from "@/lib/analytics";
-import { MessageCircle, Mail, CheckCircle } from "lucide-react";
+import { MessageCircle, Mail, ArrowRight, Check } from "lucide-react";
 import type { BookingFormData } from "@/lib/booking";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const initialForm: BookingFormData = {
   fullName: "",
@@ -31,8 +27,52 @@ const initialForm: BookingFormData = {
   message: "",
 };
 
-const inputClasses =
-  "w-full rounded-xl border border-[rgba(26,18,8,0.08)] bg-[#FDFAF3] px-4 py-3.5 text-sm text-[#1A1208] outline-none transition-all duration-300 focus:border-[#C8780A] focus:ring-2 focus:ring-[#C8780A]/20 placeholder:text-[#A08B72]/50";
+// Floating Label Input Component
+function FloatingInput({ 
+  label, 
+  name, 
+  type = "text", 
+  required = false, 
+  value, 
+  onChange,
+  className = ""
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  className?: string;
+}) {
+  const [focused, setFocused] = useState(false);
+  const active = focused || String(value).length > 0;
+
+  return (
+    <div className={`relative ${className}`} data-form-field>
+      <input
+        type={type}
+        name={name}
+        id={name}
+        required={required}
+        value={value}
+        onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        className="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white text-lg outline-none transition-all duration-300 focus:border-[#B88A44] peer"
+        placeholder=" "
+      />
+      <label 
+        htmlFor={name}
+        className={`absolute left-0 transition-all duration-300 pointer-events-none text-white/50 ${
+          active ? '-top-2 text-xs text-[#B88A44]' : 'top-4 text-lg'
+        }`}
+      >
+        {label} {required && <span className="text-[#B88A44]">*</span>}
+      </label>
+    </div>
+  );
+}
 
 export function BookingInquiry() {
   const [form, setForm] = useState<BookingFormData>(initialForm);
@@ -62,270 +102,133 @@ export function BookingInquiry() {
     window.location.href = url;
   };
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const ctx = gsap.context(() => {
-      // Header entry
-      gsap.from("[data-inquiry-header]", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
-
-      // Form entry — clean elastic rise
-      if (formRef.current) {
-        gsap.from(formRef.current, {
-          y: 80,
-          opacity: 0,
-          duration: 1.2,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-          },
-        });
-
-        // Stagger form field groups
-        const inputs = formRef.current.querySelectorAll("[data-form-field]");
-        gsap.from(inputs, {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.04,
-          ease: "back.out(1.3)",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  if (submitted) {
-    return (
-      <section id="inquiry" ref={sectionRef} className="bg-[#EDE6D6] py-28 sm:py-36">
-        <div className="mx-auto max-w-xl px-5 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366]/10">
-            <CheckCircle className="h-8 w-8 text-[#25D366]" />
-          </div>
-          <h2 className="mt-8 font-[family-name:var(--font-cormorant)] text-3xl font-semibold text-[#1E2B4A] sm:text-4xl">
-            Inquiry Prepared
-          </h2>
-          <p className="mt-4 text-[#A08B72] leading-relaxed">
-            Your WhatsApp message has been prepared with all the details.
-            {BUSINESS.name} will confirm everything with you shortly.
-          </p>
-          <Button
-            variant="outline"
-            className="mt-8 border-[rgba(26,18,8,0.12)] text-[#1E2B4A]"
-            onClick={() => {
-              setSubmitted(false);
-              setForm(initialForm);
-            }}
-          >
-            Send Another Inquiry
-          </Button>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="inquiry" ref={sectionRef} className="bg-[#EDE6D6] py-28 sm:py-36">
-      <div className="mx-auto max-w-3xl px-5 sm:px-8">
-        <div data-inquiry-header className="mb-12 text-center">
-          <SectionLabel className="mb-5 justify-center">
-            Get in Touch
-          </SectionLabel>
-          <h2 className="font-[family-name:var(--font-cormorant)] text-5xl font-semibold text-[#1E2B4A] sm:text-6xl">
-            Book Your Ride
-          </h2>
-          <p className="mt-5 text-lg text-[#A08B72] leading-relaxed">
-            Every booking is confirmed personally. No confusion after you message
-            us. Fill in the details — we handle the rest.
-          </p>
+    <section id="inquiry" className="bg-[#101010] py-32 relative overflow-hidden" data-cursor="Type">
+      {/* Background elements */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#B88A44]/30 to-transparent" />
+      <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#B88A44]/5 blur-[150px]" />
+      
+      <div className="mx-auto max-w-4xl px-4 sm:px-8 relative z-10">
+        <div className="mb-20 text-center">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+          >
+            Reservation
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-7xl font-serif text-white mb-6"
+          >
+            Reserve Your <span className="italic text-[#B88A44]">Journey</span>
+          </motion.h2>
         </div>
 
-        <form
-          ref={formRef}
-          onSubmit={handleWhatsAppSubmit}
-          className="rounded-2xl border border-[rgba(26,18,8,0.08)] bg-[#F6F1E7] p-7 sm:p-10 shadow-[0_24px_80px_rgba(23,17,10,0.06)]"
-        >
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Full Name <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="fullName"
-                required
-                value={form.fullName}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="Your full name"
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Phone Number <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="phone"
-                type="tel"
-                required
-                value={form.phone}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="98XXXXXXXX"
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Pickup Location <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="pickup"
-                required
-                value={form.pickup}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="e.g., Ludhiana Railway Station"
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Drop Location <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="drop"
-                required
-                value={form.drop}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="e.g., Chandigarh Airport"
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Travel Date <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="date"
-                type="date"
-                required
-                value={form.date}
-                onChange={handleChange}
-                className={inputClasses}
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Travel Time <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="time"
-                type="time"
-                required
-                value={form.time}
-                onChange={handleChange}
-                className={inputClasses}
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Flight Number
-              </label>
-              <input
-                name="flightNumber"
-                value={form.flightNumber}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="e.g., AI 123"
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Passengers <span className="text-[#C8780A]">*</span>
-              </label>
-              <input
-                name="passengers"
-                type="number"
-                min="1"
-                required
-                value={form.passengers}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="1"
-              />
-            </div>
-            <div data-form-field>
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Luggage Count
-              </label>
-              <input
-                name="luggage"
-                type="number"
-                min="0"
-                value={form.luggage}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="0"
-              />
-            </div>
-            <div data-form-field className="sm:col-span-2">
-              <label className="mb-2 block text-sm font-medium text-[#1A1208]">
-                Special Request / Message
-              </label>
-              <textarea
-                name="message"
-                rows={3}
-                value={form.message}
-                onChange={handleChange}
-                className={inputClasses}
-                placeholder="Any special requirements..."
-              />
-            </div>
-          </div>
-
-          {/* Primary CTA */}
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <Button
-              type="submit"
-              variant="whatsapp"
-              size="lg"
-              className="w-full sm:w-auto bg-[#1E2B4A] border border-[#C8780A]/30 hover:border-[#C8780A]/60 hover:shadow-[0_8px_40px_rgba(240,180,41,0.24)]"
+        <AnimatePresence mode="wait">
+          {submitted ? (
+            <motion.div 
+              key="success"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
+              className="text-center p-12 md:p-20 border border-white/10 bg-white/5 rounded-[32px] backdrop-blur-md"
             >
-              <MessageCircle className="h-5 w-5 text-[#25D366]" />
-              Send Inquiry on WhatsApp
-            </Button>
-
-            {/* Email fallback */}
-            <button
-              type="button"
-              onClick={handleEmailFallback}
-              className="flex items-center gap-2 text-sm text-[#A08B72] underline-offset-4 hover:text-[#C8780A] hover:underline transition-colors"
+              <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#B88A44]/20 border border-[#B88A44]/30 mb-8">
+                <motion.div
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <Check className="h-10 w-10 text-[#B88A44]" />
+                </motion.div>
+              </div>
+              <h3 className="font-serif text-3xl md:text-4xl text-white mb-4">Request Sent Successfully</h3>
+              <p className="text-white/60 mb-10 max-w-lg mx-auto">
+                Your WhatsApp message has been prepared. We'll be in touch momentarily to confirm your booking.
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setForm(initialForm);
+                }}
+                className="text-[#B88A44] font-mono uppercase tracking-widest text-xs hover:text-white transition-colors flex items-center gap-2 mx-auto"
+              >
+                Make Another Booking <ArrowRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              onSubmit={handleWhatsAppSubmit}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="p-8 md:p-12 border border-white/10 bg-white/5 rounded-[32px] backdrop-blur-md"
             >
-              <Mail className="h-4 w-4" />
-              Prefer email? Send inquiry via email instead
-            </button>
-          </div>
-        </form>
+              <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+                <FloatingInput label="Full Name" name="fullName" required value={form.fullName} onChange={handleChange} />
+                <FloatingInput label="Phone Number" name="phone" type="tel" required value={form.phone} onChange={handleChange} />
+                <FloatingInput label="Pickup Location" name="pickup" required value={form.pickup} onChange={handleChange} />
+                <FloatingInput label="Drop Location" name="drop" required value={form.drop} onChange={handleChange} />
+                <FloatingInput label="Travel Date" name="date" type="date" required value={form.date} onChange={handleChange} />
+                <FloatingInput label="Travel Time" name="time" type="time" required value={form.time} onChange={handleChange} />
+                <FloatingInput label="Flight Number (Optional)" name="flightNumber" value={form.flightNumber ?? ""} onChange={handleChange} />
+                
+                <div className="grid grid-cols-2 gap-6">
+                  <FloatingInput label="Passengers" name="passengers" type="number" required value={form.passengers} onChange={handleChange} />
+                  <FloatingInput label="Luggage" name="luggage" type="number" value={form.luggage ?? ""} onChange={handleChange} />
+                </div>
+
+                <div className="sm:col-span-2 relative mt-4">
+                  <textarea
+                    name="message"
+                    id="message"
+                    rows={1}
+                    value={form.message ?? ""}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white text-lg outline-none transition-all duration-300 focus:border-[#B88A44] peer resize-none"
+                    placeholder=" "
+                  />
+                  <label 
+                    htmlFor="message"
+                    className={`absolute left-0 transition-all duration-300 pointer-events-none text-white/50 ${
+                      (form.message?.length ?? 0) > 0 ? '-top-2 text-xs text-[#B88A44]' : 'top-4 text-lg'
+                    }`}
+                  >
+                    Special Requests
+                  </label>
+                </div>
+              </div>
+
+              {/* CTAs */}
+              <div className="mt-16 flex flex-col items-center gap-6">
+                <button
+                  type="submit"
+                  data-cursor="Book"
+                  className="w-full sm:w-auto bg-white text-[#101010] hover:bg-[#B88A44] hover:text-white px-10 py-5 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-3"
+                >
+                  <MessageCircle className="h-5 w-5 text-[#25D366] group-hover:text-white transition-colors" />
+                  Confirm on WhatsApp
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleEmailFallback}
+                  className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+                >
+                  <Mail className="h-4 w-4" />
+                  Or send via email
+                </button>
+              </div>
+            </motion.form>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

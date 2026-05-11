@@ -1,118 +1,176 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
-import { MapPin, Clock, ArrowRight } from 'lucide-react';
+import { MapPin, Clock, ArrowRight, Plane } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const EXPANDED_ROUTES = [
-  { id: 1, from: 'Ludhiana', to: 'Delhi Airport (IGI)', distance: '~310 km', time: '5h 30m', type: 'Airport Transfer', desc: 'Premium non-stop express to Delhi International Airport. Flight tracking included.' },
-  { id: 2, from: 'Chandigarh', to: 'Delhi Airport (IGI)', distance: '~250 km', time: '4h 00m', type: 'Airport Transfer', desc: 'Corporate priority route with highway comfort. Popular for business travelers.' },
-  { id: 3, from: 'Ludhiana', to: 'Chandigarh Airport (IXC)', distance: '~110 km', time: '2h 00m', type: 'Airport Transfer', desc: 'Quick airport connection with terminal drop-off and luggage assistance.' },
-  { id: 4, from: 'Ludhiana', to: 'Amritsar Airport (ATQ)', distance: '~140 km', time: '2h 30m', type: 'Airport Transfer', desc: 'Sri Guru Ram Dass Jee International Airport transfers with punctual service.' },
-  { id: 5, from: 'Jalandhar', to: 'Delhi Airport (IGI)', distance: '~370 km', time: '6h 00m', type: 'Airport Transfer', desc: 'Long-haul comfort ride with professional chauffeur and premium vehicle.' },
-  { id: 6, from: 'Patiala', to: 'Delhi Airport (IGI)', distance: '~270 km', time: '4h 30m', type: 'Airport Transfer', desc: 'Reliable airport transfer from Patiala with flexible pickup timing.' },
-  { id: 7, from: 'Delhi Airport', to: 'Punjab (Any City)', distance: 'Custom', time: 'Express', type: 'Return Transfer', desc: 'Safe arrival home. We pick you up from any terminal — domestic or international.' },
-  { id: 8, from: 'Ludhiana', to: 'Manali / Shimla', distance: '~300+ km', time: '6–8h', type: 'Outstation', desc: 'Hill station getaway with experienced mountain drivers and SUV comfort.' },
-  { id: 9, from: 'Custom', to: 'Anywhere in North India', distance: 'On Request', time: 'On Request', type: 'Custom Route', desc: 'Weddings, corporate events, family trips — tell us your plan and we handle the rest.' },
+const ROUTES = [
+  { 
+    id: 1, 
+    from: 'Ludhiana', 
+    to: 'Delhi Airport (DEL)', 
+    distance: '310 km', 
+    time: '5.5h', 
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop',
+    tag: 'Popular',
+    desc: 'The executive lifeline. Terminal drop-off at T3, T2, or T1. Flight-synced scheduling.'
+  },
+  { 
+    id: 2, 
+    from: 'Chandigarh', 
+    to: 'Delhi Airport (DEL)', 
+    distance: '250 km', 
+    time: '4h', 
+    image: 'https://images.unsplash.com/photo-1569062564112-921d74659fbc?q=80&w=2070&auto=format&fit=crop',
+    tag: 'Corporate',
+    desc: 'Express highway transit for business professionals. Quiet cabins and professional chauffeurs.'
+  },
+  { 
+    id: 3, 
+    from: 'Ludhiana', 
+    to: 'Chandigarh (IXC)', 
+    distance: '110 km', 
+    time: '2h', 
+    image: 'https://images.unsplash.com/photo-1541410965313-d53b3c16ef17?q=80&w=1974&auto=format&fit=crop',
+    tag: 'Regional',
+    desc: 'Swift airport connections from Ludhiana to Mohali/Chandigarh Airport. Stress-free transfers.'
+  },
+  { 
+    id: 4, 
+    from: 'Ludhiana', 
+    to: 'Amritsar (ATQ)', 
+    distance: '145 km', 
+    time: '3h', 
+    image: 'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?q=80&w=1912&auto=format&fit=crop',
+    tag: 'Airport',
+    desc: 'Reliable transfers to Sri Guru Ram Dass Jee International Airport. Punctual and safe.'
+  }
 ];
 
-export default function RouteCorridor() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.route-card', {
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 70%',
-        }
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  const fareMsg = encodeURIComponent(
+    `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`
+  );
 
   return (
-    <section ref={sectionRef} id="routes" className="py-24 md:py-32 bg-[#F8F7F3] text-[#101010] px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16 md:mb-20 text-center">
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Network & Coverage</p>
-          <h2 className="text-4xl md:text-6xl font-serif mb-6">Mastering the <span className="italic text-[#B88A44]">Corridor</span></h2>
-          <p className="max-w-2xl mx-auto text-lg text-[#6F6B63] font-sans">
-            Specialized in Punjab to Delhi Airport route. We don&apos;t just drive; we orchestrate your departure.
-          </p>
+    <motion.div 
+      ref={containerRef}
+      style={{ opacity }}
+      className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden flex items-center justify-center group"
+    >
+      {/* Parallax Background */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-[-20%] z-0"
+      >
+        <div 
+          className="absolute inset-0 bg-cover bg-center grayscale-[50%] group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
+          style={{ backgroundImage: `url(${route.image})` }}
+        />
+        <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-1000" />
+      </motion.div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-4 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-8"
+        >
+          <span className="bg-[#B88A44] text-white text-[10px] font-mono uppercase tracking-[0.3em] px-6 py-2 rounded-full mb-6 inline-block">
+            {route.tag}
+          </span>
+        </motion.div>
+
+        <h3 className="text-4xl md:text-8xl font-serif text-white mb-6 leading-tight">
+          <span className="block opacity-60 group-hover:opacity-100 transition-opacity duration-700">{route.from}</span>
+          <span className="italic text-[#B88A44] px-4">to</span>
+          <span className="block">{route.to}</span>
+        </h3>
+
+        <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-white/70 font-mono text-sm md:text-lg mb-10">
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5 text-[#B88A44]" /> {route.time}
+          </div>
+          <div className="flex items-center gap-2">
+            <ArrowRight className="w-5 h-5 text-[#B88A44]" /> {route.distance}
+          </div>
+          <div className="flex items-center gap-2">
+            <Plane className="w-5 h-5 text-[#B88A44]" /> Terminal Drop
+          </div>
         </div>
 
-        {/* Route Type Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {['All Routes', 'Airport Transfer', 'Outstation', 'Custom'].map((tab) => (
-            <span key={tab} className="bg-white border border-[#DEDBD2] text-xs font-mono uppercase tracking-wider px-4 py-2 rounded-full text-[#6F6B63] cursor-default">
-              {tab}
-            </span>
-          ))}
-        </div>
+        <p className="text-white/50 text-sm md:text-lg max-w-2xl mx-auto mb-10 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+          {route.desc}
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {EXPANDED_ROUTES.map((route) => {
-            const fareMsg = encodeURIComponent(
-              `Hi ${BUSINESS.name}, I need a fare quote:\n\nFrom: ${route.from}\nTo: ${route.to}\nDate: \nPassengers: `
-            );
-            return (
-              <div
-                key={route.id}
-                className="route-card group bg-white border border-[#DEDBD2] rounded-[20px] p-6 md:p-8 hover:border-[#B88A44]/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all duration-500 flex flex-col"
-              >
-                {/* Route type badge */}
-                <span className="inline-block self-start bg-[#EFEEE8] text-[#6F6B63] text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded-full mb-4">
-                  {route.type}
-                </span>
+        <motion.a
+          href={`https://wa.me/91${BUSINESS.whatsapp}?text=${fareMsg}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-cursor="Book"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center gap-4 bg-white text-[#101010] px-8 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] font-bold transition-colors hover:bg-[#B88A44] hover:text-white"
+        >
+          Request Fare Quote <ArrowRight className="w-4 h-4" />
+        </motion.a>
+      </div>
 
-                {/* Route names */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-2 mb-1">
-                    <MapPin className="h-3.5 w-3.5 text-[#B88A44]" />
-                    <span className="font-serif text-xl text-[#101010]">{route.from}</span>
-                  </div>
-                  <div className="ml-1.5 border-l-2 border-dashed border-[#DEDBD2] h-4" />
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-3.5 w-3.5 text-[#101010]" />
-                    <span className="font-serif text-xl text-[#101010]">{route.to}</span>
-                  </div>
-                </div>
+      {/* Decorative lines */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    </motion.div>
+  );
+}
 
-                {/* Distance & Time */}
-                <div className="flex gap-6 mb-4 text-sm text-[#6F6B63]">
-                  <span className="flex items-center gap-1.5">
-                    <ArrowRight className="h-3 w-3" /> {route.distance}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="h-3 w-3" /> {route.time}
-                  </span>
-                </div>
+export default function RouteCorridor() {
+  return (
+    <section id="routes" className="bg-[#101010] py-0 overflow-hidden">
+      <div className="py-32 px-4 text-center border-b border-white/5">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-[#B88A44] uppercase tracking-[0.3em] text-xs font-mono mb-6"
+        >
+          The Transit Network
+        </motion.p>
+        <motion.h2 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-5xl md:text-8xl font-serif text-white"
+        >
+          Mastering the <span className="italic text-[#B88A44]">Corridor</span>
+        </motion.h2>
+      </div>
 
-                {/* Description */}
-                <p className="text-[#6F6B63] text-sm mb-6 flex-grow">{route.desc}</p>
+      <div className="relative">
+        {ROUTES.map((route, i) => (
+          <RouteRow key={route.id} route={route} index={i} />
+        ))}
+      </div>
 
-                {/* CTA */}
-                <a
-                  href={`https://wa.me/91${BUSINESS.whatsapp}?text=${fareMsg}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#101010] group-hover:text-[#B88A44] transition-colors"
-                >
-                  Get Fare Quote <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            );
-          })}
-        </div>
+      {/* Bottom CTA to all routes */}
+      <div className="py-32 bg-[#F8F7F3] text-center">
+        <h4 className="text-3xl md:text-5xl font-serif text-[#101010] mb-8">Traveling elsewhere?</h4>
+        <p className="text-[#6F6B63] mb-12 max-w-xl mx-auto px-4">
+          We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.
+        </p>
+        <button 
+          data-cursor="Call"
+          className="bg-[#101010] text-white px-10 py-5 rounded-full text-sm font-mono uppercase tracking-[0.2em] hover:bg-[#B88A44] transition-colors"
+        >
+          Custom Inquiry
+        </button>
       </div>
     </section>
   );

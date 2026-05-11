@@ -1,5 +1,8 @@
+'use client';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
+import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight } from 'lucide-react';
 
 const exploreLinks = [
   { name: 'Airport Taxi', href: '/airport-taxi' },
@@ -15,11 +18,6 @@ const routeLinks = [
   'Ludhiana → Chandigarh Airport',
   'Ludhiana → Amritsar Airport',
   'Delhi Airport → Punjab',
-  'Jalandhar → Delhi Airport',
-];
-
-const serviceAreas = [
-  'Ludhiana', 'Chandigarh', 'Delhi NCR', 'Amritsar', 'Jalandhar', 'Patiala', 'Mohali', 'Phagwara'
 ];
 
 export default function Footer() {
@@ -28,66 +26,72 @@ export default function Footer() {
   );
 
   return (
-    <footer className="bg-[#171717] text-white/70 pt-20 pb-8 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Top CTA Banner */}
-        <div className="bg-[#B88A44]/10 border border-[#B88A44]/20 rounded-[20px] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-serif text-white mb-2">Ready to book your ride?</h3>
-            <p className="text-white/60 text-sm">Available 24/7 — Airport transfers, outstation rides, and more.</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a
-              href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#25D366] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#1da851] transition-colors text-center"
-            >
-              Book on WhatsApp
-            </a>
-            <a
-              href={`tel:+91${BUSINESS.phone}`}
-              className="border border-white/20 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors text-center"
-            >
-              Call {BUSINESS.phone}
-            </a>
-          </div>
+    <footer className="bg-[#101010] text-white pt-32 pb-12 overflow-hidden relative">
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Massive Branding Reveal */}
+        <div className="mb-24 overflow-hidden">
+          <motion.h2 
+            initial={{ y: "100%" }}
+            whileInView={{ y: 0 }}
+            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            className="text-[18vw] md:text-[14vw] font-serif leading-[0.8] tracking-tighter opacity-10 select-none whitespace-nowrap"
+          >
+            {BUSINESS.brand.toUpperCase()}
+          </motion.h2>
         </div>
 
-        {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand Column */}
-          <div>
-            <h3 className="text-2xl font-serif text-white mb-2">{BUSINESS.name}</h3>
-            <p className="font-mono text-[#B88A44] text-xs uppercase tracking-widest mb-4">{BUSINESS.brand}</p>
-            <p className="text-sm leading-relaxed mb-6">{BUSINESS.address}</p>
-            <div className="space-y-2 font-mono text-sm">
-              <p><a href={`tel:+91${BUSINESS.phone}`} className="hover:text-[#B88A44] transition-colors">+91 {BUSINESS.phone}</a></p>
-              <p><a href={`mailto:${BUSINESS.email}`} className="hover:text-[#B88A44] transition-colors">{BUSINESS.email}</a></p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+          {/* Contact Column */}
+          <div className="space-y-8">
+            <div>
+              <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-6 font-bold">Inquiries</p>
+              <div className="space-y-4">
+                <a 
+                  href={`tel:+91${BUSINESS.phone}`} 
+                  data-cursor="Call"
+                  className="block text-2xl font-serif hover:text-[#B88A44] transition-colors"
+                >
+                  +91 {BUSINESS.phone}
+                </a>
+                <a 
+                  href={`mailto:${BUSINESS.email}`} 
+                  className="block text-white/50 hover:text-white transition-colors break-words"
+                >
+                  {BUSINESS.email}
+                </a>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3 text-white/40 text-sm max-w-xs">
+              <MapPin className="h-4 w-4 mt-1 flex-shrink-0 text-[#B88A44]" />
+              <p>{BUSINESS.address}</p>
             </div>
           </div>
 
-          {/* Explore Column */}
+          {/* Navigation */}
           <div>
-            <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-6">Explore</h4>
-            <ul className="space-y-3">
+            <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Navigation</p>
+            <ul className="space-y-4">
               {exploreLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-[#B88A44] transition-colors text-sm">
-                    {link.name}
+                  <Link href={link.href} className="group flex items-center justify-between text-white/60 hover:text-white transition-all">
+                    <span className="text-lg font-serif">{link.name}</span>
+                    <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Popular Routes Column */}
+          {/* Popular Routes */}
           <div>
-            <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-6">Popular Routes</h4>
-            <ul className="space-y-3">
+            <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Top Corridors</p>
+            <ul className="space-y-4">
               {routeLinks.map((route) => (
                 <li key={route}>
-                  <Link href="/routes" className="hover:text-[#B88A44] transition-colors text-sm">
+                  <Link href="/routes" className="block text-white/60 hover:text-white transition-colors text-sm font-mono">
                     {route}
                   </Link>
                 </li>
@@ -95,34 +99,37 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Service Areas Column */}
-          <div>
-            <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-6">Service Areas</h4>
-            <div className="flex flex-wrap gap-2">
-              {serviceAreas.map((area) => (
-                <span
-                  key={area}
-                  className="bg-white/5 border border-white/10 text-xs px-3 py-1.5 rounded-full"
-                >
-                  {area}
-                </span>
-              ))}
+          {/* Connect CTA */}
+          <div className="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+            <div>
+              <h4 className="text-xl font-serif mb-4">Book in seconds.</h4>
+              <p className="text-white/40 text-xs leading-relaxed mb-8 font-mono">
+                WhatsApp verified booking. No automated calls. Real people. 24/7.
+              </p>
             </div>
-            <div className="mt-8">
-              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-3">Business Hours</h4>
-              <p className="text-sm">24/7 — Always Available</p>
-              <p className="text-xs text-white/40 mt-1">Including holidays, late nights, and early mornings.</p>
-            </div>
+            <a
+              href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="Book"
+              className="bg-[#B88A44] text-white px-6 py-4 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-white hover:text-[#101010] transition-colors text-center font-bold"
+            >
+              Start Conversation
+            </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">
-          <p>© {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="/contact" className="hover:text-white/60 transition-colors">Terms of Service</Link>
-            <Link href="/contact" className="hover:text-white/60 transition-colors">Privacy Policy</Link>
-            <Link href="/sitemap.xml" className="hover:text-white/60 transition-colors">Sitemap</Link>
+        {/* Legal & Attribution */}
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-mono uppercase tracking-widest text-white/30">
+          <div className="flex items-center gap-8">
+            <p>© {new Date().getFullYear()} {BUSINESS.brand}</p>
+            <Link href="/contact" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Terms</Link>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <span>Crafted by</span>
+            <span className="text-white font-bold tracking-tighter">V3 DIGITAL</span>
           </div>
         </div>
       </div>

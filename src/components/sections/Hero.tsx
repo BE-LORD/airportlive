@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { MessageCircle, Phone, Shield, Clock, Car, Star } from 'lucide-react';
 
@@ -17,16 +18,6 @@ export default function Hero() {
     vehicle: 'Innova Crysta',
   });
   const [step, setStep] = useState(1);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.hero-anim',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'power3.out', delay: 0.2 }
-      );
-    }, heroRef);
-    return () => ctx.revert();
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,23 +50,53 @@ export default function Hero() {
 
         {/* Left Content */}
         <div className="lg:col-span-7">
-          <p className="hero-anim text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+          >
             PREMIUM AIRPORT TRANSFERS & TRAVEL
-          </p>
-          <h1 className="hero-anim text-5xl md:text-7xl lg:text-[80px] font-serif leading-[0.95] text-white md:text-[#101010] mb-6">
-            WHERE LUXURY<br/>
-            <span className="italic text-white/80 md:text-[#343434]">MEETS COMFORT</span>
+          </motion.p>
+          <h1 className="text-5xl md:text-7xl lg:text-[80px] font-serif leading-[0.95] text-white md:text-[#101010] mb-6 overflow-hidden flex flex-col">
+            <motion.span 
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+              className="block"
+            >
+              WHERE LUXURY
+            </motion.span>
+            <motion.span 
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.4 }}
+              className="block italic text-white/80 md:text-[#343434]"
+            >
+              MEETS COMFORT
+            </motion.span>
           </h1>
-          <p className="hero-anim text-lg text-white/90 md:text-[#6F6B63] max-w-xl mb-10 font-sans leading-relaxed">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="text-lg text-white/90 md:text-[#6F6B63] max-w-xl mb-10 font-sans leading-relaxed"
+          >
             Premium airport transfers and comfortable taxi rides backed by 20+ years of trusted travel experience across Punjab, Chandigarh, and Delhi NCR.
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="hero-anim flex flex-wrap gap-4 mb-12">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="flex flex-wrap gap-4 mb-12"
+          >
             <a
               href={`https://wa.me/91${BUSINESS.whatsapp}?text=${encodeURIComponent(`Hi ${BUSINESS.name}, I want to book a ride.`)}`}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="Book"
               className="flex items-center gap-2 bg-[#171717] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#B88A44] transition-colors"
               aria-label="Book a ride on WhatsApp"
             >
@@ -83,48 +104,61 @@ export default function Hero() {
             </a>
             <a
               href={`tel:+91${BUSINESS.phone}`}
+              data-cursor="Call"
               className="flex items-center gap-2 border border-white/40 md:border-[#DEDBD2] text-white md:text-[#101010] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#EFEEE8] hover:text-[#101010] transition-colors"
               aria-label={`Call ${BUSINESS.phone}`}
             >
               <Phone className="h-4 w-4" /> Call {BUSINESS.phone}
             </a>
-          </div>
+          </motion.div>
 
           {/* Trust Strip */}
-          <div className="hero-anim grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/20 md:border-[#DEDBD2] pt-8">
-            <div className="flex items-center gap-2">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/20 md:border-[#DEDBD2] pt-8"
+          >
+            <div className="flex items-center gap-2" data-cursor="100+">
               <Car className="h-4 w-4 text-[#B88A44] hidden md:block" />
               <div>
                 <p className="font-bold text-white md:text-[#101010]">100+</p>
                 <p className="text-xs text-white/70 md:text-[#6F6B63] uppercase">Fleet</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" data-cursor="Trust">
               <Shield className="h-4 w-4 text-[#B88A44] hidden md:block" />
               <div>
                 <p className="font-bold text-white md:text-[#101010]">20+ Years</p>
                 <p className="text-xs text-white/70 md:text-[#6F6B63] uppercase">Experience</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" data-cursor="24/7">
               <Clock className="h-4 w-4 text-[#B88A44] hidden md:block" />
               <div>
                 <p className="font-bold text-white md:text-[#101010]">24/7</p>
                 <p className="text-xs text-white/70 md:text-[#6F6B63] uppercase">Booking</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" data-cursor="Elite">
               <Star className="h-4 w-4 text-[#B88A44] hidden md:block" />
               <div>
                 <p className="font-bold text-white md:text-[#101010]">4.9★</p>
                 <p className="text-xs text-white/70 md:text-[#6F6B63] uppercase">Rating</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right: Booking Form */}
-        <div className="hero-anim lg:col-span-5 relative mt-8 lg:mt-0" id="booking">
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          className="lg:col-span-5 relative mt-8 lg:mt-0" 
+          id="booking"
+          data-cursor="Form"
+        >
           <div className="bg-white p-6 md:p-8 rounded-[24px] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] border border-[#DEDBD2]">
             <h3 className="text-2xl font-serif text-[#101010] mb-2">Request Fare Quote</h3>
             <p className="text-sm text-[#6F6B63] mb-6">Fill details and get an instant quote on WhatsApp.</p>
@@ -273,7 +307,7 @@ export default function Hero() {
               No online payment • Quote confirmed on WhatsApp
             </p>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>
