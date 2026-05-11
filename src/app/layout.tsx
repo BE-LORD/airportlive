@@ -2,6 +2,7 @@ import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { constructMetadata } from "@/lib/seo";
 import { buildAllSchemas } from "@/lib/schema";
+import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className="font-sans bg-sona-cream text-sona-text antialiased">
         <div className="grain-overlay" aria-hidden="true" />
         {children}
+        <WhatsAppFloat />
       </body>
     </html>
   );
