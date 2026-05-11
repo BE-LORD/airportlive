@@ -1,26 +1,231 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ═══════════════════════════════════════════════════════════
+     SONA CORRIDOR 2.0 — Full Design System Tokens
+     Master Spec: FRAMER_PREMIUM_FRONTEND_REDESIGN_MASTER.md
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── Background Palette ── */
+  --color-sona-cream: #F6F1E7;
+  --color-sona-cream-dark: #EDE6D6;
+  --color-sona-cream-soft: #F8F3EA;
+  --color-sona-cream-warm: #F1E6D2;
+  --color-sona-card: #FDFAF3;
+
+  /* ── Dark Backgrounds ── */
+  --color-sona-dark: #1A1208;
+  --color-sona-indigo: #1E2B4A;
+  --color-sona-indigo-mid: #2D3E6A;
+  --color-sona-ink: #17110A;
+
+  /* ── Gold & Saffron ── */
+  --color-sona-gold: #C8780A;
+  --color-sona-gold-bright: #F0B429;
+  --color-sona-gold-pale: #F5D485;
+  --color-sona-gold-soft: #E2B866;
+  --color-sona-saffron: #E8943A;
+  --color-sona-saffron-muted: #D98A32;
+
+  /* ── Text Palette ── */
+  --color-sona-text: #1A1208;
+  --color-sona-text-secondary: #5C4733;
+  --color-sona-text-muted: #A08B72;
+  --color-sona-text-on-dark: #F6F1E7;
+  --color-sona-text-gold: #C8780A;
+
+  /* ── Charcoal & Brown ── */
+  --color-sona-charcoal: #2d2d2d;
+  --color-sona-brown: #4B3827;
+
+  /* ── Borders ── */
+  --color-sona-border: rgba(26, 18, 8, 0.08);
+  --color-sona-border-strong: rgba(26, 18, 8, 0.16);
+  --color-sona-border-gold: rgba(200, 120, 10, 0.34);
+
+  /* ── Base Mapping ── */
+  --color-background: var(--color-sona-cream);
+  --color-foreground: var(--color-sona-text);
+
+  /* ── Font Families ── */
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* ── Shadows ── */
+  --shadow-sona-soft: 0 24px 80px rgba(26, 18, 8, 0.08);
+  --shadow-sona-card: 0 16px 50px rgba(23, 17, 10, 0.08);
+  --shadow-sona-deep: 0 40px 120px rgba(26, 18, 8, 0.18);
+
+  /* ── Animations ── */
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ═══════════════════════════════════════════════
+   Display Typography Scale (clamp-based fluid)
+   ═══════════════════════════════════════════════ */
+:root {
+  --display-sm: clamp(2.8rem, 6vw, 5rem);
+  --display-md: clamp(4rem, 10vw, 8.5rem);
+  --display-lg: clamp(5.5rem, 15vw, 13rem);
+  --display-xl: clamp(7rem, 18vw, 16rem);
+  --glow-gold: rgba(240, 180, 41, 0.24);
+
+  /* ── Spacing Tokens ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+
+  /* ── Radius Tokens ── */
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-pill: 999px;
+}
+
+/* ═══════════════════════════════════════════════
+   Keyframe Animations
+   ═══════════════════════════════════════════════ */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes gold-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes scale-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ═══════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════ */
+
+/* NOTE: No scroll-behavior: smooth here.
+   Lenis handles smooth scrolling. CSS smooth-scroll
+   would cause double-interpolation and sluggishness. */
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-sona-cream);
+  color: var(--color-sona-text);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-sona-gold);
+  color: white;
+}
+
+/* ═══════════════════════════════════════════════
+   Grain Overlay — 2-4% opacity only
+   Film texture for editorial premium feel
+   ═══════════════════════════════════════════════ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+/* ═══════════════════════════════════════════════
+   Reduced Motion — Accessibility (WCAG AA)
+   ═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Focus Visible — Gold ring (WCAG AA)
+   ═══════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--color-sona-gold);
+  outline-offset: 4px;
+}
+
+/* ═══════════════════════════════════════════════
+   Custom Scrollbar — Editorial warm
+   ═══════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sona-cream-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sona-gold);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sona-saffron);
+}
+
+/* ═══════════════════════════════════════════════
+   Typography Helpers
+   ═══════════════════════════════════════════════ */
+.display-font {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.mono-accent {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════
+   Gold Glow Effects
+   ═══════════════════════════════════════════════ */
+.gold-glow {
+  box-shadow: 0 0 40px var(--glow-gold);
+}
+
+.gold-glow-hover:hover {
+  box-shadow: 0 8px 40px var(--glow-gold);
 }
