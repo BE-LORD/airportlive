@@ -14,10 +14,17 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { detectDeviceTier, getParticleCount, getPixelRatio } from '@/lib/three';
+import type { DeviceTier } from '@/lib/three';
 
 interface ParticleSystemProps {
   className?: string;
 }
+
+type ParticleConfig = {
+  tier: DeviceTier;
+  isSupported: boolean;
+  particleCount: number;
+};
 
 export function ParticleSystem({ className = '' }: ParticleSystemProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,22 +34,25 @@ export function ParticleSystem({ className = '' }: ParticleSystemProps) {
   const particlesRef = useRef<THREE.Points | null>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number | null>(null);
-  
-  const [tier, setTier] = useState<string>('low');
-  const [isSupported, setIsSupported] = useState(false);
-  const [particleCount, setParticleCount] = useState(0);
+  const [config, setConfig] = useState<ParticleConfig | null>(null);
 
   useEffect(() => {
-    const detectedTier = detectDeviceTier();
-    const count = getParticleCount(detectedTier);
-    setTier(detectedTier);
-    setParticleCount(count);
-    setIsSupported(count > 0);
+    const frame = window.requestAnimationFrame(() => {
+      const tier = detectDeviceTier();
+      const particleCount = getParticleCount(tier);
+      setConfig({
+        tier,
+        particleCount,
+        isSupported: particleCount > 0,
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
     // Don't render on low-tier devices or if not supported
-    if (!isSupported || particleCount === 0) {
+    if (!config?.isSupported || config.particleCount === 0) {
       return;
     }
 
@@ -66,19 +76,19 @@ export function ParticleSystem({ className = '' }: ParticleSystemProps) {
     // Initialize renderer
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: tier === 'high',
+      antialias: config.tier === 'high',
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(getPixelRatio(tier as any));
+    renderer.setPixelRatio(getPixelRatio(config.tier));
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
     // Create particle geometry
     const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const velocities = new Float32Array(particleCount * 3);
+    const positions = new Float32Array(config.particleCount * 3);
+    const velocities = new Float32Array(config.particleCount * 3);
 
-    for (let i = 0; i < particleCount * 3; i += 3) {
+    for (let i = 0; i < config.particleCount * 3; i += 3) {
       // Random position in a sphere
       const radius = Math.random() * 10 + 5;
       const theta = Math.random() * Math.PI * 2;
@@ -214,9 +224,9 @@ export function ParticleSystem({ className = '' }: ParticleSystemProps) {
       rendererRef.current = null;
       particlesRef.current = null;
     };
-  }, [isSupported, particleCount, tier]);
+  }, [config]);
 
-  if (!isSupported) {
+  if (!config?.isSupported) {
     return null;
   }
 

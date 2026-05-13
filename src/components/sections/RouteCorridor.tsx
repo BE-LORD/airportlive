@@ -1,8 +1,7 @@
 'use client';
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
-import { MapPin, Clock, ArrowRight, Plane } from 'lucide-react';
+import { Clock, ArrowRight, Plane } from 'lucide-react';
 import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 
 const ROUTES = [
@@ -58,35 +57,23 @@ const ROUTES = [
   }
 ];
 
-function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
-
+function RouteRow({ route }: { route: typeof ROUTES[0] }) {
   const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
 
   return (
-    <motion.div 
-      ref={containerRef}
-      style={{ opacity }}
-      className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden flex items-center justify-center group"
+    <div 
+      className="relative min-h-[500px] md:h-[80vh] w-full overflow-hidden flex items-center justify-center group"
     >
       {/* Parallax Background */}
-      <motion.div 
-        style={{ y }}
-        className="absolute inset-[-20%] z-0"
+      <div 
+        className="absolute inset-0 md:inset-[-20%] z-0"
       >
         <div 
           className="absolute inset-0 bg-cover bg-center grayscale-[50%] group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
           style={{ backgroundImage: `url(${route.image})` }}
         />
         <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-1000" />
-      </motion.div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl">
@@ -119,7 +106,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
           </div>
         </div>
 
-        <p className="text-white/50 text-sm md:text-lg max-w-2xl mx-auto mb-10 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+        <p className="text-white/70 md:text-white/50 text-sm md:text-lg max-w-2xl mx-auto mb-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 md:translate-y-4 md:group-hover:translate-y-0">
           {route.desc}
         </p>
 
@@ -128,7 +115,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
           target="_blank"
           rel="noopener noreferrer"
           data-cursor="Book"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.95 }}
           className="inline-flex items-center gap-4 bg-[#1A1A1A] text-[#F5F5F5] px-8 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] font-bold transition-colors hover:bg-[#E5E4E2] hover:text-white"
         >
@@ -138,7 +125,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
 
       {/* Decorative lines */}
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-    </motion.div>
+    </div>
   );
 }
 
@@ -163,8 +150,8 @@ export default function RouteCorridor() {
       </div>
 
       <div className="relative">
-        {ROUTES.map((route, i) => (
-          <RouteRow key={route.id} route={route} index={i} />
+        {ROUTES.map((route) => (
+          <RouteRow key={route.id} route={route} />
         ))}
       </div>
 

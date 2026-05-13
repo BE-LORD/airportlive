@@ -10,7 +10,7 @@
  * - Disabled on touch devices and low-tier devices
  */
 
-import { useRef, useState, ReactNode } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 import { detectDeviceTier, isFeatureEnabled } from '@/lib/three';
 
 interface Card3DTiltProps {
@@ -31,12 +31,18 @@ export function Card3DTilt({
   const cardRef = useRef<HTMLDivElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
   
-  // Check if feature should be enabled (outside of effect)
-  const tier = detectDeviceTier();
-  const enabled = isFeatureEnabled('enable3DCardTilt', tier);
-  const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
-  const isEnabled = enabled && !isTouchDevice;
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const tier = detectDeviceTier();
+      const enabled = isFeatureEnabled('enable3DCardTilt', tier);
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      setIsEnabled(enabled && !isTouchDevice);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isEnabled || !cardRef.current) return;

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "theme-fix.js",
+    "theme-swap.js",
   ]),
   {
     files: ["**/*.test.ts", "**/*.test.tsx", "src/test/setup.ts"],

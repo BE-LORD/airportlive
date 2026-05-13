@@ -446,3 +446,9 @@ html.lenis, html.lenis body {
   .grain-overlay { animation: none !important; }
 }
 
+@media (max-width: 767px), (pointer: coarse) {
+  .grain-overlay,
+  .noise-overlay {
+    display: none;
+  }
+}

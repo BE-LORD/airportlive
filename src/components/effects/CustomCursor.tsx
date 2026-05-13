@@ -13,6 +13,7 @@ export function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const rippleRef = useRef<HTMLDivElement>(null);
+  const cursorTextRef = useRef("");
   const [cursorText, setCursorText] = useState("");
   const pathname = usePathname();
 
@@ -48,7 +49,8 @@ export function CustomCursor() {
       
       if (cursorTarget) {
         const newText = cursorTarget.getAttribute('data-cursor') || "";
-        if (newText !== cursorText) {
+        if (newText !== cursorTextRef.current) {
+          cursorTextRef.current = newText;
           setCursorText(newText);
           isHovering = true;
           gsap.to(ring, {
@@ -63,6 +65,7 @@ export function CustomCursor() {
           gsap.to(text, { opacity: 1, scale: 1, duration: 0.3, delay: 0.1 });
         }
       } else if (isHovering) {
+        cursorTextRef.current = "";
         setCursorText("");
         isHovering = false;
         gsap.to(ring, {
@@ -131,7 +134,7 @@ export function CustomCursor() {
       return interactives;
     };
     
-    let interactives = setupInteractives();
+    const interactives = setupInteractives();
 
     const ticker = () => {
       pos.x += (mouse.x - pos.x) * 0.15;
@@ -153,7 +156,7 @@ export function CustomCursor() {
       });
       gsap.ticker.remove(ticker);
     };
-  }, [pathname, cursorText]); // Re-bind on route changes
+  }, [pathname]); // Re-bind on route changes
 
   return (
     <>

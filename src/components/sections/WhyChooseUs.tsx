@@ -16,28 +16,29 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
+    <section className="py-14 md:py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Image with cinematic clip-path reveal */}
+        {/* Supporting image */}
         <motion.div
-          initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-          whileInView={{ opacity: 1, clipPath: 'inset(0% 0 0 0)' }}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.6, ease: motionEases.mainEase }}
+          className="order-2 lg:order-1"
         >
-          <div className="aspect-[4/5] rounded-[24px] overflow-hidden shadow-sm border border-white/10 relative section-vignette">
+          <div className="aspect-[16/10] bg-[#1A1A1A] sm:aspect-[4/5] rounded-[24px] overflow-hidden shadow-sm border border-white/10 relative section-vignette">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop"
               alt="Professional V3 Tour and Travels chauffeur standing near premium sedan"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover md:grayscale md:hover:grayscale-0 transition-all duration-700"
               loading="lazy"
             />
           </div>
         </motion.div>
 
         {/* Content */}
-        <div>
+        <div className="order-1 lg:order-2">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +56,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
-            className="text-[#A3A3A3] mb-10 text-lg leading-relaxed"
+            className="text-[#A3A3A3] mb-8 md:mb-10 text-base md:text-lg leading-relaxed"
           >
             Since our inception, we have redefined how Punjab travels to the airport. It&apos;s not just a taxi ride; it&apos;s a commitment to punctuality, cleanliness, and peace of mind.
           </motion.p>

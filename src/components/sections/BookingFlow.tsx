@@ -1,6 +1,6 @@
 'use client';
 import { BUSINESS } from '@/lib/constants';
-import { MessageCircle, Phone, CheckCircle, Send, MapPin, Car } from 'lucide-react';
+import { MessageCircle, Phone, CheckCircle, Send, Car } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
@@ -14,7 +14,7 @@ export default function BookingFlow() {
   ];
 
   return (
-    <section id="how-it-works" className="py-12 md:py-24 bg-[#111111]" aria-label="Booking process">
+    <section id="how-it-works" className="py-10 md:py-24 bg-[#111111]" aria-label="Booking process">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -24,10 +24,10 @@ export default function BookingFlow() {
         >
           How It Works
         </motion.p>
-        <h2 className="text-4xl md:text-5xl font-serif text-[#F5F5F5] mb-16">
+        <h2 className="text-4xl md:text-5xl font-serif text-[#F5F5F5] mb-10 md:mb-16">
           <SplitTextReveal text="Booking is Effortless" highlight="Effortless" />
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 md:gap-8 relative">
           {/* Connecting line */}
           <motion.div 
             initial={{ scaleX: 0 }}
@@ -53,7 +53,7 @@ export default function BookingFlow() {
                   whileInView={{ scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 + i * 0.15, type: 'spring', stiffness: 200, damping: 15 }}
-                  className="w-[72px] h-[72px] bg-[#1A1A1A] rounded-full flex items-center justify-center shadow-sm mb-6 border border-white/10 group hover:shadow-[0_8px_30px_rgba(200,200,220,0.15)] hover:border-[#E5E4E2]/30 transition-all duration-500"
+                  className="w-14 h-14 md:w-[72px] md:h-[72px] bg-[#1A1A1A] rounded-full flex items-center justify-center shadow-sm mb-4 md:mb-6 border border-white/10 group hover:shadow-[0_8px_30px_rgba(200,200,220,0.15)] hover:border-[#E5E4E2]/30 transition-all duration-500"
                 >
                   <Icon className="h-6 w-6 text-[#E5E4E2]" />
                 </motion.div>
@@ -71,20 +71,20 @@ export default function BookingFlow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 flex flex-wrap justify-center gap-4"
+          className="mt-10 md:mt-16 flex flex-col sm:flex-row justify-center gap-4"
         >
           <a
             href={`https://wa.me/91${BUSINESS.whatsapp}?text=${encodeURIComponent(`Hi ${BUSINESS.name}, I want to book a ride.`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-[#E5E4E2] text-[#0A0A0A] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#D1D1D1] transition-colors"
+            className="flex min-h-12 items-center justify-center gap-2 bg-[#E5E4E2] text-[#0A0A0A] px-8 py-3.5 md:py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#D1D1D1] transition-colors"
             aria-label="Start booking on WhatsApp"
           >
             <MessageCircle className="h-4 w-4 text-[#25D366]" /> Start Booking
           </a>
           <a
             href={`tel:+91${BUSINESS.phone}`}
-            className="flex items-center gap-2 border border-white/10 text-[#F5F5F5] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A] transition-colors"
+            className="flex min-h-12 items-center justify-center gap-2 border border-white/10 text-[#F5F5F5] px-8 py-3.5 md:py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A] transition-colors"
             aria-label={`Call ${BUSINESS.phone}`}
           >
             <Phone className="h-4 w-4" /> Call {BUSINESS.phone}

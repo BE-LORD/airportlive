@@ -18,7 +18,11 @@ export default function Testimonials() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    const frame = window.requestAnimationFrame(() => {
+      setIsMobile(window.innerWidth < 768);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   return (

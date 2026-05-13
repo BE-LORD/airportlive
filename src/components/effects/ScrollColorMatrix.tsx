@@ -12,14 +12,34 @@
  * reads scroll data to animate global atmospheric elements.
  */
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 export function ScrollColorMatrix() {
-  const { scrollYProgress, scrollY } = useScroll();
-  const [velocity, setVelocity] = useState(0);
-  const lastScroll = useRef(0);
-  const lastTime = useRef(Date.now());
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const connection = (navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }).connection;
+      const mobileOrTouch = window.matchMedia('(max-width: 1023px), (pointer: coarse)').matches;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saveData = Boolean(connection?.saveData);
+      const slowConnection =
+        connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
+
+      setEnabled(!mobileOrTouch && !reducedMotion && !saveData && !slowConnection);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  return enabled ? <DesktopAmbientColorMatrix /> : null;
+}
+
+function DesktopAmbientColorMatrix() {
+  const { scrollYProgress } = useScroll();
   
   // Smooth spring-based transforms for organic movement
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
@@ -46,49 +66,17 @@ export function ScrollColorMatrix() {
     ]
   );
 
-  // Velocity tracking for scroll-responsive elements
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const now = Date.now();
-    const dt = now - lastTime.current;
-    if (dt > 0) {
-      const v = Math.abs(latest - lastScroll.current) / dt;
-      setVelocity(Math.min(v * 10, 1)); // Normalize 0-1
-    }
-    lastScroll.current = latest;
-    lastTime.current = now;
-  });
-
-  // Scroll progress indicator bar at top
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 50 });
-
   return (
     <>
-      {/* ═══ Scroll Progress Bar — Gold line at top ═══ */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#D1D1D1] via-[#FFFFFF] to-[#D1D1D1] z-[100] origin-left"
-        style={{ scaleX }}
-      />
-
       {/* ═══ Ambient Floating Orbs — They drift with scroll ═══ */}
       <motion.div
-        className="fixed left-[-15vw] w-[40vw] h-[40vw] rounded-full pointer-events-none z-[0] blur-[120px]"
+        className="fixed left-[-14vw] h-[34vw] w-[34vw] rounded-full pointer-events-none z-[0] blur-[80px]"
         style={{ top: orbY1, backgroundColor: orbColor1, opacity: orbOpacity1 }}
         aria-hidden="true"
       />
       <motion.div
-        className="fixed right-[-10vw] w-[30vw] h-[30vw] rounded-full pointer-events-none z-[0] blur-[100px]"
+        className="fixed right-[-9vw] h-[26vw] w-[26vw] rounded-full pointer-events-none z-[0] blur-[72px]"
         style={{ top: orbY2, backgroundColor: 'rgba(240, 180, 41, 0.05)', opacity: orbOpacity2 }}
-        aria-hidden="true"
-      />
-
-      {/* ═══ Velocity Indicator — Subtle side accent ═══ */}
-      <motion.div
-        className="fixed right-0 top-1/2 -translate-y-1/2 w-[3px] bg-[#D1D1D1]/30 z-[99] pointer-events-none rounded-full origin-center"
-        animate={{ 
-          height: `${20 + velocity * 80}px`,
-          opacity: velocity > 0.05 ? 0.4 : 0,
-        }}
-        transition={{ duration: 0.15 }}
         aria-hidden="true"
       />
     </>

@@ -9,7 +9,6 @@ import { MotionButton } from '@/components/motion/MotionButton';
 import { CountUp } from '@/components/motion/CountUp';
 import { useWhatsAppRedirect } from '@/hooks/useWhatsAppRedirect';
 import { motionDurations, motionEases } from '@/lib/motion';
-import { ParticleSystem } from '@/components/effects/ParticleSystem';
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -75,9 +74,6 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.12, ease: motionEases.mainEase }}
         />
       </motion.div>
-
-      {/* Three.js Gold Particle Field — device-tier gated */}
-      <ParticleSystem className="z-[1] opacity-60" />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent md:hidden" />
 
