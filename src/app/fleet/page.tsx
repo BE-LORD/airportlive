@@ -25,7 +25,7 @@ export default function FleetPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-32 bg-[#0A0A0A] text-white" aria-label="Fleet page hero">
+      <section className="relative pt-32 md:pt-40 pb-20 md:pb-32 bg-[#0A0A0A] text-white" aria-label="Fleet page hero">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10" aria-hidden="true" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
@@ -53,7 +53,7 @@ export default function FleetPage() {
       <FleetShowcase />
 
       {/* Comparison Table */}
-      <section className="py-24 bg-[#0A0A0A]" aria-label="Vehicle comparison table">
+      <section className="py-16 md:py-24 bg-[#0A0A0A]" aria-label="Vehicle comparison table">
         <div className="max-w-5xl mx-auto px-4">
           <Reveal className="mb-12 text-center">
             <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Quick Compare</p>
@@ -118,7 +118,7 @@ export default function FleetPage() {
       </section>
 
       {/* Fleet Standards */}
-      <section className="py-16 bg-[#1A1A1A]" aria-label="Fleet standards">
+      <section className="py-12 md:py-16 bg-[#1A1A1A]" aria-label="Fleet standards">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           {[
             { title: 'Regular Maintenance', desc: 'Every vehicle goes through regular servicing, deep cleaning, and safety checks before each long-distance trip.' },
@@ -141,7 +141,7 @@ export default function FleetPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-[#141414] text-center" aria-label="Book your vehicle">
+      <section className="py-12 md:py-16 bg-[#141414] text-center" aria-label="Book your vehicle">
         <Reveal className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-serif mb-4 text-[#F5F5F5]">Ready to Choose Your Ride?</h2>
           <p className="text-[#A3A3A3] mb-6">Book your preferred vehicle on WhatsApp or check our routes to plan your journey.</p>
