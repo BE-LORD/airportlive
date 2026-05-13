@@ -53,7 +53,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-[90vh] md:min-h-screen flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
+    <section ref={heroRef} id="home" className="relative min-h-[90dvh] md:min-h-[100dvh] flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
       {/* Background Image with cinematic Ken Burns slow pan */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"

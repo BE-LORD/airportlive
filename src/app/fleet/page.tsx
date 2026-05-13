@@ -68,7 +68,26 @@ export default function FleetPage() {
             transition={{ duration: 0.6, ease: motionEases.softEase }}
             className="bg-[#1A1A1A] rounded-[20px] border border-white/10 overflow-hidden"
           >
-            <div className="overflow-x-auto">
+            {/* Mobile Cards View */}
+            <div className="grid gap-4 p-4 md:hidden">
+              {COMPARISON_TABLE.map((row, i) => (
+                <div key={i} className="bg-[#0A0A0A]/60 rounded-xl p-4 border border-white/5 space-y-3">
+                  <h3 className="font-semibold text-[#F5F5F5] border-b border-white/10 pb-2">{row.vehicle}</h3>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div><span className="text-[#A3A3A3] block mb-1">Seats:</span> {row.seats}</div>
+                    <div><span className="text-[#A3A3A3] block mb-1">Luggage:</span> {row.luggage}</div>
+                    <div><span className="text-[#A3A3A3] block mb-1">Airport:</span> {row.airport}</div>
+                    <div><span className="text-[#A3A3A3] block mb-1">Outstation:</span> {row.outstation}</div>
+                  </div>
+                  <div className="text-xs pt-1">
+                    <span className="text-[#A3A3A3] block mb-1">Best For:</span> {row.best}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm" role="table">
                 <thead>
                   <tr className="bg-[#141414]">
