@@ -9,9 +9,9 @@ import { MessageCircle, Phone, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate static params for all defined SEO pages
@@ -22,8 +22,9 @@ export function generateStaticParams() {
 }
 
 // Generate unique metadata for each SEO page
-export function generateMetadata({ params }: Props): Metadata {
-  const page = SEO_PAGES[params.slug];
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const page = SEO_PAGES[slug];
   
   if (!page) {
     return {};
@@ -35,8 +36,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function SeoPage({ params }: Props) {
-  const page = SEO_PAGES[params.slug];
+export default async function SeoPage({ params }: Props) {
+  const { slug } = await params;
+  const page = SEO_PAGES[slug];
 
   // If the slug is not in our data, return 404
   if (!page) {
