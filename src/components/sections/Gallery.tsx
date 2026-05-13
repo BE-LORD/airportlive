@@ -30,7 +30,7 @@ export default function Gallery() {
       <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[#D1D1D1] opacity-[0.04] blur-[160px] pointer-events-none" />
       <div className="absolute -right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[#FFFFFF] opacity-[0.03] blur-[120px] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        <div className="mb-8 md:mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>
             <motion.p 
               initial={{ opacity: 0, y: 15 }}
@@ -68,7 +68,7 @@ export default function Gallery() {
             Book Now
           </motion.a>
         </div>
-        <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {GALLERY_IMAGES.map((img, i) => (
             <motion.div 
               key={i} 

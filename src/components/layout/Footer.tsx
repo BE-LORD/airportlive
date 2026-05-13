@@ -25,7 +25,7 @@ export default function Footer() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
 
   return (
-    <footer className="bg-[#0A0A0A] text-white pt-12 md:pt-32 overflow-hidden relative">
+    <footer className="bg-[#0A0A0A] text-white pt-12 md:pt-32 pb-28 md:pb-0 overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4">
@@ -47,7 +47,7 @@ export default function Footer() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-24">
           {/* Contact Column */}
           <div className="space-y-8">
             <div>

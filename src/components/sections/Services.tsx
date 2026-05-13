@@ -129,7 +129,7 @@ export default function Services() {
   return (
     <section id="services" className="py-16 bg-[#111111] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="mb-20 text-center">
+        <div className="mb-12 md:mb-20 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -26,7 +26,7 @@ export function MotionAccordion({
   const id = useId();
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("space-y-2 md:space-y-3", className)}>
       {items.map((item, index) => {
         const open = openIndex === index;
         const panelId = `${id}-panel-${index}`;

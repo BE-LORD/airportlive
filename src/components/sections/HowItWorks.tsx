@@ -127,9 +127,9 @@ export function HowItWorks() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book an airport transfer.\nPickup:\nDrop:\nDate & Time:\nFlight Number:\nPassengers:`;
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="bg-[#EDE6D6] py-28 sm:py-36">
+    <section id="how-it-works" ref={sectionRef} className="bg-[#EDE6D6] py-16 sm:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div data-hiw-header className="mb-20 text-center">
+        <div data-hiw-header className="mb-12 sm:mb-20 text-center">
           <SectionLabel className="mb-5 justify-center">
             Simple Process
           </SectionLabel>
@@ -142,7 +142,7 @@ export function HowItWorks() {
           </p>
         </div>
 
-        <div ref={gridRef} className="relative grid gap-8 sm:grid-cols-3">
+        <div ref={gridRef} className="relative grid gap-6 sm:gap-8 sm:grid-cols-3">
           {/* Connector line desktop */}
           <div data-connector-line className="absolute left-0 right-0 top-[80px] hidden h-px bg-gradient-to-r from-[#D1D1D1]/0 via-[#D1D1D1]/60 to-[#D1D1D1]/0 sm:block" />
 
