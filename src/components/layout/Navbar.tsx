@@ -133,7 +133,7 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             className={cn(
-              "flex h-12 w-12 items-center justify-center rounded-lg transition-colors lg:hidden",
+              "flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden",
               scrolled
                 ? "text-[#1E2B4A] hover:bg-[#1E2B4A]/5"
                 : "text-white hover:bg-[#1A1A1A]/10"
@@ -150,9 +150,8 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        data-lenis-prevent
         className={cn(
-          "fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-[#F6F1E7] transition-all duration-500 lg:hidden",
+          "fixed inset-0 z-[60] flex flex-col bg-[#F6F1E7] transition-all duration-500 lg:hidden",
           mobileOpen
             ? "translate-x-0 opacity-100"
             : "translate-x-full opacity-0 pointer-events-none"
@@ -165,7 +164,7 @@ export function Navbar() {
           <button
             onClick={() => setMobileOpen(false)}
             aria-label="Close menu"
-            className="flex h-12 w-12 items-center justify-center rounded-lg text-[#1E2B4A] hover:bg-[#1E2B4A]/5"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-[#1E2B4A] hover:bg-[#1E2B4A]/5"
           >
             <X className="h-5 w-5" />
           </button>
@@ -206,7 +205,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <p className="px-8 pb-8 text-center font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-[#5C4733]">
+        <p className="px-8 pb-8 text-center font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-[#A08B72]">
           {BUSINESS.tagline}
         </p>
       </div>

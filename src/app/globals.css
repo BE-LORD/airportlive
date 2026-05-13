@@ -153,24 +153,13 @@ body {
   background-color: var(--color-sona-cream);
   color: var(--color-sona-text);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  -webkit-overflow-scrolling: touch;
-  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-padding-top: 88px;
-  overflow-x: hidden;
-}
-
-a, button, input, select, textarea {
-  touch-action: manipulation;
 }
 
 /* Selection */

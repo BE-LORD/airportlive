@@ -53,7 +53,7 @@ export default function Hero() {
   };
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-[90dvh] md:min-h-[100dvh] flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
+    <section ref={heroRef} id="home" className="relative min-h-[90vh] md:min-h-screen flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
       {/* Background Image with cinematic Ken Burns slow pan */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -93,7 +93,7 @@ export default function Hero() {
           >
             PREMIUM AIRPORT TRANSFERS & TRAVEL
           </motion.p>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[80px] font-serif leading-[1.1] md:leading-[0.95] text-white md:text-[#F5F5F5] mb-6">
+          <h1 className="text-4xl md:text-7xl lg:text-[80px] font-serif leading-[0.95] text-white md:text-[#F5F5F5] mb-6">
             <SplitTextReveal
               text={"WHERE LUXURY\nMEETS COMFORT"}
               highlight="MEETS COMFORT"
@@ -104,7 +104,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.58, delay: 0.9, ease: motionEases.mainEase }}
-            className="text-[15px] md:text-lg text-white/90 md:text-[#A3A3A3] max-w-xl mb-8 md:mb-10 font-sans leading-relaxed md:leading-loose"
+            className="text-base md:text-lg text-white/90 md:text-[#A3A3A3] max-w-xl mb-8 md:mb-10 font-sans leading-relaxed"
           >
             Premium airport transfers and comfortable taxi rides backed by 20+ years of trusted travel experience across Punjab, Chandigarh, and Delhi NCR.
           </motion.p>

@@ -16,7 +16,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
+    <section className="py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Image with cinematic clip-path reveal */}
         <motion.div
