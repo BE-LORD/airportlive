@@ -1,5 +1,9 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
+import { motionEases } from '@/lib/motion';
+
 const REVIEWS = [
   { name: 'Rahul S.', route: 'Ludhiana → Delhi Airport', vehicle: 'Innova Crysta', type: 'Airport Transfer', when: 'Recent customer', text: 'Smooth airport pickup, clean car, and professional driver. The booking was quick and stress-free. Will definitely use V3 again.' },
   { name: 'Amanpreet K.', route: 'Chandigarh → Amritsar', vehicle: 'Innova Crysta', type: 'Outstation', when: 'Recent customer', text: 'Very comfortable Innova. Driver was on time and drove very safely. Highly recommend V3 Tour & Travels for family travel.' },
@@ -14,13 +18,38 @@ export default function Testimonials() {
     <section className="py-24 bg-[#F8F7F3]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Real Feedback</p>
-          <h2 className="text-4xl md:text-5xl font-serif text-[#101010]">Words from our <span className="italic text-[#B88A44]">Travelers</span></h2>
-          <p className="max-w-xl mx-auto text-[#6F6B63] mt-4">Real feedback from customers who care about timing, comfort, and trust.</p>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: motionEases.mainEase }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+          >
+            Real Feedback
+          </motion.p>
+          <h2 className="text-4xl md:text-5xl font-serif text-[#101010]">
+            <SplitTextReveal text="Words from our Travelers" highlight="Travelers" />
+          </h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
+            className="max-w-xl mx-auto text-[#6F6B63] mt-4"
+          >
+            Real feedback from customers who care about timing, comfort, and trust.
+          </motion.p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {REVIEWS.map((review, i) => (
-            <div key={i} className="bg-white p-6 md:p-8 rounded-[20px] border border-[#DEDBD2] flex flex-col hover:shadow-[0_12px_40px_rgba(0,0,0,0.04)] transition-shadow duration-500">
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: motionEases.softEase }}
+              className="bg-white p-6 md:p-8 rounded-[20px] border border-[#DEDBD2] flex flex-col hover:shadow-[0_12px_40px_rgba(0,0,0,0.04)] transition-shadow duration-500"
+            >
               {/* Stars */}
               <div className="flex gap-1 text-[#B88A44] mb-4">
                 {'★★★★★'.split('').map((star, j) => <span key={j} className="text-sm">{star}</span>)}
@@ -42,7 +71,7 @@ export default function Testimonials() {
                 </div>
                 <p className="text-[10px] text-[#6F6B63]/60 font-mono uppercase tracking-wider">{review.type} · {review.when}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

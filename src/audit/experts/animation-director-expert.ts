@@ -8,6 +8,14 @@
 
 import { BaseExpert, type AuditContext } from "./base-expert";
 
+type WindowWithGsap = Window & {
+  gsap?: {
+    plugins?: {
+      ScrollTrigger?: unknown;
+    };
+  };
+};
+
 export class AnimationDirectorExpert extends BaseExpert {
   private fpsReadings: number[] = [];
   private animationFrameId: number | null = null;
@@ -28,7 +36,8 @@ export class AnimationDirectorExpert extends BaseExpert {
 
   private async auditGSAPAnimations(): Promise<void> {
     // Check for GSAP usage
-    const hasGSAP = typeof window !== "undefined" && (window as any).gsap;
+    const hasGSAP =
+      typeof window !== "undefined" && Boolean((window as WindowWithGsap).gsap);
 
     if (!hasGSAP) {
       this.reportIssue({
@@ -87,8 +96,9 @@ export class AnimationDirectorExpert extends BaseExpert {
 
   private async auditScrollTriggeredAnimations(): Promise<void> {
     // Check for ScrollTrigger usage
-    const hasScrollTrigger = typeof window !== "undefined" && 
-      (window as any).gsap?.plugins?.ScrollTrigger;
+    const hasScrollTrigger =
+      typeof window !== "undefined" &&
+      Boolean((window as WindowWithGsap).gsap?.plugins?.ScrollTrigger);
 
     if (!hasScrollTrigger) {
       this.reportIssue({

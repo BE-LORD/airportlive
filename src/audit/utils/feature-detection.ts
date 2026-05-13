@@ -40,28 +40,28 @@ export function detectWebGL2(): boolean {
  * Detect IntersectionObserver support
  */
 export function detectIntersectionObserver(): boolean {
-  return typeof window !== "undefined" && "IntersectionObserver" in window;
+  return typeof window !== "undefined" && typeof window.IntersectionObserver !== "undefined";
 }
 
 /**
  * Detect ResizeObserver support
  */
 export function detectResizeObserver(): boolean {
-  return typeof window !== "undefined" && "ResizeObserver" in window;
+  return typeof window !== "undefined" && typeof window.ResizeObserver !== "undefined";
 }
 
 /**
  * Detect MutationObserver support
  */
 export function detectMutationObserver(): boolean {
-  return typeof window !== "undefined" && "MutationObserver" in window;
+  return typeof window !== "undefined" && typeof window.MutationObserver !== "undefined";
 }
 
 /**
  * Detect PerformanceObserver support
  */
 export function detectPerformanceObserver(): boolean {
-  return typeof window !== "undefined" && "PerformanceObserver" in window;
+  return typeof window !== "undefined" && typeof window.PerformanceObserver !== "undefined";
 }
 
 /**

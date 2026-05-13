@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { getDeviceTier, type DeviceTier } from "@/lib/device";
 
 export function useDeviceTier(): DeviceTier {
-  const [tier, setTier] = useState<DeviceTier>("high");
+  const [tier, setTier] = useState<DeviceTier>(() => getDeviceTier());
 
   useEffect(() => {
-    setTier(getDeviceTier());
+    const updateTier = () => setTier(getDeviceTier());
+    window.addEventListener("resize", updateTier);
+    return () => window.removeEventListener("resize", updateTier);
   }, []);
 
   return tier;

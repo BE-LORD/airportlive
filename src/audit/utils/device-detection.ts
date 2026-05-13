@@ -69,9 +69,9 @@ export function calculateDeviceTier(
 
   // Memory scoring (0-3 points)
   if (memory !== null) {
-    if (memory >= 8) score += 3;
-    else if (memory >= 4) score += 2;
-    else if (memory >= 2) score += 1;
+    if (memory >= 16) score += 3;
+    else if (memory >= 8) score += 2;
+    else if (memory >= 4) score += 1;
   }
 
   // GPU scoring (0-2 points)
@@ -93,10 +93,9 @@ export function calculateDeviceTier(
     }
   }
 
-  // Connection scoring (0-2 points)
+  // Connection scoring (0-1 points)
   if (connection) {
-    if (connection === "4g" || connection === "5g") score += 2;
-    else if (connection === "3g") score += 1;
+    if (connection === "4g" || connection === "5g") score += 1;
   }
 
   // Tier classification based on total score (0-10)

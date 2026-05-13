@@ -1,11 +1,12 @@
 import { MetadataRoute } from "next";
 import { BUSINESS } from "@/lib/constants";
+import { SEO_PAGES } from "@/data/seoPages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = BUSINESS.website;
   const now = new Date();
 
-  return [
+  const corePages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: now,
@@ -43,4 +44,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
   ];
+
+  const seoPages: MetadataRoute.Sitemap = Object.keys(SEO_PAGES).map((slug) => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
+
+  return [...corePages, ...seoPages];
 }

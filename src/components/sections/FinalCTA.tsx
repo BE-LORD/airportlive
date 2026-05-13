@@ -6,11 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BUSINESS } from "@/lib/constants";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
-import {
-  buildWhatsAppUrl,
-  buildCallUrl,
-  buildEmailUrl,
-} from "@/lib/booking";
+import { getWhatsAppLink, getPhoneLink, getEmailLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { MessageCircle, Phone, Mail, ArrowRight } from "lucide-react";
 
@@ -96,7 +92,7 @@ export function FinalCTA() {
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
-            href={buildWhatsAppUrl(whatsappMessage)}
+            href={getWhatsAppLink(whatsappMessage)}
             onClick={() => trackEvent("whatsapp_click_final")}
             target="_blank"
             rel="noopener noreferrer"
@@ -108,7 +104,7 @@ export function FinalCTA() {
             </Button>
           </a>
           <a
-            href={buildCallUrl()}
+            href={getPhoneLink()}
             onClick={() => trackEvent("call_click_final")}
           >
             <Button
@@ -121,7 +117,7 @@ export function FinalCTA() {
             </Button>
           </a>
           <a
-            href={buildEmailUrl()}
+            href={getEmailLink()}
             onClick={() => trackEvent("email_click_final")}
           >
             <Button

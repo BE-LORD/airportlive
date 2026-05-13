@@ -14,6 +14,8 @@ export class PerformanceMonitor {
   private observers: PerformanceObserver[] = [];
   private fpsFrames: number[] = [];
   private lastFrameTime: number = 0;
+  private fpsFrameId: number | null = null;
+  private fpsMonitoring = false;
 
   private constructor() {
     if (typeof window !== "undefined") {
@@ -147,7 +149,11 @@ export class PerformanceMonitor {
    * Start FPS monitoring using requestAnimationFrame
    */
   private startFPSMonitoring(): void {
+    this.fpsMonitoring = true;
+
     const measureFPS = (timestamp: number) => {
+      if (!this.fpsMonitoring) return;
+
       if (this.lastFrameTime) {
         const delta = timestamp - this.lastFrameTime;
         const fps = 1000 / delta;
@@ -159,10 +165,10 @@ export class PerformanceMonitor {
         }
       }
       this.lastFrameTime = timestamp;
-      requestAnimationFrame(measureFPS);
+      this.fpsFrameId = requestAnimationFrame(measureFPS);
     };
 
-    requestAnimationFrame(measureFPS);
+    this.fpsFrameId = requestAnimationFrame(measureFPS);
   }
 
   /**
@@ -292,6 +298,11 @@ export class PerformanceMonitor {
    * Cleanup observers
    */
   public cleanup(): void {
+    this.fpsMonitoring = false;
+    if (this.fpsFrameId !== null) {
+      cancelAnimationFrame(this.fpsFrameId);
+      this.fpsFrameId = null;
+    }
     this.observers.forEach((observer) => observer.disconnect());
     this.observers = [];
     this.fpsFrames = [];

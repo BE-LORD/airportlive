@@ -35,13 +35,21 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 })) as any;
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = vi.fn((cb) => {
-  setTimeout(cb, 16);
-  return 0;
-}) as any;
+const requestAnimationFrameMock = vi.fn((cb: FrameRequestCallback) =>
+  window.setTimeout(() => cb(performance.now()), 16)
+) as any;
+global.requestAnimationFrame = requestAnimationFrameMock;
+window.requestAnimationFrame = requestAnimationFrameMock;
 
 // Mock cancelAnimationFrame
-global.cancelAnimationFrame = vi.fn();
+const cancelAnimationFrameMock = vi.fn((id: number) => window.clearTimeout(id));
+global.cancelAnimationFrame = cancelAnimationFrameMock as any;
+window.cancelAnimationFrame = cancelAnimationFrameMock as any;
+
+Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
+  writable: true,
+  value: vi.fn(() => null),
+});
 
 // Mock localStorage
 const localStorageMock = {

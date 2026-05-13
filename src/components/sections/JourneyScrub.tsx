@@ -64,8 +64,8 @@ export function JourneyScrub() {
       });
 
       // Animate beats — smooth crossfade with gentle scale
-      const beatElements = gsap.utils.toArray("[data-beat]");
-      beatElements.forEach((beat: any, i) => {
+      const beatElements = gsap.utils.toArray<HTMLElement>("[data-beat]");
+      beatElements.forEach((beat, i) => {
         const timeline = gsap.timeline({
           scrollTrigger: {
             trigger: triggerRef.current,

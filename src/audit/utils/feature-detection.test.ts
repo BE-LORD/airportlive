@@ -24,6 +24,49 @@ import {
   isFeatureSupported,
 } from "./feature-detection";
 
+function withMissingGlobal<T extends keyof typeof globalThis>(
+  key: T,
+  callback: () => void
+) {
+  const original = globalThis[key];
+  const originalWindow = window[key as keyof Window];
+  Object.defineProperty(globalThis, key, {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(window, key, {
+    configurable: true,
+    value: undefined,
+  });
+
+  try {
+    callback();
+  } finally {
+    Object.defineProperty(globalThis, key, {
+      configurable: true,
+      value: original,
+    });
+    Object.defineProperty(window, key, {
+      configurable: true,
+      value: originalWindow,
+    });
+  }
+}
+
+function setWindowGlobal<T extends keyof typeof globalThis>(
+  key: T,
+  value: (typeof globalThis)[T]
+) {
+  Object.defineProperty(globalThis, key, {
+    configurable: true,
+    value,
+  });
+  Object.defineProperty(window, key, {
+    configurable: true,
+    value,
+  });
+}
+
 describe("Feature Detection", () => {
   describe("detectWebGL", () => {
     it("should return false in non-browser environment", () => {
@@ -39,44 +82,52 @@ describe("Feature Detection", () => {
 
   describe("detectIntersectionObserver", () => {
     it("should return false when IntersectionObserver is not available", () => {
-      expect(detectIntersectionObserver()).toBe(false);
+      withMissingGlobal("IntersectionObserver", () => {
+        expect(detectIntersectionObserver()).toBe(false);
+      });
     });
 
     it("should return true when IntersectionObserver is available", () => {
-      global.IntersectionObserver = vi.fn() as any;
+      setWindowGlobal("IntersectionObserver", vi.fn() as any);
       expect(detectIntersectionObserver()).toBe(true);
     });
   });
 
   describe("detectResizeObserver", () => {
     it("should return false when ResizeObserver is not available", () => {
-      expect(detectResizeObserver()).toBe(false);
+      withMissingGlobal("ResizeObserver", () => {
+        expect(detectResizeObserver()).toBe(false);
+      });
     });
 
     it("should return true when ResizeObserver is available", () => {
-      global.ResizeObserver = vi.fn() as any;
+      setWindowGlobal("ResizeObserver", vi.fn() as any);
       expect(detectResizeObserver()).toBe(true);
     });
   });
 
   describe("detectMutationObserver", () => {
     it("should return false when MutationObserver is not available", () => {
-      expect(detectMutationObserver()).toBe(false);
+      withMissingGlobal("MutationObserver", () => {
+        expect(detectMutationObserver()).toBe(false);
+      });
     });
 
     it("should return true when MutationObserver is available", () => {
-      global.MutationObserver = vi.fn() as any;
+      setWindowGlobal("MutationObserver", vi.fn() as any);
       expect(detectMutationObserver()).toBe(true);
     });
   });
 
   describe("detectPerformanceObserver", () => {
     it("should return false when PerformanceObserver is not available", () => {
-      expect(detectPerformanceObserver()).toBe(false);
+      withMissingGlobal("PerformanceObserver", () => {
+        expect(detectPerformanceObserver()).toBe(false);
+      });
     });
 
     it("should return true when PerformanceObserver is available", () => {
-      global.PerformanceObserver = vi.fn() as any;
+      setWindowGlobal("PerformanceObserver", vi.fn() as any);
       expect(detectPerformanceObserver()).toBe(true);
     });
   });
@@ -95,13 +146,17 @@ describe("Feature Detection", () => {
 
   describe("detectLocalStorage", () => {
     it("should return false in non-browser environment", () => {
-      expect(detectLocalStorage()).toBe(false);
+      withMissingGlobal("localStorage", () => {
+        expect(detectLocalStorage()).toBe(false);
+      });
     });
   });
 
   describe("detectSessionStorage", () => {
     it("should return false in non-browser environment", () => {
-      expect(detectSessionStorage()).toBe(false);
+      withMissingGlobal("sessionStorage", () => {
+        expect(detectSessionStorage()).toBe(false);
+      });
     });
   });
 
@@ -113,7 +168,9 @@ describe("Feature Detection", () => {
 
   describe("detectWebAssembly", () => {
     it("should return false when WebAssembly is not available", () => {
-      expect(detectWebAssembly()).toBe(false);
+      withMissingGlobal("WebAssembly", () => {
+        expect(detectWebAssembly()).toBe(false);
+      });
     });
   });
 

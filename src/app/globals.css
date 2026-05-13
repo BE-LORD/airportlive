@@ -94,6 +94,16 @@
   --radius-lg: 2rem;
   --radius-xl: 3rem;
   --radius-pill: 999px;
+
+  /* ── Premium Motion Tokens ── */
+  --ease-main: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quick: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-micro: 140ms;
+  --duration-tap: 120ms;
+  --duration-focus: 180ms;
+  --duration-card: 220ms;
+  --duration-section: 520ms;
 }
 
 /* ═══════════════════════════════════════════════
@@ -125,6 +135,12 @@
   to { transform: scaleX(1); }
 }
 
+@keyframes premium-shine {
+  0% { transform: translateX(-120%) skewX(-14deg); opacity: 0; }
+  35% { opacity: 0.22; }
+  100% { transform: translateX(140%) skewX(-14deg); opacity: 0; }
+}
+
 /* ═══════════════════════════════════════════════
    Base Styles
    ═══════════════════════════════════════════════ */
@@ -140,6 +156,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+html {
+  scroll-padding-top: 88px;
 }
 
 /* Selection */
@@ -174,6 +194,51 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+.motion-gold-shine {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.motion-gold-shine::after {
+  animation: premium-shine 900ms var(--ease-soft) 1150ms 1 both;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-120%) skewX(-14deg);
+}
+
+.premium-link-underline {
+  background-image: linear-gradient(#B88A44, #B88A44);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size var(--duration-card) var(--ease-main), color var(--duration-card) var(--ease-main);
+}
+
+.premium-link-underline:hover,
+.premium-link-underline:focus-visible,
+.premium-link-underline[data-active="true"] {
+  background-size: 100% 1px;
+}
+
+.premium-tap {
+  transition: transform var(--duration-tap) var(--ease-quick), background-color var(--duration-card) var(--ease-main), border-color var(--duration-card) var(--ease-main);
+}
+
+.premium-tap:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-gold-shine::after {
+    animation: none !important;
+    opacity: 0 !important;
   }
 }
 

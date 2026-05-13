@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { MapPin, Clock, ArrowRight, Plane } from 'lucide-react';
+import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 
 const ROUTES = [
   { 
@@ -27,23 +28,33 @@ const ROUTES = [
   },
   { 
     id: 3, 
+    from: 'Jalandhar', 
+    to: 'Delhi Airport (DEL)', 
+    distance: '370 km', 
+    time: '6.5h', 
+    image: 'https://images.unsplash.com/photo-1541410965313-d53b3c16ef17?q=80&w=1974&auto=format&fit=crop',
+    tag: 'NRI Priority',
+    desc: 'The preferred route for NRI families. Spacious vehicles and reliable, safe highway transit.'
+  },
+  { 
+    id: 4, 
+    from: 'Patiala', 
+    to: 'Delhi Airport (DEL)', 
+    distance: '260 km', 
+    time: '4.5h', 
+    image: 'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?q=80&w=1912&auto=format&fit=crop',
+    tag: 'Airport',
+    desc: 'Direct connection from the Royal City of Patiala to IGI Airport. Punctual and comfortable.'
+  },
+  { 
+    id: 5, 
     from: 'Ludhiana', 
     to: 'Chandigarh (IXC)', 
     distance: '110 km', 
     time: '2h', 
-    image: 'https://images.unsplash.com/photo-1541410965313-d53b3c16ef17?q=80&w=1974&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop',
     tag: 'Regional',
     desc: 'Swift airport connections from Ludhiana to Mohali/Chandigarh Airport. Stress-free transfers.'
-  },
-  { 
-    id: 4, 
-    from: 'Ludhiana', 
-    to: 'Amritsar (ATQ)', 
-    distance: '145 km', 
-    time: '3h', 
-    image: 'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?q=80&w=1912&auto=format&fit=crop',
-    tag: 'Airport',
-    desc: 'Reliable transfers to Sri Guru Ram Dass Jee International Airport. Punctual and safe.'
   }
 ];
 
@@ -57,9 +68,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
   const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  const fareMsg = encodeURIComponent(
-    `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`
-  );
+  const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
 
   return (
     <motion.div 
@@ -115,7 +124,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
         </p>
 
         <motion.a
-          href={`https://wa.me/91${BUSINESS.whatsapp}?text=${fareMsg}`}
+          href={getWhatsAppLink(fareMsg)}
           target="_blank"
           rel="noopener noreferrer"
           data-cursor="Book"
@@ -165,12 +174,12 @@ export default function RouteCorridor() {
         <p className="text-[#6F6B63] mb-12 max-w-xl mx-auto px-4">
           We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.
         </p>
-        <button 
-          data-cursor="Call"
-          className="bg-[#101010] text-white px-10 py-5 rounded-full text-sm font-mono uppercase tracking-[0.2em] hover:bg-[#B88A44] transition-colors"
+        <a 
+          href={getPhoneLink()}
+          className="inline-block bg-[#101010] text-white px-10 py-5 rounded-full text-sm font-mono uppercase tracking-[0.2em] font-bold hover:bg-[#B88A44] transition-colors"
         >
           Custom Inquiry
-        </button>
+        </a>
       </div>
     </section>
   );

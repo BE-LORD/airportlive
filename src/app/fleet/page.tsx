@@ -1,7 +1,7 @@
 import Header from '@/components/layout/Header';
 import FleetShowcase from '@/components/sections/FleetShowcase';
-import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import Footer from '@/components/layout/Footer';
+import { getWhatsAppLink } from '@/lib/links';
 import { BUSINESS } from '@/lib/constants';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -100,7 +100,7 @@ export default function FleetPage() {
           <h2 className="text-3xl font-serif mb-4 text-[#101010]">Ready to Choose Your Ride?</h2>
           <p className="text-[#6F6B63] mb-6">Book your preferred vehicle on WhatsApp or check our routes to plan your journey.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href={`https://wa.me/91${BUSINESS.whatsapp}?text=${encodeURIComponent(`Hi ${BUSINESS.name}, I want to book a vehicle.\n\nVehicle: \nDate: `)}`} target="_blank" rel="noopener noreferrer" className="bg-[#171717] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#B88A44] transition-colors" aria-label="Book vehicle on WhatsApp">
+            <a href={getWhatsAppLink(`Hi ${BUSINESS.name}, I want to book a vehicle.\n\nVehicle: \nDate: `)} target="_blank" rel="noopener noreferrer" className="bg-[#171717] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#B88A44] transition-colors" aria-label="Book vehicle on WhatsApp">
               Book on WhatsApp
             </a>
             <Link href="/routes" className="border border-[#DEDBD2] text-[#101010] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white transition-colors">
@@ -111,7 +111,6 @@ export default function FleetPage() {
       </section>
 
       <Footer />
-      <MobileBookingBar />
     </main>
   );
 }

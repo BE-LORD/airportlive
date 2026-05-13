@@ -11,7 +11,7 @@
  * - Device tier gating
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { detectDeviceTier, getParticleCount, getPixelRatio } from '@/lib/three';
 

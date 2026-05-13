@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { BUSINESS } from "@/lib/constants";
-import { buildWhatsAppUrl, buildCallUrl } from "@/lib/booking";
+import { getWhatsAppLink, getPhoneLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { MessageCircle, Phone, Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
@@ -104,7 +104,7 @@ export function Navbar() {
           {/* Desktop CTAs */}
           <div className="hidden items-center gap-3 lg:flex">
             <a
-              href={buildCallUrl()}
+              href={getPhoneLink()}
               onClick={() => trackEvent("call_click_nav")}
               className={cn(
                 "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
@@ -117,7 +117,7 @@ export function Navbar() {
               {BUSINESS.phone}
             </a>
             <a
-              href={buildWhatsAppUrl(whatsappMsg)}
+              href={getWhatsAppLink(whatsappMsg)}
               onClick={() => trackEvent("whatsapp_click_nav")}
               target="_blank"
               rel="noopener noreferrer"
@@ -185,7 +185,7 @@ export function Navbar() {
 
           <div className="mt-12 space-y-3">
             <a
-              href={buildWhatsAppUrl(whatsappMsg)}
+              href={getWhatsAppLink(whatsappMsg)}
               onClick={() => trackEvent("whatsapp_click_nav_mobile")}
               target="_blank"
               rel="noopener noreferrer"
@@ -195,7 +195,7 @@ export function Navbar() {
               Book on WhatsApp
             </a>
             <a
-              href={buildCallUrl()}
+              href={getPhoneLink()}
               onClick={() => trackEvent("call_click_nav_mobile")}
               className="flex items-center justify-center gap-3 rounded-full border border-[rgba(26,18,8,0.08)] px-6 py-4 text-sm font-medium text-[#1E2B4A]"
             >

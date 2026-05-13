@@ -1,24 +1,45 @@
 /**
- * SONA CORRIDOR 2.0 — Centralized Motion Tokens
- * Master Spec: FRAMER_PREMIUM_FRONTEND_REDESIGN_MASTER.md §12
+ * V3 Premium Motion Tokens
  *
- * All GSAP animations should reference these tokens
- * for consistent motion language across the entire site.
+ * Motion personality: premium cinematic editorial motion.
+ * Calm, precise, mobile-first, and conversion-focused.
  */
+
+export const motionEases = {
+  mainEase: [0.22, 1, 0.36, 1] as [number, number, number, number],
+  softEase: [0.16, 1, 0.3, 1] as [number, number, number, number],
+  quickEase: [0.2, 0.8, 0.2, 1] as [number, number, number, number],
+} as const;
+
+export const motionDurations = {
+  micro: 0.14,
+  buttonTap: 0.12,
+  inputFocus: 0.18,
+  cardHover: 0.22,
+  cardReveal: 0.42,
+  sectionReveal: 0.52,
+  heroReveal: 0.95,
+  pageTransition: 0.56,
+  drawerOpen: 0.4,
+  accordionOpen: 0.28,
+  carouselSnap: 0.32,
+  countUp: 1.1,
+  imageReveal: 0.68,
+} as const;
 
 export const motionTokens = {
   /** Duration presets (seconds) */
   duration: {
     /** Micro-interactions: button press, focus ring */
-    micro: 0.18,
+    micro: motionDurations.micro,
     /** Fast transitions: tooltip, tab switch */
-    fast: 0.28,
+    fast: motionDurations.accordionOpen,
     /** Standard section entry animation */
-    base: 0.45,
+    base: motionDurations.cardReveal,
     /** Section-level reveals */
-    section: 0.75,
+    section: motionDurations.sectionReveal,
     /** Cinematic hero / headline reveals */
-    cinematic: 1.2,
+    cinematic: motionDurations.heroReveal,
     /** Desktop preloader sequence */
     preloaderDesktop: 2.4,
     /** Mobile preloader (shorter for perceived speed) */
@@ -28,21 +49,25 @@ export const motionTokens = {
   /** Cubic-bezier easing curves */
   ease: {
     /** Standard exit ease — smooth deceleration */
-    out: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    out: motionEases.softEase,
     /** Symmetric in-out */
     inOut: [0.65, 0, 0.35, 1] as [number, number, number, number],
     /** Soft, luxurious settle */
-    soft: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    /** Elastic snap for playful entries */
-    snap: [0.34, 1.56, 0.64, 1] as [number, number, number, number],
+    soft: motionEases.mainEase,
+    /** Quick tap/feedback curve; avoid bouncy motion. */
+    quick: motionEases.quickEase,
   },
 
   /** Y-axis displacement presets (px) */
   distance: {
     /** Subtle shift for micro-interactions */
     subtle: 12,
+    /** Mobile reveal offset; must stay between 12px and 20px. */
+    mobile: 16,
     /** Standard section entry offset */
     base: 24,
+    /** Standard section reveal travel */
+    section: 40,
     /** Dramatic hero / cinematic offset */
     dramatic: 80,
   },
@@ -72,6 +97,40 @@ export const motionTokens = {
   },
 } as const;
 
+export type RevealVariantOptions = {
+  delay?: number;
+  duration?: number;
+  y?: number;
+  reducedMotion?: boolean;
+};
+
+export function buildRevealVariants({
+  delay = 0,
+  duration = motionDurations.sectionReveal,
+  y = motionTokens.distance.section,
+  reducedMotion = false,
+}: RevealVariantOptions = {}) {
+  if (reducedMotion) {
+    return {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1, transition: { duration: 0.01 } },
+    };
+  }
+
+  return {
+    hidden: { opacity: 0, y },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay,
+        duration,
+        ease: motionEases.mainEase,
+      },
+    },
+  };
+}
+
 /**
  * GSAP ease string equivalents for named easings.
  * Use these when GSAP expects a string (e.g., "expo.out").
@@ -81,8 +140,8 @@ export const gsapEase = {
   out: "expo.out",
   /** Power curve for parallax */
   power: "power2.out",
-  /** Elastic bounce for playful entries */
-  elastic: "back.out(1.4)",
+  /** Restrained settle for premium entries */
+  settle: "power3.out",
   /** Linear for scroll-scrub */
   linear: "none",
   /** Smooth sine for breathing animations */

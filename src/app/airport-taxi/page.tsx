@@ -1,10 +1,10 @@
 import Header from '@/components/layout/Header';
 import FAQ from '@/components/sections/FAQ';
-import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import Footer from '@/components/layout/Footer';
 import { BUSINESS } from '@/lib/constants';
 import { Metadata } from 'next';
 import { Plane, Clock, MapPin, Shield, Phone, Luggage } from 'lucide-react';
+import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ const PROCESS_STEPS = [
 ];
 
 export default function AirportTaxiPage() {
-  const whatsappMsg = encodeURIComponent(`Hi ${BUSINESS.name}, I need an airport taxi.\n\nFlight: \nDate: \nPassengers: `);
+  const whatsappMsg = `Hi ${BUSINESS.name}, I need an airport taxi.\n\nFlight: \nDate: \nPassengers: `;
 
   return (
     <main className="bg-[#F8F7F3] min-h-screen font-sans text-[#101010]">
@@ -44,10 +44,10 @@ export default function AirportTaxiPage() {
             Never miss a flight. Never wait at arrivals. Our specialized airport transfer service covers Delhi, Chandigarh, and Amritsar airports with flight tracking and door-to-terminal comfort.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer" className="bg-[#B88A44] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white hover:text-[#101010] transition-colors" aria-label="Book airport taxi on WhatsApp">
+            <a href={getWhatsAppLink(whatsappMsg)} target="_blank" rel="noopener noreferrer" className="bg-[#B88A44] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white hover:text-[#101010] transition-colors" aria-label="Book airport taxi on WhatsApp">
               Book Airport Taxi
             </a>
-            <a href={`tel:+91${BUSINESS.phone}`} className="border border-white/30 text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white/10 transition-colors" aria-label={`Call ${BUSINESS.phone}`}>
+            <a href={getPhoneLink()} className="border border-white/30 text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white/10 transition-colors" aria-label={`Call ${BUSINESS.phone}`}>
               Call {BUSINESS.phone}
             </a>
           </div>
@@ -115,7 +115,7 @@ export default function AirportTaxiPage() {
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-serif mb-4">Late Night & Early Morning Flights?</h2>
           <p className="text-white/60 mb-6">We operate 24/7 with zero late-night surcharge. Whether your flight is at 2 AM or 11 PM, your driver will be there on time.</p>
-          <a href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer" className="inline-block bg-[#B88A44] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white hover:text-[#101010] transition-colors" aria-label="Book late night airport taxi on WhatsApp">
+          <a href={getWhatsAppLink(whatsappMsg)} target="_blank" rel="noopener noreferrer" className="inline-block bg-[#B88A44] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white hover:text-[#101010] transition-colors" aria-label="Book late night airport taxi on WhatsApp">
             Book Late Night Taxi
           </a>
         </div>
@@ -135,7 +135,6 @@ export default function AirportTaxiPage() {
       </section>
 
       <Footer />
-      <MobileBookingBar />
     </main>
   );
 }

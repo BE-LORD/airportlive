@@ -59,9 +59,11 @@ describe("PerformanceMonitor", () => {
   });
 
   describe("getDOMNodeCount", () => {
-    it("should return 0 in non-browser environment", () => {
+    it("should return the current document node count", () => {
       const monitor = PerformanceMonitor.getInstance();
-      expect(monitor.getDOMNodeCount()).toBe(0);
+      expect(monitor.getDOMNodeCount()).toBe(
+        document.getElementsByTagName("*").length
+      );
     });
   });
 

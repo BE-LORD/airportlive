@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import MobileBookingBar from '@/components/layout/MobileBookingBar';
+import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import { SEO_PAGES } from '@/data/seoPages';
 import { BUSINESS } from '@/lib/constants';
 import { MessageCircle, Phone, ChevronDown } from 'lucide-react';
@@ -44,7 +44,7 @@ export default function SeoPage({ params }: Props) {
   }
 
   const Icon = page.icon;
-  const whatsappMsg = encodeURIComponent(`Hi ${BUSINESS.name}, I want to book the ${page.h1} service.`);
+  const whatsappMsg = `Hi ${BUSINESS.name}, I want to book the ${page.h1} service.`;
 
   return (
     <main className="bg-[#F8F7F3] min-h-screen font-sans text-[#101010]">
@@ -63,7 +63,7 @@ export default function SeoPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a 
-              href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`} 
+              href={getWhatsAppLink(whatsappMsg)} 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-[#B88A44] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white hover:text-[#101010] transition-colors flex items-center gap-2"
@@ -72,7 +72,7 @@ export default function SeoPage({ params }: Props) {
               <MessageCircle className="w-4 h-4" /> Get Fare on WhatsApp
             </a>
             <a 
-              href={`tel:+91${BUSINESS.phone}`} 
+              href={getPhoneLink()} 
               className="border border-white/30 text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
               aria-label={`Call ${BUSINESS.phone}`}
             >
@@ -151,7 +151,7 @@ export default function SeoPage({ params }: Props) {
           <p className="text-white/70 mb-8">Click below to share your trip details on WhatsApp and get an instant, transparent quote.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <a 
-              href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`} 
+              href={getWhatsAppLink(whatsappMsg)} 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-[#B88A44] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white hover:text-[#101010] transition-colors"
@@ -169,7 +169,6 @@ export default function SeoPage({ params }: Props) {
       </section>
 
       <Footer />
-      <MobileBookingBar />
     </main>
   );
 }

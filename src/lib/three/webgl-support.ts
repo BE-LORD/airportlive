@@ -17,6 +17,12 @@ export interface WebGLCapabilities {
   vendor: string;
 }
 
+type WebGLContext = WebGLRenderingContext | WebGL2RenderingContext;
+type DebugRendererInfo = {
+  UNMASKED_RENDERER_WEBGL: number;
+  UNMASKED_VENDOR_WEBGL: number;
+};
+
 /**
  * Detect WebGL support and capabilities
  */
@@ -39,12 +45,14 @@ export function detectWebGLSupport(): WebGLCapabilities {
   const canvas = document.createElement('canvas');
   
   // Try WebGL2 first
-  let gl: any = canvas.getContext('webgl2');
+  let gl: WebGLContext | null = canvas.getContext('webgl2');
   let version: 1 | 2 | null = gl ? 2 : null;
   
   // Fall back to WebGL1
   if (!gl) {
-    gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    gl =
+      canvas.getContext('webgl') ||
+      (canvas.getContext('experimental-webgl') as WebGLRenderingContext | null);
     version = gl ? 1 : null;
   }
   
@@ -64,12 +72,12 @@ export function detectWebGLSupport(): WebGLCapabilities {
   }
   
   // Get debug info
-  const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-  const renderer = debugInfo 
-    ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) 
+  const debugInfo = gl.getExtension('WEBGL_debug_renderer_info') as DebugRendererInfo | null;
+  const renderer = debugInfo
+    ? String(gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL))
     : 'unknown';
-  const vendor = debugInfo 
-    ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) 
+  const vendor = debugInfo
+    ? String(gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL))
     : 'unknown';
   
   return {

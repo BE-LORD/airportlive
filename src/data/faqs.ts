@@ -54,4 +54,30 @@ export const faqs: FAQ[] = [
     answer:
       "For urgent bookings, call or WhatsApp us directly at 9888000510. We are available 24/7 and will respond as quickly as possible.",
   },
+  {
+    question: "Are tolls and parking included in the fare?",
+    answer:
+      "Our fare quotes typically include the ride and driver charges. Tolls, state taxes, and parking fees are usually extra and charged as per actual receipts, unless a flat 'all-inclusive' fare is requested.",
+  },
+  {
+    question: "Do you provide one-way taxi services?",
+    answer:
+      "Yes, we provide one-way drops to Delhi Airport, Chandigarh, and other cities at competitive fixed rates. You only pay for the distance you travel.",
+  },
+  {
+    question: "Can I book a taxi for late-night or early-morning flights?",
+    answer:
+      "Yes, we specialize in 24/7 airport transfers. Whether your flight is at 2 AM or 5 AM, our driver will be at your doorstep on time.",
+  },
+  {
+    question: "How much luggage can an Innova Crysta carry?",
+    answer:
+      "An Innova Crysta can comfortably carry 4-5 large suitcases along with 6 passengers. If you have excessive luggage, please inform us during booking so we can suggest the best vehicle configuration.",
+  },
+  {
+    question: "Is WhatsApp booking really available 24/7?",
+    answer:
+      "Yes. Our WhatsApp support is active round the clock to take your bookings, share driver details, and answer your queries instantly.",
+  },
 ];
+

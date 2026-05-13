@@ -80,14 +80,15 @@ export class IssueTracker {
     const issue = this.issues.get(id);
     if (!issue) return null;
 
+    const updatedAt = Math.max(Date.now(), issue.updatedAt + 1);
     const updatedIssue: Issue = {
       ...issue,
       ...updates,
-      updatedAt: Date.now(),
+      updatedAt,
     };
 
     if (updates.status === "resolved" && !issue.resolvedAt) {
-      updatedIssue.resolvedAt = Date.now();
+      updatedIssue.resolvedAt = updatedAt;
     }
 
     this.issues.set(id, updatedIssue);

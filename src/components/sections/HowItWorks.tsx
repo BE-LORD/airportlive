@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BUSINESS } from "@/lib/constants";
-import { buildWhatsAppUrl } from "@/lib/booking";
+import { getWhatsAppLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { MessageSquare, ClipboardCheck, CarFront, MessageCircle } from "lucide-react";
@@ -174,7 +174,7 @@ export function HowItWorks() {
         {/* Copy template CTA */}
         <div className="mt-12 text-center">
           <a
-            href={buildWhatsAppUrl(whatsappMsg)}
+            href={getWhatsAppLink(whatsappMsg)}
             onClick={() => trackEvent("whatsapp_click_hiw")}
             target="_blank"
             rel="noopener noreferrer"

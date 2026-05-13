@@ -10,7 +10,6 @@ import Gallery from '@/components/sections/Gallery';
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
 import InquirySection from '@/components/sections/InquirySection';
-import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import Footer from '@/components/layout/Footer';
 
 export default function Home() {
@@ -29,7 +28,6 @@ export default function Home() {
       <FAQ />
       <InquirySection />
       <Footer />
-      <MobileBookingBar />
     </main>
   );
 }

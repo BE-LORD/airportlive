@@ -12,8 +12,8 @@ export function Preloader() {
     // Only show once per session
     const seen = sessionStorage.getItem("v3-preloader-seen");
     if (seen) {
-      setVisible(false);
-      return;
+      const timeout = window.setTimeout(() => setVisible(false), 0);
+      return () => window.clearTimeout(timeout);
     }
 
     const interval = setInterval(() => {

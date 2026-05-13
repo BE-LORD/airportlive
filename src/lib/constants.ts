@@ -3,6 +3,7 @@ export const BUSINESS = {
   brand: "Airport Live",
   connectedBrand: "Airport Live",
   tagline: "Premium Airport Transfers",
+  description: "Premium airport transfers across Ludhiana, Chandigarh, and Delhi NCR. Professional chauffeurs, Toyota Innova Crysta comfort, fixed fares, 24/7 WhatsApp booking.",
   primaryService:
     "Premium airport transfers across Ludhiana, Chandigarh, and Delhi NCR. Professional chauffeurs, Toyota Innova Crysta comfort, fixed fares, 24/7 WhatsApp booking.",
   phone: "9888000510",
@@ -14,7 +15,8 @@ export const BUSINESS = {
   website: "https://airportlive.in",
   address: "Ludhiana, Punjab, India",
   experience: "20+",
-  fleet: "100+",
+  fleetCount: "100+",
+  openingHours: "Mo-Su 00:00-23:59",
   serviceArea: [
     "Ludhiana",
     "Chandigarh",
@@ -22,6 +24,9 @@ export const BUSINESS = {
     "Amritsar",
     "Jalandhar",
     "Patiala",
+    "Phagwara",
+    "Mohali",
+    "Panchkula",
   ],
   coreRoutes: [
     "Ludhiana → Delhi Airport",
@@ -29,6 +34,8 @@ export const BUSINESS = {
     "Delhi Airport → Punjab",
     "Ludhiana → Chandigarh Airport",
     "Amritsar → Delhi Airport",
+    "Jalandhar → Delhi Airport",
+    "Patiala → Delhi Airport",
   ],
 };
 
@@ -39,6 +46,7 @@ export const ROUTES = [
     to: "Delhi Airport",
     time: "5h 30m",
     desc: "Premium Non-Stop Express",
+    popular: true,
   },
   {
     id: 2,
@@ -46,13 +54,36 @@ export const ROUTES = [
     to: "Delhi Airport",
     time: "4h 00m",
     desc: "Corporate Priority Route",
+    popular: true,
   },
   {
     id: 3,
-    from: "Delhi",
-    to: "Punjab",
-    time: "Express",
-    desc: "Safe Arrivals Home",
+    from: "Delhi Airport",
+    to: "Ludhiana",
+    time: "5h 30m",
+    desc: "Safe Arrival Pickup",
+    popular: true,
+  },
+  {
+    id: 4,
+    from: "Jalandhar",
+    to: "Delhi Airport",
+    time: "6h 30m",
+    desc: "NRIs Favorite Route",
+  },
+  {
+    id: 5,
+    from: "Patiala",
+    to: "Delhi Airport",
+    time: "4h 30m",
+    desc: "Comfortable Airport Link",
+  },
+  {
+    id: 6,
+    from: "Amritsar",
+    to: "Delhi Airport",
+    time: "8h 00m",
+    desc: "Long Distance Luxury",
   },
 ];
 
@@ -61,24 +92,49 @@ export const FLEET = [
     id: "innova-crysta",
     name: "Innova Crysta",
     tagline: "The Corporate Standard",
+    seats: "6+1",
+    luggage: "4 Bags",
+    bestFor: "Family & Corporate",
+    comfort: "Premium",
     image:
       "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop",
-    features: ["Captain Seats", "Quiet Cabin", "Ample Luggage"],
+    features: ["Captain Seats", "Quiet Cabin", "Ample Luggage", "Rear AC Control"],
   },
   {
-    id: "sedan",
+    id: "premium-sedan",
     name: "Premium Sedan",
     tagline: "Executive Comfort",
+    seats: "4+1",
+    luggage: "2 Bags",
+    bestFor: "Couples & Business",
+    comfort: "High",
     image:
       "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=2070&auto=format&fit=crop",
-    features: ["Leather Interior", "Climate Control", "Smooth Ride"],
+    features: ["Leather Interior", "Climate Control", "Smooth Ride", "USB Charging"],
   },
   {
     id: "tempo-traveller",
     name: "Tempo Traveller",
     tagline: "Group Travel Redefined",
+    seats: "12-16",
+    luggage: "10+ Bags",
+    bestFor: "Large Groups & Weddings",
+    comfort: "Spacious",
     image:
       "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop",
-    features: ["12–16 Seats", "Push-Back Chairs", "Entertainment System"],
+    features: ["Push-Back Chairs", "Entertainment System", "Extra Legroom", "Uniformed Driver"],
+  },
+  {
+    id: "maruti-xl6",
+    name: "Maruti XL6 / SUV",
+    tagline: "Versatile Travel",
+    seats: "6",
+    luggage: "3 Bags",
+    bestFor: "Small Families",
+    comfort: "Standard",
+    image:
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    features: ["Captain Seats", "Hybrid Efficiency", "Flexible Space"],
   },
 ];
+

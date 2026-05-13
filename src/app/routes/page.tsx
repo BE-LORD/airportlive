@@ -1,6 +1,5 @@
 import Header from '@/components/layout/Header';
 import RouteCorridor from '@/components/sections/RouteCorridor';
-import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import Footer from '@/components/layout/Footer';
 import { BUSINESS } from '@/lib/constants';
 import { Metadata } from 'next';
@@ -59,7 +58,6 @@ export default function RoutesPage() {
       </section>
 
       <Footer />
-      <MobileBookingBar />
     </main>
   );
 }

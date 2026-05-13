@@ -1,4 +1,4 @@
-import { Plane, Car, Users, Briefcase, MapPin, Shield, Clock } from 'lucide-react';
+import { Plane, Car, Users, Briefcase, MapPin, type LucideIcon } from 'lucide-react';
 
 export interface SeoPageData {
   slug: string;
@@ -7,7 +7,7 @@ export interface SeoPageData {
   h1: string;
   subhead: string;
   type: 'service' | 'route' | 'fleet';
-  icon: any;
+  icon: LucideIcon;
   content: {
     overview: string;
     feature1Title: string;

@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header';
-import MobileBookingBar from '@/components/layout/MobileBookingBar';
 import Footer from '@/components/layout/Footer';
+import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import ContactBookingForm from '@/components/sections/ContactBookingForm';
 import { BUSINESS } from '@/lib/constants';
 import { Metadata } from 'next';
@@ -33,14 +33,14 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="p-6 border border-[#DEDBD2] rounded-[20px] hover:shadow-lg transition-shadow text-center">
               <h3 className="font-bold text-[#101010] mb-2 uppercase text-[10px] tracking-widest font-mono">WhatsApp</h3>
-              <a href={`https://wa.me/91${BUSINESS.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-[#B88A44] hover:text-[#101010] text-lg transition-colors font-mono block" aria-label={`WhatsApp us at ${BUSINESS.whatsapp}`}>
+              <a href={getWhatsAppLink("Hi V3 Tour & Travels, I have an inquiry.")} target="_blank" rel="noopener noreferrer" className="text-[#B88A44] hover:text-[#101010] text-lg transition-colors font-mono block" aria-label={`WhatsApp us at ${BUSINESS.whatsapp}`}>
                 +91 {BUSINESS.whatsapp}
               </a>
               <p className="text-[10px] text-[#6F6B63] mt-1 uppercase">Fastest response</p>
             </div>
             <div className="p-6 border border-[#DEDBD2] rounded-[20px] hover:shadow-lg transition-shadow text-center">
               <h3 className="font-bold text-[#101010] mb-2 uppercase text-[10px] tracking-widest font-mono">Call Center</h3>
-              <a href={`tel:+91${BUSINESS.phone}`} className="text-[#B88A44] hover:text-[#101010] text-lg transition-colors font-mono block" aria-label={`Call us at ${BUSINESS.phone}`}>
+              <a href={getPhoneLink()} className="text-[#B88A44] hover:text-[#101010] text-lg transition-colors font-mono block" aria-label={`Call us at ${BUSINESS.phone}`}>
                 +91 {BUSINESS.phone}
               </a>
               <p className="text-[10px] text-[#6F6B63] mt-1 uppercase">Standard call rates apply</p>
@@ -86,7 +86,6 @@ export default function ContactPage() {
       </section>
 
       <Footer />
-      <MobileBookingBar />
     </main>
   );
 }

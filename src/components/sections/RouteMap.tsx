@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BUSINESS } from "@/lib/constants";
-import { buildWhatsAppUrl } from "@/lib/booking";
+import { getWhatsAppLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { MapPin, Clock, MessageCircle, ArrowRight, Plane } from "lucide-react";
@@ -227,7 +227,7 @@ export function RouteMap() {
 
                 {/* Micro-CTA */}
                 <a
-                  href={buildWhatsAppUrl(whatsappMsg)}
+                  href={getWhatsAppLink(whatsappMsg)}
                   onClick={() =>
                     trackEvent("whatsapp_click_route", {
                       route: `${route.from}-${route.to}`,

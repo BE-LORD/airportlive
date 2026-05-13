@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { BUSINESS } from '@/lib/constants';
 
+import { getWhatsAppLink } from '@/lib/links';
+
 export default function WhatsAppFloat() {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -12,9 +14,7 @@ export default function WhatsAppFloat() {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappMsg = encodeURIComponent(
-    `Hi ${BUSINESS.name}, I want to book a ride.\n\nPickup: \nDrop: \nDate: `
-  );
+  const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.\n\nPickup: \nDrop: \nDate: `;
 
   if (!isVisible) return null;
 
@@ -35,7 +35,7 @@ export default function WhatsAppFloat() {
           </div>
           <p className="text-[#6F6B63] text-xs mb-4">Click below to book your airport taxi or outstation ride on WhatsApp.</p>
           <a
-            href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
+            href={getWhatsAppLink(whatsappMsg)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 bg-[#25D366] text-white w-full py-3 rounded-xl text-sm font-semibold hover:bg-[#1da851] transition-colors"

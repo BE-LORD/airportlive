@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight } from 'lucide-react';
+import { getWhatsAppLink, getPhoneLink, getEmailLink } from '@/lib/links';
 
 const exploreLinks = [
   { name: 'Airport Taxi', href: '/airport-taxi' },
@@ -21,9 +22,7 @@ const routeLinks = [
 ];
 
 export default function Footer() {
-  const whatsappMsg = encodeURIComponent(
-    `Hi ${BUSINESS.name}, I want to book a ride.`
-  );
+  const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
 
   return (
     <footer className="bg-[#101010] text-white pt-32 pb-12 overflow-hidden relative">
@@ -49,14 +48,14 @@ export default function Footer() {
               <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-6 font-bold">Inquiries</p>
               <div className="space-y-4">
                 <a 
-                  href={`tel:+91${BUSINESS.phone}`} 
+                  href={getPhoneLink()} 
                   data-cursor="Call"
                   className="block text-2xl font-serif hover:text-[#B88A44] transition-colors"
                 >
                   +91 {BUSINESS.phone}
                 </a>
                 <a 
-                  href={`mailto:${BUSINESS.email}`} 
+                  href={getEmailLink()} 
                   className="block text-white/50 hover:text-white transition-colors break-words"
                 >
                   {BUSINESS.email}
@@ -108,7 +107,7 @@ export default function Footer() {
               </p>
             </div>
             <a
-              href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
+              href={getWhatsAppLink(whatsappMsg)}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="Book"

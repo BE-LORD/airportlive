@@ -1,5 +1,9 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
+import { motionEases } from '@/lib/motion';
+
 const GALLERY_IMAGES = [
   {
     src: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=800&auto=format&fit=crop',
@@ -25,11 +29,33 @@ export default function Gallery() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>
-            <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Visual Stories</p>
-            <h2 className="text-4xl md:text-5xl font-serif mb-4">The Experience</h2>
-            <p className="text-white/60 max-w-lg font-sans">From premium night pickups to scenic long-route travel. Every ride is built around comfort.</p>
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: motionEases.mainEase }}
+              className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+            >
+              Visual Stories
+            </motion.p>
+            <h2 className="text-4xl md:text-5xl font-serif mb-4">
+              <SplitTextReveal text="The Experience" highlight="Experience" />
+            </h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
+              className="text-white/60 max-w-lg font-sans"
+            >
+              From premium night pickups to scenic long-route travel. Every ride is built around comfort.
+            </motion.p>
           </div>
-          <a
+          <motion.a
+            initial={{ opacity: 0, x: -15 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3, ease: motionEases.mainEase }}
             href="https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride."
             target="_blank"
             rel="noopener noreferrer"
@@ -37,11 +63,18 @@ export default function Gallery() {
             aria-label="Book a ride on WhatsApp"
           >
             Book Now
-          </a>
+          </motion.a>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {GALLERY_IMAGES.map((img, i) => (
-            <div key={i} className="aspect-square bg-[#2a2a2a] rounded-[16px] overflow-hidden relative group">
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, delay: i * 0.15, ease: motionEases.softEase }}
+              className="aspect-square bg-[#2a2a2a] rounded-[16px] overflow-hidden relative group"
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.src}
@@ -60,7 +93,7 @@ export default function Gallery() {
                   }
                 }}
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

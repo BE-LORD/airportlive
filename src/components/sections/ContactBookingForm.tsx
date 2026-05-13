@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { BUSINESS } from '@/lib/constants';
 import { MessageCircle, CheckCircle } from 'lucide-react';
+import { getWhatsAppLink, getBookingMessage } from '@/lib/links';
 
 export default function ContactBookingForm() {
   const [form, setForm] = useState({
@@ -17,14 +18,18 @@ export default function ContactBookingForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = encodeURIComponent(
-      `Hi ${BUSINESS.name}, I want to book a ride.\n\n` +
-      `👤 Name: ${form.name}\n📞 Phone: ${form.phone}\n✉️ Email: ${form.email || 'N/A'}\n\n` +
-      `📍 Pickup: ${form.pickup}\n📍 Drop: ${form.drop}\n📅 Date: ${form.date}\n🕐 Time: ${form.time || 'Flexible'}\n\n` +
-      `👥 Passengers: ${form.passengers}\n🚗 Vehicle: ${form.vehicle}\n` +
-      (form.notes ? `📝 Notes: ${form.notes}` : '')
-    );
-    window.open(`https://wa.me/91${BUSINESS.whatsapp}?text=${msg}`, '_blank', 'noopener,noreferrer');
+    const msg = getBookingMessage({
+      name: form.name,
+      phone: form.phone,
+      pickup: form.pickup,
+      drop: form.drop,
+      date: form.date,
+      time: form.time,
+      passengers: form.passengers,
+      vehicle: form.vehicle,
+      message: form.notes
+    });
+    window.open(getWhatsAppLink(msg), '_blank', 'noopener,noreferrer');
     setSubmitted(true);
   };
 

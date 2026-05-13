@@ -1,18 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BUSINESS } from "@/lib/constants";
-import { Button } from "@/components/ui/Button";
-import {
-  buildWhatsAppUrl,
-  buildEmailUrl,
-  buildBookingMessage,
-  buildBookingEmailBody,
-} from "@/lib/booking";
+import { getWhatsAppLink, getEmailLink, getBookingMessage } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { MessageCircle, Mail, ArrowRight, Check } from "lucide-react";
-import type { BookingFormData } from "@/lib/booking";
+import { BookingFormData } from "@/lib/links";
 
 const initialForm: BookingFormData = {
   fullName: "",
@@ -89,16 +82,24 @@ export function BookingInquiry() {
     if (!form.phone || !form.fullName) return;
 
     trackEvent("booking_submit", { channel: "whatsapp" });
-    const message = buildBookingMessage(form);
-    const url = buildWhatsAppUrl(message);
+    const message = getBookingMessage({
+      pickup: form.pickup,
+      drop: form.drop,
+      date: form.date,
+      time: form.time,
+      name: form.fullName,
+      phone: form.phone,
+      passengers: form.passengers,
+      vehicle: form.message || "Any", // Map appropriately
+    });
+    const url = getWhatsAppLink(message);
     window.open(url, "_blank");
     setSubmitted(true);
   };
 
   const handleEmailFallback = () => {
     trackEvent("booking_submit", { channel: "email" });
-    const body = buildBookingEmailBody(form);
-    const url = buildEmailUrl("Booking Inquiry", body);
+    const url = getEmailLink();
     window.location.href = url;
   };
 
@@ -149,7 +150,7 @@ export function BookingInquiry() {
               </div>
               <h3 className="font-serif text-3xl md:text-4xl text-white mb-4">Request Sent Successfully</h3>
               <p className="text-white/60 mb-10 max-w-lg mx-auto">
-                Your WhatsApp message has been prepared. We'll be in touch momentarily to confirm your booking.
+                Your WhatsApp message has been prepared. We&apos;ll be in touch momentarily to confirm your booking.
               </p>
               <button
                 onClick={() => {
@@ -172,17 +173,17 @@ export function BookingInquiry() {
               className="p-8 md:p-12 border border-white/10 bg-white/5 rounded-[32px] backdrop-blur-md"
             >
               <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
-                <FloatingInput label="Full Name" name="fullName" required value={form.fullName} onChange={handleChange} />
-                <FloatingInput label="Phone Number" name="phone" type="tel" required value={form.phone} onChange={handleChange} />
-                <FloatingInput label="Pickup Location" name="pickup" required value={form.pickup} onChange={handleChange} />
-                <FloatingInput label="Drop Location" name="drop" required value={form.drop} onChange={handleChange} />
-                <FloatingInput label="Travel Date" name="date" type="date" required value={form.date} onChange={handleChange} />
-                <FloatingInput label="Travel Time" name="time" type="time" required value={form.time} onChange={handleChange} />
-                <FloatingInput label="Flight Number (Optional)" name="flightNumber" value={form.flightNumber ?? ""} onChange={handleChange} />
+                <FloatingInput label="Full Name" name="fullName" required value={form.fullName || ""} onChange={handleChange} />
+                <FloatingInput label="Phone Number" name="phone" type="tel" required value={form.phone || ""} onChange={handleChange} />
+                <FloatingInput label="Pickup Location" name="pickup" required value={form.pickup || ""} onChange={handleChange} />
+                <FloatingInput label="Drop Location" name="drop" required value={form.drop || ""} onChange={handleChange} />
+                <FloatingInput label="Travel Date" name="date" type="date" required value={form.date || ""} onChange={handleChange} />
+                <FloatingInput label="Travel Time" name="time" type="time" required value={form.time || ""} onChange={handleChange} />
+                <FloatingInput label="Flight Number (Optional)" name="flightNumber" value={form.flightNumber || ""} onChange={handleChange} />
                 
                 <div className="grid grid-cols-2 gap-6">
-                  <FloatingInput label="Passengers" name="passengers" type="number" required value={form.passengers} onChange={handleChange} />
-                  <FloatingInput label="Luggage" name="luggage" type="number" value={form.luggage ?? ""} onChange={handleChange} />
+                  <FloatingInput label="Passengers" name="passengers" type="number" required value={form.passengers || ""} onChange={handleChange} />
+                  <FloatingInput label="Luggage" name="luggage" type="number" value={form.luggage || ""} onChange={handleChange} />
                 </div>
 
                 <div className="sm:col-span-2 relative mt-4">
@@ -190,7 +191,7 @@ export function BookingInquiry() {
                     name="message"
                     id="message"
                     rows={1}
-                    value={form.message ?? ""}
+                    value={form.message || ""}
                     onChange={handleChange}
                     className="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white text-lg outline-none transition-all duration-300 focus:border-[#B88A44] peer resize-none"
                     placeholder=" "
@@ -198,7 +199,7 @@ export function BookingInquiry() {
                   <label 
                     htmlFor="message"
                     className={`absolute left-0 transition-all duration-300 pointer-events-none text-white/50 ${
-                      (form.message?.length ?? 0) > 0 ? '-top-2 text-xs text-[#B88A44]' : 'top-4 text-lg'
+                      (form.message?.length || 0) > 0 ? '-top-2 text-xs text-[#B88A44]' : 'top-4 text-lg'
                     }`}
                   >
                     Special Requests
