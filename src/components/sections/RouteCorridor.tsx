@@ -12,7 +12,7 @@ const ROUTES = [
     to: 'Delhi Airport (DEL)', 
     distance: '310 km', 
     time: '5.5h', 
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop',
+    image: '/images/luxury_bus.png',
     tag: 'Popular',
     desc: 'The executive lifeline. Terminal drop-off at T3, T2, or T1. Flight-synced scheduling.'
   },
@@ -52,7 +52,7 @@ const ROUTES = [
     to: 'Chandigarh (IXC)', 
     distance: '110 km', 
     time: '2h', 
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop',
+    image: '/images/chandigarh_route.png',
     tag: 'Regional',
     desc: 'Swift airport connections from Ludhiana to Mohali/Chandigarh Airport. Stress-free transfers.'
   }
@@ -66,7 +66,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
 
   const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
 
@@ -96,26 +96,26 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <span className="bg-[#B88A44] text-white text-[10px] font-mono uppercase tracking-[0.3em] px-6 py-2 rounded-full mb-6 inline-block">
+          <span className="bg-[#E5E4E2] text-[#0A0A0A] text-[10px] font-mono uppercase tracking-[0.3em] px-6 py-2 rounded-full mb-6 inline-block">
             {route.tag}
           </span>
         </motion.div>
 
-        <h3 className="text-4xl md:text-8xl font-serif text-white mb-6 leading-tight">
+        <h3 className="text-3xl sm:text-4xl md:text-8xl font-serif text-white mb-6 leading-tight">
           <span className="block opacity-60 group-hover:opacity-100 transition-opacity duration-700">{route.from}</span>
-          <span className="italic text-[#B88A44] px-4">to</span>
+          <span className="italic text-[#E5E4E2] px-4">to</span>
           <span className="block">{route.to}</span>
         </h3>
 
         <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-white/70 font-mono text-sm md:text-lg mb-10">
           <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-[#B88A44]" /> {route.time}
+            <Clock className="w-5 h-5 text-[#E5E4E2]" /> {route.time}
           </div>
           <div className="flex items-center gap-2">
-            <ArrowRight className="w-5 h-5 text-[#B88A44]" /> {route.distance}
+            <ArrowRight className="w-5 h-5 text-[#E5E4E2]" /> {route.distance}
           </div>
           <div className="flex items-center gap-2">
-            <Plane className="w-5 h-5 text-[#B88A44]" /> Terminal Drop
+            <Plane className="w-5 h-5 text-[#E5E4E2]" /> Terminal Drop
           </div>
         </div>
 
@@ -130,7 +130,7 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
           data-cursor="Book"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-4 bg-white text-[#101010] px-8 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] font-bold transition-colors hover:bg-[#B88A44] hover:text-white"
+          className="inline-flex items-center gap-4 bg-[#1A1A1A] text-[#F5F5F5] px-8 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] font-bold transition-colors hover:bg-[#E5E4E2] hover:text-white"
         >
           Request Fare Quote <ArrowRight className="w-4 h-4" />
         </motion.a>
@@ -144,12 +144,12 @@ function RouteRow({ route, index }: { route: typeof ROUTES[0], index: number }) 
 
 export default function RouteCorridor() {
   return (
-    <section id="routes" className="bg-[#101010] py-0 overflow-hidden">
-      <div className="py-32 px-4 text-center border-b border-white/5">
+    <section id="routes" className="bg-[#0A0A0A] py-0 overflow-hidden">
+      <div className="py-12 md:py-32 px-4 text-center border-b border-white/5">
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-[#B88A44] uppercase tracking-[0.3em] text-xs font-mono mb-6"
+          className="text-[#E5E4E2] uppercase tracking-[0.3em] text-xs font-mono mb-6"
         >
           The Transit Network
         </motion.p>
@@ -158,7 +158,7 @@ export default function RouteCorridor() {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-5xl md:text-8xl font-serif text-white"
         >
-          Mastering the <span className="italic text-[#B88A44]">Corridor</span>
+          Mastering the <span className="italic text-[#E5E4E2]">Corridor</span>
         </motion.h2>
       </div>
 
@@ -169,14 +169,14 @@ export default function RouteCorridor() {
       </div>
 
       {/* Bottom CTA to all routes */}
-      <div className="py-32 bg-[#F8F7F3] text-center">
-        <h4 className="text-3xl md:text-5xl font-serif text-[#101010] mb-8">Traveling elsewhere?</h4>
-        <p className="text-[#6F6B63] mb-12 max-w-xl mx-auto px-4">
+      <div className="py-32 bg-[#0A0A0A] text-center">
+        <h4 className="text-3xl md:text-5xl font-serif text-[#F5F5F5] mb-8">Traveling elsewhere?</h4>
+        <p className="text-[#A3A3A3] mb-12 max-w-xl mx-auto px-4">
           We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.
         </p>
         <a 
           href={getPhoneLink()}
-          className="inline-block bg-[#101010] text-white px-10 py-5 rounded-full text-sm font-mono uppercase tracking-[0.2em] font-bold hover:bg-[#B88A44] transition-colors"
+          className="inline-block bg-[#E5E4E2] text-[#0A0A0A] px-10 py-5 rounded-full text-sm font-mono uppercase tracking-[0.2em] font-bold hover:bg-[#D1D1D1] transition-colors"
         >
           Custom Inquiry
         </a>

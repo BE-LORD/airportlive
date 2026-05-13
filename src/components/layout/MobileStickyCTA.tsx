@@ -56,10 +56,10 @@ export default function MobileStickyCTA() {
           transition={{ duration: motionDurations.drawerOpen, ease: motionEases.mainEase }}
           className="fixed bottom-0 left-0 right-0 z-[90] px-4 pb-[calc(12px+env(safe-area-inset-bottom))] md:hidden"
         >
-          <div className="grid grid-cols-2 gap-2 rounded-full border border-white/15 bg-[#101010]/92 p-2 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+          <div className="grid grid-cols-2 gap-2 rounded-full border border-white/15 bg-[#0A0A0A]/92 p-2 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl">
             <a
               href={getPhoneLink()}
-              className="premium-tap flex min-h-12 items-center justify-center gap-2 rounded-full bg-white/10 text-xs font-black uppercase tracking-widest text-white"
+              className="premium-tap flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#1A1A1A]/10 text-xs font-black uppercase tracking-widest text-white"
               aria-label={`Call ${BUSINESS.phone}`}
             >
               <Phone className="h-4 w-4" />

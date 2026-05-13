@@ -91,7 +91,7 @@ export function MobileDrawer({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: motionDurations.micro }}
-          className="fixed inset-0 z-[55] bg-[#101010] text-white lg:hidden"
+          className="fixed inset-0 z-[55] bg-[#0A0A0A] text-white lg:hidden"
         >
           <motion.div
             initial={{ y: 28, opacity: 0 }}
@@ -100,7 +100,7 @@ export function MobileDrawer({
             transition={{ duration: motionDurations.drawerOpen, ease: motionEases.mainEase }}
             className="flex min-h-dvh flex-col justify-center px-6 pb-10 pt-24"
           >
-            <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-[#B88A44]">
+            <p className="mb-8 text-xs font-bold uppercase tracking-[0.28em] text-[#E5E4E2]">
               {brand}
             </p>
 
@@ -121,7 +121,7 @@ export function MobileDrawer({
                     onClick={onClose}
                     className={cn(
                       "block min-h-12 py-2 font-serif text-4xl leading-tight transition-colors",
-                      pathname === item.path ? "text-[#B88A44]" : "text-white"
+                      pathname === item.path ? "text-[#E5E4E2]" : "text-white"
                     )}
                   >
                     {item.name}
@@ -145,7 +145,7 @@ export function MobileDrawer({
                 href={phoneHref}
                 variant="outline"
                 icon={<Phone className="h-4 w-4" />}
-                className="w-full border-white/20 text-white hover:bg-white/10"
+                className="w-full border-white/20 text-white hover:bg-[#1A1A1A]/10"
               >
                 Call {phoneLabel}
               </MotionButton>

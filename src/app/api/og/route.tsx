@@ -33,7 +33,7 @@ export async function GET() {
             width: "400px",
             height: "300px",
             background:
-              "linear-gradient(225deg, rgba(200,120,10,0.12) 0%, transparent 70%)",
+              "linear-gradient(225deg, rgba(200,200,220,0.12) 0%, transparent 70%)",
           }}
         />
         {/* Bottom indigo strip */}
@@ -60,7 +60,7 @@ export async function GET() {
           <p
             style={{
               fontSize: "16px",
-              color: "#C8780A",
+              color: "#D1D1D1",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               fontWeight: 500,
@@ -88,7 +88,7 @@ export async function GET() {
             style={{
               width: "100px",
               height: "3px",
-              backgroundColor: "#C8780A",
+              backgroundColor: "#D1D1D1",
               borderRadius: "2px",
             }}
           />
@@ -131,7 +131,7 @@ export async function GET() {
                   style={{
                     fontSize: "24px",
                     fontWeight: 700,
-                    color: "#C8780A",
+                    color: "#D1D1D1",
                   }}
                 >
                   {c.v}
@@ -154,7 +154,7 @@ export async function GET() {
           <p
             style={{
               fontSize: "18px",
-              color: "#C8780A",
+              color: "#D1D1D1",
               marginTop: "20px",
               letterSpacing: "0.15em",
               fontWeight: 500,

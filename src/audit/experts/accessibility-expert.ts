@@ -987,7 +987,7 @@ export class AccessibilityExpert extends BaseExpert {
               ],
               expectedBehavior: "Focus indicators must have at least 3:1 contrast ratio",
               actualBehavior: `Focus indicator contrast is ${ratio.toFixed(2)}:1`,
-              suggestedFix: "Use a focus indicator color with at least 3:1 contrast against both the element and its background (e.g., gold #C8780A)",
+              suggestedFix: "Use a focus indicator color with at least 3:1 contrast against both the element and its background (e.g., gold #D1D1D1)",
             });
           }
         }

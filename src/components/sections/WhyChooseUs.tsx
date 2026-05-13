@@ -16,16 +16,16 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-24 bg-[#F8F7F3] overflow-hidden" aria-label="Why choose us">
+    <section className="py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Image */}
+        {/* Image with cinematic clip-path reveal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: motionEases.mainEase }}
+          initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
+          whileInView={{ opacity: 1, clipPath: 'inset(0% 0 0 0)' }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
         >
-          <div className="aspect-[4/5] rounded-[24px] overflow-hidden shadow-sm border border-[#DEDBD2] relative">
+          <div className="aspect-[4/5] rounded-[24px] overflow-hidden shadow-sm border border-white/10 relative section-vignette">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop"
@@ -43,11 +43,11 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
           >
             The {BUSINESS.name} Standard
           </motion.p>
-          <h2 className="text-4xl md:text-5xl font-serif text-[#101010] mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif text-[#F5F5F5] mb-6">
             <SplitTextReveal text="A Legacy of Reliable Travel" highlight="Reliable" />
           </h2>
           <motion.p 
@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
-            className="text-[#6F6B63] mb-10 text-lg leading-relaxed"
+            className="text-[#A3A3A3] mb-10 text-lg leading-relaxed"
           >
             Since our inception, we have redefined how Punjab travels to the airport. It&apos;s not just a taxi ride; it&apos;s a commitment to punctuality, cleanliness, and peace of mind.
           </motion.p>
@@ -69,14 +69,14 @@ export default function WhyChooseUs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-20px" }}
                   transition={{ duration: 0.5, delay: 0.3 + (i * 0.1), ease: motionEases.softEase }}
-                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#EFEEE8] transition-colors"
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#222222] hover:shadow-[0_4px_20px_rgba(200,200,220,0.08)] hover:-translate-y-0.5 transition-all duration-500 group/pillar"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-[#B88A44]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Icon className="w-4 h-4 text-[#B88A44]" />
+                  <div className="w-9 h-9 rounded-lg bg-[#E5E4E2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Icon className="w-4 h-4 text-[#E5E4E2]" />
                   </div>
                   <div>
-                    <p className="font-bold text-[#101010] text-sm mb-0.5">{pillar.title}</p>
-                    <p className="text-[#6F6B63] text-xs leading-relaxed">{pillar.desc}</p>
+                    <p className="font-bold text-[#F5F5F5] text-sm mb-0.5">{pillar.title}</p>
+                    <p className="text-[#A3A3A3] text-xs leading-relaxed">{pillar.desc}</p>
                   </div>
                 </motion.div>
               );

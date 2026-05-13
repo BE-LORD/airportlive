@@ -62,8 +62,8 @@ export function FinalCTA() {
   return (
     <section ref={sectionRef} className="relative bg-[#1E2B4A] py-28 sm:py-36 overflow-hidden">
       {/* Ambient gold glow */}
-      <div className="cta-glow absolute right-0 top-0 h-[70%] w-[45%] bg-gradient-to-bl from-[#C8780A]/8 to-transparent" />
-      <div className="cta-glow absolute left-0 bottom-0 h-[50%] w-[35%] bg-gradient-to-tr from-[#F0B429]/5 to-transparent" />
+      <div className="cta-glow absolute right-0 top-0 h-[70%] w-[45%] bg-gradient-to-bl from-[#D1D1D1]/8 to-transparent" />
+      <div className="cta-glow absolute left-0 bottom-0 h-[50%] w-[35%] bg-gradient-to-tr from-[#FFFFFF]/5 to-transparent" />
 
       <div data-cta-content className="relative mx-auto max-w-3xl px-5 text-center sm:px-8">
         <SectionLabel dark className="mb-6 justify-center">
@@ -81,8 +81,8 @@ export function FinalCTA() {
         </p>
 
         {/* Template hint */}
-        <div className="mt-8 mx-auto max-w-md rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-          <p className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.15em] text-[#F0B429] mb-3">
+        <div className="mt-8 mx-auto max-w-md rounded-xl border border-white/10 bg-[#1A1A1A]/5 p-5 backdrop-blur-sm">
+          <p className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.15em] text-[#FFFFFF] mb-3">
             Quick booking template
           </p>
           <p className="text-sm text-white/50 leading-relaxed text-left">
@@ -97,7 +97,7 @@ export function FinalCTA() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button variant="whatsapp" size="lg" className="bg-[#1A1208] border border-[#C8780A]/30 hover:border-[#C8780A]/60 hover:shadow-[0_8px_40px_rgba(240,180,41,0.24)]">
+            <Button variant="whatsapp" size="lg" className="bg-[#1A1208] border border-[#D1D1D1]/30 hover:border-[#D1D1D1]/60 hover:shadow-[0_8px_40px_rgba(240,180,41,0.24)]">
               <MessageCircle className="h-5 w-5 text-[#25D366]" />
               Book on WhatsApp
               <ArrowRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
@@ -110,7 +110,7 @@ export function FinalCTA() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white/15 text-white hover:bg-white/10 hover:text-white"
+              className="border-white/15 text-white hover:bg-[#1A1A1A]/10 hover:text-white"
             >
               <Phone className="h-5 w-5" />
               Call {BUSINESS.phone}
@@ -123,7 +123,7 @@ export function FinalCTA() {
             <Button
               variant="ghost"
               size="lg"
-              className="text-white/60 hover:bg-white/10 hover:text-white"
+              className="text-white/60 hover:bg-[#1A1A1A]/10 hover:text-white"
             >
               <Mail className="h-5 w-5" />
               Email Us

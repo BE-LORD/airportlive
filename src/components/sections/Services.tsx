@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Plane, MapPin, Briefcase, Users, PartyPopper, Car, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { Card3DTilt } from '@/components/effects/Card3DTilt';
 
 const SERVICES = [
   {
@@ -83,7 +84,7 @@ function BentoCard({ service, index }: { service: typeof SERVICES[0], index: num
       href={service.href}
       ref={cardRef}
       data-cursor="Explore"
-      className={`group relative overflow-hidden rounded-[32px] border border-[#DEDBD2] bg-[#101010] flex flex-col justify-end min-h-[360px] md:min-h-[420px] ${service.colSpan} transition-transform duration-500 hover:scale-[0.98]`}
+      className={`group relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0A0A0A] flex flex-col justify-end min-h-[360px] md:min-h-[420px] ${service.colSpan} transition-transform duration-500 hover:scale-[0.98]`}
     >
       {/* Parallax Background */}
       <motion.div 
@@ -97,12 +98,12 @@ function BentoCard({ service, index }: { service: typeof SERVICES[0], index: num
       </motion.div>
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#101010] via-[#101010]/60 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
 
       {/* Content */}
       <div className="relative z-20 p-8 md:p-10 flex flex-col h-full justify-end">
-        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-[#B88A44] transition-colors duration-500">
-          <Icon className="w-5 h-5 text-white" />
+        <div className="w-12 h-12 rounded-full bg-[#1A1A1A]/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-[#E5E4E2] transition-colors duration-500">
+          <Icon className="w-5 h-5 text-white group-hover:text-[#0A0A0A] transition-colors duration-500" />
         </div>
         
         <h3 className="text-2xl md:text-3xl font-serif text-white mb-3">{service.title}</h3>
@@ -112,7 +113,7 @@ function BentoCard({ service, index }: { service: typeof SERVICES[0], index: num
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 items-center opacity-100 group-hover:opacity-0 group-hover:-translate-y-4 transition-all duration-500 absolute bottom-8 left-8 right-8">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-[#B88A44] bg-[#B88A44]/10 px-3 py-1.5 rounded-full backdrop-blur-md border border-[#B88A44]/20">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-[#E5E4E2] bg-[#E5E4E2]/10 px-3 py-1.5 rounded-full backdrop-blur-md border border-[#E5E4E2]/20">
             {service.bestFor}
           </span>
           <span className="text-[10px] font-mono uppercase tracking-wider text-white/50 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-md">
@@ -126,14 +127,14 @@ function BentoCard({ service, index }: { service: typeof SERVICES[0], index: num
 
 export default function Services() {
   return (
-    <section id="services" className="py-32 bg-[#F8F7F3] relative overflow-hidden">
+    <section id="services" className="py-16 bg-[#111111] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="mb-20 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
           >
             Signature Services
           </motion.p>
@@ -141,10 +142,10 @@ export default function Services() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-serif text-[#101010]"
+            className="text-5xl md:text-7xl font-serif text-[#F5F5F5]"
           >
             Crafted for the <br/>
-            <span className="italic text-[#B88A44]">Modern Traveler</span>
+            <span className="italic text-[#E5E4E2]">Modern Traveler</span>
           </motion.h2>
         </div>
         
@@ -159,7 +160,9 @@ export default function Services() {
               transition={{ duration: 0.7, delay: i * 0.1 }}
               className={service.colSpan}
             >
-              <BentoCard service={service} index={i} />
+              <Card3DTilt maxTilt={8} scale={1.02} className="h-full">
+                <BentoCard service={service} index={i} />
+              </Card3DTilt>
             </motion.div>
           ))}
         </div>

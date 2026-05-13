@@ -29,7 +29,7 @@ interface RouteVisualization3DProps {
 
 export function RouteVisualization3D({
   points,
-  color = '#C8780A',
+  color = '#D1D1D1',
   className = '',
   scrollProgress = 0,
 }: RouteVisualization3DProps) {

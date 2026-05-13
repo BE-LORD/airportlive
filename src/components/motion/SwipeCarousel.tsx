@@ -73,7 +73,7 @@ export function SwipeCarousel({
           <button
             type="button"
             onClick={() => emblaApi?.scrollPrev()}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#DEDBD2] text-[#101010] transition-colors hover:border-[#B88A44]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-[#F5F5F5] transition-colors hover:border-[#E5E4E2]"
             aria-label="Previous slide"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -81,7 +81,7 @@ export function SwipeCarousel({
           <button
             type="button"
             onClick={() => emblaApi?.scrollNext()}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-[#DEDBD2] text-[#101010] transition-colors hover:border-[#B88A44]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-[#F5F5F5] transition-colors hover:border-[#E5E4E2]"
             aria-label="Next slide"
           >
             <ChevronRight className="h-4 w-4" />
@@ -97,7 +97,7 @@ export function SwipeCarousel({
             onClick={() => emblaApi?.scrollTo(index)}
             className={cn(
               "h-2 rounded-full transition-all duration-300",
-              selected === index ? "w-7 bg-[#B88A44]" : "w-2 bg-[#DEDBD2]"
+              selected === index ? "w-7 bg-[#E5E4E2]" : "w-2 bg-[#DEDBD2]"
             )}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={selected === index}

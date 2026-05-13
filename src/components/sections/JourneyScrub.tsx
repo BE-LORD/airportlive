@@ -126,8 +126,8 @@ export function JourneyScrub() {
       <div ref={triggerRef} className="relative h-screen w-full overflow-hidden bg-[#1E2B4A]">
         {/* Ambient Golden Background */}
         <div className="absolute inset-0">
-          <div className="absolute -left-1/4 -top-1/4 h-[800px] w-[800px] rounded-full bg-[#C8780A] opacity-[0.08] blur-[160px]" />
-          <div className="absolute -right-1/4 -bottom-1/4 h-[800px] w-[800px] rounded-full bg-[#F0B429] opacity-[0.06] blur-[160px]" />
+          <div className="absolute -left-1/4 -top-1/4 h-[800px] w-[800px] rounded-full bg-[#D1D1D1] opacity-[0.08] blur-[160px]" />
+          <div className="absolute -right-1/4 -bottom-1/4 h-[800px] w-[800px] rounded-full bg-[#FFFFFF] opacity-[0.06] blur-[160px]" />
         </div>
 
         {/* Content Overlay */}
@@ -144,7 +144,7 @@ export function JourneyScrub() {
                   data-beat
                   className="absolute inset-0 flex flex-col items-center justify-center text-center opacity-0"
                 >
-                  <p className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.4em] text-[#F0B429] mb-4">
+                  <p className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.4em] text-[#FFFFFF] mb-4">
                     {beat.context}
                   </p>
                   <h2 className="font-[family-name:var(--font-cormorant)] text-5xl font-semibold text-white sm:text-7xl lg:text-8xl">
@@ -161,10 +161,10 @@ export function JourneyScrub() {
 
         {/* Progress Indicator */}
         <div className="absolute bottom-12 left-1/2 w-full max-w-xs -translate-x-1/2 px-6">
-          <div className="relative h-px w-full bg-white/10">
+          <div className="relative h-px w-full bg-[#1A1A1A]/10">
             <div
               data-journey-progress
-              className="absolute left-0 top-0 h-full w-full origin-left scale-x-0 bg-[#C8780A]"
+              className="absolute left-0 top-0 h-full w-full origin-left scale-x-0 bg-[#D1D1D1]"
             />
           </div>
           <div className="mt-4 flex justify-between font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-white/40">

@@ -35,20 +35,20 @@ export function MotionAccordion({
         return (
           <div
             key={item.question}
-            className="overflow-hidden rounded-2xl border border-[#DEDBD2] bg-white"
+            className="overflow-hidden rounded-2xl border border-white/10 bg-[#1A1A1A]"
           >
             <button
               id={buttonId}
               type="button"
               onClick={() => setOpenIndex(open ? null : index)}
-              className="flex min-h-[56px] w-full items-center justify-between gap-4 px-6 py-5 text-left text-sm font-bold text-[#101010] md:px-8 md:text-base"
+              className="flex min-h-[56px] w-full items-center justify-between gap-4 px-6 py-5 text-left text-sm font-bold text-[#F5F5F5] md:px-8 md:text-base"
               aria-expanded={open}
               aria-controls={panelId}
             >
               <span>{item.question}</span>
               <ChevronDown
                 className={cn(
-                  "h-5 w-5 flex-shrink-0 text-[#B88A44] transition-transform duration-200",
+                  "h-5 w-5 flex-shrink-0 text-[#E5E4E2] transition-transform duration-200",
                   open && "rotate-180"
                 )}
               />
@@ -68,7 +68,7 @@ export function MotionAccordion({
                   }}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-6 text-sm leading-relaxed text-[#6F6B63] md:px-8 md:text-base">
+                  <div className="px-6 pb-6 text-sm leading-relaxed text-[#A3A3A3] md:px-8 md:text-base">
                     {item.answer}
                   </div>
                 </motion.div>

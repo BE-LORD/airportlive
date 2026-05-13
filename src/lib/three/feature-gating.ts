@@ -31,6 +31,12 @@ export interface FeatureGates {
  * Detect device tier based on hardware capabilities
  */
 export function detectDeviceTier(): DeviceTier {
+  // Force low tier on mobile to prevent WebGL overload and black screens
+  const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    return 'low';
+  }
+
   const webgl = detectWebGLSupport();
   
   // No WebGL support = low tier

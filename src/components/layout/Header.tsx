@@ -39,7 +39,7 @@ export default function Header() {
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#101010]/88 backdrop-blur-xl shadow-lg py-3 border-b border-white/10'
+            ? 'bg-[#0A0A0A]/88 backdrop-blur-xl shadow-lg py-3 border-b border-white/10'
             : 'bg-transparent py-6'
         }`}
       >
@@ -83,7 +83,7 @@ export default function Header() {
               href={getPhoneLink()}
               data-cursor="Call"
               className={`flex items-center gap-2 px-2 py-2 text-sm font-medium transition-colors ${
-                isScrolled ? 'text-white/80 hover:text-[#B88A44]' : 'text-white/90 hover:text-white'
+                isScrolled ? 'text-white/80 hover:text-[#E5E4E2]' : 'text-white/90 hover:text-white'
               }`}
               aria-label="Call us"
             >
@@ -113,7 +113,7 @@ export default function Header() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            className="flex h-12 w-12 items-center justify-center rounded-full transition-colors lg:hidden text-white bg-white/10 backdrop-blur-md z-[60]"
+            className="flex h-12 w-12 items-center justify-center rounded-full transition-colors lg:hidden text-white bg-[#1A1A1A]/10 backdrop-blur-md z-[60]"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

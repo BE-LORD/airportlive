@@ -18,7 +18,7 @@ export function MotionCard({ children, className, as = "div" }: MotionCardProps)
   return (
     <Component
       className={cn(
-        "transition-colors duration-200 will-change-auto hover:border-[#B88A44]/35",
+        "transition-colors duration-200 will-change-auto hover:border-[#E5E4E2]/35",
         className
       )}
       whileHover={isMobile ? undefined : { y: -6 }}

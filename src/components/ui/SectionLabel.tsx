@@ -13,11 +13,11 @@ interface SectionLabelProps {
 export function SectionLabel({ children, className, dark }: SectionLabelProps) {
   return (
     <div className={cn("flex items-center gap-3", className)}>
-      <span className="h-px w-8 bg-[#C8780A]" />
+      <span className="h-px w-8 bg-[#D1D1D1]" />
       <span
         className={cn(
           "font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-medium uppercase tracking-[0.2em]",
-          dark ? "text-[#F0B429]" : "text-[#A08B72]"
+          dark ? "text-[#FFFFFF]" : "text-[#A08B72]"
         )}
       >
         {children}

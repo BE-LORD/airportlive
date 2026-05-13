@@ -78,7 +78,7 @@ export function Navbar() {
             <span
               className={cn(
                 "hidden font-[family-name:var(--font-jetbrains-mono)] text-[9px] uppercase tracking-[0.2em] transition-colors duration-300 sm:block",
-                scrolled ? "text-[#C8780A]" : "text-[#F0B429]"
+                scrolled ? "text-[#D1D1D1]" : "text-[#FFFFFF]"
               )}
             >
               Airport Live
@@ -92,7 +92,7 @@ export function Navbar() {
                 key={link.label}
                 onClick={() => handleNavClick(link.href)}
                 className={cn(
-                  "text-sm font-medium transition-colors duration-300 hover:text-[#C8780A]",
+                  "text-sm font-medium transition-colors duration-300 hover:text-[#D1D1D1]",
                   scrolled ? "text-[#5C4733]" : "text-white/80"
                 )}
               >
@@ -109,7 +109,7 @@ export function Navbar() {
               className={cn(
                 "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
                 scrolled
-                  ? "text-[#5C4733] hover:text-[#C8780A]"
+                  ? "text-[#5C4733] hover:text-[#D1D1D1]"
                   : "text-white/80 hover:text-white"
               )}
             >
@@ -121,7 +121,7 @@ export function Navbar() {
               onClick={() => trackEvent("whatsapp_click_nav")}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full bg-[#1E2B4A] px-5 py-2.5 text-sm font-semibold text-[#F6F1E7] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(240,180,41,0.2)] border border-[#C8780A]/20 hover:border-[#C8780A]/40"
+              className="flex items-center gap-2 rounded-full bg-[#1E2B4A] px-5 py-2.5 text-sm font-semibold text-[#F6F1E7] transition-all duration-300 hover:shadow-[0_4px_20px_rgba(240,180,41,0.2)] border border-[#D1D1D1]/20 hover:border-[#D1D1D1]/40"
             >
               <MessageCircle className="h-3.5 w-3.5 text-[#25D366]" />
               WhatsApp
@@ -136,7 +136,7 @@ export function Navbar() {
               "flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden",
               scrolled
                 ? "text-[#1E2B4A] hover:bg-[#1E2B4A]/5"
-                : "text-white hover:bg-white/10"
+                : "text-white hover:bg-[#1A1A1A]/10"
             )}
           >
             {mobileOpen ? (
@@ -176,7 +176,7 @@ export function Navbar() {
               <button
                 key={link.label}
                 onClick={() => handleNavClick(link.href)}
-                className="block font-[family-name:var(--font-cormorant)] text-3xl font-semibold text-[#1E2B4A] transition-colors hover:text-[#C8780A]"
+                className="block font-[family-name:var(--font-cormorant)] text-3xl font-semibold text-[#1E2B4A] transition-colors hover:text-[#D1D1D1]"
               >
                 {link.label}
               </button>

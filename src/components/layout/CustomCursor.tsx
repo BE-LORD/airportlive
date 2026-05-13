@@ -51,7 +51,7 @@ export default function CustomCursor() {
   return (
     <motion.div
       ref={cursorRef}
-      className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference flex items-center justify-center text-white text-[10px] font-bold uppercase tracking-widest text-center"
+      className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference hidden md:flex items-center justify-center text-white text-[10px] font-bold uppercase tracking-widest text-center"
       style={{
         x: cursorX,
         y: cursorY,

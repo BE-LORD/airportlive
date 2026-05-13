@@ -25,11 +25,10 @@ interface MotionButtonProps {
 }
 
 const variants = {
-  dark: "bg-[#101010] text-white hover:bg-[#B88A44]",
-  gold: "bg-[#B88A44] text-white hover:bg-[#101010]",
-  light: "bg-white text-[#101010] hover:bg-[#B88A44] hover:text-white",
-  outline:
-    "border border-[#DEDBD2] text-[#101010] hover:border-[#B88A44]/50 hover:bg-[#EFEEE8]",
+  dark: "bg-[#1A1A1A] text-white border border-white/10 hover:bg-[#222222]",
+  gold: "bg-[#E5E4E2] text-[#0A0A0A] hover:bg-[#D1D1D1]", // Now Platinum (Silver)
+  light: "bg-[#F5F5F5] text-[#0A0A0A] hover:bg-[#E5E4E2]", // Bright
+  outline: "border border-white/20 text-[#F5F5F5] hover:bg-white/5",
   whatsapp: "bg-[#25D366] text-white hover:bg-[#1da851]",
 };
 
@@ -61,7 +60,7 @@ export function MotionButton({
     </>
   );
   const sharedClassName = cn(
-    "group inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider transition-colors duration-200 focus-visible:outline-[#B88A44] disabled:pointer-events-none disabled:opacity-60",
+    "group inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider transition-colors duration-200 focus-visible:outline-[#E5E4E2] disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     className
   );

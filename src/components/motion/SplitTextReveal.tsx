@@ -47,7 +47,7 @@ export function SplitTextReveal({
                 <span key={`${part}-${partIndex}`}>
                   {part}
                   {isHighlighted && partIndex < parts.length - 1 ? (
-                    <span className="motion-gold-shine italic text-[#B88A44]">
+                    <span className="motion-gold-shine italic text-[#E5E4E2]">
                       {highlight}
                     </span>
                   ) : null}

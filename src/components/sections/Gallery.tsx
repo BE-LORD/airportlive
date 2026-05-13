@@ -25,7 +25,10 @@ const GALLERY_IMAGES = [
 
 export default function Gallery() {
   return (
-    <section className="py-24 bg-[#171717] text-white" aria-label="Photo gallery">
+    <section className="py-12 md:py-24 bg-[#0A0A0A] text-white relative overflow-hidden" aria-label="Photo gallery">
+      {/* Ambient gold glow */}
+      <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[#D1D1D1] opacity-[0.04] blur-[160px] pointer-events-none" />
+      <div className="absolute -right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[#FFFFFF] opacity-[0.03] blur-[120px] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>
@@ -34,7 +37,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: motionEases.mainEase }}
-              className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+              className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
             >
               Visual Stories
             </motion.p>
@@ -59,21 +62,28 @@ export default function Gallery() {
             href="https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride."
             target="_blank"
             rel="noopener noreferrer"
-            className="uppercase tracking-wider text-sm font-semibold text-white hover:text-[#B88A44] transition-colors underline underline-offset-8 flex-shrink-0"
+            className="uppercase tracking-wider text-sm font-semibold text-white hover:text-[#E5E4E2] transition-colors underline underline-offset-8 flex-shrink-0"
             aria-label="Book a ride on WhatsApp"
           >
             Book Now
           </motion.a>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {GALLERY_IMAGES.map((img, i) => (
             <motion.div 
               key={i} 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: i * 0.15, ease: motionEases.softEase }}
-              className="aspect-square bg-[#2a2a2a] rounded-[16px] overflow-hidden relative group"
+              initial={{ 
+                opacity: 0, 
+                clipPath: i % 2 === 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
+              }}
+              whileInView={{ 
+                opacity: 1, 
+                clipPath: 'inset(0 0% 0 0%)',
+              }}
+              viewport={{ once: true, margin: "200px" }}
+              transition={{ duration: 0.9, delay: i * 0.12, ease: [0.76, 0, 0.24, 1] }}
+              className="aspect-square bg-[#2a2a2a] rounded-[16px] overflow-hidden relative group cursor-pointer"
+              data-cursor="EXPLORE"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

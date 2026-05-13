@@ -21,18 +21,18 @@ const COMPARISON_TABLE = [
 
 export default function FleetPage() {
   return (
-    <main className="bg-[#F8F7F3] min-h-screen font-sans text-[#101010]">
+    <main className="bg-[#0A0A0A] min-h-screen font-sans text-[#F5F5F5]">
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-32 bg-[#171717] text-white" aria-label="Fleet page hero">
+      <section className="relative pt-40 pb-32 bg-[#0A0A0A] text-white" aria-label="Fleet page hero">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10" aria-hidden="true" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
           >
             100+ Vehicles Network
           </motion.p>
@@ -53,10 +53,10 @@ export default function FleetPage() {
       <FleetShowcase />
 
       {/* Comparison Table */}
-      <section className="py-24 bg-[#F8F7F3]" aria-label="Vehicle comparison table">
+      <section className="py-24 bg-[#0A0A0A]" aria-label="Vehicle comparison table">
         <div className="max-w-5xl mx-auto px-4">
           <Reveal className="mb-12 text-center">
-            <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Quick Compare</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Quick Compare</p>
             <h2 className="text-3xl md:text-4xl font-serif">
               <SplitTextReveal text="Vehicle Comparison" highlight="Comparison" />
             </h2>
@@ -66,29 +66,29 @@ export default function FleetPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: motionEases.softEase }}
-            className="bg-white rounded-[20px] border border-[#DEDBD2] overflow-hidden"
+            className="bg-[#1A1A1A] rounded-[20px] border border-white/10 overflow-hidden"
           >
             <div className="overflow-x-auto">
               <table className="w-full text-sm" role="table">
                 <thead>
-                  <tr className="bg-[#EFEEE8]">
-                    <th className="text-left px-6 py-4 font-mono text-[10px] uppercase tracking-widest text-[#6F6B63]" scope="col">Vehicle</th>
-                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#6F6B63]" scope="col">Seats</th>
-                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#6F6B63]" scope="col">Luggage</th>
-                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#6F6B63]" scope="col">Airport</th>
-                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#6F6B63]" scope="col">Outstation</th>
-                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#6F6B63]" scope="col">Best For</th>
+                  <tr className="bg-[#141414]">
+                    <th className="text-left px-6 py-4 font-mono text-[10px] uppercase tracking-widest text-[#A3A3A3]" scope="col">Vehicle</th>
+                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#A3A3A3]" scope="col">Seats</th>
+                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#A3A3A3]" scope="col">Luggage</th>
+                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#A3A3A3]" scope="col">Airport</th>
+                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#A3A3A3]" scope="col">Outstation</th>
+                    <th className="text-center px-4 py-4 font-mono text-[10px] uppercase tracking-widest text-[#A3A3A3]" scope="col">Best For</th>
                   </tr>
                 </thead>
                 <tbody>
                   {COMPARISON_TABLE.map((row, i) => (
-                    <tr key={i} className="border-t border-[#DEDBD2] hover:bg-[#F8F7F3]/60 transition-colors">
-                      <td className="px-6 py-4 font-semibold text-[#101010]">{row.vehicle}</td>
-                      <td className="text-center px-4 py-4 text-[#6F6B63]">{row.seats}</td>
-                      <td className="text-center px-4 py-4 text-[#6F6B63] text-xs">{row.luggage}</td>
-                      <td className="text-center px-4 py-4 text-[#B88A44]">{row.airport}</td>
-                      <td className="text-center px-4 py-4 text-[#B88A44]">{row.outstation}</td>
-                      <td className="text-center px-4 py-4 text-[#6F6B63] text-xs">{row.best}</td>
+                    <tr key={i} className="border-t border-white/10 hover:bg-[#0A0A0A]/60 transition-colors">
+                      <td className="px-6 py-4 font-semibold text-[#F5F5F5]">{row.vehicle}</td>
+                      <td className="text-center px-4 py-4 text-[#A3A3A3]">{row.seats}</td>
+                      <td className="text-center px-4 py-4 text-[#A3A3A3] text-xs">{row.luggage}</td>
+                      <td className="text-center px-4 py-4 text-[#E5E4E2]">{row.airport}</td>
+                      <td className="text-center px-4 py-4 text-[#E5E4E2]">{row.outstation}</td>
+                      <td className="text-center px-4 py-4 text-[#A3A3A3] text-xs">{row.best}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -99,7 +99,7 @@ export default function FleetPage() {
       </section>
 
       {/* Fleet Standards */}
-      <section className="py-16 bg-white" aria-label="Fleet standards">
+      <section className="py-16 bg-[#1A1A1A]" aria-label="Fleet standards">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           {[
             { title: 'Regular Maintenance', desc: 'Every vehicle goes through regular servicing, deep cleaning, and safety checks before each long-distance trip.' },
@@ -112,25 +112,25 @@ export default function FleetPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.softEase }}
-              className="bg-[#F8F7F3] p-8 rounded-[20px] border border-[#DEDBD2]"
+              className="bg-[#0A0A0A] p-8 rounded-[20px] border border-white/10"
             >
-              <h3 className="font-serif text-lg text-[#101010] mb-2">{item.title}</h3>
-              <p className="text-[#6F6B63] text-sm">{item.desc}</p>
+              <h3 className="font-serif text-lg text-[#F5F5F5] mb-2">{item.title}</h3>
+              <p className="text-[#A3A3A3] text-sm">{item.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-[#EFEEE8] text-center" aria-label="Book your vehicle">
+      <section className="py-16 bg-[#141414] text-center" aria-label="Book your vehicle">
         <Reveal className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl font-serif mb-4 text-[#101010]">Ready to Choose Your Ride?</h2>
-          <p className="text-[#6F6B63] mb-6">Book your preferred vehicle on WhatsApp or check our routes to plan your journey.</p>
+          <h2 className="text-3xl font-serif mb-4 text-[#F5F5F5]">Ready to Choose Your Ride?</h2>
+          <p className="text-[#A3A3A3] mb-6">Book your preferred vehicle on WhatsApp or check our routes to plan your journey.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href={getWhatsAppLink(`Hi ${BUSINESS.name}, I want to book a vehicle.\n\nVehicle: \nDate: `)} target="_blank" rel="noopener noreferrer" className="bg-[#171717] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#B88A44] transition-colors" aria-label="Book vehicle on WhatsApp">
+            <a href={getWhatsAppLink(`Hi ${BUSINESS.name}, I want to book a vehicle.\n\nVehicle: \nDate: `)} target="_blank" rel="noopener noreferrer" className="bg-[#0A0A0A] text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#E5E4E2] transition-colors" aria-label="Book vehicle on WhatsApp">
               Book on WhatsApp
             </a>
-            <Link href="/routes" className="border border-[#DEDBD2] text-[#101010] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-white transition-colors">
+            <Link href="/routes" className="border border-white/10 text-[#F5F5F5] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A] transition-colors">
               View Routes →
             </Link>
           </div>

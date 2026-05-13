@@ -6,6 +6,7 @@ import { Users, Luggage, Star, ArrowRight } from 'lucide-react';
 import { getWhatsAppLink } from '@/lib/links';
 import { Reveal } from '@/components/motion/Reveal';
 import { MotionCard } from '@/components/motion/MotionCard';
+import { Card3DTilt } from '@/components/effects/Card3DTilt';
 import { MotionButton } from '@/components/motion/MotionButton';
 import { SwipeCarousel } from '@/components/motion/SwipeCarousel';
 
@@ -77,7 +78,7 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ${vehicle.name}.\n\nPickup: \nDrop: \nDate: `;
 
   return (
-    <MotionCard className="h-full overflow-hidden rounded-[24px] border border-white/10 bg-[#101010] text-white">
+    <MotionCard className="h-full overflow-hidden rounded-[24px] border border-white/10 bg-[#0A0A0A] text-white">
       <button
         type="button"
         onClick={() => setExpanded((current) => !current)}
@@ -90,30 +91,30 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
             className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.04]"
             style={{ backgroundImage: `url(${vehicle.image})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#101010] via-black/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/35 to-transparent" />
           <div className="absolute bottom-6 left-6">
-            <span className="rounded-full bg-[#B88A44] px-4 py-1.5 text-[10px] font-mono uppercase tracking-wider text-white">
+            <span className="rounded-full bg-[#0A0A0A]/70 backdrop-blur-sm px-4 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#E5E4E2] border border-[#E5E4E2]/20">
               {vehicle.comfort}
             </span>
           </div>
         </div>
 
         <div className="p-7">
-          <p className="mb-2 text-xs font-mono uppercase tracking-widest text-[#B88A44]">{vehicle.tagline}</p>
+          <p className="mb-2 text-xs font-mono uppercase tracking-widest text-[#E5E4E2]">{vehicle.tagline}</p>
           <h3 className="mb-2 text-3xl font-serif text-white">{vehicle.name}</h3>
           <p className="mb-5 text-xs text-white/45">{vehicle.vehicles}</p>
 
           <div className="grid grid-cols-2 gap-3 border-y border-white/10 py-4">
             <div className="text-sm text-white/70">
-              <span className="mb-1 flex items-center gap-2 text-white"><Users className="h-4 w-4 text-[#B88A44]" /> Seats</span>
+              <span className="mb-1 flex items-center gap-2 text-white"><Users className="h-4 w-4 text-[#E5E4E2]" /> Seats</span>
               <span className="text-xs">{vehicle.seats}</span>
             </div>
             <div className="text-sm text-white/70">
-              <span className="mb-1 flex items-center gap-2 text-white"><Luggage className="h-4 w-4 text-[#B88A44]" /> Luggage</span>
+              <span className="mb-1 flex items-center gap-2 text-white"><Luggage className="h-4 w-4 text-[#E5E4E2]" /> Luggage</span>
               <span className="text-xs">{vehicle.luggage}</span>
             </div>
             <div className="col-span-2 text-sm text-white/70">
-              <span className="mb-1 flex items-center gap-2 text-white"><Star className="h-4 w-4 text-[#B88A44]" /> Best For</span>
+              <span className="mb-1 flex items-center gap-2 text-white"><Star className="h-4 w-4 text-[#E5E4E2]" /> Best For</span>
               <span className="text-xs">{vehicle.bestFor}</span>
             </div>
           </div>
@@ -123,7 +124,7 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
               <ul className="mt-5 space-y-2">
                 {vehicle.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3 text-xs text-white/70">
-                    <span className="h-1 w-1 flex-shrink-0 rounded-full bg-[#B88A44]" />
+                    <span className="h-1 w-1 flex-shrink-0 rounded-full bg-[#E5E4E2]" />
                     {feature}
                   </li>
                 ))}
@@ -152,14 +153,14 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
 
 export default function FleetShowcase() {
   return (
-    <section id="fleet" className="py-24 md:py-32 bg-[#171717] text-white overflow-hidden relative" data-cursor="Swipe">
+    <section id="fleet" className="py-12 md:py-32 bg-[#0A0A0A] text-white overflow-hidden relative" data-cursor="Swipe">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <Reveal className="mb-12" y={24}>
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">
+          <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">
             100+ Vehicles Network
           </p>
           <h2 className="text-5xl md:text-7xl font-serif mb-6">
-            Choose Your <span className="italic text-[#B88A44]">Ride</span>
+            Choose Your <span className="italic text-[#E5E4E2]">Ride</span>
           </h2>
           <p className="max-w-xl text-base md:text-lg text-white/55 font-sans">
             Swipe to explore the fleet. Tap a vehicle to reveal details, then choose your ride on WhatsApp.
@@ -167,7 +168,7 @@ export default function FleetShowcase() {
         </Reveal>
       </div>
 
-      <div className="pl-2 md:pl-[max(1rem,calc((100vw-80rem)/2))]">
+      <div className="pl-2 md:pl-[max(1rem,calc((100vw-80rem)/2))]" data-cursor="DRAG">
         <SwipeCarousel
           ariaLabel="Premium fleet carousel"
           viewportClassName="pb-2"
@@ -175,7 +176,11 @@ export default function FleetShowcase() {
           showArrows
         >
           {FLEET_DETAILED.map((vehicle) => (
-            <FleetCard key={vehicle.id} vehicle={vehicle} />
+            <Card3DTilt key={vehicle.id} maxTilt={10} scale={1.02} className="h-full">
+              <div data-cursor="VIEW" className="h-full">
+                <FleetCard vehicle={vehicle} />
+              </div>
+            </Card3DTilt>
           ))}
         </SwipeCarousel>
       </div>

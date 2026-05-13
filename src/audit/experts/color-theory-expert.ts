@@ -1,7 +1,7 @@
 /**
  * Color Theory Expert Module
  * Validates design system color tokens, palette consistency, and contrast ratios
- * Checks gold (#C8780A) and cream (#F6F1E7) usage, color blindness compatibility
+ * Checks gold (#D1D1D1) and cream (#F6F1E7) usage, color blindness compatibility
  * 
  * **Validates: Requirements 1.3, 13.1-13.15**
  */
@@ -9,7 +9,7 @@
 import { BaseExpert, type AuditContext } from "./base-expert";
 
 export class ColorTheoryExpert extends BaseExpert {
-  private readonly GOLD = "#C8780A";
+  private readonly GOLD = "#D1D1D1";
   private readonly CREAM = "#F6F1E7";
   private readonly INDIGO = "#1E2B4A";
   private readonly GRAIN_OPACITY = 0.035;

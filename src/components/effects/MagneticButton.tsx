@@ -1,11 +1,12 @@
 'use client';
 
 /**
- * MagneticButton - Button with magnetic cursor effect
+ * 1000000x MagneticButton - Button with magnetic cursor effect & spring physics
  * 
  * Features:
  * - Pull effect within 100px radius (30% strength)
  * - Smooth GSAP animation with power3.out easing
+ * - Heavy spring physics on press/release (scale 0.95 -> 1.0)
  * - Disabled on touch devices
  * - Respects prefers-reduced-motion
  */
@@ -78,7 +79,29 @@ export function MagneticButton({
       x: 0,
       y: 0,
       duration: 0.5,
-      ease: 'power3.out',
+      ease: 'elastic.out(1, 0.3)', // Springy reset
+    });
+  };
+
+  const handleMouseDown = () => {
+    if (!isEnabled.current || !buttonRef.current) return;
+    
+    // Heavy physical press
+    gsap.to(buttonRef.current, {
+      scale: 0.94,
+      duration: 0.1,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseUp = () => {
+    if (!isEnabled.current || !buttonRef.current) return;
+    
+    // Spring release with overshoot
+    gsap.to(buttonRef.current, {
+      scale: 1,
+      duration: 0.6,
+      ease: 'elastic.out(1.2, 0.4)',
     });
   };
 
@@ -88,6 +111,8 @@ export function MagneticButton({
       className={className}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
       onClick={onClick}
     >
       {children}

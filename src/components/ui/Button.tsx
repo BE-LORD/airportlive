@@ -27,15 +27,15 @@ const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-[#1E2B4A] text-[#F6F1E7] shadow-md hover:bg-[#2D3E6A] transition-all duration-300",
   secondary:
-    "bg-[#C8780A] text-white shadow-md hover:bg-[#E8943A] transition-all duration-300",
+    "bg-[#D1D1D1] text-white shadow-md hover:bg-[#E8943A] transition-all duration-300",
   outline:
     "border border-[rgba(26,18,8,0.12)] bg-transparent text-[#1A1208] hover:bg-[#EDE6D6] transition-all duration-300",
   ghost:
     "text-[#1A1208] hover:bg-[#EDE6D6] transition-all duration-300",
   whatsapp:
-    "bg-[#1E2B4A] text-[#F6F1E7] shadow-md border border-[#C8780A]/20 hover:border-[#C8780A]/40 hover:shadow-[0_8px_40px_rgba(240,180,41,0.2)] transition-all duration-300",
+    "bg-[#1E2B4A] text-[#F6F1E7] shadow-md border border-[#D1D1D1]/20 hover:border-[#D1D1D1]/40 hover:shadow-[0_8px_40px_rgba(240,180,41,0.2)] transition-all duration-300",
   link:
-    "text-[#C8780A] underline-offset-4 hover:underline transition-colors duration-300",
+    "text-[#D1D1D1] underline-offset-4 hover:underline transition-colors duration-300",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -53,7 +53,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={cn(
-          "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8780A] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D1D1D1] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
           variantStyles[variant],
           sizeStyles[size],
           className

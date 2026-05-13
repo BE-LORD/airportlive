@@ -153,7 +153,7 @@ export function TrustLayer() {
   return (
     <section id="trust" ref={sectionRef} className="bg-[#1E2B4A] py-28 sm:py-36 overflow-hidden relative">
       {/* Subtle gold glow top right */}
-      <div data-trust-glow className="absolute right-0 top-0 h-[60%] w-[40%] bg-gradient-to-bl from-[#C8780A]/8 to-transparent" />
+      <div data-trust-glow className="absolute right-0 top-0 h-[60%] w-[40%] bg-gradient-to-bl from-[#D1D1D1]/8 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         {/* Header */}
@@ -180,9 +180,9 @@ export function TrustLayer() {
             <div
               key={stat.label}
               data-stat
-              className="group rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:border-[#C8780A]/30 hover:bg-white/8"
+              className="group rounded-2xl border border-white/10 bg-[#1A1A1A]/5 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:border-[#D1D1D1]/30 hover:bg-[#1A1A1A]/8"
             >
-              <p className="font-[family-name:var(--font-cormorant)] text-4xl font-bold text-[#F0B429] sm:text-5xl">
+              <p className="font-[family-name:var(--font-cormorant)] text-4xl font-bold text-[#FFFFFF] sm:text-5xl">
                 {stat.value}
               </p>
               <p className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-white/50">
@@ -198,9 +198,9 @@ export function TrustLayer() {
             <div
               key={point.title}
               data-trust-card
-              className="group rounded-2xl border border-white/8 bg-white/5 p-7 backdrop-blur-sm transition-all duration-300 hover:border-[#C8780A]/25 hover:bg-white/8"
+              className="group rounded-2xl border border-white/8 bg-[#1A1A1A]/5 p-7 backdrop-blur-sm transition-all duration-300 hover:border-[#D1D1D1]/25 hover:bg-[#1A1A1A]/8"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#C8780A]/15 text-[#F0B429] transition-all duration-300 group-hover:bg-[#C8780A] group-hover:text-white group-hover:scale-105">
+              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#D1D1D1]/15 text-[#FFFFFF] transition-all duration-300 group-hover:bg-[#D1D1D1] group-hover:text-white group-hover:scale-105">
                 {point.icon}
               </div>
               <h3 className="text-lg font-semibold text-white">

@@ -25,8 +25,8 @@ export default function MobileBookingBar() {
       }`}
     >
       {/* Gradient fade for smooth transition */}
-      <div className="h-6 bg-gradient-to-t from-[#171717] to-transparent" />
-      <div className="bg-[#171717] px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-2">
+      <div className="h-6 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+      <div className="bg-[#0A0A0A] px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-2">
         <div className="grid grid-cols-3 gap-2">
           <a
             href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
@@ -40,7 +40,7 @@ export default function MobileBookingBar() {
           </a>
           <a
             href={`tel:+91${BUSINESS.phone}`}
-            className="flex flex-col items-center justify-center gap-1 rounded-xl bg-white/10 py-3 text-white active:scale-95 transition-transform min-h-[52px]"
+            className="flex flex-col items-center justify-center gap-1 rounded-xl bg-[#1A1A1A]/10 py-3 text-white active:scale-95 transition-transform min-h-[52px]"
             aria-label="Call now"
           >
             <Phone className="h-5 w-5" />
@@ -48,7 +48,7 @@ export default function MobileBookingBar() {
           </a>
           <a
             href="#booking"
-            className="flex flex-col items-center justify-center gap-1 rounded-xl bg-[#B88A44] py-3 text-white active:scale-95 transition-transform min-h-[52px]"
+            className="flex flex-col items-center justify-center gap-1 rounded-xl bg-[#E5E4E2] py-3 text-white active:scale-95 transition-transform min-h-[52px]"
             aria-label="Book a ride"
           >
             <CalendarCheck className="h-5 w-5" />

@@ -33,7 +33,7 @@ export function Reveal({
       variants={buildRevealVariants({ delay, duration, y, reducedMotion })}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount: 0.2, margin: "0px 0px -10% 0px" }}
+      viewport={{ once, amount: 0.05, margin: "0px" }}
     >
       {children}
     </Component>

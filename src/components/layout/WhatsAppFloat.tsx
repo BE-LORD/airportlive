@@ -22,18 +22,18 @@ export default function WhatsAppFloat() {
     <div className="fixed bottom-6 right-6 z-40 hidden md:flex flex-col items-end gap-3">
       {/* Tooltip/Chat bubble */}
       {isOpen && (
-        <div className="bg-white rounded-2xl shadow-xl border border-[#DEDBD2] p-5 w-[280px] animate-in slide-in-from-bottom-4">
+        <div className="bg-[#1A1A1A] rounded-2xl shadow-xl border border-white/10 p-5 w-[280px] animate-in slide-in-from-bottom-4">
           <div className="flex items-center justify-between mb-3">
-            <p className="font-bold text-[#101010] text-sm">Need a ride?</p>
+            <p className="font-bold text-[#F5F5F5] text-sm">Need a ride?</p>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-[#6F6B63] hover:text-[#101010] transition-colors"
+              className="text-[#A3A3A3] hover:text-[#F5F5F5] transition-colors"
               aria-label="Close chat bubble"
             >
               <X className="h-4 w-4" />
             </button>
           </div>
-          <p className="text-[#6F6B63] text-xs mb-4">Click below to book your airport taxi or outstation ride on WhatsApp.</p>
+          <p className="text-[#A3A3A3] text-xs mb-4">Click below to book your airport taxi or outstation ride on WhatsApp.</p>
           <a
             href={getWhatsAppLink(whatsappMsg)}
             target="_blank"

@@ -5,13 +5,13 @@
  * 
  * Features:
  * - 1000 particles (high tier), 500 (mid tier), 0 (low tier)
- * - Gold color (#C8780A)
+ * - Gold color (#D1D1D1)
  * - Mouse-influenced parallax effect
  * - Noise-based organic movement
  * - Device tier gating
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { detectDeviceTier, getParticleCount, getPixelRatio } from '@/lib/three';
 
@@ -28,14 +28,21 @@ export function ParticleSystem({ className = '' }: ParticleSystemProps) {
   const mouseRef = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number | null>(null);
   
-  // Check device tier outside of effect
-  const tier = detectDeviceTier();
-  const particleCount = getParticleCount(tier);
-  const isSupported = particleCount > 0;
+  const [tier, setTier] = useState<string>('low');
+  const [isSupported, setIsSupported] = useState(false);
+  const [particleCount, setParticleCount] = useState(0);
 
   useEffect(() => {
-    // Don't render on low-tier devices
-    if (!isSupported) {
+    const detectedTier = detectDeviceTier();
+    const count = getParticleCount(detectedTier);
+    setTier(detectedTier);
+    setParticleCount(count);
+    setIsSupported(count > 0);
+  }, []);
+
+  useEffect(() => {
+    // Don't render on low-tier devices or if not supported
+    if (!isSupported || particleCount === 0) {
       return;
     }
 
@@ -62,7 +69,7 @@ export function ParticleSystem({ className = '' }: ParticleSystemProps) {
       antialias: tier === 'high',
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(getPixelRatio(tier));
+    renderer.setPixelRatio(getPixelRatio(tier as any));
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -207,7 +214,7 @@ export function ParticleSystem({ className = '' }: ParticleSystemProps) {
       rendererRef.current = null;
       particlesRef.current = null;
     };
-  }, []);
+  }, [isSupported, particleCount, tier]);
 
   if (!isSupported) {
     return null;

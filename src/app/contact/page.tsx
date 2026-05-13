@@ -11,18 +11,18 @@ import { motionEases } from '@/lib/motion';
 
 export default function ContactPage() {
   return (
-    <main className="bg-[#F8F7F3] min-h-screen font-sans text-[#101010]">
+    <main className="bg-[#0A0A0A] min-h-screen font-sans text-[#F5F5F5]">
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-20 bg-[#171717] text-white" aria-label="Contact page hero">
+      <section className="relative pt-40 pb-20 bg-[#0A0A0A] text-white" aria-label="Contact page hero">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-15" aria-hidden="true" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
           >
             Get In Touch
           </motion.p>
@@ -41,7 +41,7 @@ export default function ContactPage() {
       </section>
 
       {/* Direct Contact Info */}
-      <section className="py-16 bg-white" aria-label="Contact information">
+      <section className="py-16 bg-[#1A1A1A]" aria-label="Contact information">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
@@ -56,17 +56,17 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.softEase }}
-                className="p-6 border border-[#DEDBD2] rounded-[20px] hover:shadow-lg transition-shadow text-center"
+                className="p-6 border border-white/10 rounded-[20px] hover:shadow-lg transition-shadow text-center"
               >
-                <h3 className="font-bold text-[#101010] mb-2 uppercase text-[10px] tracking-widest font-mono">{info.title}</h3>
+                <h3 className="font-bold text-[#F5F5F5] mb-2 uppercase text-[10px] tracking-widest font-mono">{info.title}</h3>
                 {info.href ? (
-                  <a href={info.href} target={info.title === 'WhatsApp' ? '_blank' : '_self'} rel={info.title === 'WhatsApp' ? 'noopener noreferrer' : ''} className="text-[#B88A44] hover:text-[#101010] text-lg transition-colors font-mono block">
+                  <a href={info.href} target={info.title === 'WhatsApp' ? '_blank' : '_self'} rel={info.title === 'WhatsApp' ? 'noopener noreferrer' : ''} className="text-[#E5E4E2] hover:text-[#F5F5F5] text-lg transition-colors font-mono block">
                     {info.text}
                   </a>
                 ) : (
-                  <p className="text-[#101010] text-sm">{info.text}</p>
+                  <p className="text-[#F5F5F5] text-sm">{info.text}</p>
                 )}
-                <p className="text-[10px] text-[#6F6B63] mt-1 uppercase">{info.desc}</p>
+                <p className="text-[10px] text-[#A3A3A3] mt-1 uppercase">{info.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -77,7 +77,7 @@ export default function ContactPage() {
       <ContactBookingForm />
 
       {/* Emergency & Business Hours */}
-      <section className="py-16 bg-[#EFEEE8]" aria-label="Business hours and emergency info">
+      <section className="py-16 bg-[#141414]" aria-label="Business hours and emergency info">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {[
             { title: 'Business Hours', main: '24 / 7', desc: 'Including holidays, weekends, early mornings, and late nights.' },
@@ -90,11 +90,11 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.softEase }}
-              className="bg-white p-8 rounded-[20px] border border-[#DEDBD2]"
+              className="bg-[#1A1A1A] p-8 rounded-[20px] border border-white/10"
             >
-              <h3 className="font-serif text-xl text-[#101010] mb-3">{item.title}</h3>
-              <p className={item.isPhone ? "text-[#B88A44] font-bold text-lg font-mono" : (item.main === '24 / 7' ? "text-[#B88A44] font-bold text-2xl font-mono" : "text-[#101010] text-sm font-medium")}>{item.main}</p>
-              <p className="text-[#6F6B63] text-sm mt-2">{item.desc}</p>
+              <h3 className="font-serif text-xl text-[#F5F5F5] mb-3">{item.title}</h3>
+              <p className={item.isPhone ? "text-[#E5E4E2] font-bold text-lg font-mono" : (item.main === '24 / 7' ? "text-[#E5E4E2] font-bold text-2xl font-mono" : "text-[#F5F5F5] text-sm font-medium")}>{item.main}</p>
+              <p className="text-[#A3A3A3] text-sm mt-2">{item.desc}</p>
             </motion.div>
           ))}
         </div>

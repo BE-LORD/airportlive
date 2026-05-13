@@ -144,24 +144,24 @@ export function HowItWorks() {
 
         <div ref={gridRef} className="relative grid gap-8 sm:grid-cols-3">
           {/* Connector line desktop */}
-          <div data-connector-line className="absolute left-0 right-0 top-[80px] hidden h-px bg-gradient-to-r from-[#C8780A]/0 via-[#C8780A]/60 to-[#C8780A]/0 sm:block" />
+          <div data-connector-line className="absolute left-0 right-0 top-[80px] hidden h-px bg-gradient-to-r from-[#D1D1D1]/0 via-[#D1D1D1]/60 to-[#D1D1D1]/0 sm:block" />
 
           {steps.map((step) => (
             <div
               key={step.number}
               data-hiw-card
-              className="group relative rounded-2xl border border-[rgba(26,18,8,0.08)] bg-[#FDFAF3] p-8 text-center transition-all duration-300 hover:border-[rgba(200,120,10,0.32)] hover:shadow-[0_16px_50px_rgba(23,17,10,0.08)]"
+              className="group relative rounded-2xl border border-[rgba(26,18,8,0.08)] bg-[#FDFAF3] p-8 text-center transition-all duration-300 hover:border-[rgba(200,200,220,0.32)] hover:shadow-[0_16px_50px_rgba(23,17,10,0.08)]"
             >
-              <div className="relative z-10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#C8780A]/10 text-[#C8780A] ring-1 ring-[#C8780A]/20 transition-all duration-300 group-hover:bg-[#C8780A] group-hover:text-white group-hover:ring-[#C8780A] group-hover:scale-110">
+              <div className="relative z-10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D1D1D1]/10 text-[#D1D1D1] ring-1 ring-[#D1D1D1]/20 transition-all duration-300 group-hover:bg-[#D1D1D1] group-hover:text-white group-hover:ring-[#D1D1D1] group-hover:scale-110">
                 {step.icon}
               </div>
-              <span className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#C8780A]">
+              <span className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#D1D1D1]">
                 Step {step.number}
               </span>
               <h3 className="mt-4 text-xl font-semibold text-[#1E2B4A]">
                 {step.title}
               </h3>
-              <p className="mt-1 font-[family-name:var(--font-cormorant)] text-sm italic text-[#C8780A]">
+              <p className="mt-1 font-[family-name:var(--font-cormorant)] text-sm italic text-[#D1D1D1]">
                 {step.accent}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-[#A08B72]">
@@ -178,7 +178,7 @@ export function HowItWorks() {
             onClick={() => trackEvent("whatsapp_click_hiw")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-full border border-[rgba(200,120,10,0.32)] bg-[#C8780A]/5 px-6 py-3 text-sm font-semibold text-[#C8780A] transition-all duration-300 hover:bg-[#C8780A] hover:text-white"
+            className="inline-flex items-center gap-3 rounded-full border border-[rgba(200,200,220,0.32)] bg-[#D1D1D1]/5 px-6 py-3 text-sm font-semibold text-[#D1D1D1] transition-all duration-300 hover:bg-[#D1D1D1] hover:text-white"
           >
             <MessageCircle className="h-4 w-4" />
             Start with a message

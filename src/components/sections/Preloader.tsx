@@ -46,7 +46,7 @@ export function Preloader() {
             y: "-100%",
             transition: { duration: 1, ease: [0.76, 0, 0.24, 1] }
           }}
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#101010]"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#0A0A0A]"
         >
           {/* Grain overlay for luxury feel */}
           <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-10 mix-blend-overlay pointer-events-none" />
@@ -60,7 +60,7 @@ export function Preloader() {
               <h1 className="font-serif text-5xl md:text-7xl text-white mb-2 tracking-tighter">
                 {BUSINESS.brand.toUpperCase()}
               </h1>
-              <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-[#B88A44] mb-12">
+              <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-[#E5E4E2] mb-12">
                 Tour & Travels
               </p>
             </motion.div>
@@ -78,9 +78,9 @@ export function Preloader() {
             </div>
 
             {/* Progress bar */}
-            <div className="mt-8 w-full h-[1px] bg-white/10 relative overflow-hidden">
+            <div className="mt-8 w-full h-[1px] bg-[#1A1A1A]/10 relative overflow-hidden">
               <motion.div 
-                className="absolute top-0 left-0 h-full bg-[#B88A44]"
+                className="absolute top-0 left-0 h-full bg-[#E5E4E2]"
                 initial={{ width: 0 }}
                 animate={{ width: `${count}%` }}
                 transition={{ duration: 0.5 }}

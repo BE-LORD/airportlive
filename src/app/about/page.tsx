@@ -30,17 +30,17 @@ const CITIES = ['Ludhiana', 'Chandigarh', 'Delhi NCR', 'Amritsar', 'Jalandhar', 
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#F8F7F3] min-h-screen font-sans text-[#101010]">
+    <main className="bg-[#0A0A0A] min-h-screen font-sans text-[#F5F5F5]">
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-32 bg-[#171717] text-white" aria-label="About us hero">
+      <section className="relative pt-40 pb-32 bg-[#0A0A0A] text-white" aria-label="About us hero">
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
           >
             Our Legacy
           </motion.p>
@@ -59,10 +59,10 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-24 bg-white" aria-label="Company story">
+      <section className="py-24 bg-[#1A1A1A]" aria-label="Company story">
         <div className="max-w-4xl mx-auto px-4">
           <Reveal className="text-center mb-12">
-            <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">The V3 Story</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">The V3 Story</p>
             <h2 className="text-4xl md:text-5xl font-serif mb-8">
               <SplitTextReveal text="From One Car to 100+" highlight="100+" />
             </h2>
@@ -72,17 +72,17 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: motionEases.softEase }}
-            className="space-y-6 text-[#6F6B63] text-base leading-relaxed"
+            className="space-y-6 text-[#A3A3A3] text-base leading-relaxed"
           >
             <p>V3 Tour & Travels started over two decades ago with a single vision: make travel across Punjab comfortable, reliable, and safe. What began as a small family operation in Ludhiana has grown into one of the region&apos;s most trusted travel brands.</p>
             <p>Today, we operate a network of 100+ vehicles including premium Innova Crystas, executive sedans, and group-travel Tempo Travellers. Our focus is on airport transfers — connecting Punjab to Delhi IGI, Chandigarh, and Amritsar airports — but we also handle outstation rides, corporate travel, and wedding logistics.</p>
-            <p>Operating as <strong className="text-[#101010]">Airport Live</strong> for our digital presence, V3 Tour & Travels is the name families have trusted for generations. Our drivers are experienced, our vehicles are maintained to high standards, and our dispatch operates 24/7 via WhatsApp and phone.</p>
+            <p>Operating as <strong className="text-[#F5F5F5]">Airport Live</strong> for our digital presence, V3 Tour & Travels is the name families have trusted for generations. Our drivers are experienced, our vehicles are maintained to high standards, and our dispatch operates 24/7 via WhatsApp and phone.</p>
           </motion.div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-[#171717] text-white" aria-label="Company statistics">
+      <section className="py-16 bg-[#0A0A0A] text-white" aria-label="Company statistics">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {STATS.map((stat, i) => (
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.mainEase }}
               >
-                <p className="text-4xl md:text-5xl font-serif text-[#B88A44] mb-2">{stat.number}</p>
+                <p className="text-4xl md:text-5xl font-serif text-[#E5E4E2] mb-2">{stat.number}</p>
                 <p className="text-xs uppercase tracking-widest text-white/60 font-mono">{stat.label}</p>
               </motion.div>
             ))}
@@ -102,10 +102,10 @@ export default function AboutPage() {
       </section>
 
       {/* Our Values */}
-      <section className="py-24 bg-[#EFEEE8]" aria-label="Our values">
+      <section className="py-24 bg-[#141414]" aria-label="Our values">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="text-center mb-16">
-            <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Why V3</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Why V3</p>
             <h2 className="text-4xl md:text-5xl font-serif">
               <SplitTextReveal text="What Makes Us Different" highlight="Different" />
             </h2>
@@ -120,13 +120,13 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: i * 0.1, ease: motionEases.softEase }}
-                  className="bg-white p-8 rounded-[20px] border border-[#DEDBD2]"
+                  className="bg-[#1A1A1A] p-8 rounded-[20px] border border-white/10"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#B88A44]/10 flex items-center justify-center mb-5">
-                    <Icon className="w-5 h-5 text-[#B88A44]" />
+                  <div className="w-12 h-12 rounded-2xl bg-[#E5E4E2]/10 flex items-center justify-center mb-5">
+                    <Icon className="w-5 h-5 text-[#E5E4E2]" />
                   </div>
-                  <h3 className="text-lg font-serif text-[#101010] mb-2">{value.title}</h3>
-                  <p className="text-[#6F6B63] text-sm leading-relaxed">{value.desc}</p>
+                  <h3 className="text-lg font-serif text-[#F5F5F5] mb-2">{value.title}</h3>
+                  <p className="text-[#A3A3A3] text-sm leading-relaxed">{value.desc}</p>
                 </motion.div>
               );
             })}
@@ -135,10 +135,10 @@ export default function AboutPage() {
       </section>
 
       {/* Cities Served */}
-      <section className="py-16 bg-white" aria-label="Cities served">
+      <section className="py-16 bg-[#1A1A1A]" aria-label="Cities served">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <Reveal>
-            <h2 className="text-3xl font-serif text-[#101010] mb-8">Cities We Serve</h2>
+            <h2 className="text-3xl font-serif text-[#F5F5F5] mb-8">Cities We Serve</h2>
           </Reveal>
           <div className="flex flex-wrap justify-center gap-3">
             {CITIES.map((city, i) => (
@@ -148,7 +148,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05, ease: motionEases.mainEase }}
-                className="bg-[#EFEEE8] border border-[#DEDBD2] text-[#101010] text-sm px-4 py-2 rounded-full"
+                className="bg-[#141414] border border-white/10 text-[#F5F5F5] text-sm px-4 py-2 rounded-full"
               >
                 {city}
               </motion.span>

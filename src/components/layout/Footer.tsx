@@ -25,17 +25,23 @@ export default function Footer() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
 
   return (
-    <footer className="bg-[#101010] text-white pt-32 pb-12 overflow-hidden relative">
+    <footer className="bg-[#0A0A0A] text-white pt-12 md:pt-32 overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4">
-        {/* Massive Branding Reveal */}
-        <div className="mb-24 overflow-hidden">
+        {/* Massive Branding Reveal — Hollow to Gold Fill */}
+        <div className="mb-12 md:mb-24 overflow-hidden">
           <motion.h2 
             initial={{ y: "100%" }}
             whileInView={{ y: 0 }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            className="text-[18vw] md:text-[14vw] font-serif leading-[0.8] tracking-tighter opacity-10 select-none whitespace-nowrap"
+            className="text-[18vw] md:text-[14vw] font-serif leading-[0.8] tracking-tighter select-none whitespace-nowrap motion-gold-shine"
+            style={{
+              WebkitTextStroke: '1px rgba(255,255,255,0.08)',
+              WebkitTextFillColor: 'transparent',
+              backgroundImage: 'linear-gradient(to top, rgba(200,200,220,0.15) 0%, rgba(255,255,255,0.05) 100%)',
+              backgroundClip: 'text',
+            }}
           >
             {BUSINESS.brand.toUpperCase()}
           </motion.h2>
@@ -45,12 +51,12 @@ export default function Footer() {
           {/* Contact Column */}
           <div className="space-y-8">
             <div>
-              <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-6 font-bold">Inquiries</p>
+              <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.3em] mb-6 font-bold">Inquiries</p>
               <div className="space-y-4">
                 <a 
                   href={getPhoneLink()} 
                   data-cursor="Call"
-                  className="block text-2xl font-serif hover:text-[#B88A44] transition-colors"
+                  className="block text-2xl font-serif hover:text-[#E5E4E2] transition-colors"
                 >
                   +91 {BUSINESS.phone}
                 </a>
@@ -64,14 +70,14 @@ export default function Footer() {
             </div>
             
             <div className="flex items-start gap-3 text-white/40 text-sm max-w-xs">
-              <MapPin className="h-4 w-4 mt-1 flex-shrink-0 text-[#B88A44]" />
+              <MapPin className="h-4 w-4 mt-1 flex-shrink-0 text-[#E5E4E2]" />
               <p>{BUSINESS.address}</p>
             </div>
           </div>
 
           {/* Navigation */}
           <div>
-            <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Navigation</p>
+            <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Navigation</p>
             <ul className="space-y-4">
               {exploreLinks.map((link) => (
                 <li key={link.name}>
@@ -86,7 +92,7 @@ export default function Footer() {
 
           {/* Popular Routes */}
           <div>
-            <p className="text-[#B88A44] font-mono text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Top Corridors</p>
+            <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.3em] mb-8 font-bold">Top Corridors</p>
             <ul className="space-y-4">
               {routeLinks.map((route) => (
                 <li key={route}>
@@ -99,7 +105,7 @@ export default function Footer() {
           </div>
 
           {/* Connect CTA */}
-          <div className="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
+          <div className="bg-[#1A1A1A]/5 p-8 rounded-3xl border border-white/10 flex flex-col justify-between">
             <div>
               <h4 className="text-xl font-serif mb-4">Book in seconds.</h4>
               <p className="text-white/40 text-xs leading-relaxed mb-8 font-mono">
@@ -111,7 +117,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="Book"
-              className="bg-[#B88A44] text-white px-6 py-4 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-white hover:text-[#101010] transition-colors text-center font-bold"
+              className="bg-[#E5E4E2] text-[#0A0A0A] px-6 py-4 rounded-full text-xs font-mono uppercase tracking-widest hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-colors text-center font-bold"
             >
               Start Conversation
             </a>
