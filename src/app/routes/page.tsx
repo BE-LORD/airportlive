@@ -1,14 +1,13 @@
+"use client";
+
 import Header from '@/components/layout/Header';
 import RouteCorridor from '@/components/sections/RouteCorridor';
 import Footer from '@/components/layout/Footer';
-import { BUSINESS } from '@/lib/constants';
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: `Airport & Outstation Taxi Routes | ${BUSINESS.name}`,
-  description: "View our core taxi routes including Ludhiana to Delhi Airport, Chandigarh to Delhi, Amritsar Airport, and across Punjab. Distance, time estimates, and instant WhatsApp booking.",
-};
+import { motion } from 'framer-motion';
+import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
+import { motionEases } from '@/lib/motion';
+import { Reveal } from '@/components/motion/Reveal';
 
 export default function RoutesPage() {
   return (
@@ -18,11 +17,25 @@ export default function RoutesPage() {
       {/* Hero */}
       <section className="relative pt-40 pb-32 bg-[#171717] text-white" aria-label="Routes page hero">
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold">Network & Coverage</p>
-          <h1 className="text-5xl md:text-7xl font-serif mb-6">Mastering the <span className="italic text-[#B88A44]">Corridor</span></h1>
-          <p className="text-white/70 max-w-2xl mx-auto text-lg mb-10">
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: motionEases.mainEase }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+          >
+            Network & Coverage
+          </motion.p>
+          <h1 className="text-5xl md:text-7xl font-serif mb-6">
+            <SplitTextReveal text="Mastering the Corridor" highlight="Corridor" />
+          </h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
+            className="text-white/70 max-w-2xl mx-auto text-lg mb-10"
+          >
             Dedicated airport and outstation routes connecting Punjab, Chandigarh, and Delhi. Safe, non-stop, and highly punctual. Every route with a fare quote on WhatsApp.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -31,30 +44,35 @@ export default function RoutesPage() {
       {/* Route Tips */}
       <section className="py-16 bg-[#EFEEE8]" aria-label="Route booking tips">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div className="bg-white p-8 rounded-[20px] border border-[#DEDBD2]">
-            <h3 className="font-serif text-lg text-[#101010] mb-2">Book Early, Save More</h3>
-            <p className="text-[#6F6B63] text-sm">Booking 12–24 hours in advance guarantees vehicle availability and the best rates.</p>
-          </div>
-          <div className="bg-white p-8 rounded-[20px] border border-[#DEDBD2]">
-            <h3 className="font-serif text-lg text-[#101010] mb-2">One-Way Available</h3>
-            <p className="text-[#6F6B63] text-sm">Pay only for the distance you travel. No return charges for one-way airport drops or pickups.</p>
-          </div>
-          <div className="bg-white p-8 rounded-[20px] border border-[#DEDBD2]">
-            <h3 className="font-serif text-lg text-[#101010] mb-2">Custom Routes</h3>
-            <p className="text-[#6F6B63] text-sm">Don&apos;t see your route? Just WhatsApp us. We handle custom routes across all of North India.</p>
-          </div>
+          {[
+            { title: 'Book Early, Save More', desc: 'Booking 12–24 hours in advance guarantees vehicle availability and the best rates.' },
+            { title: 'One-Way Available', desc: 'Pay only for the distance you travel. No return charges for one-way airport drops or pickups.' },
+            { title: 'Custom Routes', desc: 'Don\'t see your route? Just WhatsApp us. We handle custom routes across all of North India.' }
+          ].map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.softEase }}
+              className="bg-white p-8 rounded-[20px] border border-[#DEDBD2]"
+            >
+              <h3 className="font-serif text-lg text-[#101010] mb-2">{item.title}</h3>
+              <p className="text-[#6F6B63] text-sm">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-16 bg-white text-center" aria-label="Choose vehicle for your route">
-        <div className="max-w-3xl mx-auto px-4">
+        <Reveal className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-serif mb-4 text-[#101010]">Choose the Right Vehicle for Your Route</h2>
           <p className="text-[#6F6B63] mb-6">Different routes, different needs. See which vehicle fits your journey best.</p>
           <Link href="/fleet" className="inline-block border border-[#DEDBD2] text-[#101010] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#EFEEE8] transition-colors">
             View Fleet →
           </Link>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />

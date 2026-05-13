@@ -1,15 +1,15 @@
+"use client";
+
 import Header from '@/components/layout/Header';
 import FleetShowcase from '@/components/sections/FleetShowcase';
 import Footer from '@/components/layout/Footer';
 import { getWhatsAppLink } from '@/lib/links';
 import { BUSINESS } from '@/lib/constants';
-import { Metadata } from 'next';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: `Premium Taxi Fleet — Sedan, SUV & Group Travel | ${BUSINESS.name}`,
-  description: "Explore our premium fleet of Innova Crystas, executive sedans, SUVs, and Tempo Travellers. Compare seats, luggage capacity, and suitability for airport and outstation travel.",
-};
+import { motion } from 'framer-motion';
+import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
+import { motionEases } from '@/lib/motion';
+import { Reveal } from '@/components/motion/Reveal';
 
 const COMPARISON_TABLE = [
   { vehicle: 'Premium Sedan', seats: '4', luggage: '2 Large + 1 Cabin', airport: '✓', outstation: '✓', best: 'Solo / Couples' },
@@ -28,11 +28,25 @@ export default function FleetPage() {
       <section className="relative pt-40 pb-32 bg-[#171717] text-white" aria-label="Fleet page hero">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10" aria-hidden="true" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold">100+ Vehicles Network</p>
-          <h1 className="text-5xl md:text-7xl font-serif mb-6">Our <span className="italic text-[#B88A44]">Premium</span> Fleet</h1>
-          <p className="text-white/70 max-w-2xl mx-auto text-lg mb-10">
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: motionEases.mainEase }}
+            className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+          >
+            100+ Vehicles Network
+          </motion.p>
+          <h1 className="text-5xl md:text-7xl font-serif mb-6">
+            <SplitTextReveal text="Our Premium Fleet" highlight="Premium" />
+          </h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
+            className="text-white/70 max-w-2xl mx-auto text-lg mb-10"
+          >
             Choose comfort for every journey. From executive sedans to spacious Tempo Travellers, our vehicles are impeccably maintained and driven by professionals.
-          </p>
+          </motion.p>
         </div>
       </section>
 
@@ -41,11 +55,19 @@ export default function FleetPage() {
       {/* Comparison Table */}
       <section className="py-24 bg-[#F8F7F3]" aria-label="Vehicle comparison table">
         <div className="max-w-5xl mx-auto px-4">
-          <div className="mb-12 text-center">
+          <Reveal className="mb-12 text-center">
             <p className="text-[#B88A44] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Quick Compare</p>
-            <h2 className="text-3xl md:text-4xl font-serif">Vehicle Comparison</h2>
-          </div>
-          <div className="bg-white rounded-[20px] border border-[#DEDBD2] overflow-hidden">
+            <h2 className="text-3xl md:text-4xl font-serif">
+              <SplitTextReveal text="Vehicle Comparison" highlight="Comparison" />
+            </h2>
+          </Reveal>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, ease: motionEases.softEase }}
+            className="bg-white rounded-[20px] border border-[#DEDBD2] overflow-hidden"
+          >
             <div className="overflow-x-auto">
               <table className="w-full text-sm" role="table">
                 <thead>
@@ -72,31 +94,36 @@ export default function FleetPage() {
                 </tbody>
               </table>
             </div>
-          </div>
+            </motion.div>
         </div>
       </section>
 
       {/* Fleet Standards */}
       <section className="py-16 bg-white" aria-label="Fleet standards">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div className="bg-[#F8F7F3] p-8 rounded-[20px] border border-[#DEDBD2]">
-            <h3 className="font-serif text-lg text-[#101010] mb-2">Regular Maintenance</h3>
-            <p className="text-[#6F6B63] text-sm">Every vehicle goes through regular servicing, deep cleaning, and safety checks before each long-distance trip.</p>
-          </div>
-          <div className="bg-[#F8F7F3] p-8 rounded-[20px] border border-[#DEDBD2]">
-            <h3 className="font-serif text-lg text-[#101010] mb-2">Professional Drivers</h3>
-            <p className="text-[#6F6B63] text-sm">Licensed, experienced, and well-groomed. Many of our drivers have been with us for over a decade.</p>
-          </div>
-          <div className="bg-[#F8F7F3] p-8 rounded-[20px] border border-[#DEDBD2]">
-            <h3 className="font-serif text-lg text-[#101010] mb-2">AC Always On</h3>
-            <p className="text-[#6F6B63] text-sm">Climate control is standard. Whether it&apos;s summer heat or winter fog, you travel in comfort.</p>
-          </div>
+          {[
+            { title: 'Regular Maintenance', desc: 'Every vehicle goes through regular servicing, deep cleaning, and safety checks before each long-distance trip.' },
+            { title: 'Professional Drivers', desc: 'Licensed, experienced, and well-groomed. Many of our drivers have been with us for over a decade.' },
+            { title: 'AC Always On', desc: 'Climate control is standard. Whether it\'s summer heat or winter fog, you travel in comfort.' }
+          ].map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.softEase }}
+              className="bg-[#F8F7F3] p-8 rounded-[20px] border border-[#DEDBD2]"
+            >
+              <h3 className="font-serif text-lg text-[#101010] mb-2">{item.title}</h3>
+              <p className="text-[#6F6B63] text-sm">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-16 bg-[#EFEEE8] text-center" aria-label="Book your vehicle">
-        <div className="max-w-3xl mx-auto px-4">
+        <Reveal className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-serif mb-4 text-[#101010]">Ready to Choose Your Ride?</h2>
           <p className="text-[#6F6B63] mb-6">Book your preferred vehicle on WhatsApp or check our routes to plan your journey.</p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -107,7 +134,7 @@ export default function FleetPage() {
               View Routes →
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />
