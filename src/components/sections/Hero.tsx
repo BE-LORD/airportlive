@@ -1,9 +1,10 @@
 'use client';
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { getWhatsAppLink, getPhoneLink, getBookingMessage } from '@/lib/links';
-import { MessageCircle, Phone, Shield, Clock, Car, Star, ArrowLeft } from 'lucide-react';
+import { MessageCircle, Phone, Shield, Clock, Car, Star, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { MotionButton } from '@/components/motion/MotionButton';
 import { CountUp } from '@/components/motion/CountUp';
@@ -33,13 +34,14 @@ export default function Hero() {
     { id: 4, label: 'Confirm' },
   ];
 
+  // Date is optional so users can always advance; we validate only pickup/drop
   const canContinue =
     step === 1 ? Boolean(formData.pickup && formData.drop) :
-    step === 2 ? Boolean(formData.date) :
-    true;
+    true; // steps 2-3 are always continuable
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleFinalSubmit = () => {
+    // HARD GUARD: never send to WhatsApp unless explicitly on Step 4
+    if (step !== 4 || submitted) return;
     const msg = getBookingMessage(formData);
     setSubmitted(true);
     window.setTimeout(() => {
@@ -47,12 +49,38 @@ export default function Hero() {
     }, 120);
   };
 
+  // Block Enter key from any form submission on steps 1-3
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && step !== 4) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (canContinue) setStep((current) => Math.min(4, current + 1));
+    }
+  };
+
   const updateField = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  // Ensure passenger count doesn't exceed vehicle capacity when vehicle changes
+  const handleVehicleChange = (newVehicle: string) => {
+    updateField('vehicle', newVehicle);
+    const pax = formData.passengers === '10+' ? 11 : parseInt(formData.passengers);
+    if (newVehicle === 'Premium Sedan' && pax > 4) {
+      updateField('passengers', '4');
+    } else if ((newVehicle === 'Innova Crysta' || newVehicle === 'XL6 / SUV') && pax > 6) {
+      updateField('passengers', '6');
+    }
+  };
+
+  const getPassengerOptions = (vehicle: string) => {
+    if (vehicle === 'Premium Sedan') return [1, 2, 3, 4];
+    if (vehicle === 'Innova Crysta' || vehicle === 'XL6 / SUV') return [1, 2, 3, 4, 5, 6];
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, '10+'];
+  };
+
   return (
-    <section ref={heroRef} id="home" className="relative min-h-[90vh] md:min-h-screen flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
+    <section ref={heroRef} id="home" className="relative min-h-[90svh] md:min-h-[100svh] flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
       {/* Background Image with cinematic Ken Burns slow pan */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -62,13 +90,23 @@ export default function Hero() {
         transition={{ duration: 1.2, ease: motionEases.softEase }}
       >
         <motion.div
-          className="absolute inset-[-10%] bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"
+          className="absolute inset-0 w-full h-full"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1.0 }}
           transition={{ duration: 20, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
-        />
+        >
+          <Image
+            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop"
+            alt="Premium luxury car background"
+            fill
+            priority
+            sizes="100vw"
+            quality={85}
+            className="object-cover"
+          />
+        </motion.div>
         <motion.div
-          className="absolute inset-0 bg-black/75 md:bg-[#0A0A0A]/90 md:bg-gradient-to-r md:from-[#0A0A0A] md:via-[#0A0A0A]/85 md:to-[#0A0A0A]/40"
+          className="absolute inset-0 bg-black/60 md:bg-[#0A0A0A]/90 md:bg-gradient-to-r md:from-[#0A0A0A] md:via-[#0A0A0A]/85 md:to-[#0A0A0A]/40"
           initial={{ opacity: 0.86 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.12, ease: motionEases.mainEase }}
@@ -139,42 +177,47 @@ export default function Hero() {
           </motion.div>
 
 
-          {/* Trust Strip */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.18 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/20 md:border-white/10 pt-8"
-          >
-            <div className="flex items-center gap-2" data-cursor="100+">
-              <Car className="h-4 w-4 text-[#E5E4E2] hidden md:block" />
-              <div>
-                <p className="font-bold text-white md:text-[#F5F5F5]"><CountUp value="100+" /></p>
-                <p className="text-xs text-white/70 md:text-[#A3A3A3] uppercase">Fleet</p>
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-6 pt-10 border-t border-white/10">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.2, duration: 0.8, ease: motionEases.mainEase }}
+              className="flex items-center gap-4"
+            >
+              <div className="flex -space-x-3">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="h-10 w-10 rounded-full border-2 border-[#0A0A0A] bg-[#1A1A1A] overflow-hidden ring-1 ring-white/10">
+                    <img 
+                      src={`https://i.pravatar.cc/100?u=${i+10}`} 
+                      alt="Customer" 
+                      className="h-full w-full object-cover grayscale opacity-70 transition-all duration-500 hover:grayscale-0 hover:opacity-100" 
+                    />
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="flex items-center gap-2" data-cursor="Trust">
-              <Shield className="h-4 w-4 text-[#E5E4E2] hidden md:block" />
               <div>
-                <p className="font-bold text-white md:text-[#F5F5F5]"><CountUp value="20+" /> Years</p>
-                <p className="text-xs text-white/70 md:text-[#A3A3A3] uppercase">Experience</p>
+                <div className="flex gap-0.5 mb-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} className="h-3 w-3 fill-[#E5E4E2] text-[#E5E4E2]" />
+                  ))}
+                </div>
+                <p className="text-[10px] uppercase tracking-widest text-[#A3A3A3] font-bold">2.5k+ Happy Clients</p>
               </div>
-            </div>
-            <div className="flex items-center gap-2" data-cursor="24/7">
-              <Clock className="h-4 w-4 text-[#E5E4E2] hidden md:block" />
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.4, duration: 0.8, ease: motionEases.mainEase }}
+              className="flex items-center gap-3 pl-10 border-l border-white/10"
+            >
+              <ShieldCheck className="h-5 w-5 text-[#E5E4E2]" />
               <div>
-                <p className="font-bold text-white md:text-[#F5F5F5]">24/7</p>
-                <p className="text-xs text-white/70 md:text-[#A3A3A3] uppercase">Booking</p>
+                <p className="text-white font-bold text-sm leading-none mb-1">Elite Fleet</p>
+                <p className="text-[10px] uppercase tracking-widest text-[#A3A3A3]">Verified Premium Cab</p>
               </div>
-            </div>
-            <div className="flex items-center gap-2" data-cursor="Elite">
-              <Star className="h-4 w-4 text-[#E5E4E2] hidden md:block" />
-              <div>
-                <p className="font-bold text-white md:text-[#F5F5F5]"><CountUp value="4.9" />★</p>
-                <p className="text-xs text-white/70 md:text-[#A3A3A3] uppercase">Rating</p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Right: Booking Form */}
@@ -186,7 +229,10 @@ export default function Hero() {
           id="booking"
           data-cursor="Form"
         >
-          <div className="bg-[#1A1A1A] p-5 md:p-8 rounded-[24px] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] border border-white/10">
+          <div className="bg-[#0D0D0D]/60 backdrop-blur-3xl p-6 md:p-8 rounded-[32px] border border-white/10 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+            {/* Luxury Grain Overlay */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent opacity-50" />
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>
                 <h3 className="text-2xl font-serif text-[#F5F5F5] mb-2">Request Fare Quote</h3>
@@ -197,22 +243,28 @@ export default function Hero() {
               </span>
             </div>
 
-            <div className="mb-6 grid grid-cols-4 gap-2" aria-label="Quote form progress">
+            <div className="mb-8 flex items-center justify-between gap-1" aria-label="Quote form progress">
               {steps.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setStep(item.id)}
-                  className={`h-1.5 rounded-full transition-colors duration-200 ${
-                    step >= item.id ? 'bg-[#E5E4E2]' : 'bg-[#DEDBD2]'
-                  }`}
-                  aria-label={`Go to ${item.label} step`}
-                  aria-current={step === item.id}
-                />
+                <div key={item.id} className="flex-1 flex flex-col items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => { if (item.id <= step) setStep(item.id); }}
+                    className={`h-1.5 w-full rounded-full transition-all duration-500 ${
+                      step >= item.id ? 'bg-[#E5E4E2] shadow-[0_0_8px_rgba(229,228,226,0.4)]' : 'bg-white/10'
+                    } ${item.id > step ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'}`}
+                    aria-label={`Go to ${item.label} step`}
+                    aria-current={step === item.id}
+                  />
+                  <span className={`text-[9px] uppercase tracking-[0.15em] font-mono transition-colors duration-300 ${
+                    step === item.id ? 'text-[#E5E4E2] font-bold' : 'text-[#A3A3A3]/30'
+                  }`}>
+                    {item.label}
+                  </span>
+                </div>
               ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <div onKeyDown={handleKeyDown} className="space-y-4">
               <AnimatePresence mode="wait">
                 {step === 1 && (
                   <motion.div
@@ -233,7 +285,6 @@ export default function Hero() {
                         value={formData.pickup}
                         onChange={(e) => updateField('pickup', e.target.value)}
                         className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] placeholder:text-[#A3A3A3]/50 transition-colors"
-                        required
                         autoComplete="address-level2"
                       />
                     </div>
@@ -246,7 +297,6 @@ export default function Hero() {
                         value={formData.drop}
                         onChange={(e) => updateField('drop', e.target.value)}
                         className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] placeholder:text-[#A3A3A3]/50 transition-colors"
-                        required
                         autoComplete="address-level2"
                       />
                     </div>
@@ -271,7 +321,6 @@ export default function Hero() {
                         value={formData.date}
                         onChange={(e) => updateField('date', e.target.value)}
                         className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] transition-colors"
-                        required
                       />
                     </div>
                     <div>
@@ -297,29 +346,29 @@ export default function Hero() {
                     className="grid grid-cols-2 gap-4"
                   >
                     <div>
-                      <label htmlFor="passengers" className="block text-xs uppercase text-[#A3A3A3] mb-1 font-semibold">Passengers</label>
-                      <select
-                        id="passengers"
-                        value={formData.passengers}
-                        onChange={(e) => updateField('passengers', e.target.value)}
-                        className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] transition-colors"
-                      >
-                        {[1,2,3,4,5,6,7,8,9,10,'10+'].map(n => <option key={n} value={String(n)}>{n}</option>)}
-                      </select>
-                    </div>
-                    <div>
                       <label htmlFor="vehicle" className="block text-xs uppercase text-[#A3A3A3] mb-1 font-semibold">Vehicle</label>
                       <select
                         id="vehicle"
                         value={formData.vehicle}
-                        onChange={(e) => updateField('vehicle', e.target.value)}
-                        className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] transition-colors"
+                        onChange={(e) => handleVehicleChange(e.target.value)}
+                        className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] transition-colors cursor-pointer"
                       >
                         <option>Innova Crysta</option>
                         <option>Premium Sedan</option>
                         <option>XL6 / SUV</option>
                         <option>Tempo Traveller</option>
                         <option>Any / Best Available</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="passengers" className="block text-xs uppercase text-[#A3A3A3] mb-1 font-semibold">Passengers</label>
+                      <select
+                        id="passengers"
+                        value={formData.passengers}
+                        onChange={(e) => updateField('passengers', e.target.value)}
+                        className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] transition-colors cursor-pointer"
+                      >
+                        {getPassengerOptions(formData.vehicle).map(n => <option key={n} value={String(n)}>{n}</option>)}
                       </select>
                     </div>
                   </motion.div>
@@ -393,8 +442,9 @@ export default function Hero() {
                   </MotionButton>
                 ) : (
                   <MotionButton
-                    type="submit"
+                    type="button"
                     variant="whatsapp"
+                    onClick={handleFinalSubmit}
                     icon={<MessageCircle className="h-4 w-4" />}
                     success={submitted}
                     className="flex-1 rounded-[14px]"
@@ -403,7 +453,7 @@ export default function Hero() {
                   </MotionButton>
                 )}
               </div>
-            </form>
+            </div>
 
             {/* Trust note */}
             <p className="text-[10px] text-[#A3A3A3]/60 text-center mt-4 font-mono uppercase tracking-wider">

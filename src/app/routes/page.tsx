@@ -39,7 +39,7 @@ export default function RoutesPage() {
         </div>
       </section>
 
-      <RouteCorridor />
+      <RouteCorridor hideHeader />
 
       {/* Route Tips */}
       <section className="py-16 bg-[#141414]" aria-label="Route booking tips">

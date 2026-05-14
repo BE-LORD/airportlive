@@ -34,7 +34,7 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-32 bg-[#0A0A0A] text-white" aria-label="About us hero">
+      <section className="relative pt-32 md:pt-40 pb-16 md:pb-32 bg-[#0A0A0A] text-white" aria-label="About us hero">
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
@@ -59,7 +59,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-24 bg-[#1A1A1A]" aria-label="Company story">
+      <section className="py-16 md:py-24 bg-[#1A1A1A]" aria-label="Company story">
         <div className="max-w-4xl mx-auto px-4">
           <Reveal className="text-center mb-12">
             <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">The V3 Story</p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.mainEase }}
               >
-                <p className="text-4xl md:text-5xl font-serif text-[#E5E4E2] mb-2">{stat.number}</p>
+                <p className="text-4xl md:text-5xl font-sans font-light tracking-tight text-[#E5E4E2] mb-2">{stat.number}</p>
                 <p className="text-xs uppercase tracking-widest text-white/60 font-mono">{stat.label}</p>
               </motion.div>
             ))}

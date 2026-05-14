@@ -118,7 +118,7 @@ export function MobileDrawer({
                 >
                   <Link
                     href={item.path}
-                    onClick={onClose}
+                    onClick={() => setTimeout(onClose, 150)}
                     className={cn(
                       "block min-h-12 py-2 font-serif text-4xl leading-tight transition-colors",
                       pathname === item.path ? "text-[#E5E4E2]" : "text-white"

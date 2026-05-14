@@ -9,35 +9,42 @@ import { BUSINESS } from "@/lib/constants";
 export const siteConfig = {
   name: BUSINESS.name,
   description:
-    "Premium airport transfers across Ludhiana, Chandigarh, and Delhi NCR. Professional chauffeurs, Toyota Innova Crysta comfort, fixed fares, 24/7 WhatsApp booking. V3 Tour & Travels — WHERE LUXURY MEETS COMFORT.",
+    "Luxury airport transfers across Punjab, Chandigarh, and Delhi NCR. Experience 5-star comfort in Toyota Innova Crysta with professional chauffeurs. Fixed fares, no hidden costs, and 24/7 WhatsApp booking. Trusted by 20,000+ travelers for reliable airport pickups and drops.",
   url: BUSINESS.website,
   ogImage: `${BUSINESS.website}/api/og`,
   keywords: [
-    // Primary intent keywords
-    "airport transfer Ludhiana",
+    // High-Intent & Transactional
+    "book airport taxi Punjab",
+    "luxury airport transfer India",
+    "reliable taxi Ludhiana to Delhi airport",
+    "best cab service Chandigarh to Delhi airport",
+    "fixed price airport taxi Punjab",
+    // GEO & Local Entity
+    "airport taxi Ludhiana",
     "taxi service Chandigarh airport",
     "premium cab Delhi NCR",
     "airport taxi Punjab",
-    // Route-specific
+    "taxi near Ludhiana railway station",
+    "Chandigarh airport pickup drop",
+    // Route-Specific (GEO Targeting)
     "Ludhiana to Chandigarh airport taxi",
-    "Ludhiana to Delhi airport cab",
+    "Ludhiana to Delhi airport cab price",
     "Ludhiana to Amritsar airport transfer",
-    "Chandigarh to Delhi airport taxi",
-    "Delhi airport to Ludhiana cab",
-    // Service-specific
-    "corporate travel Punjab",
-    "wedding car hire Ludhiana",
-    "Toyota Innova Crysta rental Punjab",
-    "professional chauffeur service Ludhiana",
-    "24/7 taxi booking Punjab",
-    "intercity taxi Punjab",
-    "airport pickup drop Chandigarh",
-    "fixed fare airport taxi",
-    // Brand
-    "Airport Live",
+    "Chandigarh to Delhi airport taxi distance",
+    "Delhi airport to Ludhiana cab 24/7",
+    "Patiala to Delhi airport taxi",
+    "Jalandhar to Delhi airport luxury cab",
+    // Vehicle & Fleet
+    "Innova Crysta for airport drop Punjab",
+    "premium sedan for Delhi airport",
+    "tempo traveller for wedding Ludhiana",
+    "7 seater taxi Ludhiana to Delhi",
+    // Trust & Authority
     "V3 Tour and Travels",
-    "V3 Tour & Travels Ludhiana",
-    "airportlive.in",
+    "Airport Live booking",
+    "V3 travels Punjab reviews",
+    "safe airport taxi for females Punjab",
+    "professional chauffeur Punjab",
   ],
 };
 

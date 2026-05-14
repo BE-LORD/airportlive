@@ -50,7 +50,7 @@ export default function RootLayout({
           />
         ))}
       </head>
-      <body className="font-sans bg-sona-cream text-sona-text antialiased">
+      <body className="font-sans bg-sona-cream text-sona-text antialiased" suppressHydrationWarning>
         <CustomCursor />
         <SmoothScroll>
           <ScrollProgressBar />

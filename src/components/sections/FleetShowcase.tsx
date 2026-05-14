@@ -15,7 +15,7 @@ const FLEET_DETAILED = [
     id: 'sedan',
     name: 'Premium Sedan',
     tagline: 'Executive Comfort',
-    image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=2070&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1590362891991-f70287a935be?q=80&w=2070&auto=format&fit=crop',
     seats: '4 passengers',
     luggage: '2 large bags',
     bestFor: 'Airport runs, couples, solo business',
@@ -157,7 +157,7 @@ export default function FleetShowcase() {
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <Reveal className="mb-12" y={24}>
           <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">
-            100+ Vehicles Network
+            Swipe to Explore
           </p>
           <h2 className="text-5xl md:text-7xl font-serif mb-6">
             Choose Your <span className="italic text-[#E5E4E2]">Ride</span>

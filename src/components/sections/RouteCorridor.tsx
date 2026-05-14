@@ -1,4 +1,5 @@
 'use client';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { Clock, ArrowRight, Plane } from 'lucide-react';
@@ -41,7 +42,7 @@ const ROUTES = [
     to: 'Delhi Airport (DEL)', 
     distance: '260 km', 
     time: '4.5h', 
-    image: 'https://images.unsplash.com/photo-1514222134-b57cbb8ce073?q=80&w=1912&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop',
     tag: 'Airport',
     desc: 'Direct connection from the Royal City of Patiala to IGI Airport. Punctual and comfortable.'
   },
@@ -58,11 +59,14 @@ const ROUTES = [
 ];
 
 function RouteRow({ route }: { route: typeof ROUTES[0] }) {
+  const corridorRef = useRef<HTMLDivElement>(null);
   const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
 
   return (
     <div 
-      className="relative min-h-[500px] md:h-[80vh] w-full overflow-hidden flex items-center justify-center group"
+      ref={corridorRef}
+      className="relative min-h-[500px] md:h-[80svh] w-full overflow-hidden flex items-center justify-center group"
+      aria-label={`Route corridor showcasing ${route.from} to ${route.to}`}
     >
       {/* Parallax Background */}
       <div 
@@ -72,7 +76,7 @@ function RouteRow({ route }: { route: typeof ROUTES[0] }) {
           className="absolute inset-0 bg-cover bg-center grayscale-[50%] group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
           style={{ backgroundImage: `url(${route.image})` }}
         />
-        <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-1000" />
+        <div className="absolute inset-0 bg-black/70 group-hover:bg-black/60 transition-colors duration-1000" />
       </div>
 
       {/* Content */}
@@ -88,10 +92,10 @@ function RouteRow({ route }: { route: typeof ROUTES[0] }) {
           </span>
         </motion.div>
 
-        <h3 className="text-3xl sm:text-4xl md:text-8xl font-serif text-white mb-6 leading-tight">
-          <span className="block opacity-60 group-hover:opacity-100 transition-opacity duration-700">{route.from}</span>
-          <span className="italic text-[#E5E4E2] px-4">to</span>
-          <span className="block">{route.to}</span>
+        <h3 className="text-3xl sm:text-4xl md:text-8xl font-serif text-white mb-6 leading-tight drop-shadow-2xl">
+          <span className="block opacity-60 group-hover:opacity-100 transition-opacity duration-700 drop-shadow-md">{route.from}</span>
+          <span className="italic text-[#E5E4E2] px-4 drop-shadow-md">to</span>
+          <span className="block drop-shadow-md">{route.to}</span>
         </h3>
 
         <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-white/70 font-mono text-sm md:text-lg mb-10">
@@ -129,25 +133,27 @@ function RouteRow({ route }: { route: typeof ROUTES[0] }) {
   );
 }
 
-export default function RouteCorridor() {
+export default function RouteCorridor({ hideHeader = false }: { hideHeader?: boolean }) {
   return (
     <section id="routes" className="bg-[#0A0A0A] py-0 overflow-hidden">
-      <div className="py-12 md:py-32 px-4 text-center border-b border-white/5">
-        <motion.p 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-[#E5E4E2] uppercase tracking-[0.3em] text-xs font-mono mb-6"
-        >
-          The Transit Network
-        </motion.p>
-        <motion.h2 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-8xl font-serif text-white"
-        >
-          Mastering the <span className="italic text-[#E5E4E2]">Corridor</span>
-        </motion.h2>
-      </div>
+      {!hideHeader && (
+        <div className="py-12 md:py-32 px-4 text-center border-b border-white/5">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-[#E5E4E2] uppercase tracking-[0.3em] text-xs font-mono mb-6"
+          >
+            The Transit Network
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-8xl font-serif text-white"
+          >
+            Mastering the <span className="italic text-[#E5E4E2]">Corridor</span>
+          </motion.h2>
+        </div>
+      )}
 
       <div className="relative">
         {ROUTES.map((route) => (

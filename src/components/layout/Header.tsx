@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 w-full z-[60] transition-all duration-300 ${
           isScrolled
             ? 'bg-[#0A0A0A]/88 backdrop-blur-xl shadow-lg py-3 border-b border-white/10'
             : 'bg-transparent py-6'
@@ -46,8 +46,8 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           {/* Logo */}
           <motion.div
-            initial={{ opacity: 0, letterSpacing: '0.28em' }}
-            animate={{ opacity: 1, letterSpacing: '0.08em' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: motionEases.mainEase }}
             className="z-[60]"
           >

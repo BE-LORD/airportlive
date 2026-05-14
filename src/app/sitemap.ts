@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { BUSINESS } from "@/lib/constants";
 import { SEO_PAGES } from "@/data/seoPages";
+import { PSEO_ROUTES } from "@/data/pSEO_routes";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = BUSINESS.website;
@@ -45,7 +46,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const seoPages: MetadataRoute.Sitemap = Object.keys(SEO_PAGES).map((slug) => ({
+  // Combine both data sources for dynamic pages
+  const allSlugs = Array.from(new Set([...Object.keys(SEO_PAGES), ...Object.keys(PSEO_ROUTES)]));
+
+  const seoPages: MetadataRoute.Sitemap = allSlugs.map((slug) => ({
     url: `${baseUrl}/${slug}`,
     lastModified: now,
     changeFrequency: "monthly",

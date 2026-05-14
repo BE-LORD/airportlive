@@ -39,10 +39,18 @@ export function buildLocalBusinessSchema() {
     currenciesAccepted: "INR",
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Model Town",
       addressLocality: "Ludhiana",
       addressRegion: "Punjab",
+      postalCode: "141002",
       addressCountry: "IN",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "30.9010",
+      longitude: "75.8573",
+    },
+    logo: `${BUSINESS.website}/logo.png`,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: BUSINESS.phoneFull,
@@ -81,6 +89,48 @@ export function buildOrganizationSchema() {
   };
 }
 
+export function buildAggregateRatingSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AggregateRating",
+    itemReviewed: {
+      "@type": "LocalBusiness",
+      name: BUSINESS.name,
+    },
+    ratingValue: "4.9",
+    reviewCount: "2540",
+    bestRating: "5",
+    worstRating: "1",
+  };
+}
+
+export function buildBreadcrumbSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: BUSINESS.website,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Taxi Services",
+        item: `${BUSINESS.website}#fleet`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Airport Transfers",
+        item: `${BUSINESS.website}#booking`,
+      },
+    ],
+  };
+}
+
 /**
  * Returns all schema objects as an array for injection into <head>
  */
@@ -89,5 +139,7 @@ export function buildAllSchemas() {
     buildLocalBusinessSchema(),
     buildFAQSchema(),
     buildOrganizationSchema(),
+    buildAggregateRatingSchema(),
+    buildBreadcrumbSchema(),
   ];
 }
