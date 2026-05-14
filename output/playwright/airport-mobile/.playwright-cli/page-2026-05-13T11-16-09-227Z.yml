@@ -1,0 +1,842 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - generic [ref=e5]:
+      - link "AIRPORT LIVE" [ref=e7]:
+        - /url: /
+      - navigation [ref=e8]:
+        - link "Airport Taxi" [ref=e9]:
+          - /url: /airport-taxi
+        - link "Routes" [ref=e10]:
+          - /url: /routes
+        - link "Fleet" [ref=e11]:
+          - /url: /fleet
+        - link "About" [ref=e12]:
+          - /url: /about
+        - link "Contact" [ref=e13]:
+          - /url: /contact
+      - generic [ref=e14]:
+        - link "Call us" [ref=e15]:
+          - /url: tel:+919888000510
+          - img [ref=e16]
+          - text: "9888000510"
+        - link "Book on WhatsApp" [ref=e18]:
+          - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride.
+          - img [ref=e19]
+          - generic [ref=e21]: WhatsApp
+    - region "Hero section" [ref=e22]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: PREMIUM AIRPORT TRANSFERS & TRAVEL
+          - heading "WHERE LUXURY MEETS COMFORT" [level=1] [ref=e29]:
+            - generic "WHERE LUXURY MEETS COMFORT" [ref=e30]:
+              - generic [ref=e32]: WHERE LUXURY
+              - generic [ref=e36]: MEETS COMFORT
+          - paragraph [ref=e37]: Premium airport transfers and comfortable taxi rides backed by 20+ years of trusted travel experience across Punjab, Chandigarh, and Delhi NCR.
+          - generic [ref=e38]:
+            - link "Book a ride on WhatsApp" [ref=e39]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I'm%20interested%20in%20booking%20a%20ride.
+              - img [ref=e40]
+              - generic [ref=e42]: Book on WhatsApp
+            - link "Call 9888000510" [ref=e43]:
+              - /url: tel:+919888000510
+              - img [ref=e44]
+              - generic [ref=e46]: Call 9888000510
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - img [ref=e49]
+              - generic [ref=e53]:
+                - paragraph [ref=e54]: 89+
+                - paragraph [ref=e55]: Fleet
+            - generic [ref=e56]:
+              - img [ref=e57]
+              - generic [ref=e59]:
+                - paragraph [ref=e60]: 18+ Years
+                - paragraph [ref=e61]: Experience
+            - generic [ref=e62]:
+              - img [ref=e63]
+              - generic [ref=e66]:
+                - paragraph [ref=e67]: 24/7
+                - paragraph [ref=e68]: Booking
+            - generic [ref=e69]:
+              - img [ref=e70]
+              - generic [ref=e72]:
+                - paragraph [ref=e73]: 4.4★
+                - paragraph [ref=e74]: Rating
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - heading "Request Fare Quote" [level=3] [ref=e79]
+              - paragraph [ref=e80]: Fill details and get an instant quote on WhatsApp.
+            - generic [ref=e81]: 1/4
+          - generic "Quote form progress" [ref=e82]:
+            - button "Go to Route step" [ref=e83]
+            - button "Go to Timing step" [ref=e84]
+            - button "Go to Ride step" [ref=e85]
+            - button "Go to Confirm step" [ref=e86]
+          - generic [ref=e87]:
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - generic [ref=e91]: Pickup *
+                - textbox "Pickup *" [ref=e92]:
+                  - /placeholder: City or Airport
+              - generic [ref=e93]:
+                - generic [ref=e94]: Drop *
+                - textbox "Drop *" [ref=e95]:
+                  - /placeholder: City or Airport
+            - generic [ref=e96]:
+              - button "Next Step" [disabled]:
+                - generic: Next Step
+                - img
+          - paragraph [ref=e97]: No online payment - Quote confirmed on WhatsApp
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]: 20+ Years Experience
+        - generic [ref=e102]: ✦
+      - generic [ref=e103]:
+        - generic [ref=e104]: 100+ Fleet Network
+        - generic [ref=e105]: ✦
+      - generic [ref=e106]:
+        - generic [ref=e107]: Airport Pickup & Drop
+        - generic [ref=e108]: ✦
+      - generic [ref=e109]:
+        - generic [ref=e110]: Clean Comfortable Rides
+        - generic [ref=e111]: ✦
+      - generic [ref=e112]:
+        - generic [ref=e113]: Professional Drivers
+        - generic [ref=e114]: ✦
+      - generic [ref=e115]:
+        - generic [ref=e116]: WhatsApp Booking
+        - generic [ref=e117]: ✦
+      - generic [ref=e118]:
+        - generic [ref=e119]: Fixed Fare Promise
+        - generic [ref=e120]: ✦
+      - generic [ref=e121]:
+        - generic [ref=e122]: 24/7 Availability
+        - generic [ref=e123]: ✦
+      - generic [ref=e124]:
+        - generic [ref=e125]: 20+ Years Experience
+        - generic [ref=e126]: ✦
+      - generic [ref=e127]:
+        - generic [ref=e128]: 100+ Fleet Network
+        - generic [ref=e129]: ✦
+      - generic [ref=e130]:
+        - generic [ref=e131]: Airport Pickup & Drop
+        - generic [ref=e132]: ✦
+      - generic [ref=e133]:
+        - generic [ref=e134]: Clean Comfortable Rides
+        - generic [ref=e135]: ✦
+      - generic [ref=e136]:
+        - generic [ref=e137]: Professional Drivers
+        - generic [ref=e138]: ✦
+      - generic [ref=e139]:
+        - generic [ref=e140]: WhatsApp Booking
+        - generic [ref=e141]: ✦
+      - generic [ref=e142]:
+        - generic [ref=e143]: Fixed Fare Promise
+        - generic [ref=e144]: ✦
+      - generic [ref=e145]:
+        - generic [ref=e146]: 24/7 Availability
+        - generic [ref=e147]: ✦
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - paragraph [ref=e151]: Signature Services
+        - heading "Crafted for the Modern Traveler" [level=2] [ref=e152]:
+          - text: Crafted for the
+          - text: Modern Traveler
+      - generic [ref=e153]:
+        - link "Airport Pickup & Drop Punctual airport pickup/drop with luggage-friendly cars and WhatsApp confirmation. Flights, family travel, late-night pickup Delhi, Chandigarh, Amritsar Airports" [ref=e156]:
+          - /url: /airport-taxi
+          - generic [ref=e160]:
+            - img [ref=e162]
+            - heading "Airport Pickup & Drop" [level=3] [ref=e164]
+            - paragraph [ref=e165]: Punctual airport pickup/drop with luggage-friendly cars and WhatsApp confirmation.
+            - generic [ref=e166]:
+              - generic [ref=e167]: Flights, family travel, late-night pickup
+              - generic [ref=e168]: Delhi, Chandigarh, Amritsar Airports
+        - link "Outstation Taxi Comfortable long-route travel for family, business, and personal journeys across North India. Intercity travel, hill stations Punjab, Himachal, Delhi NCR" [ref=e171]:
+          - /url: /routes
+          - generic [ref=e175]:
+            - img [ref=e177]
+            - heading "Outstation Taxi" [level=3] [ref=e180]
+            - paragraph [ref=e181]: Comfortable long-route travel for family, business, and personal journeys across North India.
+            - generic [ref=e182]:
+              - generic [ref=e183]: Intercity travel, hill stations
+              - generic [ref=e184]: Punjab, Himachal, Delhi NCR
+        - link "Corporate Travel Professional travel support for business meetings, airport transfers, and executive movement. Executives, teams, business events GST invoices available" [ref=e187]:
+          - /url: /corporate-travel
+          - generic [ref=e191]:
+            - img [ref=e193]
+            - heading "Corporate Travel" [level=3] [ref=e196]
+            - paragraph [ref=e197]: Professional travel support for business meetings, airport transfers, and executive movement.
+            - generic [ref=e198]:
+              - generic [ref=e199]: Executives, teams, business events
+              - generic [ref=e200]: GST invoices available
+        - link "Family Tours Spacious, clean vehicles for relaxed family travel, planned trips, and pilgrimage journeys. Weekend getaways, religious trips Customizable routes" [ref=e203]:
+          - /url: /family-tours
+          - generic [ref=e207]:
+            - img [ref=e209]
+            - heading "Family Tours" [level=3] [ref=e214]
+            - paragraph [ref=e215]: Spacious, clean vehicles for relaxed family travel, planned trips, and pilgrimage journeys.
+            - generic [ref=e216]:
+              - generic [ref=e217]: Weekend getaways, religious trips
+              - generic [ref=e218]: Customizable routes
+        - link "Event Transport Reliable multi-vehicle coordination for guest pickups, decorated cars, and event logistics. Weddings, receptions Multi-city fleet management" [ref=e221]:
+          - /url: /contact
+          - generic [ref=e225]:
+            - img [ref=e227]
+            - heading "Event Transport" [level=3] [ref=e233]
+            - paragraph [ref=e234]: Reliable multi-vehicle coordination for guest pickups, decorated cars, and event logistics.
+            - generic [ref=e235]:
+              - generic [ref=e236]: Weddings, receptions
+              - generic [ref=e237]: Multi-city fleet management
+        - link "Local City Rides Premium vehicles for local shopping, meetings, hospital visits, or day-to-day premium travel. Shopping, daily premium travel Within Ludhiana & nearby" [ref=e240]:
+          - /url: /contact
+          - generic [ref=e244]:
+            - img [ref=e246]
+            - heading "Local City Rides" [level=3] [ref=e250]
+            - paragraph [ref=e251]: Premium vehicles for local shopping, meetings, hospital visits, or day-to-day premium travel.
+            - generic [ref=e252]:
+              - generic [ref=e253]: Shopping, daily premium travel
+              - generic [ref=e254]: Within Ludhiana & nearby
+    - generic [ref=e255]:
+      - generic [ref=e256]:
+        - paragraph [ref=e257]: The Transit Network
+        - heading "Mastering the Corridor" [level=2] [ref=e258]
+      - generic [ref=e259]:
+        - generic [ref=e264]:
+          - generic [ref=e266]: Popular
+          - heading "Ludhiana to Delhi Airport (DEL)" [level=3] [ref=e267]:
+            - generic [ref=e268]: Ludhiana
+            - text: to
+            - generic [ref=e269]: Delhi Airport (DEL)
+          - generic [ref=e270]:
+            - generic [ref=e271]:
+              - img [ref=e272]
+              - text: 5.5h
+            - generic [ref=e275]:
+              - img [ref=e276]
+              - text: 310 km
+            - generic [ref=e278]:
+              - img [ref=e279]
+              - text: Terminal Drop
+          - paragraph [ref=e281]: The executive lifeline. Terminal drop-off at T3, T2, or T1. Flight-synced scheduling.
+          - link "Request Fare Quote" [ref=e282]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20need%20a%20quote%20for%20Ludhiana%20to%20Delhi%20Airport%20(DEL).
+            - text: Request Fare Quote
+            - img [ref=e283]
+        - generic [ref=e290]:
+          - generic [ref=e292]: Corporate
+          - heading "Chandigarh to Delhi Airport (DEL)" [level=3] [ref=e293]:
+            - generic [ref=e294]: Chandigarh
+            - text: to
+            - generic [ref=e295]: Delhi Airport (DEL)
+          - generic [ref=e296]:
+            - generic [ref=e297]:
+              - img [ref=e298]
+              - text: 4h
+            - generic [ref=e301]:
+              - img [ref=e302]
+              - text: 250 km
+            - generic [ref=e304]:
+              - img [ref=e305]
+              - text: Terminal Drop
+          - paragraph [ref=e307]: Express highway transit for business professionals. Quiet cabins and professional chauffeurs.
+          - link "Request Fare Quote" [ref=e308]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20need%20a%20quote%20for%20Chandigarh%20to%20Delhi%20Airport%20(DEL).
+            - text: Request Fare Quote
+            - img [ref=e309]
+        - generic [ref=e316]:
+          - generic [ref=e318]: NRI Priority
+          - heading "Jalandhar to Delhi Airport (DEL)" [level=3] [ref=e319]:
+            - generic [ref=e320]: Jalandhar
+            - text: to
+            - generic [ref=e321]: Delhi Airport (DEL)
+          - generic [ref=e322]:
+            - generic [ref=e323]:
+              - img [ref=e324]
+              - text: 6.5h
+            - generic [ref=e327]:
+              - img [ref=e328]
+              - text: 370 km
+            - generic [ref=e330]:
+              - img [ref=e331]
+              - text: Terminal Drop
+          - paragraph [ref=e333]: The preferred route for NRI families. Spacious vehicles and reliable, safe highway transit.
+          - link "Request Fare Quote" [ref=e334]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20need%20a%20quote%20for%20Jalandhar%20to%20Delhi%20Airport%20(DEL).
+            - text: Request Fare Quote
+            - img [ref=e335]
+        - generic [ref=e342]:
+          - generic [ref=e344]: Airport
+          - heading "Patiala to Delhi Airport (DEL)" [level=3] [ref=e345]:
+            - generic [ref=e346]: Patiala
+            - text: to
+            - generic [ref=e347]: Delhi Airport (DEL)
+          - generic [ref=e348]:
+            - generic [ref=e349]:
+              - img [ref=e350]
+              - text: 4.5h
+            - generic [ref=e353]:
+              - img [ref=e354]
+              - text: 260 km
+            - generic [ref=e356]:
+              - img [ref=e357]
+              - text: Terminal Drop
+          - paragraph [ref=e359]: Direct connection from the Royal City of Patiala to IGI Airport. Punctual and comfortable.
+          - link "Request Fare Quote" [ref=e360]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20need%20a%20quote%20for%20Patiala%20to%20Delhi%20Airport%20(DEL).
+            - text: Request Fare Quote
+            - img [ref=e361]
+        - generic [ref=e368]:
+          - generic [ref=e370]: Regional
+          - heading "Ludhiana to Chandigarh (IXC)" [level=3] [ref=e371]:
+            - generic [ref=e372]: Ludhiana
+            - text: to
+            - generic [ref=e373]: Chandigarh (IXC)
+          - generic [ref=e374]:
+            - generic [ref=e375]:
+              - img [ref=e376]
+              - text: 2h
+            - generic [ref=e379]:
+              - img [ref=e380]
+              - text: 110 km
+            - generic [ref=e382]:
+              - img [ref=e383]
+              - text: Terminal Drop
+          - paragraph [ref=e385]: Swift airport connections from Ludhiana to Mohali/Chandigarh Airport. Stress-free transfers.
+          - link "Request Fare Quote" [ref=e386]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20need%20a%20quote%20for%20Ludhiana%20to%20Chandigarh%20(IXC).
+            - text: Request Fare Quote
+            - img [ref=e387]
+      - generic [ref=e390]:
+        - heading "Traveling elsewhere?" [level=4] [ref=e391]
+        - paragraph [ref=e392]: We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.
+        - link "Custom Inquiry" [ref=e393]:
+          - /url: tel:+919888000510
+    - generic [ref=e394]:
+      - generic [ref=e396]:
+        - paragraph [ref=e397]: 100+ Vehicles Network
+        - heading "Choose Your Ride" [level=2] [ref=e398]
+        - paragraph [ref=e399]: Swipe to explore the fleet. Tap a vehicle to reveal details, then choose your ride on WhatsApp.
+      - generic "Premium fleet carousel" [ref=e401]:
+        - generic [ref=e403]:
+          - generic [ref=e407]:
+            - button "Show Premium Sedan details" [ref=e408]:
+              - generic [ref=e412]: High
+              - generic [ref=e413]:
+                - paragraph [ref=e414]: Executive Comfort
+                - heading "Premium Sedan" [level=3] [ref=e415]
+                - paragraph [ref=e416]: Dzire, Aura, Honda City
+                - generic [ref=e417]:
+                  - generic [ref=e418]:
+                    - generic [ref=e419]:
+                      - img [ref=e420]
+                      - text: Seats
+                    - text: 4 passengers
+                  - generic [ref=e425]:
+                    - generic [ref=e426]:
+                      - img [ref=e427]
+                      - text: Luggage
+                    - text: 2 large bags
+                  - generic [ref=e432]:
+                    - generic [ref=e433]:
+                      - img [ref=e434]
+                      - text: Best For
+                    - text: Airport runs, couples, solo business
+                - list [ref=e438]:
+                  - listitem [ref=e439]: Leather Interior
+                  - listitem [ref=e441]: Climate Control
+                  - listitem [ref=e443]: Smooth Highway Ride
+                  - listitem [ref=e445]: Professional Driver
+            - link "Choose Premium Sedan" [ref=e448]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20Premium%20Sedan.%0A%0APickup%3A%20%0ADrop%3A%20%0ADate%3A%20
+              - generic [ref=e449]: Choose Premium Sedan
+              - img [ref=e450]
+          - generic [ref=e455]:
+            - button "Show Innova Crysta details" [ref=e456]:
+              - generic [ref=e460]: Premium+
+              - generic [ref=e461]:
+                - paragraph [ref=e462]: The Corporate Standard
+                - heading "Innova Crysta" [level=3] [ref=e463]
+                - paragraph [ref=e464]: Toyota Innova Crysta (Captain Seats)
+                - generic [ref=e465]:
+                  - generic [ref=e466]:
+                    - generic [ref=e467]:
+                      - img [ref=e468]
+                      - text: Seats
+                    - text: 6-7 passengers
+                  - generic [ref=e473]:
+                    - generic [ref=e474]:
+                      - img [ref=e475]
+                      - text: Luggage
+                    - text: 4 large bags
+                  - generic [ref=e480]:
+                    - generic [ref=e481]:
+                      - img [ref=e482]
+                      - text: Best For
+                    - text: Families, corporate, airport groups
+                - list [ref=e486]:
+                  - listitem [ref=e487]: Captain Seats
+                  - listitem [ref=e489]: Quiet Cabin
+                  - listitem [ref=e491]: Ample Boot Space
+                  - listitem [ref=e493]: Rear AC Control
+            - link "Choose Innova Crysta" [ref=e496]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20Innova%20Crysta.%0A%0APickup%3A%20%0ADrop%3A%20%0ADate%3A%20
+              - generic [ref=e497]: Choose Innova Crysta
+              - img [ref=e498]
+          - generic [ref=e503]:
+            - button "Show XL6 / SUV details" [ref=e504]:
+              - generic [ref=e508]: Premium
+              - generic [ref=e509]:
+                - paragraph [ref=e510]: Family Comfort
+                - heading "XL6 / SUV" [level=3] [ref=e511]
+                - paragraph [ref=e512]: Maruti XL6, Ertiga, Kia Carens
+                - generic [ref=e513]:
+                  - generic [ref=e514]:
+                    - generic [ref=e515]:
+                      - img [ref=e516]
+                      - text: Seats
+                    - text: 6 passengers
+                  - generic [ref=e521]:
+                    - generic [ref=e522]:
+                      - img [ref=e523]
+                      - text: Luggage
+                    - text: 3 large bags
+                  - generic [ref=e528]:
+                    - generic [ref=e529]:
+                      - img [ref=e530]
+                      - text: Best For
+                    - text: Small family trips, weekend getaways
+                - list [ref=e534]:
+                  - listitem [ref=e535]: Spacious Interior
+                  - listitem [ref=e537]: Flexible Seating
+                  - listitem [ref=e539]: Luggage Friendly
+                  - listitem [ref=e541]: Hybrid Efficiency
+            - link "Choose XL6 / SUV" [ref=e544]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20XL6%20%2F%20SUV.%0A%0APickup%3A%20%0ADrop%3A%20%0ADate%3A%20
+              - generic [ref=e545]: Choose XL6 / SUV
+              - img [ref=e546]
+          - generic [ref=e551]:
+            - button "Show Tempo Traveller details" [ref=e552]:
+              - generic [ref=e556]: Spacious
+              - generic [ref=e557]:
+                - paragraph [ref=e558]: Group Travel Redefined
+                - heading "Tempo Traveller" [level=3] [ref=e559]
+                - paragraph [ref=e560]: Force Tempo Traveller (AC)
+                - generic [ref=e561]:
+                  - generic [ref=e562]:
+                    - generic [ref=e563]:
+                      - img [ref=e564]
+                      - text: Seats
+                    - text: 12-16 passengers
+                  - generic [ref=e569]:
+                    - generic [ref=e570]:
+                      - img [ref=e571]
+                      - text: Luggage
+                    - text: 10+ bags
+                  - generic [ref=e576]:
+                    - generic [ref=e577]:
+                      - img [ref=e578]
+                      - text: Best For
+                    - text: Weddings, events, large groups
+                - list [ref=e582]:
+                  - listitem [ref=e583]: Push-Back Chairs
+                  - listitem [ref=e585]: Entertainment System
+                  - listitem [ref=e587]: Aisle Space
+                  - listitem [ref=e589]: Extra Legroom
+            - link "Choose Tempo Traveller" [ref=e592]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20Tempo%20Traveller.%0A%0APickup%3A%20%0ADrop%3A%20%0ADate%3A%20
+              - generic [ref=e593]: Choose Tempo Traveller
+              - img [ref=e594]
+          - generic [ref=e599]:
+            - button "Show Luxury / Executive details" [ref=e600]:
+              - generic [ref=e604]: Ultra Premium
+              - generic [ref=e605]:
+                - paragraph [ref=e606]: On Special Request
+                - heading "Luxury / Executive" [level=3] [ref=e607]
+                - paragraph [ref=e608]: Fortuner, Endeavour, Mercedes (on request)
+                - generic [ref=e609]:
+                  - generic [ref=e610]:
+                    - generic [ref=e611]:
+                      - img [ref=e612]
+                      - text: Seats
+                    - text: 4 passengers
+                  - generic [ref=e617]:
+                    - generic [ref=e618]:
+                      - img [ref=e619]
+                      - text: Luggage
+                    - text: 2 large bags
+                  - generic [ref=e624]:
+                    - generic [ref=e625]:
+                      - img [ref=e626]
+                      - text: Best For
+                    - text: VIP arrivals, high-profile travel
+                - list [ref=e630]:
+                  - listitem [ref=e631]: Premium Leather
+                  - listitem [ref=e633]: Chauffeur-Driven
+                  - listitem [ref=e635]: Privacy Partition
+                  - listitem [ref=e637]: Luxury Amenities
+            - link "Choose Luxury / Executive" [ref=e640]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20Luxury%20%2F%20Executive.%0A%0APickup%3A%20%0ADrop%3A%20%0ADate%3A%20
+              - generic [ref=e641]: Choose Luxury / Executive
+              - img [ref=e642]
+        - generic [ref=e644]:
+          - button "Previous slide" [ref=e645]:
+            - img [ref=e646]
+          - button "Next slide" [ref=e648]:
+            - img [ref=e649]
+        - generic [ref=e651]:
+          - button "Go to slide 1" [ref=e652]
+          - button "Go to slide 2" [ref=e653]
+          - button "Go to slide 3" [ref=e654]
+    - region "Booking process" [ref=e655]:
+      - generic [ref=e656]:
+        - paragraph [ref=e657]: How It Works
+        - heading "Booking is Effortless" [level=2] [ref=e658]:
+          - generic "Booking is Effortless" [ref=e659]:
+            - generic [ref=e662]:
+              - text: Booking is
+              - generic [ref=e663]: Effortless
+        - generic [ref=e664]:
+          - generic [ref=e665]:
+            - generic [ref=e666]: "01"
+            - heading "Share Trip Details" [level=3] [ref=e667]
+            - paragraph [ref=e668]: Message us on WhatsApp or call with your pickup, drop, date, time, and passenger count.
+          - generic [ref=e669]:
+            - generic [ref=e670]: "02"
+            - heading "Confirm Fare & Vehicle" [level=3] [ref=e671]
+            - paragraph [ref=e672]: We send a fixed fare quote with vehicle options. No hidden charges, no surge pricing.
+          - generic [ref=e673]:
+            - generic [ref=e674]: "03"
+            - heading "Driver Assigned" [level=3] [ref=e675]
+            - paragraph [ref=e676]: A professional chauffeur is assigned. You receive driver details and tracking link on WhatsApp.
+          - generic [ref=e677]:
+            - generic [ref=e678]: "04"
+            - heading "Ride & Arrive Safely" [level=3] [ref=e679]
+            - paragraph [ref=e680]: Your driver arrives early. Enjoy a clean, comfortable, and punctual journey to your destination.
+        - generic [ref=e681]:
+          - link "Start booking on WhatsApp" [ref=e682]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride.
+            - img [ref=e683]
+            - text: Start Booking
+          - link "Call 9888000510" [ref=e685]:
+            - /url: tel:+919888000510
+            - img [ref=e686]
+            - text: Call 9888000510
+    - region "Why choose us" [ref=e688]:
+      - generic [ref=e689]:
+        - img "Professional V3 Tour and Travels chauffeur standing near premium sedan" [ref=e692]
+        - generic [ref=e693]:
+          - paragraph [ref=e694]: The V3 Tour & Travels Standard
+          - heading "A Legacy of Reliable Travel" [level=2] [ref=e695]:
+            - generic "A Legacy of Reliable Travel" [ref=e696]:
+              - generic [ref=e698]:
+                - generic [ref=e699]:
+                  - text: A Legacy of
+                  - generic [ref=e700]: Reliable
+                - text: Travel
+          - paragraph [ref=e701]: Since our inception, we have redefined how Punjab travels to the airport. It's not just a taxi ride; it's a commitment to punctuality, cleanliness, and peace of mind.
+          - generic [ref=e702]:
+            - generic [ref=e703]:
+              - img [ref=e705]
+              - generic [ref=e708]:
+                - paragraph [ref=e709]: 20+ Years Experience
+                - paragraph [ref=e710]: Two decades of mastering Punjab-to-airport routes with consistent reliability.
+            - generic [ref=e711]:
+              - img [ref=e713]
+              - generic [ref=e717]:
+                - paragraph [ref=e718]: Premium Vehicles
+                - paragraph [ref=e719]: Innova Crysta, executive sedans, and Tempo Travellers — all clean, AC, well-maintained.
+            - generic [ref=e720]:
+              - img [ref=e722]
+              - generic [ref=e724]:
+                - paragraph [ref=e725]: Transparent Pricing
+                - paragraph [ref=e726]: Fixed fare confirmed before you book. No surge, no hidden charges, no toll surprises.
+            - generic [ref=e727]:
+              - img [ref=e729]
+              - generic [ref=e731]:
+                - paragraph [ref=e732]: Professional Drivers
+                - paragraph [ref=e733]: Licensed, experienced, well-groomed chauffeurs who prioritize safety and punctuality.
+            - generic [ref=e734]:
+              - img [ref=e736]
+              - generic [ref=e738]:
+                - paragraph [ref=e739]: 24/7 WhatsApp Booking
+                - paragraph [ref=e740]: Book anytime via WhatsApp. Get instant confirmation, driver details, and live tracking.
+            - generic [ref=e741]:
+              - img [ref=e743]
+              - generic [ref=e748]:
+                - paragraph [ref=e749]: Family Trusted
+                - paragraph [ref=e750]: Hundreds of families trust us for regular airport runs. Many customers are 5+ year regulars.
+    - region "Photo gallery" [ref=e751]:
+      - generic [ref=e752]:
+        - generic [ref=e753]:
+          - generic [ref=e754]:
+            - paragraph [ref=e755]: Visual Stories
+            - heading "The Experience" [level=2] [ref=e756]:
+              - generic "The Experience" [ref=e757]:
+                - generic [ref=e760]:
+                  - text: The
+                  - generic [ref=e761]: Experience
+            - paragraph [ref=e762]: From premium night pickups to scenic long-route travel. Every ride is built around comfort.
+          - link "Book a ride on WhatsApp" [ref=e763]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride.
+            - text: Book Now
+        - generic [ref=e764]:
+          - img "Premium sedan driving on highway during golden hour - V3 Tour and Travels airport transfer" [ref=e766]
+          - img "Clean premium sedan exterior - V3 Tour and Travels fleet vehicle" [ref=e768]
+          - img "Professional chauffeur standing near luxury SUV - V3 Tour and Travels driver" [ref=e770]
+          - img "Multi-passenger vehicle for group travel - V3 Tour and Travels tempo traveller" [ref=e772]
+    - generic [ref=e774]:
+      - generic [ref=e775]:
+        - paragraph [ref=e776]: Real Feedback
+        - heading "Words from our Travelers" [level=2] [ref=e777]:
+          - generic "Words from our Travelers" [ref=e778]:
+            - generic [ref=e781]:
+              - text: Words from our
+              - generic [ref=e782]: Travelers
+        - paragraph [ref=e783]: Real feedback from customers who care about timing, comfort, and trust.
+      - generic [ref=e784]:
+        - generic [ref=e785]:
+          - generic [ref=e786]:
+            - generic [ref=e787]: ★
+            - generic [ref=e788]: ★
+            - generic [ref=e789]: ★
+            - generic [ref=e790]: ★
+            - generic [ref=e791]: ★
+          - paragraph [ref=e792]: “Smooth airport pickup, clean car, and professional driver. The booking was quick and stress-free. Will definitely use V3 again.”
+          - generic [ref=e793]:
+            - paragraph [ref=e794]: Rahul S.
+            - generic [ref=e795]:
+              - generic [ref=e796]: Ludhiana → Delhi Airport
+              - generic [ref=e797]: Innova Crysta
+            - paragraph [ref=e798]: Airport Transfer · Recent customer
+        - generic [ref=e799]:
+          - generic [ref=e800]:
+            - generic [ref=e801]: ★
+            - generic [ref=e802]: ★
+            - generic [ref=e803]: ★
+            - generic [ref=e804]: ★
+            - generic [ref=e805]: ★
+          - paragraph [ref=e806]: “Very comfortable Innova. Driver was on time and drove very safely. Highly recommend V3 Tour & Travels for family travel.”
+          - generic [ref=e807]:
+            - paragraph [ref=e808]: Amanpreet K.
+            - generic [ref=e809]:
+              - generic [ref=e810]: Chandigarh → Amritsar
+              - generic [ref=e811]: Innova Crysta
+            - paragraph [ref=e812]: Outstation · Recent customer
+        - generic [ref=e813]:
+          - generic [ref=e814]:
+            - generic [ref=e815]: ★
+            - generic [ref=e816]: ★
+            - generic [ref=e817]: ★
+            - generic [ref=e818]: ★
+            - generic [ref=e819]: ★
+          - paragraph [ref=e820]: “Flight landed late at night but the driver was waiting at the terminal. True luxury service and highly reliable even at odd hours.”
+          - generic [ref=e821]:
+            - paragraph [ref=e822]: Vikram M.
+            - generic [ref=e823]:
+              - generic [ref=e824]: Delhi Airport → Ludhiana
+              - generic [ref=e825]: Premium Sedan
+            - paragraph [ref=e826]: Airport Pickup · Recent customer
+        - generic [ref=e827]:
+          - generic [ref=e828]:
+            - generic [ref=e829]: ★
+            - generic [ref=e830]: ★
+            - generic [ref=e831]: ★
+            - generic [ref=e832]: ★
+            - generic [ref=e833]: ★
+          - paragraph [ref=e834]: “I book for my parents every time they fly. The team is reliable, polite, and always communicates clearly. Peace of mind for me.”
+          - generic [ref=e835]:
+            - paragraph [ref=e836]: Priya G.
+            - generic [ref=e837]:
+              - generic [ref=e838]: Ludhiana → Chandigarh Airport
+              - generic [ref=e839]: Sedan
+            - paragraph [ref=e840]: Family Pickup · Recent customer
+        - generic [ref=e841]:
+          - generic [ref=e842]:
+            - generic [ref=e843]: ★
+            - generic [ref=e844]: ★
+            - generic [ref=e845]: ★
+            - generic [ref=e846]: ★
+            - generic [ref=e847]: ★
+          - paragraph [ref=e848]: “Used them for a corporate event with 5 cars. Everything was coordinated perfectly. No stress, no confusion. Professional service.”
+          - generic [ref=e849]:
+            - paragraph [ref=e850]: Gurpreet S.
+            - generic [ref=e851]:
+              - generic [ref=e852]: Multi-City Punjab
+              - generic [ref=e853]: Fleet (5 cars)
+            - paragraph [ref=e854]: Corporate Event · Recent customer
+        - generic [ref=e855]:
+          - generic [ref=e856]:
+            - generic [ref=e857]: ★
+            - generic [ref=e858]: ★
+            - generic [ref=e859]: ★
+            - generic [ref=e860]: ★
+            - generic [ref=e861]: ★
+          - paragraph [ref=e862]: “For our wedding, they handled guest pickups from three different cities. Every car arrived on time. Professional from start to finish.”
+          - generic [ref=e863]:
+            - paragraph [ref=e864]: Anita R.
+            - generic [ref=e865]:
+              - generic [ref=e866]: Ludhiana + Jalandhar + Chandigarh
+              - generic [ref=e867]: Tempo Traveller + Sedans
+            - paragraph [ref=e868]: Wedding Transport · Recent customer
+    - generic [ref=e870]:
+      - generic [ref=e871]:
+        - paragraph [ref=e872]: Common Questions
+        - heading "Frequently Asked" [level=2] [ref=e873]:
+          - generic "Frequently Asked" [ref=e874]:
+            - generic [ref=e877]:
+              - text: Frequently
+              - generic [ref=e878]: Asked
+      - generic [ref=e879]:
+        - generic [ref=e880]:
+          - button "How do I book a ride?" [expanded] [ref=e881]:
+            - generic [ref=e882]: How do I book a ride?
+            - img [ref=e883]
+          - region "How do I book a ride?" [ref=e885]:
+            - generic [ref=e886]: Simply fill out the booking inquiry form on this page or message us on WhatsApp with your pickup, drop, date, time, and passenger count. We will confirm all details with you directly.
+        - button "Which areas do you serve?" [ref=e888]:
+          - generic [ref=e889]: Which areas do you serve?
+          - img [ref=e890]
+        - button "What vehicles are available?" [ref=e893]:
+          - generic [ref=e894]: What vehicles are available?
+          - img [ref=e895]
+        - button "Are your chauffeurs professional?" [ref=e898]:
+          - generic [ref=e899]: Are your chauffeurs professional?
+          - img [ref=e900]
+        - button "Can I book for someone else?" [ref=e903]:
+          - generic [ref=e904]: Can I book for someone else?
+          - img [ref=e905]
+        - button "Do you track flights for airport pickups?" [ref=e908]:
+          - generic [ref=e909]: Do you track flights for airport pickups?
+          - img [ref=e910]
+        - button "Is there a minimum booking time?" [ref=e913]:
+          - generic [ref=e914]: Is there a minimum booking time?
+          - img [ref=e915]
+        - button "Do you provide GST invoices?" [ref=e918]:
+          - generic [ref=e919]: Do you provide GST invoices?
+          - img [ref=e920]
+        - button "What if I need to cancel or reschedule?" [ref=e923]:
+          - generic [ref=e924]: What if I need to cancel or reschedule?
+          - img [ref=e925]
+        - button "How do I contact you for urgent bookings?" [ref=e928]:
+          - generic [ref=e929]: How do I contact you for urgent bookings?
+          - img [ref=e930]
+        - button "Are tolls and parking included in the fare?" [ref=e933]:
+          - generic [ref=e934]: Are tolls and parking included in the fare?
+          - img [ref=e935]
+        - button "Do you provide one-way taxi services?" [ref=e938]:
+          - generic [ref=e939]: Do you provide one-way taxi services?
+          - img [ref=e940]
+        - button "Can I book a taxi for late-night or early-morning flights?" [ref=e943]:
+          - generic [ref=e944]: Can I book a taxi for late-night or early-morning flights?
+          - img [ref=e945]
+        - button "How much luggage can an Innova Crysta carry?" [ref=e948]:
+          - generic [ref=e949]: How much luggage can an Innova Crysta carry?
+          - img [ref=e950]
+        - button "Is WhatsApp booking really available 24/7?" [ref=e953]:
+          - generic [ref=e954]: Is WhatsApp booking really available 24/7?
+          - img [ref=e955]
+      - generic [ref=e957]:
+        - paragraph [ref=e958]: Still have questions?
+        - link "Ask on WhatsApp" [ref=e959]:
+          - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20have%20a%20question%20regarding...
+          - generic [ref=e960]: Ask on WhatsApp
+          - img [ref=e961]
+    - region "Final booking call to action" [ref=e963]:
+      - generic [ref=e964]:
+        - paragraph [ref=e965]: Available 24/7
+        - heading "Ready for Takeoff?" [level=2] [ref=e966]:
+          - generic "Ready for Takeoff?" [ref=e967]:
+            - generic [ref=e970]:
+              - text: Ready for
+              - generic [ref=e971]: Takeoff?
+        - paragraph [ref=e972]: Reserve your premium vehicle for your next airport transfer. Whether it's a late-night flight or early morning pickup, we are always on time.
+        - generic [ref=e973]:
+          - button "Book on WhatsApp" [ref=e974]:
+            - link "Book on WhatsApp" [ref=e975]:
+              - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride.
+              - img [ref=e976]
+              - text: Book on WhatsApp
+          - button "Call direct at 9888000510" [ref=e978]:
+            - link "Call direct at 9888000510" [ref=e979]:
+              - /url: tel:+919888000510
+              - img [ref=e980]
+              - text: Call Direct
+    - generic [ref=e984]:
+      - heading "AIRPORT LIVE" [level=2] [ref=e986]
+      - generic [ref=e987]:
+        - generic [ref=e988]:
+          - generic [ref=e989]:
+            - paragraph [ref=e990]: Inquiries
+            - generic [ref=e991]:
+              - link "+91 9888000510" [ref=e992]:
+                - /url: tel:+919888000510
+              - link "book@airportlive.in" [ref=e993]:
+                - /url: mailto:book@airportlive.in?subject=Booking%20Inquiry%20-%20V3%20Tour%20%26%20Travels&body=
+          - generic [ref=e994]:
+            - img [ref=e995]
+            - paragraph [ref=e998]: Ludhiana, Punjab, India
+        - generic [ref=e999]:
+          - paragraph [ref=e1000]: Navigation
+          - list [ref=e1001]:
+            - listitem [ref=e1002]:
+              - link "Airport Taxi" [ref=e1003]:
+                - /url: /airport-taxi
+                - generic [ref=e1004]: Airport Taxi
+                - img [ref=e1005]
+            - listitem [ref=e1008]:
+              - link "Routes" [ref=e1009]:
+                - /url: /routes
+                - generic [ref=e1010]: Routes
+                - img [ref=e1011]
+            - listitem [ref=e1014]:
+              - link "Fleet" [ref=e1015]:
+                - /url: /fleet
+                - generic [ref=e1016]: Fleet
+                - img [ref=e1017]
+            - listitem [ref=e1020]:
+              - link "About" [ref=e1021]:
+                - /url: /about
+                - generic [ref=e1022]: About
+                - img [ref=e1023]
+            - listitem [ref=e1026]:
+              - link "Contact" [ref=e1027]:
+                - /url: /contact
+                - generic [ref=e1028]: Contact
+                - img [ref=e1029]
+        - generic [ref=e1032]:
+          - paragraph [ref=e1033]: Top Corridors
+          - list [ref=e1034]:
+            - listitem [ref=e1035]:
+              - link "Ludhiana → Delhi Airport" [ref=e1036]:
+                - /url: /routes
+            - listitem [ref=e1037]:
+              - link "Chandigarh → Delhi Airport" [ref=e1038]:
+                - /url: /routes
+            - listitem [ref=e1039]:
+              - link "Ludhiana → Chandigarh Airport" [ref=e1040]:
+                - /url: /routes
+            - listitem [ref=e1041]:
+              - link "Ludhiana → Amritsar Airport" [ref=e1042]:
+                - /url: /routes
+            - listitem [ref=e1043]:
+              - link "Delhi Airport → Punjab" [ref=e1044]:
+                - /url: /routes
+        - generic [ref=e1045]:
+          - generic [ref=e1046]:
+            - heading "Book in seconds." [level=4] [ref=e1047]
+            - paragraph [ref=e1048]: WhatsApp verified booking. No automated calls. Real people. 24/7.
+          - link "Start Conversation" [ref=e1049]:
+            - /url: https://wa.me/919888000510?text=Hi%20V3%20Tour%20%26%20Travels%2C%20I%20want%20to%20book%20a%20ride.
+      - generic [ref=e1050]:
+        - generic [ref=e1051]:
+          - paragraph [ref=e1052]: © 2026 Airport Live
+          - link "Privacy" [ref=e1053]:
+            - /url: /contact
+          - link "Terms" [ref=e1054]:
+            - /url: /contact
+        - generic [ref=e1055]:
+          - generic [ref=e1056]: Crafted by
+          - generic [ref=e1057]: V3 DIGITAL
+  - alert [ref=e1058]
