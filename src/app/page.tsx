@@ -13,6 +13,9 @@ import InquirySection from '@/components/sections/InquirySection';
 import Footer from '@/components/layout/Footer';
 import { ScrollColorMatrix } from '@/components/effects/ScrollColorMatrix';
 import { SectionBlend } from '@/components/effects/SectionBlend';
+import { HOME_METADATA } from '@/lib/homepage-metadata';
+
+export const metadata = HOME_METADATA;
 
 export default function Home() {
   return (
