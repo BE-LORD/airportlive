@@ -1,8 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { gsap } from "gsap";
 import { usePathname } from "next/navigation";
+
+function canUseCustomCursor() {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(hover: hover)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+function subscribeCursorCapability(onChange: () => void) {
+  if (typeof window === "undefined") return () => {};
+  const hoverQuery = window.matchMedia("(hover: hover)");
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  hoverQuery.addEventListener("change", onChange);
+  motionQuery.addEventListener("change", onChange);
+
+  return () => {
+    hoverQuery.removeEventListener("change", onChange);
+    motionQuery.removeEventListener("change", onChange);
+  };
+}
 
 /**
  * 1000000x Custom Cursor
@@ -15,22 +37,8 @@ export function CustomCursor() {
   const rippleRef = useRef<HTMLDivElement>(null);
   const cursorTextRef = useRef("");
   const [cursorText, setCursorText] = useState("");
-  const [enabled, setEnabled] = useState(false);
+  const enabled = useSyncExternalStore(subscribeCursorCapability, canUseCustomCursor, () => false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const hasHover = window.matchMedia("(hover: hover)").matches;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!hasHover || prefersReduced) {
-      setEnabled(false);
-      return;
-    }
-
-    setEnabled(true);
-  }, []);
 
   useEffect(() => {
     if (!enabled) return;

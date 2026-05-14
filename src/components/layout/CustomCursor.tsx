@@ -1,12 +1,34 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useSyncExternalStore } from 'react';
 import { motion, useSpring } from 'framer-motion';
+
+function canUseFineCursor() {
+  if (typeof window === 'undefined') return false;
+  return (
+    window.matchMedia('(pointer: fine)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+}
+
+function subscribeCursorCapability(onChange: () => void) {
+  if (typeof window === 'undefined') return () => {};
+  const pointerQuery = window.matchMedia('(pointer: fine)');
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  pointerQuery.addEventListener('change', onChange);
+  motionQuery.addEventListener('change', onChange);
+
+  return () => {
+    pointerQuery.removeEventListener('change', onChange);
+    motionQuery.removeEventListener('change', onChange);
+  };
+}
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverText, setHoverText] = useState('');
-  const [enabled, setEnabled] = useState(false);
+  const enabled = useSyncExternalStore(subscribeCursorCapability, canUseFineCursor, () => false);
   
   const cursorRef = useRef<HTMLDivElement>(null);
 
@@ -14,12 +36,7 @@ export default function CustomCursor() {
   const cursorY = useSpring(-100, { stiffness: 500, damping: 28 });
 
   useEffect(() => {
-    const canUseCursor =
-      window.matchMedia('(pointer: fine)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    setEnabled(canUseCursor);
-    if (!canUseCursor) return;
+    if (!enabled) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - (isHovered ? 40 : 10));
@@ -46,7 +63,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [cursorX, cursorY, isHovered]);
+  }, [cursorX, cursorY, enabled, isHovered]);
 
   if (!enabled) return null;
 

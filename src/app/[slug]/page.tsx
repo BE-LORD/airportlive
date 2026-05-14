@@ -3,14 +3,14 @@ import { notFound } from 'next/navigation';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
-import { SEO_PAGES } from '@/data/seoPages';
-import { PSEO_ROUTES } from '@/data/pSEO_routes';
+import { SEO_PAGES, type SeoPageData } from '@/data/seoPages';
+import { PSEO_ROUTES, type RouteDetail } from '@/data/pSEO_routes';
 import { BUSINESS } from '@/lib/constants';
 import { MessageCircle, Phone, ChevronDown, ShieldCheck, Star, Clock, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { buildAllSchemas } from '@/lib/schema';
 import Script from 'next/script';
+
+type SeoRenderablePage = SeoPageData | RouteDetail;
 
 interface Props {
   params: Promise<{
@@ -29,7 +29,7 @@ export function generateStaticParams() {
 // Generate unique metadata for each page
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const page = (PSEO_ROUTES[slug] as any) || (SEO_PAGES[slug] as any);
+  const page: SeoRenderablePage | undefined = PSEO_ROUTES[slug] ?? SEO_PAGES[slug];
   
   if (!page) return {};
   const title = page.title.replace(/\s\|\sV3 Tour & Travels$/i, '');
@@ -67,6 +67,7 @@ export default async function SeoPage({ params }: Props) {
   if (!page) notFound();
 
   const isPSEO = !!pSEOPage;
+  const overview = pSEOPage?.content.overview ?? legacyPage?.content.overview ?? '';
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book the ${page.h1} service.`;
   
   // Build dynamic schema for this specific page
@@ -101,7 +102,7 @@ export default async function SeoPage({ params }: Props) {
           </h1>
           
           <p className="text-xl md:text-2xl text-white/60 max-w-3xl mx-auto mb-12 leading-relaxed font-light italic">
-            "{page.subhead}"
+            &ldquo;{page.subhead}&rdquo;
           </p>
 
           <div className="flex flex-wrap justify-center gap-6">
@@ -152,10 +153,10 @@ export default async function SeoPage({ params }: Props) {
               </h2>
               
               <p className="text-white/70 leading-relaxed first-letter:text-5xl first-letter:font-serif first-letter:mr-3 first-letter:float-left">
-                {isPSEO ? pSEOPage.content.overview : (legacyPage as any).content.overview}
+                {overview}
               </p>
 
-              {isPSEO && (
+              {pSEOPage && (
                 <>
                   <div className="my-16 p-8 rounded-3xl bg-gradient-to-br from-[#1A1A1A] to-[#0A0A0A] border border-white/10 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -189,7 +190,7 @@ export default async function SeoPage({ params }: Props) {
           <div className="lg:col-span-5 space-y-12">
             
             {/* Quick Stats Card */}
-            {isPSEO && (
+            {pSEOPage && (
               <div className="p-8 rounded-3xl bg-[#141414] border border-white/10">
                 <h3 className="text-xl font-serif text-white mb-6">Route Fast-Facts</h3>
                 <div className="space-y-6">
@@ -210,7 +211,7 @@ export default async function SeoPage({ params }: Props) {
             )}
 
             {/* Pain Points Section - CRO Engineered */}
-            {isPSEO && (
+            {pSEOPage && (
               <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
                 <h3 className="text-xl font-serif text-white mb-6">We Solve Your Travel Pain</h3>
                 <div className="space-y-4">
