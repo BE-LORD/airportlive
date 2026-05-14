@@ -11,6 +11,8 @@ import { CountUp } from '@/components/motion/CountUp';
 import { useWhatsAppRedirect } from '@/hooks/useWhatsAppRedirect';
 import { motionDurations, motionEases } from '@/lib/motion';
 
+const customerInitials = ['AK', 'RS', 'MS'];
+
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
@@ -177,31 +179,33 @@ export default function Hero() {
           </motion.div>
 
 
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-6 pt-10 border-t border-white/10">
+          <div className="grid grid-cols-1 gap-5 pt-8 border-t border-white/10 sm:flex sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-6 sm:pt-10">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.2, duration: 0.8, ease: motionEases.mainEase }}
-              className="flex items-center gap-4"
+              className="flex min-w-0 items-center gap-3 sm:gap-4"
             >
-              <div className="flex -space-x-3">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="h-10 w-10 rounded-full border-2 border-[#0A0A0A] bg-[#1A1A1A] overflow-hidden ring-1 ring-white/10">
-                    <img 
-                      src={`https://i.pravatar.cc/100?u=${i+10}`} 
-                      alt="Customer" 
-                      className="h-full w-full object-cover grayscale opacity-70 transition-all duration-500 hover:grayscale-0 hover:opacity-100" 
-                    />
+              <div className="flex shrink-0 -space-x-2.5 sm:-space-x-3" aria-hidden="true">
+                {customerInitials.map((initials, i) => (
+                  <div
+                    key={initials}
+                    className="grid h-9 w-9 place-items-center rounded-full border-2 border-[#0A0A0A] bg-gradient-to-br from-[#2D3E6A] via-[#1A1A1A] to-[#0A0A0A] text-[10px] font-bold text-[#F5F5F5] shadow-[0_0_0_1px_rgba(255,255,255,0.12)] sm:h-10 sm:w-10"
+                    style={{ zIndex: customerInitials.length - i }}
+                  >
+                    {initials}
                   </div>
                 ))}
               </div>
-              <div>
+              <div className="min-w-0">
                 <div className="flex gap-0.5 mb-0.5">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <Star key={i} className="h-3 w-3 fill-[#E5E4E2] text-[#E5E4E2]" />
                   ))}
                 </div>
-                <p className="text-[10px] uppercase tracking-widest text-[#A3A3A3] font-bold">2.5k+ Happy Clients</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#A3A3A3] sm:tracking-widest">
+                  2.5k+ Happy Clients
+                </p>
               </div>
             </motion.div>
 
@@ -209,7 +213,7 @@ export default function Hero() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.4, duration: 0.8, ease: motionEases.mainEase }}
-              className="flex items-center gap-3 pl-10 border-l border-white/10"
+              className="flex min-w-0 items-center gap-3 border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-10 sm:pt-0"
             >
               <ShieldCheck className="h-5 w-5 text-[#E5E4E2]" />
               <div>
@@ -230,8 +234,6 @@ export default function Hero() {
           data-cursor="Form"
         >
           <div className="bg-[#0D0D0D]/60 backdrop-blur-3xl p-6 md:p-8 rounded-[32px] border border-white/10 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.5)] relative overflow-hidden group">
-            {/* Luxury Grain Overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-white/[0.05] to-transparent opacity-50" />
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>

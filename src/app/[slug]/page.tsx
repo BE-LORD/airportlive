@@ -32,15 +32,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = (PSEO_ROUTES[slug] as any) || (SEO_PAGES[slug] as any);
   
   if (!page) return {};
+  const title = page.title.replace(/\s\|\sV3 Tour & Travels$/i, '');
 
   return {
-    title: page.title,
+    title,
     description: page.metaDesc,
     alternates: {
       canonical: `${BUSINESS.website}/${slug}`,
     },
     openGraph: {
-      title: page.title,
+      title,
       description: page.metaDesc,
       url: `${BUSINESS.website}/${slug}`,
       siteName: BUSINESS.name,
@@ -87,9 +88,6 @@ export default async function SeoPage({ params }: Props) {
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 scale-105" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
         
-        {/* Luxury Grain Overlay */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />

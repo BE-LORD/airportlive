@@ -15,6 +15,7 @@ export function CustomCursor() {
   const rippleRef = useRef<HTMLDivElement>(null);
   const cursorTextRef = useRef("");
   const [cursorText, setCursorText] = useState("");
+  const [enabled, setEnabled] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -23,7 +24,16 @@ export function CustomCursor() {
     const hasHover = window.matchMedia("(hover: hover)").matches;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!hasHover || prefersReduced) return;
+    if (!hasHover || prefersReduced) {
+      setEnabled(false);
+      return;
+    }
+
+    setEnabled(true);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
 
     const dot = dotRef.current;
     const ring = ringRef.current;
@@ -156,7 +166,9 @@ export function CustomCursor() {
       });
       gsap.ticker.remove(ticker);
     };
-  }, [pathname]); // Re-bind on route changes
+  }, [enabled, pathname]); // Re-bind on route changes
+
+  if (!enabled) return null;
 
   return (
     <>

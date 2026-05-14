@@ -8,8 +8,11 @@ import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: `Airport Taxi Service — Premium Pickup & Drop | ${BUSINESS.name}`,
+  title: "Airport Taxi Service — Premium Pickup & Drop",
   description: "Book premium airport taxi and outstation rides with V3 Tour and Travels. 20+ years experience, 100+ fleet network. Delhi, Chandigarh, and Amritsar airports.",
+  alternates: {
+    canonical: `${BUSINESS.website}/airport-taxi`,
+  },
 };
 
 const AIRPORTS = [

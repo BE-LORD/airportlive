@@ -6,6 +6,7 @@ import { motion, useSpring } from 'framer-motion';
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverText, setHoverText] = useState('');
+  const [enabled, setEnabled] = useState(false);
   
   const cursorRef = useRef<HTMLDivElement>(null);
 
@@ -13,8 +14,12 @@ export default function CustomCursor() {
   const cursorY = useSpring(-100, { stiffness: 500, damping: 28 });
 
   useEffect(() => {
-    // Check if device is touch enabled, if so don't render custom cursor
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const canUseCursor =
+      window.matchMedia('(pointer: fine)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    setEnabled(canUseCursor);
+    if (!canUseCursor) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - (isHovered ? 40 : 10));
@@ -43,10 +48,7 @@ export default function CustomCursor() {
     };
   }, [cursorX, cursorY, isHovered]);
 
-  // Hide on mobile/touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
-    return null;
-  }
+  if (!enabled) return null;
 
   return (
     <motion.div

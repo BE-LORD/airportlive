@@ -15,7 +15,7 @@ const FLEET_DETAILED = [
     id: 'sedan',
     name: 'Premium Sedan',
     tagline: 'Executive Comfort',
-    image: 'https://images.unsplash.com/photo-1590362891991-f70287a935be?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#2D3E6A] via-[#1A1A1A] to-[#0A0A0A]',
     seats: '4 passengers',
     luggage: '2 large bags',
     bestFor: 'Airport runs, couples, solo business',
@@ -27,7 +27,7 @@ const FLEET_DETAILED = [
     id: 'innova-crysta',
     name: 'Innova Crysta',
     tagline: 'The Corporate Standard',
-    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#4B3827] via-[#1A1A1A] to-[#0A0A0A]',
     seats: '6-7 passengers',
     luggage: '4 large bags',
     bestFor: 'Families, corporate, airport groups',
@@ -39,7 +39,7 @@ const FLEET_DETAILED = [
     id: 'suv',
     name: 'XL6 / SUV',
     tagline: 'Family Comfort',
-    image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#1E2B4A] via-[#141414] to-[#0A0A0A]',
     seats: '6 passengers',
     luggage: '3 large bags',
     bestFor: 'Small family trips, weekend getaways',
@@ -51,7 +51,7 @@ const FLEET_DETAILED = [
     id: 'tempo-traveller',
     name: 'Tempo Traveller',
     tagline: 'Group Travel Redefined',
-    image: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#2d2d2d] via-[#1A1A1A] to-[#0A0A0A]',
     seats: '12-16 passengers',
     luggage: '10+ bags',
     bestFor: 'Weddings, events, large groups',
@@ -63,7 +63,7 @@ const FLEET_DETAILED = [
     id: 'luxury',
     name: 'Luxury / Executive',
     tagline: 'On Special Request',
-    image: 'https://images.unsplash.com/photo-1563259837-1473bdab0cf2?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#D98A32]/35 via-[#1A1A1A] to-[#0A0A0A]',
     seats: '4 passengers',
     luggage: '2 large bags',
     bestFor: 'VIP arrivals, high-profile travel',
@@ -87,11 +87,10 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
         aria-label={`Show ${vehicle.name} details`}
       >
         <div className="relative h-[260px] overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.04]"
-            style={{ backgroundImage: `url(${vehicle.image})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/35 to-transparent" />
+          <div className={`absolute inset-0 bg-gradient-to-br ${vehicle.visual} transition-transform duration-700 group-hover:scale-[1.04]`} />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.14),transparent_32%),linear-gradient(to_top,#0A0A0A,rgba(0,0,0,0.25),transparent)]" />
+          <div className="absolute right-6 top-6 h-24 w-24 rounded-full border border-white/10" />
+          <div className="absolute right-12 top-14 h-16 w-32 rounded-full border border-white/10" />
           <div className="absolute bottom-6 left-6">
             <span className="rounded-full bg-[#0A0A0A]/70 backdrop-blur-sm px-4 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#E5E4E2] border border-[#E5E4E2]/20">
               {vehicle.comfort}

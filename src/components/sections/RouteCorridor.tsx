@@ -12,7 +12,7 @@ const ROUTES = [
     to: 'Delhi Airport (DEL)', 
     distance: '310 km', 
     time: '5.5h', 
-    image: '/images/luxury_bus.png',
+    visual: 'from-[#1E2B4A] via-[#111111] to-[#0A0A0A]',
     tag: 'Popular',
     desc: 'The executive lifeline. Terminal drop-off at T3, T2, or T1. Flight-synced scheduling.'
   },
@@ -22,7 +22,7 @@ const ROUTES = [
     to: 'Delhi Airport (DEL)', 
     distance: '250 km', 
     time: '4h', 
-    image: 'https://images.unsplash.com/photo-1569062564112-921d74659fbc?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#2D3E6A] via-[#111111] to-[#0A0A0A]',
     tag: 'Corporate',
     desc: 'Express highway transit for business professionals. Quiet cabins and professional chauffeurs.'
   },
@@ -32,7 +32,7 @@ const ROUTES = [
     to: 'Delhi Airport (DEL)', 
     distance: '370 km', 
     time: '6.5h', 
-    image: 'https://images.unsplash.com/photo-1541410965313-d53b3c16ef17?q=80&w=1974&auto=format&fit=crop',
+    visual: 'from-[#4B3827] via-[#111111] to-[#0A0A0A]',
     tag: 'NRI Priority',
     desc: 'The preferred route for NRI families. Spacious vehicles and reliable, safe highway transit.'
   },
@@ -42,7 +42,7 @@ const ROUTES = [
     to: 'Delhi Airport (DEL)', 
     distance: '260 km', 
     time: '4.5h', 
-    image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=2070&auto=format&fit=crop',
+    visual: 'from-[#2d2d2d] via-[#111111] to-[#0A0A0A]',
     tag: 'Airport',
     desc: 'Direct connection from the Royal City of Patiala to IGI Airport. Punctual and comfortable.'
   },
@@ -52,7 +52,7 @@ const ROUTES = [
     to: 'Chandigarh (IXC)', 
     distance: '110 km', 
     time: '2h', 
-    image: '/images/chandigarh_route.png',
+    visual: 'from-[#D98A32]/35 via-[#111111] to-[#0A0A0A]',
     tag: 'Regional',
     desc: 'Swift airport connections from Ludhiana to Mohali/Chandigarh Airport. Stress-free transfers.'
   }
@@ -72,10 +72,8 @@ function RouteRow({ route }: { route: typeof ROUTES[0] }) {
       <div 
         className="absolute inset-0 md:inset-[-20%] z-0"
       >
-        <div 
-          className="absolute inset-0 bg-cover bg-center grayscale-[50%] group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
-          style={{ backgroundImage: `url(${route.image})` }}
-        />
+        <div className={`absolute inset-0 bg-gradient-to-br ${route.visual} transition-all duration-1000 ease-in-out`} />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.12),transparent_30%),linear-gradient(135deg,transparent_0%,rgba(229,228,226,0.08)_45%,transparent_46%)]" />
         <div className="absolute inset-0 bg-black/70 group-hover:bg-black/60 transition-colors duration-1000" />
       </div>
 
