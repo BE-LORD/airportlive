@@ -24,4 +24,26 @@ describe("ResponsiveImage", () => {
     expect(html).toContain("object-cover");
     expect(html).toContain("object-position:center bottom");
   });
+
+  it("supports contain fit and keeps responsive art-direction props off the rendered image", () => {
+    const html = renderToStaticMarkup(
+      <div className="relative aspect-[16/9]">
+        <ResponsiveImage
+          src="/media/fleet/airportlive-fleet-lineup.webp"
+          mobileSrc="/media/fleet/airportlive-fleet-lineup-mobile.webp"
+          alt="AirportLive premium fleet lineup for Punjab airport taxi and outstation travel"
+          fill
+          sizes="100vw"
+          objectFit="contain"
+          objectPosition="center center"
+          mobileObjectPosition="center bottom"
+        />
+      </div>
+    );
+
+    expect(html).toContain("object-contain");
+    expect(html).not.toContain("object-cover");
+    expect(html).not.toContain("mobileSrc");
+    expect(html).not.toContain("mobileObjectPosition");
+  });
 });

@@ -60,7 +60,7 @@ export function MotionButton({
     </>
   );
   const sharedClassName = cn(
-    "group inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider transition-colors duration-200 focus-visible:outline-[#E5E4E2] disabled:pointer-events-none disabled:opacity-60",
+    "group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider transition-colors duration-200 focus-visible:outline-[#E5E4E2] disabled:pointer-events-none disabled:opacity-60",
     variants[variant],
     className
   );

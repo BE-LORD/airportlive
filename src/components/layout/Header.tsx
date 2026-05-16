@@ -54,14 +54,14 @@ export default function Header() {
           <Link
             href="/"
             data-cursor="Home"
-            className="inline-flex min-h-12 items-center font-serif text-2xl font-bold text-white mix-blend-difference md:text-3xl"
+            className="inline-flex min-h-12 items-center font-serif text-[1.45rem] font-bold tracking-tight text-white mix-blend-difference md:text-3xl"
           >
             {BUSINESS.brand.toUpperCase()}
           </Link>
           </motion.div>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex gap-10 items-center">
+          <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
             {navLinks.map((item) => (
               <Link
                 key={item.name}
@@ -113,7 +113,7 @@ export default function Header() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            className="flex h-12 w-12 items-center justify-center rounded-full transition-colors lg:hidden text-white bg-[#1A1A1A]/10 backdrop-blur-md z-[60]"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0A0A0A]/55 text-white backdrop-blur-md transition-colors lg:hidden z-[60]"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

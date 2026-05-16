@@ -33,9 +33,9 @@ export default function Hero() {
 
   const steps = [
     { id: 1, label: 'Route' },
-    { id: 2, label: 'Timing' },
-    { id: 3, label: 'Ride' },
-    { id: 4, label: 'Confirm' },
+    { id: 2, label: 'Date & Time' },
+    { id: 3, label: 'Vehicle' },
+    { id: 4, label: 'Contact' },
   ];
 
   // Date is optional so users can always advance; we validate only pickup/drop
@@ -259,7 +259,7 @@ export default function Hero() {
                       }`}
                     />
                   </button>
-                  <span className={`text-[9px] uppercase tracking-[0.15em] font-mono transition-colors duration-300 ${
+                  <span className={`text-center text-[9px] uppercase leading-tight tracking-[0.1em] font-mono transition-colors duration-300 sm:tracking-[0.15em] ${
                     step === item.id ? 'text-[#E5E4E2] font-bold' : 'text-[#A3A3A3]/30'
                   }`}>
                     {item.label}
@@ -318,7 +318,7 @@ export default function Hero() {
                     className="grid grid-cols-2 gap-4"
                   >
                     <div>
-                      <label htmlFor="date" className="block text-xs uppercase text-[#A3A3A3] mb-1 font-semibold">Date *</label>
+                      <label htmlFor="date" className="block text-xs uppercase text-[#A3A3A3] mb-1 font-semibold">Date</label>
                       <input
                         id="date"
                         type="date"
@@ -326,6 +326,9 @@ export default function Hero() {
                         onChange={(e) => updateField('date', e.target.value)}
                         className="w-full border-b-2 border-white/10 py-3 focus:border-[#E5E4E2] outline-none bg-transparent text-[#F5F5F5] transition-colors"
                       />
+                      <p className="mt-2 text-[11px] text-white/45">
+                        Share exact flight time on WhatsApp after submitting.
+                      </p>
                     </div>
                     <div>
                       <label htmlFor="time" className="block text-xs uppercase text-[#A3A3A3] mb-1 font-semibold">Time</label>

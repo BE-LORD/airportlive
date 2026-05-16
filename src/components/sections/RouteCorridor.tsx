@@ -104,7 +104,7 @@ function RouteRow({ route }: { route: Route }) {
           </span>
         </motion.div>
 
-        <h3 className="mb-6 font-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl md:text-8xl">
+        <h3 className="mb-6 font-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl md:text-6xl lg:text-8xl">
           <span className="block opacity-60 drop-shadow-md transition-opacity duration-700 group-hover:opacity-100">{route.from}</span>
           <span className="px-4 italic text-[#E5E4E2] drop-shadow-md">to</span>
           <span className="block drop-shadow-md">{route.to}</span>
@@ -166,7 +166,7 @@ function CompactRoutePlanner() {
             {...routeMedia.ludhianaDelhiAirport}
             fill
             sizes="(max-width: 1024px) 92vw, 48vw"
-            className="opacity-58"
+            className="opacity-65"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/68 to-[#0A0A0A]/8" />
           <div className="relative z-10 flex h-full flex-col justify-between">
