@@ -151,7 +151,7 @@ function CompactRoutePlanner() {
   return (
     <section
       id="routes"
-      className="relative overflow-hidden bg-[#0A0A0A] py-12 text-white md:py-20"
+      className="relative overflow-hidden bg-[#0A0A0A] pt-12 pb-28 text-white md:py-20"
       data-route-corridor-variant="compact"
     >
       <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
@@ -283,7 +283,7 @@ export default function RouteCorridor({ hideHeader = false, variant = 'immersive
         ))}
       </div>
 
-      <div className="bg-[#0A0A0A] px-4 py-20 pb-28 text-center md:py-32">
+      <div className="bg-[#0A0A0A] px-4 py-20 pb-36 text-center md:py-32">
         <h4 className="mb-8 font-serif text-3xl text-[#F5F5F5] md:text-5xl">Traveling elsewhere?</h4>
         <p className="mx-auto mb-12 max-w-xl px-4 text-[#A3A3A3]">
           We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.

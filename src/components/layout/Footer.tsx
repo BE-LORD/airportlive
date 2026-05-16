@@ -25,7 +25,7 @@ export default function Footer() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
 
   return (
-    <footer className="bg-[#0A0A0A] text-white pt-10 md:pt-24 pb-28 md:pb-0 overflow-hidden relative">
+    <footer className="bg-[#0A0A0A] text-white pt-10 md:pt-24 pb-36 md:pb-0 overflow-hidden relative">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4">

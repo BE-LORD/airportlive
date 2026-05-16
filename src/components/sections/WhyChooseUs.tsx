@@ -18,7 +18,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-14 md:py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
+    <section id="why-choose-us" className="pt-24 pb-32 md:py-32 bg-[#111111] overflow-hidden scroll-mt-24" aria-label="Why choose us">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Supporting image */}
         <motion.div
