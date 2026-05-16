@@ -72,6 +72,7 @@ export function ResponsiveImage({
         fill
         sizes={sizes}
         loading={priority ? undefined : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         preload={priority}
         decoding="async"
         className={imageClassName}
@@ -89,6 +90,7 @@ export function ResponsiveImage({
       height={props.height}
       sizes={sizes}
       loading={priority ? undefined : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
       preload={priority}
       decoding="async"
       className={imageClassName}
