@@ -19,14 +19,14 @@ export default function MobileStickyCTA() {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
       const footer = document.querySelector('footer');
-      const form = document.querySelector('#booking, #booking-form, #inquiry');
+      const interactiveZones = document.querySelectorAll('#booking, #booking-form, #inquiry, #fleet, #final-cta');
       const footerTop = footer?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
-      const formRect = form?.getBoundingClientRect();
       const nearFooter = footerTop < window.innerHeight + 120;
-      const overForm = Boolean(
-        formRect && formRect.top < window.innerHeight - 80 && formRect.bottom > window.innerHeight - 120
-      );
-      setVisible(progress > 0.2 && !nearFooter && !overForm);
+      const overInteractiveZone = Array.from(interactiveZones).some((zone) => {
+        const rect = zone.getBoundingClientRect();
+        return rect.top < window.innerHeight - 80 && rect.bottom > window.innerHeight - 120;
+      });
+      setVisible(progress > 0.2 && !nearFooter && !overInteractiveZone);
       ticking = false;
     };
 

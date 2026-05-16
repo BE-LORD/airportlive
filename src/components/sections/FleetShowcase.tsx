@@ -114,7 +114,7 @@ function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
         aria-expanded={expanded}
         aria-label={`Show ${vehicle.name} details`}
       >
-        <div className="relative h-[260px] overflow-hidden">
+        <div className="relative h-[220px] overflow-hidden md:h-[260px]">
           {media ? (
             <ResponsiveImage
               {...media.exterior}
@@ -204,7 +204,7 @@ function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
 
 export default function FleetShowcase() {
   return (
-    <section id="fleet" className="py-12 md:py-32 bg-[#0A0A0A] text-white overflow-hidden relative" data-cursor="Swipe">
+    <section id="fleet" className="relative overflow-hidden bg-[#0A0A0A] pt-12 pb-32 text-white md:py-32" data-cursor="Swipe">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <Reveal className="mb-12" y={24}>
           <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">

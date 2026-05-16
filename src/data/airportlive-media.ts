@@ -19,7 +19,7 @@ const heroSizes = "100vw";
 const serviceSizes = "(max-width: 768px) 92vw, (max-width: 1200px) 33vw, 360px";
 const fleetSizes = "(max-width: 768px) 88vw, (max-width: 1200px) 33vw, 420px";
 const gallerySizes = "(max-width: 768px) 46vw, (max-width: 1200px) 25vw, 320px";
-const journeySizes = "(max-width: 768px) 88vw, 420px";
+const journeySizes = "(max-width: 768px) 92vw, 420px";
 const ctaSizes = "100vw";
 
 export const heroMedia: AirportLiveImage = {
@@ -191,7 +191,7 @@ export const journeyMedia = {
     alt: "AirportLive chauffeur assigned for airport pickup",
     section: "Journey Story",
     sizes: journeySizes,
-    objectPosition: "center center",
+    objectPosition: "center bottom",
   },
   cabinComfort: {
     src: "/media/journey/airportlive-cabin-comfort.webp",

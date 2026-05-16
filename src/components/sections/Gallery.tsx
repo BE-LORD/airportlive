@@ -35,7 +35,7 @@ const GALLERY_IMAGES = [
 
 export default function Gallery() {
   return (
-    <section className="py-12 md:py-24 bg-[#0A0A0A] text-white relative overflow-hidden" aria-label="Photo gallery">
+    <section className="relative overflow-hidden bg-[#0A0A0A] pt-12 pb-28 text-white md:py-24" aria-label="Photo gallery">
       {/* Ambient gold glow */}
       <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[#D1D1D1] opacity-[0.04] blur-[160px] pointer-events-none" />
       <div className="absolute -right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[#FFFFFF] opacity-[0.03] blur-[120px] pointer-events-none" />

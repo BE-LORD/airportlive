@@ -44,7 +44,7 @@ export default function JourneyStory() {
   const whatsappMsg = 'Hi V3 Tour & Travels, I want to plan my airport ride.';
 
   return (
-    <section className="bg-[#0A0A0A] py-14 text-white md:py-24" aria-label="Airport transfer journey">
+    <section className="relative bg-[#0A0A0A] py-14 text-white md:py-24" aria-label="Airport transfer journey">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-10 max-w-3xl md:mb-14">
           <motion.p
@@ -76,7 +76,7 @@ export default function JourneyStory() {
           </motion.p>
         </div>
 
-        <div className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0 md:pb-0">
+        <div className="grid grid-cols-1 gap-4 overflow-visible touch-pan-y overscroll-auto md:grid-cols-5">
           {journeyBeats.map((beat, index) => (
             <motion.article
               key={beat.label}
@@ -84,9 +84,9 @@ export default function JourneyStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.52, delay: index * 0.06, ease: motionEases.mainEase }}
-              className="min-w-[82vw] snap-start overflow-hidden rounded-[22px] border border-white/10 bg-[#111111] md:min-w-0"
+              className="min-w-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#111111]"
             >
-              <div className="relative aspect-[4/5] bg-[#151515]">
+              <div className="relative aspect-[16/10] bg-[#151515] md:aspect-[4/5]">
                 <ResponsiveImage
                   {...beat.image}
                   fill

@@ -51,7 +51,28 @@ describe("AirportLive media manifest data", () => {
       expect(image.alt.trim().length).toBeGreaterThan(12);
       expect(image.section.trim().length).toBeGreaterThan(0);
       expect(image.sizes.trim().length).toBeGreaterThan(0);
+      expect(image.objectPosition?.trim().length).toBeGreaterThan(0);
     }
+  });
+
+  it("pins mobile crop positions for the approved imagery", () => {
+    expect(heroMedia.objectPosition).toBe("center bottom");
+    expect(serviceMedia.airportPickup.objectPosition).toBe("center bottom");
+    expect(serviceMedia.outstationTaxi.objectPosition).toBe("center center");
+    expect(serviceMedia.corporateTravel.objectPosition).toBe("center center");
+    expect(serviceMedia.familyTours.objectPosition).toBe("center bottom");
+    expect(serviceMedia.eventTransport.objectPosition).toBe("center center");
+    expect(serviceMedia.cityRides.objectPosition).toBe("center center");
+    expect(fleetMedia.find((vehicle) => vehicle.id === "innova-crysta")?.exterior.objectPosition).toBe("center center");
+    expect(fleetMedia.find((vehicle) => vehicle.id === "innova-crysta")?.interior?.objectPosition).toBe("center center");
+    expect(fleetMedia.find((vehicle) => vehicle.id === "innova-crysta")?.luggage?.objectPosition).toBe("center center");
+    expect(proofMedia.driverPortrait.objectPosition).toBe("center center");
+    expect(journeyMedia.bookingConfirmed.objectPosition).toBe("center center");
+    expect(journeyMedia.driverAssigned.objectPosition).toBe("center bottom");
+    expect(proofMedia.luggageLoading.objectPosition).toBe("center center");
+    expect(journeyMedia.cabinComfort.objectPosition).toBe("center center");
+    expect(journeyMedia.airportArrival.objectPosition).toBe("center bottom");
+    expect(ctaMedia.objectPosition).toBe("center bottom");
   });
 
   it("documents allowed same-source reuse for the first integration pass", () => {

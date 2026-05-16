@@ -106,8 +106,8 @@ export default function Hero() {
           quality={85}
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/58 md:bg-gradient-to-r md:from-[#0A0A0A]/95 md:via-[#0A0A0A]/78 md:to-[#0A0A0A]/28" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/78 to-transparent" />
+        <div className="absolute inset-0 bg-black/48 md:bg-gradient-to-r md:from-[#0A0A0A]/92 md:via-[#0A0A0A]/72 md:to-[#0A0A0A]/24" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/68 to-transparent" />
       </motion.div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent md:hidden" />

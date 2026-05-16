@@ -13,7 +13,7 @@ export default function InquirySection() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
 
   return (
-    <section className="relative overflow-hidden py-16 bg-[#0A0A0A] text-white text-center px-4" aria-label="Final booking call to action">
+    <section id="final-cta" className="relative overflow-hidden bg-[#0A0A0A] px-4 pt-16 pb-32 text-center text-white md:py-16" aria-label="Final booking call to action">
       <div className="absolute inset-0" aria-hidden="true">
         <ResponsiveImage
           {...ctaMedia}

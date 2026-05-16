@@ -95,7 +95,7 @@ function BentoCard({ service }: { service: typeof SERVICES[0] }) {
       href={service.href}
       ref={cardRef}
       data-cursor="Explore"
-      className={`group relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0A0A0A] flex flex-col justify-end min-h-[360px] md:min-h-[420px] ${service.colSpan} transition-transform duration-500 hover:scale-[0.98]`}
+      className={`group relative overflow-hidden rounded-[28px] border border-white/10 bg-[#0A0A0A] flex flex-col justify-end min-h-[340px] md:min-h-[420px] ${service.colSpan} transition-transform duration-500 hover:scale-[0.98]`}
     >
       {/* Parallax Background */}
       <motion.div 
@@ -105,26 +105,26 @@ function BentoCard({ service }: { service: typeof SERVICES[0] }) {
         <ResponsiveImage
           {...service.media}
           fill
-          className="grayscale-[55%] opacity-45 transition-all duration-700 ease-in-out group-hover:grayscale-0 group-hover:opacity-65"
+          className="grayscale-[35%] opacity-[0.58] transition-all duration-700 ease-in-out group-hover:grayscale-0 group-hover:opacity-70 md:grayscale-[55%] md:opacity-45"
         />
       </motion.div>
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/68 to-transparent md:via-[#0A0A0A]/80" />
 
       {/* Content */}
-      <div className="relative z-20 p-8 md:p-10 flex flex-col h-full justify-end">
+      <div className="relative z-20 flex h-full flex-col justify-end p-6 md:p-10">
         <div className="w-12 h-12 rounded-full bg-[#1A1A1A]/10 backdrop-blur-md flex items-center justify-center mb-6 group-hover:bg-[#E5E4E2] transition-colors duration-500">
           <Icon className="w-5 h-5 text-white group-hover:text-[#0A0A0A] transition-colors duration-500" />
         </div>
         
         <h3 className="text-2xl md:text-3xl font-serif text-white mb-3">{service.title}</h3>
-        <p className="text-white/70 text-sm md:text-base mb-6 leading-relaxed max-w-lg opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+        <p className="mb-4 max-w-lg translate-y-0 text-sm leading-relaxed text-white/76 opacity-100 transition-all duration-500 md:mb-6 md:text-base md:text-white/70 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0">
           {service.desc}
         </p>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 items-center opacity-100 group-hover:opacity-0 group-hover:-translate-y-4 transition-all duration-500 absolute bottom-8 left-8 right-8">
+        <div className="flex flex-wrap gap-2 items-center opacity-100 transition-all duration-500 md:absolute md:bottom-8 md:left-8 md:right-8 md:group-hover:opacity-0 md:group-hover:-translate-y-4">
           <span className="text-[10px] font-mono uppercase tracking-wider text-[#E5E4E2] bg-[#E5E4E2]/10 px-3 py-1.5 rounded-full backdrop-blur-md border border-[#E5E4E2]/20">
             {service.bestFor}
           </span>
