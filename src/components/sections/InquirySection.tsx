@@ -5,7 +5,6 @@ import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
-import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ResponsiveImage } from '@/components/media/ResponsiveImage';
 import { ctaMedia } from '@/data/airportlive-media';
 
@@ -53,26 +52,22 @@ export default function InquirySection() {
           transition={{ duration: 0.5, delay: 0.4, ease: motionEases.mainEase }}
           className="flex flex-col sm:flex-row gap-6 justify-center"
         >
-          <MagneticButton className="breathing-glow flex items-center justify-center gap-2 bg-[#E5E4E2] text-[#0A0A0A] px-10 py-5 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-colors duration-300">
-            <a 
-              href={getWhatsAppLink(whatsappMsg)} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-              aria-label="Book on WhatsApp"
-            >
-              <MessageCircle className="h-5 w-5" /> Book on WhatsApp
-            </a>
-          </MagneticButton>
-          <MagneticButton className="flex items-center justify-center gap-2 border border-white/30 text-white px-10 py-5 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A]/10 transition-colors duration-300">
-            <a 
-              href={getPhoneLink()} 
-              className="flex items-center gap-2"
-              aria-label={`Call direct at ${BUSINESS.phone}`}
-            >
-              <Phone className="h-5 w-5" /> Call Direct
-            </a>
-          </MagneticButton>
+          <a
+            href={getWhatsAppLink(whatsappMsg)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="breathing-glow flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E5E4E2] px-10 py-5 text-sm font-semibold uppercase tracking-wider text-[#0A0A0A] transition-colors duration-300 hover:bg-[#1A1A1A] hover:text-[#F5F5F5]"
+            aria-label="Book on WhatsApp"
+          >
+            <MessageCircle className="h-5 w-5" /> Book on WhatsApp
+          </a>
+          <a
+            href={getPhoneLink()}
+            className="flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-10 py-5 text-sm font-semibold uppercase tracking-wider text-white transition-colors duration-300 hover:bg-[#1A1A1A]/10"
+            aria-label={`Call direct at ${BUSINESS.phone}`}
+          >
+            <Phone className="h-5 w-5" /> Call Direct
+          </a>
         </motion.div>
       </div>
     </section>

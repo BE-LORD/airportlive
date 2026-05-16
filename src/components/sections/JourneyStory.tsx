@@ -1,42 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { CheckCircle2, Clock3, Luggage, MessageCircle, ShieldCheck } from 'lucide-react';
 import { ResponsiveImage } from '@/components/media/ResponsiveImage';
-import { journeyMedia, proofMedia, type AirportLiveImage } from '@/data/airportlive-media';
+import { journeyMedia, proofMedia } from '@/data/airportlive-media';
 import { MotionButton } from '@/components/motion/MotionButton';
 import { getWhatsAppLink } from '@/lib/links';
 import { motionEases } from '@/lib/motion';
 
-const journeyBeats: Array<{
-  label: string;
-  copy: string;
-  image: AirportLiveImage;
-}> = [
+const journeyBeats = [
   {
-    label: 'Booking confirmed',
-    copy: 'Trip details are confirmed on WhatsApp with a clear fare and pickup time.',
-    image: journeyMedia.bookingConfirmed,
+    label: 'WhatsApp quote',
+    copy: 'Route, fare, and pickup window confirmed by a real coordinator.',
+    icon: MessageCircle,
   },
   {
     label: 'Driver assigned',
-    copy: 'A professional chauffeur is assigned before your airport movement begins.',
-    image: journeyMedia.driverAssigned,
+    copy: 'Driver details arrive before pickup, with enough airport timing buffer.',
+    icon: ShieldCheck,
   },
   {
     label: 'Luggage handled',
-    copy: 'Bags are handled carefully so the family can settle in without stress.',
-    image: proofMedia.luggageLoading,
+    copy: 'Clean vehicle, careful loading, and cabin space matched to your group.',
+    icon: Luggage,
   },
   {
-    label: 'Quiet highway ride',
-    copy: 'Clean cabins, calm driving, and a route rhythm built around flight timing.',
-    image: journeyMedia.cabinComfort,
-  },
-  {
-    label: 'On-time airport drop',
-    copy: 'Your cab reaches the terminal with the right margin for check-in and luggage.',
-    image: journeyMedia.airportArrival,
+    label: 'On-time arrival',
+    copy: 'A calm highway ride planned around terminal, luggage, and check-in time.',
+    icon: Clock3,
   },
 ];
 
@@ -44,14 +35,35 @@ export default function JourneyStory() {
   const whatsappMsg = 'Hi V3 Tour & Travels, I want to plan my airport ride.';
 
   return (
-    <section className="relative bg-[#0A0A0A] py-14 text-white md:py-24" aria-label="Airport transfer journey">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-10 max-w-3xl md:mb-14">
+    <section className="relative bg-[#0A0A0A] py-12 text-white md:py-20" aria-label="Airport transfer journey">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 overflow-visible px-4 touch-pan-y overscroll-auto lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: motionEases.mainEase }}
+          className="relative min-h-[280px] overflow-hidden rounded-[22px] border border-white/10 bg-[#111111] md:min-h-[520px]"
+        >
+          <ResponsiveImage
+            {...journeyMedia.driverAssigned}
+            fill
+            className="opacity-82"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/42 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#E5E4E2]">Handled end to end</p>
+            <h2 className="max-w-lg font-serif text-3xl leading-tight text-white md:text-6xl">
+              From booking to terminal, no chaos in between.
+            </h2>
+          </div>
+        </motion.div>
+
+        <div>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: motionEases.mainEase }}
+            transition={{ duration: 0.45, ease: motionEases.mainEase }}
             className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#E5E4E2]"
           >
             Journey Proof
@@ -60,70 +72,82 @@ export default function JourneyStory() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.08, ease: motionEases.mainEase }}
-            className="font-serif text-4xl leading-tight text-[#F5F5F5] md:text-6xl"
+            transition={{ duration: 0.5, delay: 0.05, ease: motionEases.mainEase }}
+            className="max-w-2xl font-serif text-3xl leading-tight text-[#F5F5F5] md:text-6xl"
           >
-            From Booking to Airport, Handled.
+            Airport transfers that stay calm.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.16, ease: motionEases.mainEase }}
-            className="mt-5 max-w-2xl text-base leading-relaxed text-white/62 md:text-lg"
+            transition={{ duration: 0.5, delay: 0.1, ease: motionEases.mainEase }}
+            className="mt-4 max-w-2xl text-base leading-relaxed text-white/68 md:text-lg"
           >
-            A simple WhatsApp booking, a professional chauffeur, clean luggage handling, and a calm airport ride — all handled before you reach the terminal.
+            One message starts the booking, and every detail after that is handled with timing, care, and clear coordination.
           </motion.p>
-        </div>
 
-        <div className="grid grid-cols-1 gap-4 overflow-visible touch-pan-y overscroll-auto md:grid-cols-5">
-          {journeyBeats.map((beat, index) => (
-            <motion.article
-              key={beat.label}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.52, delay: index * 0.06, ease: motionEases.mainEase }}
-              className="min-w-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#111111]"
-            >
-              <div className="relative aspect-[16/10] bg-[#151515] md:aspect-[4/5]">
-                <ResponsiveImage
-                  {...beat.image}
-                  fill
-                  className="opacity-82"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/20 to-transparent" />
-                <span className="absolute left-4 top-4 rounded-full border border-[#E5E4E2]/25 bg-black/35 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[#E5E4E2] backdrop-blur-sm">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-              </div>
-              <div className="p-5">
-                <h3 className="font-serif text-2xl text-white">{beat.label}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/58">{beat.copy}</p>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            {journeyBeats.map((beat, index) => {
+              const Icon = beat.icon;
+              return (
+                <motion.article
+                  key={beat.label}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.44, delay: index * 0.04, ease: motionEases.mainEase }}
+                  className="rounded-[16px] border border-white/10 bg-[#111111] p-4 md:rounded-[18px] md:p-5"
+                >
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5E4E2]/10 text-[#E5E4E2]">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <CheckCircle2 className="h-4 w-4 text-[#E5E4E2]/75" />
+                  </div>
+                  <h3 className="font-serif text-xl text-white md:text-2xl">{beat.label}</h3>
+                  <p className="mt-2 text-sm leading-snug text-white/62 md:leading-relaxed">{beat.copy}</p>
+                </motion.article>
+              );
+            })}
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
-          className="mt-10 flex justify-center"
-        >
-          <MotionButton
-            href={getWhatsAppLink(whatsappMsg)}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="light"
-            icon={<MessageCircle className="h-4 w-4 text-[#25D366]" />}
-            showArrow
-            ariaLabel="Plan my airport ride on WhatsApp"
+          <div className="mt-6 grid grid-cols-[88px_1fr] gap-4 rounded-[18px] border border-white/10 bg-[#111111] p-3">
+            <div className="relative min-h-28 overflow-hidden rounded-[14px] bg-[#151515]">
+              <ResponsiveImage
+                {...proofMedia.luggageLoading}
+                fill
+                className="opacity-86"
+              />
+            </div>
+            <div className="py-2 pr-2">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#E5E4E2]">Real ride proof</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/65">
+                Luggage, clean cabin, and airport timing are visible service details, not hidden claims.
+              </p>
+            </div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.12, ease: motionEases.mainEase }}
+            className="mt-7"
           >
-            Plan My Airport Ride
-          </MotionButton>
-        </motion.div>
+            <MotionButton
+              href={getWhatsAppLink(whatsappMsg)}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="light"
+              icon={<MessageCircle className="h-4 w-4 text-[#25D366]" />}
+              showArrow
+              ariaLabel="Plan my airport ride on WhatsApp"
+            >
+              Plan My Airport Ride
+            </MotionButton>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

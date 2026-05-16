@@ -9,7 +9,7 @@ import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import { MobileDrawer } from '@/components/motion/MobileDrawer';
 import { MotionButton } from '@/components/motion/MotionButton';
 import { useWhatsAppRedirect } from '@/hooks/useWhatsAppRedirect';
-import { motionDurations, motionEases } from '@/lib/motion';
+import { motionEases } from '@/lib/motion';
 
 const navLinks = [
   { name: 'Airport Taxi', path: '/airport-taxi' },
@@ -54,7 +54,7 @@ export default function Header() {
           <Link
             href="/"
             data-cursor="Home"
-            className="font-serif text-2xl md:text-3xl font-bold text-white mix-blend-difference"
+            className="inline-flex min-h-12 items-center font-serif text-2xl font-bold text-white mix-blend-difference md:text-3xl"
           >
             {BUSINESS.brand.toUpperCase()}
           </Link>
@@ -68,9 +68,9 @@ export default function Header() {
                 href={item.path}
                 data-cursor="Explore"
                 data-active={pathname === item.path}
-                className={`font-mono text-xs uppercase tracking-[0.15em] transition-colors relative group ${
+                className={`relative inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.15em] transition-colors group ${
                   isScrolled ? 'text-white/80 hover:text-white' : 'text-white/90 hover:text-white'
-                } premium-link-underline pb-2`}
+                } premium-link-underline`}
               >
                 {item.name}
               </Link>
@@ -82,7 +82,7 @@ export default function Header() {
             <a
               href={getPhoneLink()}
               data-cursor="Call"
-              className={`flex items-center gap-2 px-2 py-2 text-sm font-medium transition-colors ${
+              className={`flex min-h-11 items-center gap-2 px-2 py-2 text-sm font-medium transition-colors ${
                 isScrolled ? 'text-white/80 hover:text-[#E5E4E2]' : 'text-white/90 hover:text-white'
               }`}
               aria-label="Call us"

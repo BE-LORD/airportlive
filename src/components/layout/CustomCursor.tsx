@@ -7,6 +7,7 @@ function canUseFineCursor() {
   if (typeof window === 'undefined') return false;
   return (
     window.matchMedia('(pointer: fine)').matches &&
+    window.matchMedia('(min-width: 768px)').matches &&
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
 }
@@ -14,13 +15,16 @@ function canUseFineCursor() {
 function subscribeCursorCapability(onChange: () => void) {
   if (typeof window === 'undefined') return () => {};
   const pointerQuery = window.matchMedia('(pointer: fine)');
+  const widthQuery = window.matchMedia('(min-width: 768px)');
   const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   pointerQuery.addEventListener('change', onChange);
+  widthQuery.addEventListener('change', onChange);
   motionQuery.addEventListener('change', onChange);
 
   return () => {
     pointerQuery.removeEventListener('change', onChange);
+    widthQuery.removeEventListener('change', onChange);
     motionQuery.removeEventListener('change', onChange);
   };
 }

@@ -26,13 +26,13 @@ export function SplitTextReveal({
   const lines = text.split("\n");
 
   return (
-    <span className={cn("block", className)} aria-label={text.replace(/\n/g, " ")}>
+    <span className={cn("block", className)}>
       {lines.map((line, index) => {
         const isHighlighted = Boolean(highlight && line.includes(highlight));
         const parts = highlight ? line.split(highlight) : [line];
 
         return (
-          <span key={`${line}-${index}`} className="block overflow-hidden" aria-hidden="true">
+          <span key={`${line}-${index}`} className="block overflow-hidden">
             <motion.span
               className={cn("motion-static-on-reduce block", lineClassName)}
               initial={reducedMotion ? { opacity: 0 } : { y: "105%", opacity: 0 }}

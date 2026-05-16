@@ -5,11 +5,8 @@ import Services from '@/components/sections/Services';
 import JourneyStory from '@/components/sections/JourneyStory';
 import RouteCorridor from '@/components/sections/RouteCorridor';
 import FleetShowcase from '@/components/sections/FleetShowcase';
-import BookingFlow from '@/components/sections/BookingFlow';
 import WhyChooseUs from '@/components/sections/WhyChooseUs';
 import Gallery from '@/components/sections/Gallery';
-import Testimonials from '@/components/sections/Testimonials';
-import FAQ from '@/components/sections/FAQ';
 import InquirySection from '@/components/sections/InquirySection';
 import Footer from '@/components/layout/Footer';
 import { ScrollColorMatrix } from '@/components/effects/ScrollColorMatrix';
@@ -34,27 +31,17 @@ export default function Home() {
 
       <JourneyStory />
 
-      <RouteCorridor />
+      <RouteCorridor variant="compact" />
 
       {/* Light → Dark blend into Fleet */}
       <SectionBlend from="light" to="dark" />
       <FleetShowcase />
-
-      {/* Dark → Cream blend into Booking */}
-      <SectionBlend from="dark" to="cream" />
-      <BookingFlow />
 
       <WhyChooseUs />
 
       {/* Light → Dark blend into Gallery */}
       <SectionBlend from="light" to="dark" />
       <Gallery />
-
-      {/* Dark → Light blend into Testimonials */}
-      <SectionBlend from="dark" to="light" />
-      <Testimonials />
-
-      <FAQ />
 
       {/* Cream → Dark blend into Inquiry */}
       <SectionBlend from="cream" to="dark" />

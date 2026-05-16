@@ -29,7 +29,7 @@ const variants = {
   gold: "bg-[#E5E4E2] text-[#0A0A0A] hover:bg-[#D1D1D1]", // Now Platinum (Silver)
   light: "bg-[#F5F5F5] text-[#0A0A0A] hover:bg-[#E5E4E2]", // Bright
   outline: "border border-white/20 text-[#F5F5F5] hover:bg-white/5",
-  whatsapp: "bg-[#25D366] text-white hover:bg-[#1da851]",
+  whatsapp: "bg-[#25D366] text-[#0A0A0A] hover:bg-[#1da851]",
 };
 
 export function MotionButton({

@@ -7,7 +7,7 @@ describe("JourneyStory mobile layout", () => {
   it("uses normal vertical document flow on mobile instead of a nested horizontal scroller", () => {
     const html = renderToStaticMarkup(<JourneyStory />);
 
-    expect(html).toContain("grid grid-cols-1");
+    expect(html).toContain("grid-cols-1");
     expect(html).toContain("touch-pan-y");
     expect(html).not.toContain("overflow-x-auto");
     expect(html).not.toContain("snap-x");

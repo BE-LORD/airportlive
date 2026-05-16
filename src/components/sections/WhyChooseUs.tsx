@@ -19,14 +19,14 @@ export default function WhyChooseUs() {
 
   return (
     <section className="py-14 md:py-24 bg-[#111111] overflow-hidden" aria-label="Why choose us">
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Supporting image */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: motionEases.mainEase }}
-          className="order-2 lg:order-1"
+          className="order-2 hidden lg:order-1 lg:block"
         >
           <div className="aspect-[16/10] bg-[#1A1A1A] sm:aspect-[4/5] rounded-[24px] overflow-hidden shadow-sm border border-white/10 relative section-vignette">
             <ResponsiveImage
@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
           >
             Since our inception, we have redefined how Punjab travels to the airport. It&apos;s not just a taxi ride; it&apos;s a commitment to punctuality, cleanliness, and peace of mind.
           </motion.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             {pillars.map((pillar, i) => {
               const Icon = pillar.icon;
               return (
@@ -70,14 +70,14 @@ export default function WhyChooseUs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-20px" }}
                   transition={{ duration: 0.5, delay: 0.3 + (i * 0.1), ease: motionEases.softEase }}
-                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#222222] hover:shadow-[0_4px_20px_rgba(200,200,220,0.08)] hover:-translate-y-0.5 transition-all duration-500 group/pillar"
+                  className="flex items-start gap-3 rounded-xl p-3 transition-all duration-500 hover:-translate-y-0.5 hover:bg-[#222222] hover:shadow-[0_4px_20px_rgba(200,200,220,0.08)] group/pillar"
                 >
                   <div className="w-9 h-9 rounded-lg bg-[#E5E4E2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Icon className="w-4 h-4 text-[#E5E4E2]" />
                   </div>
                   <div>
                     <p className="font-bold text-[#F5F5F5] text-sm mb-0.5">{pillar.title}</p>
-                    <p className="text-[#A3A3A3] text-xs leading-relaxed">{pillar.desc}</p>
+                    <p className="hidden text-[#A3A3A3] text-xs leading-relaxed sm:block">{pillar.desc}</p>
                   </div>
                 </motion.div>
               );

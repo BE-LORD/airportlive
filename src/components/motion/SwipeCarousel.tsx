@@ -89,19 +89,23 @@ export function SwipeCarousel({
         </div>
       ) : null}
 
-      <div className="mt-6 flex justify-center gap-2">
+      <div className="mt-6 flex justify-center">
         {snaps.map((_, index) => (
           <button
             key={index}
             type="button"
             onClick={() => emblaApi?.scrollTo(index)}
-            className={cn(
-              "h-2 rounded-full transition-all duration-300",
-              selected === index ? "w-7 bg-[#E5E4E2]" : "w-2 bg-[#DEDBD2]"
-            )}
+            className="grid h-11 w-11 place-items-center rounded-full"
             aria-label={`Go to slide ${index + 1}`}
             aria-current={selected === index}
-          />
+          >
+            <span
+              className={cn(
+                "h-2 rounded-full transition-all duration-300",
+                selected === index ? "w-7 bg-[#E5E4E2]" : "w-2 bg-[#DEDBD2]"
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>
