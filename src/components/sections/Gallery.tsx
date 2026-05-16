@@ -3,25 +3,35 @@
 import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { galleryMedia, type AirportLiveImage } from '@/data/airportlive-media';
 
 const GALLERY_IMAGES = [
   {
-    src: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=800&auto=format&fit=crop',
-    alt: 'Premium sedan driving on highway during golden hour - V3 Tour and Travels airport transfer',
+    label: 'Clean Interior',
+    image: galleryMedia.cleanInterior,
   },
   {
-    src: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=800&auto=format&fit=crop',
-    alt: 'Clean premium sedan exterior - V3 Tour and Travels fleet vehicle',
+    label: 'Airport Pickup',
+    image: galleryMedia.airportPickupProof,
   },
   {
-    src: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop',
-    alt: 'Professional chauffeur standing near luxury SUV - V3 Tour and Travels driver',
+    label: 'Luggage Handled',
+    image: galleryMedia.luggageHandled,
   },
   {
-    src: 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800&auto=format&fit=crop',
-    alt: 'Multi-passenger vehicle for group travel - V3 Tour and Travels tempo traveller',
+    label: 'Fleet Lineup',
+    image: galleryMedia.fleetLineup,
   },
-];
+  {
+    label: 'Family Travel',
+    image: galleryMedia.familyTravelProof,
+  },
+  {
+    label: 'Group Transport',
+    image: galleryMedia.groupTransportProof,
+  },
+] satisfies Array<{ label: string; image: AirportLiveImage }>;
 
 export default function Gallery() {
   return (
@@ -39,10 +49,10 @@ export default function Gallery() {
               transition={{ duration: 0.5, ease: motionEases.mainEase }}
               className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
             >
-              Visual Stories
+              Visual Proof
             </motion.p>
             <h2 className="text-4xl md:text-5xl font-serif mb-4">
-              <SplitTextReveal text="The Experience" highlight="Experience" />
+              <SplitTextReveal text="Real Cars. Real Drivers. Real Airport Rides." highlight="Real Airport Rides." />
             </h2>
             <motion.p 
               initial={{ opacity: 0, y: 15 }}
@@ -51,7 +61,7 @@ export default function Gallery() {
               transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
               className="text-white/60 max-w-lg font-sans"
             >
-              From premium night pickups to scenic long-route travel. Every ride is built around comfort.
+              From airport pickups to clean interiors and group travel, every ride is built around comfort, timing, and trust.
             </motion.p>
           </div>
           <motion.a
@@ -68,10 +78,10 @@ export default function Gallery() {
             Book Now
           </motion.a>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {GALLERY_IMAGES.map((img, i) => (
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+          {GALLERY_IMAGES.map((item, i) => (
             <motion.div 
-              key={i} 
+              key={item.label}
               initial={{ 
                 opacity: 0, 
                 clipPath: i % 2 === 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
@@ -82,27 +92,18 @@ export default function Gallery() {
               }}
               viewport={{ once: true, margin: "200px" }}
               transition={{ duration: 0.9, delay: i * 0.12, ease: [0.76, 0, 0.24, 1] }}
-              className="aspect-square bg-[#2a2a2a] rounded-[16px] overflow-hidden relative group cursor-pointer"
+              className="aspect-[4/5] bg-[#2a2a2a] rounded-[16px] overflow-hidden relative group cursor-pointer sm:aspect-square"
               data-cursor="EXPLORE"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  if (target.parentElement) {
-                    target.parentElement.classList.add('flex', 'items-center', 'justify-center');
-                    const fallback = document.createElement('span');
-                    fallback.textContent = 'Premium Travel';
-                    fallback.className = 'text-white/30 font-mono text-xs uppercase tracking-wider';
-                    target.parentElement.appendChild(fallback);
-                  }
-                }}
+              <ResponsiveImage
+                {...item.image}
+                fill
+                className="opacity-74 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/12 to-transparent" />
+              <span className="absolute bottom-3 left-3 right-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white sm:text-xs">
+                {item.label}
+              </span>
             </motion.div>
           ))}
         </div>

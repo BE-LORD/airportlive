@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { Clock, ArrowRight, Plane } from 'lucide-react';
 import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { routeMedia } from '@/data/airportlive-media';
 
 const ROUTES = [
   { 
@@ -61,6 +63,7 @@ const ROUTES = [
 function RouteRow({ route }: { route: typeof ROUTES[0] }) {
   const corridorRef = useRef<HTMLDivElement>(null);
   const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
+  const featuredRoute = route.id === 1;
 
   return (
     <div 
@@ -72,9 +75,17 @@ function RouteRow({ route }: { route: typeof ROUTES[0] }) {
       <div 
         className="absolute inset-0 md:inset-[-20%] z-0"
       >
-        <div className={`absolute inset-0 bg-gradient-to-br ${route.visual} transition-all duration-1000 ease-in-out`} />
+        {featuredRoute ? (
+          <ResponsiveImage
+            {...routeMedia.ludhianaDelhiAirport}
+            fill
+            className="opacity-70 transition-transform duration-1000 ease-in-out group-hover:scale-[1.02]"
+          />
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-br ${route.visual} transition-all duration-1000 ease-in-out`} />
+        )}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.12),transparent_30%),linear-gradient(135deg,transparent_0%,rgba(229,228,226,0.08)_45%,transparent_46%)]" />
-        <div className="absolute inset-0 bg-black/70 group-hover:bg-black/60 transition-colors duration-1000" />
+        <div className="absolute inset-0 bg-black/76 group-hover:bg-black/66 transition-colors duration-1000" />
       </div>
 
       {/* Content */}

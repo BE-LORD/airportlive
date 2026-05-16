@@ -1,9 +1,11 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Plane, MapPin, Briefcase, Users, PartyPopper, Car, ArrowRight } from 'lucide-react';
+import { Plane, MapPin, Briefcase, Users, PartyPopper, Car } from 'lucide-react';
 import Link from 'next/link';
 import { Card3DTilt } from '@/components/effects/Card3DTilt';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { serviceMedia, type AirportLiveImage } from '@/data/airportlive-media';
 
 const SERVICES = [
   {
@@ -14,7 +16,7 @@ const SERVICES = [
     route: 'Delhi, Chandigarh, Amritsar Airports',
     href: '/airport-taxi',
     colSpan: 'md:col-span-2 lg:col-span-2',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop',
+    media: serviceMedia.airportPickup,
   },
   {
     title: 'Outstation Taxi',
@@ -24,7 +26,7 @@ const SERVICES = [
     route: 'Punjab, Himachal, Delhi NCR',
     href: '/routes',
     colSpan: 'md:col-span-1 lg:col-span-1',
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop',
+    media: serviceMedia.outstationTaxi,
   },
   {
     title: 'Corporate Travel',
@@ -34,7 +36,7 @@ const SERVICES = [
     route: 'GST invoices available',
     href: '/corporate-travel',
     colSpan: 'md:col-span-1 lg:col-span-1',
-    image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop',
+    media: serviceMedia.corporateTravel,
   },
   {
     title: 'Family Tours',
@@ -44,7 +46,7 @@ const SERVICES = [
     route: 'Customizable routes',
     href: '/family-tours',
     colSpan: 'md:col-span-2 lg:col-span-2',
-    image: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2070&auto=format&fit=crop',
+    media: serviceMedia.familyTours,
   },
   {
     title: 'Event Transport',
@@ -54,7 +56,7 @@ const SERVICES = [
     route: 'Multi-city fleet management',
     href: '/contact',
     colSpan: 'md:col-span-2 lg:col-span-1',
-    image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop',
+    media: serviceMedia.eventTransport,
   },
   {
     title: 'Local City Rides',
@@ -64,11 +66,20 @@ const SERVICES = [
     route: 'Within Ludhiana & nearby',
     href: '/contact',
     colSpan: 'md:col-span-1 lg:col-span-2',
-    image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop',
+    media: serviceMedia.cityRides,
   },
-];
+] satisfies Array<{
+  title: string;
+  desc: string;
+  bestFor: string;
+  icon: typeof Plane;
+  route: string;
+  href: string;
+  colSpan: string;
+  media: AirportLiveImage;
+}>;
 
-function BentoCard({ service, index }: { service: typeof SERVICES[0], index: number }) {
+function BentoCard({ service }: { service: typeof SERVICES[0] }) {
   const cardRef = useRef<HTMLAnchorElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -91,9 +102,10 @@ function BentoCard({ service, index }: { service: typeof SERVICES[0], index: num
         style={{ y }}
         className="absolute inset-[-20%] z-0"
       >
-        <div 
-          className="absolute inset-0 bg-cover bg-center grayscale-[80%] opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700 ease-in-out"
-          style={{ backgroundImage: `url(${service.image})` }}
+        <ResponsiveImage
+          {...service.media}
+          fill
+          className="grayscale-[55%] opacity-45 transition-all duration-700 ease-in-out group-hover:grayscale-0 group-hover:opacity-65"
         />
       </motion.div>
       
@@ -161,7 +173,7 @@ export default function Services() {
               className={service.colSpan}
             >
               <Card3DTilt maxTilt={8} scale={1.02} className="h-full">
-                <BentoCard service={service} index={i} />
+                <BentoCard service={service} />
               </Card3DTilt>
             </motion.div>
           ))}

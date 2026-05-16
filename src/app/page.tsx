@@ -2,6 +2,7 @@ import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
 import TrustStrip from '@/components/sections/TrustStrip';
 import Services from '@/components/sections/Services';
+import JourneyStory from '@/components/sections/JourneyStory';
 import RouteCorridor from '@/components/sections/RouteCorridor';
 import FleetShowcase from '@/components/sections/FleetShowcase';
 import BookingFlow from '@/components/sections/BookingFlow';
@@ -30,6 +31,8 @@ export default function Home() {
       {/* Dark → Light blend into Services */}
       <SectionBlend from="dark" to="light" />
       <Services />
+
+      <JourneyStory />
 
       <RouteCorridor />
 

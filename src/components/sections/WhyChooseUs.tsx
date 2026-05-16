@@ -4,6 +4,8 @@ import { Shield, Clock, Car, Star, Users, Headphones } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { proofMedia } from '@/data/airportlive-media';
 
 export default function WhyChooseUs() {
   const pillars = [
@@ -27,12 +29,10 @@ export default function WhyChooseUs() {
           className="order-2 lg:order-1"
         >
           <div className="aspect-[16/10] bg-[#1A1A1A] sm:aspect-[4/5] rounded-[24px] overflow-hidden shadow-sm border border-white/10 relative section-vignette">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop"
-              alt="Professional V3 Tour and Travels chauffeur standing near premium sedan"
-              className="w-full h-full object-cover md:grayscale md:hover:grayscale-0 transition-all duration-700"
-              loading="lazy"
+            <ResponsiveImage
+              {...proofMedia.driverPortrait}
+              fill
+              className="md:grayscale md:hover:grayscale-0 transition-all duration-700"
             />
           </div>
         </motion.div>

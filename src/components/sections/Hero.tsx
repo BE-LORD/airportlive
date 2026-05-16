@@ -1,20 +1,22 @@
 'use client';
-import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
 import { getWhatsAppLink, getPhoneLink, getBookingMessage } from '@/lib/links';
-import { MessageCircle, Phone, Shield, Clock, Car, Star, ArrowLeft, ShieldCheck } from 'lucide-react';
+import { MessageCircle, Phone, Star, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { MotionButton } from '@/components/motion/MotionButton';
-import { CountUp } from '@/components/motion/CountUp';
 import { useWhatsAppRedirect } from '@/hooks/useWhatsAppRedirect';
 import { motionDurations, motionEases } from '@/lib/motion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { heroMedia } from '@/data/airportlive-media';
 
 const customerInitials = ['AK', 'RS', 'MS'];
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
   const [formData, setFormData] = useState({
     pickup: '',
     drop: '',
@@ -81,38 +83,31 @@ export default function Hero() {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, '10+'];
   };
 
+  const revealInitial = reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 };
+  const revealTransition = (delay: number, duration = 0.56) => ({
+    duration: reducedMotion ? 0 : duration,
+    delay: reducedMotion ? 0 : delay,
+    ease: motionEases.mainEase,
+  });
+
   return (
     <section ref={heroRef} id="home" className="relative min-h-[90svh] md:min-h-[100svh] flex items-center pt-20 md:pt-24 pb-12 overflow-hidden bg-[#0A0A0A]" aria-label="Hero section">
-      {/* Background Image with cinematic Ken Burns slow pan */}
+      {/* Background image */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
         aria-hidden="true"
-        initial={{ opacity: 0 }}
+        initial={{ opacity: reducedMotion ? 1 : 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: motionEases.softEase }}
+        transition={{ duration: reducedMotion ? 0 : 1, ease: motionEases.softEase }}
       >
-        <motion.div
-          className="absolute inset-0 w-full h-full"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1.0 }}
-          transition={{ duration: 20, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop"
-            alt="Premium luxury car background"
-            fill
-            priority
-            sizes="100vw"
-            quality={85}
-            className="object-cover"
-          />
-        </motion.div>
-        <motion.div
-          className="absolute inset-0 bg-black/60 md:bg-[#0A0A0A]/90 md:bg-gradient-to-r md:from-[#0A0A0A] md:via-[#0A0A0A]/85 md:to-[#0A0A0A]/40"
-          initial={{ opacity: 0.86 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.12, ease: motionEases.mainEase }}
+        <ResponsiveImage
+          {...heroMedia}
+          fill
+          quality={85}
+          className="object-cover"
         />
+        <div className="absolute inset-0 bg-black/58 md:bg-gradient-to-r md:from-[#0A0A0A]/95 md:via-[#0A0A0A]/78 md:to-[#0A0A0A]/28" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/78 to-transparent" />
       </motion.div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent md:hidden" />
@@ -122,10 +117,10 @@ export default function Hero() {
         {/* Left Content */}
         <div className="lg:col-span-7">
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={revealInitial}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.18, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-[10px] md:text-xs font-mono mb-4 font-bold"
+            transition={revealTransition(1.2, 0.42)}
+            className="motion-static-on-reduce text-[#E5E4E2] uppercase tracking-[0.2em] text-[10px] md:text-xs font-mono mb-4 font-bold"
           >
             PREMIUM AIRPORT TRANSFERS & TRAVEL
           </motion.p>
@@ -133,24 +128,24 @@ export default function Hero() {
             <SplitTextReveal
               text={"WHERE LUXURY\nMEETS COMFORT"}
               highlight="MEETS COMFORT"
-              delay={0.28}
+              delay={reducedMotion ? 0 : 1.4}
             />
           </h1>
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
+            initial={revealInitial}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.58, delay: 0.9, ease: motionEases.mainEase }}
-            className="text-base md:text-lg text-white/90 md:text-[#A3A3A3] max-w-xl mb-8 md:mb-10 font-sans leading-relaxed"
+            transition={revealTransition(1.8, 0.5)}
+            className="motion-static-on-reduce text-base md:text-lg text-white/90 md:text-[#A3A3A3] max-w-xl mb-8 md:mb-10 font-sans leading-relaxed"
           >
             Premium airport transfers and comfortable taxi rides backed by 20+ years of trusted travel experience across Punjab, Chandigarh, and Delhi NCR.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={revealInitial}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.04, ease: motionEases.mainEase }}
-            className="flex flex-col sm:flex-row gap-4 mb-8 md:mb-12"
+            transition={revealTransition(2.0, 0.5)}
+            className="motion-static-on-reduce flex flex-col sm:flex-row gap-4 mb-8 md:mb-12"
           >
             <MotionButton
               href={getWhatsAppLink()}
@@ -181,10 +176,10 @@ export default function Hero() {
 
           <div className="grid grid-cols-1 gap-5 pt-8 border-t border-white/10 sm:flex sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-6 sm:pt-10">
             <motion.div 
-              initial={{ opacity: 0, x: -20 }}
+              initial={reducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2, duration: 0.8, ease: motionEases.mainEase }}
-              className="flex min-w-0 items-center gap-3 sm:gap-4"
+              transition={{ delay: reducedMotion ? 0 : 2.25, duration: reducedMotion ? 0 : 0.65, ease: motionEases.mainEase }}
+              className="motion-static-on-reduce flex min-w-0 items-center gap-3 sm:gap-4"
             >
               <div className="flex shrink-0 -space-x-2.5 sm:-space-x-3" aria-hidden="true">
                 {customerInitials.map((initials, i) => (
@@ -210,10 +205,10 @@ export default function Hero() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, x: -20 }}
+              initial={reducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.4, duration: 0.8, ease: motionEases.mainEase }}
-              className="flex min-w-0 items-center gap-3 border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-10 sm:pt-0"
+              transition={{ delay: reducedMotion ? 0 : 2.35, duration: reducedMotion ? 0 : 0.65, ease: motionEases.mainEase }}
+              className="motion-static-on-reduce flex min-w-0 items-center gap-3 border-t border-white/10 pt-5 sm:border-l sm:border-t-0 sm:pl-10 sm:pt-0"
             >
               <ShieldCheck className="h-5 w-5 text-[#E5E4E2]" />
               <div>
@@ -226,10 +221,10 @@ export default function Hero() {
 
         {/* Right: Booking Form */}
         <motion.div
-          initial={{ opacity: 0, y: 22 }}
+          initial={revealInitial}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.72, delay: 0.72, ease: motionEases.mainEase }}
-          className="lg:col-span-5 relative mt-8 lg:mt-0"
+          transition={revealTransition(2.2, 0.6)}
+          className="motion-static-on-reduce lg:col-span-5 relative mt-8 lg:mt-0"
           id="booking"
           data-cursor="Form"
         >
@@ -251,12 +246,18 @@ export default function Hero() {
                   <button
                     type="button"
                     onClick={() => { if (item.id <= step) setStep(item.id); }}
-                    className={`h-1.5 w-full rounded-full transition-all duration-500 ${
-                      step >= item.id ? 'bg-[#E5E4E2] shadow-[0_0_8px_rgba(229,228,226,0.4)]' : 'bg-white/10'
-                    } ${item.id > step ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'}`}
+                    className={`flex min-h-11 w-full items-center rounded-none ${
+                      item.id > step ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'
+                    }`}
                     aria-label={`Go to ${item.label} step`}
                     aria-current={step === item.id}
-                  />
+                  >
+                    <span
+                      className={`h-1.5 w-full rounded-full transition-all duration-500 ${
+                        step >= item.id ? 'bg-[#E5E4E2] shadow-[0_0_8px_rgba(229,228,226,0.4)]' : 'bg-white/10'
+                      }`}
+                    />
+                  </button>
                   <span className={`text-[9px] uppercase tracking-[0.15em] font-mono transition-colors duration-300 ${
                     step === item.id ? 'text-[#E5E4E2] font-bold' : 'text-[#A3A3A3]/30'
                   }`}>

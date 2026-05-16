@@ -2,17 +2,40 @@
 
 import { useState } from 'react';
 import { BUSINESS } from '@/lib/constants';
-import { Users, Luggage, Star, ArrowRight } from 'lucide-react';
+import { Users, Luggage, Star } from 'lucide-react';
 import { getWhatsAppLink } from '@/lib/links';
 import { Reveal } from '@/components/motion/Reveal';
 import { MotionCard } from '@/components/motion/MotionCard';
 import { Card3DTilt } from '@/components/effects/Card3DTilt';
 import { MotionButton } from '@/components/motion/MotionButton';
 import { SwipeCarousel } from '@/components/motion/SwipeCarousel';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { fleetMedia, type AirportLiveImage, type FleetVehicleMedia } from '@/data/airportlive-media';
+
+const fleetMediaById = new Map(fleetMedia.map((vehicle) => [vehicle.id, vehicle]));
+
+function isImage(image: AirportLiveImage | undefined): image is AirportLiveImage {
+  return Boolean(image);
+}
+
+type FleetDetail = {
+  id: string;
+  mediaId?: FleetVehicleMedia["id"];
+  name: string;
+  tagline: string;
+  visual: string;
+  seats: string;
+  luggage: string;
+  bestFor: string;
+  comfort: string;
+  vehicles: string;
+  features: string[];
+};
 
 const FLEET_DETAILED = [
   {
     id: 'sedan',
+    mediaId: 'premium-sedan',
     name: 'Premium Sedan',
     tagline: 'Executive Comfort',
     visual: 'from-[#2D3E6A] via-[#1A1A1A] to-[#0A0A0A]',
@@ -25,6 +48,7 @@ const FLEET_DETAILED = [
   },
   {
     id: 'innova-crysta',
+    mediaId: 'innova-crysta',
     name: 'Innova Crysta',
     tagline: 'The Corporate Standard',
     visual: 'from-[#4B3827] via-[#1A1A1A] to-[#0A0A0A]',
@@ -37,6 +61,7 @@ const FLEET_DETAILED = [
   },
   {
     id: 'suv',
+    mediaId: 'xl6-suv',
     name: 'XL6 / SUV',
     tagline: 'Family Comfort',
     visual: 'from-[#1E2B4A] via-[#141414] to-[#0A0A0A]',
@@ -49,6 +74,7 @@ const FLEET_DETAILED = [
   },
   {
     id: 'tempo-traveller',
+    mediaId: 'tempo-traveller',
     name: 'Tempo Traveller',
     tagline: 'Group Travel Redefined',
     visual: 'from-[#2d2d2d] via-[#1A1A1A] to-[#0A0A0A]',
@@ -71,10 +97,12 @@ const FLEET_DETAILED = [
     vehicles: 'Fortuner, Endeavour, Mercedes (on request)',
     features: ['Premium Leather', 'Chauffeur-Driven', 'Privacy Partition', 'Luxury Amenities'],
   },
-];
+] satisfies FleetDetail[];
 
-function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
+function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
   const [expanded, setExpanded] = useState(false);
+  const media = vehicle.mediaId ? fleetMediaById.get(vehicle.mediaId) : undefined;
+  const detailImages = [media?.interior, media?.luggage].filter(isImage);
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ${vehicle.name}.\n\nPickup: \nDrop: \nDate: `;
 
   return (
@@ -87,10 +115,20 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
         aria-label={`Show ${vehicle.name} details`}
       >
         <div className="relative h-[260px] overflow-hidden">
-          <div className={`absolute inset-0 bg-gradient-to-br ${vehicle.visual} transition-transform duration-700 group-hover:scale-[1.04]`} />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.14),transparent_32%),linear-gradient(to_top,#0A0A0A,rgba(0,0,0,0.25),transparent)]" />
-          <div className="absolute right-6 top-6 h-24 w-24 rounded-full border border-white/10" />
-          <div className="absolute right-12 top-14 h-16 w-32 rounded-full border border-white/10" />
+          {media ? (
+            <ResponsiveImage
+              {...media.exterior}
+              fill
+              className="opacity-80 transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <>
+              <div className={`absolute inset-0 bg-gradient-to-br ${vehicle.visual} transition-transform duration-700 group-hover:scale-[1.04]`} />
+              <div className="absolute right-6 top-6 h-24 w-24 rounded-full border border-white/10" />
+              <div className="absolute right-12 top-14 h-16 w-32 rounded-full border border-white/10" />
+            </>
+          )}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.14),transparent_32%),linear-gradient(to_top,#0A0A0A,rgba(0,0,0,0.28),transparent)]" />
           <div className="absolute bottom-6 left-6">
             <span className="rounded-full bg-[#0A0A0A]/70 backdrop-blur-sm px-4 py-1.5 text-[10px] font-mono uppercase tracking-wider text-[#E5E4E2] border border-[#E5E4E2]/20">
               {vehicle.comfort}
@@ -120,6 +158,20 @@ function FleetCard({ vehicle }: { vehicle: typeof FLEET_DETAILED[0] }) {
 
           <div className={`grid transition-[grid-template-rows,opacity] duration-300 ${expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0 md:grid-rows-[1fr] md:opacity-100'}`}>
             <div className="overflow-hidden">
+              {detailImages.length > 0 ? (
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  {detailImages.map((image) => (
+                    <div key={image.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-[#111111]">
+                      <ResponsiveImage
+                        {...image}
+                        fill
+                        className="opacity-85"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+                    </div>
+                  ))}
+                </div>
+              ) : null}
               <ul className="mt-5 space-y-2">
                 {vehicle.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3 text-xs text-white/70">

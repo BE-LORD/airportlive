@@ -209,6 +209,11 @@ html {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
+  .motion-static-on-reduce {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .motion-gold-shine {

@@ -6,13 +6,24 @@ import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
 import { MagneticButton } from '@/components/effects/MagneticButton';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { ctaMedia } from '@/data/airportlive-media';
 
 export default function InquirySection() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
 
   return (
-    <section className="py-16 bg-[#0A0A0A] text-white text-center px-4" aria-label="Final booking call to action">
-      <div className="max-w-4xl mx-auto">
+    <section className="relative overflow-hidden py-16 bg-[#0A0A0A] text-white text-center px-4" aria-label="Final booking call to action">
+      <div className="absolute inset-0" aria-hidden="true">
+        <ResponsiveImage
+          {...ctaMedia}
+          fill
+          className="opacity-55"
+        />
+        <div className="absolute inset-0 bg-[#0A0A0A]/76" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#0A0A0A] to-transparent" />
+      </div>
+      <div className="relative z-10 max-w-4xl mx-auto">
         <motion.p 
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
