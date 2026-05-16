@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
     formats: ["image/webp", "image/avif"],
     qualities: [75, 85],
     remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
   },
@@ -20,7 +19,7 @@ const nextConfig: NextConfig = {
           "default-src 'self'",
           `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
           "style-src 'self' 'unsafe-inline'",
-          "img-src 'self' data: blob: https://images.unsplash.com https://upload.wikimedia.org",
+          "img-src 'self' data: blob: https://upload.wikimedia.org",
           "font-src 'self' data:",
           "connect-src 'self'",
           "frame-ancestors 'none'",
