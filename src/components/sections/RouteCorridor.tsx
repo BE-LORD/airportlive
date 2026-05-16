@@ -3,13 +3,14 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { BUSINESS } from '@/lib/constants';
-import { Clock, ArrowRight, Plane, MapPin, Phone } from 'lucide-react';
+import { Clock, ArrowRight, Plane, Phone } from 'lucide-react';
 import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import { ResponsiveImage } from '@/components/media/ResponsiveImage';
 import { routeMedia } from '@/data/airportlive-media';
 import { motionEases } from '@/lib/motion';
+import { RouteCard } from '@/components/routes/RouteCard';
 
-const ROUTES = [
+export const ROUTES = [
   {
     id: 1,
     from: 'Ludhiana',
@@ -18,6 +19,7 @@ const ROUTES = [
     time: '5.5h',
     visual: 'from-[#1E2B4A] via-[#111111] to-[#0A0A0A]',
     tag: 'Popular',
+    mediaKey: 'ludhianaDelhiAirport',
     desc: 'Terminal drop-off at T3, T2, or T1 with flight-synced scheduling.',
   },
   {
@@ -28,6 +30,7 @@ const ROUTES = [
     time: '4h',
     visual: 'from-[#2D3E6A] via-[#111111] to-[#0A0A0A]',
     tag: 'Corporate',
+    mediaKey: 'chandigarhDelhiAirport',
     desc: 'Express highway transit for business professionals and family travelers.',
   },
   {
@@ -38,6 +41,7 @@ const ROUTES = [
     time: '6.5h',
     visual: 'from-[#4B3827] via-[#111111] to-[#0A0A0A]',
     tag: 'NRI Priority',
+    mediaKey: 'jalandharDelhiAirport',
     desc: 'Spacious vehicles and reliable long-distance airport timing.',
   },
   {
@@ -48,6 +52,7 @@ const ROUTES = [
     time: '4.5h',
     visual: 'from-[#2d2d2d] via-[#111111] to-[#0A0A0A]',
     tag: 'Airport',
+    mediaKey: 'patialaDelhiAirport',
     desc: 'Direct connection from Patiala to IGI Airport with comfortable cabins.',
   },
   {
@@ -58,16 +63,17 @@ const ROUTES = [
     time: '2h',
     visual: 'from-[#D98A32]/35 via-[#111111] to-[#0A0A0A]',
     tag: 'Regional',
+    mediaKey: 'ludhianaChandigarhAirport',
     desc: 'Swift airport connections from Ludhiana to Mohali and Chandigarh Airport.',
   },
-];
+] as const;
 
-type Route = typeof ROUTES[0];
+export type Route = typeof ROUTES[number];
 
 function RouteRow({ route }: { route: Route }) {
   const corridorRef = useRef<HTMLDivElement>(null);
   const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
-  const featuredRoute = route.id === 1;
+  const media = routeMedia[route.mediaKey];
 
   return (
     <div
@@ -76,15 +82,12 @@ function RouteRow({ route }: { route: Route }) {
       aria-label={`Route corridor showcasing ${route.from} to ${route.to}`}
     >
       <div className="absolute inset-0 md:inset-[-20%] z-0">
-        {featuredRoute ? (
-          <ResponsiveImage
-            {...routeMedia.ludhianaDelhiAirport}
-            fill
-            className="opacity-70 transition-transform duration-1000 ease-in-out group-hover:scale-[1.02]"
-          />
-        ) : (
-          <div className={`absolute inset-0 bg-gradient-to-br ${route.visual} transition-all duration-1000 ease-in-out`} />
-        )}
+        <ResponsiveImage
+          {...media}
+          fill
+          sizes="100vw"
+          className="opacity-70 transition-transform duration-1000 ease-in-out group-hover:scale-[1.02]"
+        />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.12),transparent_30%),linear-gradient(135deg,transparent_0%,rgba(229,228,226,0.08)_45%,transparent_46%)]" />
         <div className="absolute inset-0 bg-black/76 group-hover:bg-black/66 transition-colors duration-1000" />
       </div>
@@ -143,7 +146,7 @@ function RouteRow({ route }: { route: Route }) {
 
 function CompactRoutePlanner() {
   const featured = ROUTES[0];
-  const routeRows = ROUTES.slice(0, 3);
+  const routeRows = ROUTES.slice(0, 4);
 
   return (
     <section
@@ -205,56 +208,28 @@ function CompactRoutePlanner() {
             </div>
             <Link
               href="/routes"
-              className="hidden min-h-10 items-center gap-2 rounded-full border border-white/10 px-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-white/5 sm:inline-flex"
+              className="hidden min-h-12 items-center gap-2 rounded-full border border-white/10 px-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-white/5 sm:inline-flex"
             >
               See all routes <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          <div className="grid gap-3">
-            {routeRows.map((route, index) => {
-              const fareMsg = `Hi ${BUSINESS.name}, I need a quote for ${route.from} to ${route.to}.`;
-              return (
-                <motion.a
-                  key={route.id}
-                  href={getWhatsAppLink(fareMsg)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: index * 0.05, ease: motionEases.mainEase }}
-                  className="group grid gap-3 rounded-[16px] border border-white/8 bg-[#0A0A0A] p-4 transition-colors hover:border-[#E5E4E2]/30 md:grid-cols-[1fr_auto] md:items-center md:rounded-[18px] md:p-5"
-                >
-                  <div>
-                    <span className="mb-3 inline-flex rounded-full border border-[#E5E4E2]/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-[#E5E4E2]">
-                      {route.tag}
-                    </span>
-                    <h3 className="font-serif text-xl leading-tight text-white md:text-3xl">
-                      {route.from} <span className="italic text-[#E5E4E2]">to</span> {route.to}
-                    </h3>
-                    <p className="mt-2 text-sm leading-snug text-white/62 md:leading-relaxed">{route.desc}</p>
-                  </div>
-                  <div className="flex items-center gap-4 text-sm text-white/68 md:flex-col md:items-end">
-                    <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4 text-[#E5E4E2]" />{route.time}</span>
-                    <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-[#E5E4E2]" />{route.distance}</span>
-                    <span className="inline-flex items-center gap-2 text-[#E5E4E2]">Quote <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
-                  </div>
-                </motion.a>
-              );
-            })}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {routeRows.map((route) => (
+              <RouteCard key={route.id} route={route} />
+            ))}
           </div>
 
           <div className="mt-4 grid gap-3 sm:hidden">
             <Link
               href="/routes"
-              className="flex min-h-11 items-center justify-center gap-2 rounded-full border border-white/10 px-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white"
+              className="flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/10 px-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white"
             >
               See all routes <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <a
               href={getPhoneLink()}
-              className="flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#E5E4E2] px-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0A0A0A]"
+              className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E5E4E2] px-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0A0A0A]"
             >
               <Phone className="h-3.5 w-3.5" /> Custom inquiry
             </a>
@@ -296,13 +271,19 @@ export default function RouteCorridor({ hideHeader = false, variant = 'immersive
         </div>
       )}
 
-      <div className="relative">
+      <div className="relative hidden md:block">
         {ROUTES.map((route) => (
           <RouteRow key={route.id} route={route} />
         ))}
       </div>
 
-      <div className="bg-[#0A0A0A] py-32 text-center">
+      <div className="grid gap-4 px-4 py-8 md:hidden">
+        {ROUTES.map((route) => (
+          <RouteCard key={route.id} route={route} />
+        ))}
+      </div>
+
+      <div className="bg-[#0A0A0A] px-4 py-20 pb-28 text-center md:py-32">
         <h4 className="mb-8 font-serif text-3xl text-[#F5F5F5] md:text-5xl">Traveling elsewhere?</h4>
         <p className="mx-auto mb-12 max-w-xl px-4 text-[#A3A3A3]">
           We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.

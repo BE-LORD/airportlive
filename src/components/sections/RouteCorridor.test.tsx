@@ -8,6 +8,7 @@ describe("RouteCorridor compact mode", () => {
     const html = renderToStaticMarkup(<RouteCorridor variant="compact" />);
 
     expect(html).toContain("data-route-corridor-variant=\"compact\"");
+    expect(html).toContain("airportlive-route-ludhiana-delhi");
     expect(html).toContain("Most-booked airport routes");
     expect(html).toContain("See all routes");
     expect(html).not.toContain("md:h-[80svh]");
