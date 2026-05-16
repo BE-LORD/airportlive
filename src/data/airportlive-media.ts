@@ -1,10 +1,12 @@
 export type AirportLiveImage = {
   src: string;
+  mobileSrc?: string;
   alt: string;
   section: string;
   priority?: boolean;
   sizes: string;
   objectPosition?: string;
+  mobileObjectPosition?: string;
 };
 
 export type FleetVehicleMedia = {
@@ -20,6 +22,7 @@ const serviceSizes = "(max-width: 768px) 92vw, (max-width: 1200px) 33vw, 360px";
 const fleetSizes = "(max-width: 768px) 88vw, (max-width: 1200px) 33vw, 420px";
 const gallerySizes = "(max-width: 768px) 46vw, (max-width: 1200px) 25vw, 320px";
 const journeySizes = "(max-width: 768px) 92vw, 420px";
+const routeCardSizes = "(max-width: 768px) 92vw, 45vw";
 const ctaSizes = "100vw";
 
 export const heroMedia: AirportLiveImage = {
@@ -30,6 +33,36 @@ export const heroMedia: AirportLiveImage = {
   sizes: heroSizes,
   objectPosition: "center bottom",
 };
+
+export const pageHeroMedia = {
+  airportTaxi: {
+    src: "/media/pages/airportlive-airport-taxi-hero.webp",
+    alt: "AirportLive branded Innova cab waiting at airport terminal for premium pickup and drop service",
+    section: "Airport Taxi Page Hero",
+    priority: true,
+    sizes: heroSizes,
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+  },
+  fleet: {
+    src: "/media/pages/airportlive-fleet-lineup-hero.webp",
+    alt: "AirportLive premium fleet lineup for Punjab airport taxi and outstation travel",
+    section: "Fleet Page Hero",
+    priority: true,
+    sizes: heroSizes,
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+  },
+  contact: {
+    src: "/media/pages/airportlive-contact-hero.webp",
+    alt: "AirportLive chauffeur and premium vehicle available for 24 hour booking assistance",
+    section: "Contact Page Hero",
+    priority: true,
+    sizes: heroSizes,
+    objectPosition: "center center",
+    mobileObjectPosition: "center center",
+  },
+} satisfies Record<string, AirportLiveImage>;
 
 export const serviceMedia = {
   airportPickup: {
@@ -170,10 +203,38 @@ export const proofMedia = {
 
 export const routeMedia = {
   ludhianaDelhiAirport: {
-    src: "/media/routes/airportlive-ludhiana-delhi-airport-route.webp",
-    alt: "Premium taxi on Ludhiana to Delhi Airport route",
+    src: "/media/routes/airportlive-route-ludhiana-delhi.webp",
+    alt: "AirportLive cab for Ludhiana to Delhi Airport transfer",
     section: "Route Corridor",
-    sizes: "100vw",
+    sizes: routeCardSizes,
+    objectPosition: "center center",
+  },
+  chandigarhDelhiAirport: {
+    src: "/media/routes/airportlive-route-chandigarh-delhi.webp",
+    alt: "AirportLive premium cab for Chandigarh to Delhi Airport route",
+    section: "Route Corridor",
+    sizes: routeCardSizes,
+    objectPosition: "center center",
+  },
+  jalandharDelhiAirport: {
+    src: "/media/routes/airportlive-route-jalandhar-delhi.webp",
+    alt: "AirportLive cab for Jalandhar to Delhi Airport transfer with luggage assistance",
+    section: "Route Corridor",
+    sizes: routeCardSizes,
+    objectPosition: "center center",
+  },
+  patialaDelhiAirport: {
+    src: "/media/routes/airportlive-route-patiala-delhi.webp",
+    alt: "AirportLive cab for Patiala to Delhi Airport terminal drop service",
+    section: "Route Corridor",
+    sizes: routeCardSizes,
+    objectPosition: "center center",
+  },
+  ludhianaChandigarhAirport: {
+    src: "/media/routes/airportlive-route-ludhiana-chandigarh.webp",
+    alt: "AirportLive cab for Ludhiana to Chandigarh Airport transfer",
+    section: "Route Corridor",
+    sizes: routeCardSizes,
     objectPosition: "center center",
   },
 } satisfies Record<string, AirportLiveImage>;

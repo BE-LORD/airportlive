@@ -96,8 +96,7 @@ export const FLEET = [
     luggage: "4 Bags",
     bestFor: "Family & Corporate",
     comfort: "Premium",
-    image:
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop",
+    image: "/media/fleet/airportlive-innova-crysta-exterior.webp",
     features: ["Captain Seats", "Quiet Cabin", "Ample Luggage", "Rear AC Control"],
   },
   {
@@ -108,8 +107,7 @@ export const FLEET = [
     luggage: "2 Bags",
     bestFor: "Couples & Business",
     comfort: "High",
-    image:
-      "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=2070&auto=format&fit=crop",
+    image: "/media/fleet/airportlive-premium-sedan-exterior.webp",
     features: ["Leather Interior", "Climate Control", "Smooth Ride", "USB Charging"],
   },
   {
@@ -120,8 +118,7 @@ export const FLEET = [
     luggage: "10+ Bags",
     bestFor: "Large Groups & Weddings",
     comfort: "Spacious",
-    image:
-      "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2070&auto=format&fit=crop",
+    image: "/media/fleet/airportlive-tempo-traveller-exterior.webp",
     features: ["Push-Back Chairs", "Entertainment System", "Extra Legroom", "Uniformed Driver"],
   },
   {
@@ -132,8 +129,7 @@ export const FLEET = [
     luggage: "3 Bags",
     bestFor: "Small Families",
     comfort: "Standard",
-    image:
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=2070&auto=format&fit=crop",
+    image: "/media/fleet/airportlive-xl6-suv-exterior.webp",
     features: ["Captain Seats", "Hybrid Efficiency", "Flexible Space"],
   },
 ];

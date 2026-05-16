@@ -85,18 +85,6 @@ const FLEET_DETAILED = [
     vehicles: 'Force Tempo Traveller (AC)',
     features: ['Push-Back Chairs', 'Entertainment System', 'Aisle Space', 'Extra Legroom'],
   },
-  {
-    id: 'luxury',
-    name: 'Luxury / Executive',
-    tagline: 'On Special Request',
-    visual: 'from-[#D98A32]/35 via-[#1A1A1A] to-[#0A0A0A]',
-    seats: '4 passengers',
-    luggage: '2 large bags',
-    bestFor: 'VIP arrivals, high-profile travel',
-    comfort: 'Ultra Premium',
-    vehicles: 'Fortuner, Endeavour, Mercedes (on request)',
-    features: ['Premium Leather', 'Chauffeur-Driven', 'Privacy Partition', 'Luxury Amenities'],
-  },
 ] satisfies FleetDetail[];
 
 function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
@@ -106,7 +94,7 @@ function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ${vehicle.name}.\n\nPickup: \nDrop: \nDate: `;
 
   return (
-    <MotionCard className="h-full overflow-hidden rounded-[24px] border border-white/10 bg-[#0A0A0A] text-white">
+    <MotionCard className="h-full overflow-hidden rounded-[24px] border border-white/10 bg-[#0A0A0A] text-white group">
       <button
         type="button"
         onClick={() => setExpanded((current) => !current)}
@@ -114,7 +102,7 @@ function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
         aria-expanded={expanded}
         aria-label={`Show ${vehicle.name} details`}
       >
-        <div className="relative h-[220px] overflow-hidden md:h-[260px]">
+        <div className="relative h-[190px] overflow-hidden md:h-[260px]">
           {media ? (
             <ResponsiveImage
               {...media.exterior}
@@ -185,7 +173,7 @@ function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
         </div>
       </button>
 
-      <div className="px-7 pb-7">
+      <div className="px-5 pb-24 md:px-7 md:pb-7">
         <MotionButton
           href={getWhatsAppLink(whatsappMsg)}
           target="_blank"
@@ -223,7 +211,7 @@ export default function FleetShowcase() {
         <SwipeCarousel
           ariaLabel="Premium fleet carousel"
           viewportClassName="pb-2"
-          slideClassName="sm:flex-[0_0_420px] lg:flex-[0_0_420px]"
+          slideClassName="flex-[0_0_86vw] sm:flex-[0_0_420px] lg:flex-[0_0_420px]"
           showArrows
         >
           {FLEET_DETAILED.map((vehicle) => (
@@ -235,6 +223,45 @@ export default function FleetShowcase() {
           ))}
         </SwipeCarousel>
       </div>
+
+      <Reveal className="mx-auto mt-8 max-w-4xl px-4 text-center" y={20}>
+        <div className="relative rounded-[24px] border border-white/10 bg-[#111111] p-6 md:p-8 overflow-hidden">
+          {/* Atmospheric background image */}
+          <div className="absolute inset-0 opacity-25 pointer-events-none" aria-hidden="true">
+            <ResponsiveImage
+              src="/media/journey/airportlive-airport-arrival.webp"
+              alt="Executive vehicle at airport"
+              fill
+              sizes="(max-width: 1024px) 92vw, 48rem"
+              className="object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/75 to-[#111111]/40 pointer-events-none" aria-hidden="true" />
+          {/* Content */}
+          <div className="relative z-10">
+            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#E5E4E2]">
+              On Special Request
+            </p>
+            <h3 className="mt-3 font-serif text-3xl leading-tight text-white md:text-4xl">
+              Luxury / Executive Vehicles
+            </h3>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/60">
+              Fortuner, Endeavour, Mercedes and executive cars are arranged after availability confirmation.
+            </p>
+            <MotionButton
+              href={getWhatsAppLink(`Hi ${BUSINESS.name}, I want to check availability for a Luxury / Executive vehicle.\n\nPickup: \nDrop: \nDate: `)}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="light"
+              showArrow
+              dataCursor="Book"
+              className="mt-6 min-h-12 w-full sm:w-auto"
+            >
+              Check Availability
+            </MotionButton>
+          </div>
+        </div>
+      </Reveal>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </section>

@@ -8,6 +8,8 @@ import { BUSINESS } from '@/lib/constants';
 import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { pageHeroMedia } from '@/data/airportlive-media';
 
 export default function ContactPage() {
   return (
@@ -15,28 +17,51 @@ export default function ContactPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-20 bg-[#0A0A0A] text-white" aria-label="Contact page hero">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-15" aria-hidden="true" />
+      <section className="relative min-h-[68svh] overflow-hidden bg-[#0A0A0A] pt-32 pb-16 text-white md:min-h-[74svh] md:pt-40 md:pb-20" aria-label="Contact page hero">
+        <div className="absolute inset-0" aria-hidden="true">
+          <ResponsiveImage
+            {...pageHeroMedia.contact}
+            fill
+            className="opacity-55"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/72 to-[#0A0A0A]/35" />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.14em] md:tracking-[0.2em] text-xs font-mono mb-6 font-bold"
           >
             Get In Touch
           </motion.p>
-          <h1 className="text-5xl md:text-7xl font-serif mb-6">
+          <h1 className="mx-auto mb-6 max-w-[10ch] text-[clamp(3rem,13vw,5.8rem)] font-serif leading-[0.9] md:max-w-none md:text-7xl">
             <SplitTextReveal text="Contact Us" highlight="Us" />
           </h1>
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
-            className="text-white/70 max-w-2xl mx-auto text-lg mb-10"
+            className="text-white/72 max-w-2xl mx-auto text-base leading-relaxed md:text-lg mb-8"
           >
             We are available 24/7 for bookings, quotes, and travel assistance. Connect with our dispatch team instantly.
           </motion.p>
+          <div className="mx-auto grid max-w-xl gap-3 sm:grid-cols-2">
+            <a
+              href={getWhatsAppLink("Hi V3 Tour & Travels, I need booking assistance.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-12 items-center justify-center rounded-full bg-[#E5E4E2] px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#0A0A0A] transition-colors hover:bg-white"
+            >
+              WhatsApp Now
+            </a>
+            <a
+              href={getPhoneLink()}
+              className="flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-white/10"
+            >
+              Call {BUSINESS.phone}
+            </a>
+          </div>
         </div>
       </section>
 
@@ -56,7 +81,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: motionEases.softEase }}
-                className="p-6 border border-white/10 rounded-[20px] hover:shadow-lg transition-shadow text-center"
+                className="rounded-[18px] border border-white/10 p-5 text-center transition-shadow hover:shadow-lg md:p-6"
               >
                 <h3 className="font-bold text-[#F5F5F5] mb-2 uppercase text-[10px] tracking-widest font-mono">{info.title}</h3>
                 {info.href ? (

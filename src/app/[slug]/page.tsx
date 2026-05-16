@@ -9,6 +9,8 @@ import { BUSINESS } from '@/lib/constants';
 import { MessageCircle, Phone, ChevronDown, ShieldCheck, Star, Clock, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
 import { buildAllSchemas } from '@/lib/schema';
 import Script from 'next/script';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { pageHeroMedia } from '@/data/airportlive-media';
 
 type SeoRenderablePage = SeoPageData | RouteDetail;
 
@@ -85,9 +87,16 @@ export default async function SeoPage({ params }: Props) {
       />
 
       {/* Hero Section - Cinematic with Grain & Blur */}
-      <section className="relative pt-48 pb-36 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 scale-105" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+      <section className="relative overflow-hidden pt-40 pb-28 md:pt-48 md:pb-36">
+        <div className="absolute inset-0 scale-105" aria-hidden="true">
+          <ResponsiveImage
+            {...(isPSEO ? pageHeroMedia.airportTaxi : pageHeroMedia.contact)}
+            fill
+            priority={false}
+            className="opacity-42"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0A0A0A]/60 to-[#0A0A0A]" />
+        </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
@@ -97,25 +106,25 @@ export default async function SeoPage({ params }: Props) {
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-[1.1] tracking-tight">
+          <h1 className="mb-8 font-serif text-[clamp(3rem,12vw,6rem)] leading-[0.95] tracking-tight md:text-8xl">
             {page.h1}
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/60 max-w-3xl mx-auto mb-12 leading-relaxed font-light italic">
+          <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-white/68 md:mb-12 md:text-2xl font-light italic">
             &ldquo;{page.subhead}&rdquo;
           </p>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="mx-auto grid max-w-2xl gap-3 sm:grid-cols-2">
             <a 
               href={getWhatsAppLink(whatsappMsg)} 
-              className="group bg-[#E5E4E2] text-[#0A0A0A] px-10 py-5 rounded-full uppercase tracking-wider text-sm font-bold hover:bg-white transition-all duration-500 flex items-center gap-3 shadow-[0_0_40px_rgba(229,228,226,0.2)] hover:scale-105"
+              className="group flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#E5E4E2] px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#0A0A0A] shadow-[0_0_40px_rgba(229,228,226,0.2)] transition-all duration-500 hover:scale-105 hover:bg-white"
             >
               <MessageCircle className="w-5 h-5 fill-current" />
               Get Instant Fare Quote
             </a>
             <a 
               href={getPhoneLink()} 
-              className="px-10 py-5 rounded-full border border-white/20 text-white uppercase tracking-wider text-sm font-bold hover:bg-white/5 transition-all flex items-center gap-3"
+              className="flex min-h-12 items-center justify-center gap-3 rounded-full border border-white/20 px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all hover:bg-white/5"
             >
               <Phone className="w-4 h-4" /> Direct Call
             </a>

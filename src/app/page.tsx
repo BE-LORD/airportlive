@@ -29,13 +29,13 @@ export default function Home() {
       <SectionBlend from="dark" to="light" />
       <Services />
 
-      <JourneyStory />
-
       <RouteCorridor variant="compact" />
 
       {/* Light → Dark blend into Fleet */}
       <SectionBlend from="light" to="dark" />
       <FleetShowcase />
+
+      <JourneyStory />
 
       <WhyChooseUs />
 

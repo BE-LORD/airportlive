@@ -7,6 +7,7 @@ import {
   galleryMedia,
   heroMedia,
   journeyMedia,
+  pageHeroMedia,
   proofMedia,
   routeMedia,
   serviceMedia,
@@ -16,6 +17,7 @@ const flattenImages = () => [
   heroMedia,
   ...Object.values(serviceMedia),
   ...Object.values(proofMedia),
+  ...Object.values(pageHeroMedia),
   ...Object.values(routeMedia),
   ...Object.values(journeyMedia),
   ...Object.values(galleryMedia),
@@ -28,12 +30,45 @@ const flattenImages = () => [
 ].filter((image): image is NonNullable<typeof image> => Boolean(image));
 
 describe("AirportLive media manifest data", () => {
-  it("keeps hero as the only priority image", () => {
+  it("marks only page-level hero images as priority", () => {
     const priorityImages = flattenImages().filter((image) => image.priority);
 
-    expect(priorityImages).toEqual([heroMedia]);
+    expect(priorityImages).toEqual([
+      heroMedia,
+      pageHeroMedia.airportTaxi,
+      pageHeroMedia.fleet,
+      pageHeroMedia.contact,
+    ]);
     expect(heroMedia.src).toBe("/media/hero/airportlive-mobile-hero-poster.webp");
     expect(heroMedia.sizes).toBe("100vw");
+  });
+
+  it("provides local hero media for key service pages", () => {
+    expect(pageHeroMedia.airportTaxi.src).toBe("/media/pages/airportlive-airport-taxi-hero.webp");
+    expect(pageHeroMedia.fleet.src).toBe("/media/pages/airportlive-fleet-lineup-hero.webp");
+    expect(pageHeroMedia.contact.src).toBe("/media/pages/airportlive-contact-hero.webp");
+
+    for (const image of Object.values(pageHeroMedia)) {
+      expect(image.priority).toBe(true);
+      expect(image.sizes).toBe("100vw");
+      expect(image.alt).toContain("AirportLive");
+    }
+  });
+
+  it("maps every homepage route to a local route image", () => {
+    expect(Object.keys(routeMedia)).toEqual([
+      "ludhianaDelhiAirport",
+      "chandigarhDelhiAirport",
+      "jalandharDelhiAirport",
+      "patialaDelhiAirport",
+      "ludhianaChandigarhAirport",
+    ]);
+
+    for (const image of Object.values(routeMedia)) {
+      expect(image.src).toMatch(/^\/media\/routes\/airportlive-route-.+\.webp$/);
+      expect(image.alt).toContain("AirportLive");
+      expect(image.sizes).toBe("(max-width: 768px) 92vw, 45vw");
+    }
   });
 
   it("keeps XL6 interior unavailable instead of faking a missing asset", () => {

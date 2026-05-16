@@ -17,11 +17,14 @@ type SharedImageProps = Omit<
   | "style"
 > & {
   src: string;
+  mobileSrc?: string;
   alt: string;
   className?: string;
   priority?: boolean;
   sizes: string;
   objectPosition?: string;
+  mobileObjectPosition?: string;
+  objectFit?: "cover" | "contain";
 };
 
 type FillImageProps = SharedImageProps & {
@@ -40,16 +43,25 @@ export type ResponsiveImageProps = FillImageProps | FixedImageProps;
 
 export function ResponsiveImage({
   src,
+  mobileSrc,
   alt,
   className,
   priority = false,
   sizes,
   objectPosition,
+  mobileObjectPosition,
+  objectFit = "cover",
   fill,
   ...props
 }: ResponsiveImageProps) {
-  const imageClassName = cn("object-cover", className);
-  const style = objectPosition ? { objectPosition } : undefined;
+  const hasArtDirectionMetadata = Boolean(mobileSrc || mobileObjectPosition);
+  const imageClassName = cn(
+    objectFit === "contain" ? "object-contain" : "object-cover",
+    hasArtDirectionMetadata && "responsive-image-art-directed",
+    className
+  );
+  const resolvedObjectPosition = objectPosition ?? mobileObjectPosition;
+  const style = resolvedObjectPosition ? { objectPosition: resolvedObjectPosition } : undefined;
 
   if (fill) {
     return (

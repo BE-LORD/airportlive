@@ -6,6 +6,8 @@ import { Metadata } from 'next';
 import { Plane, Clock, MapPin, Shield, Phone, Luggage } from 'lucide-react';
 import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import Link from 'next/link';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { pageHeroMedia } from '@/data/airportlive-media';
 
 export const metadata: Metadata = {
   title: "Airport Taxi Service — Premium Pickup & Drop",
@@ -38,21 +40,35 @@ export default function AirportTaxiPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-32 bg-[#0A0A0A] text-white" aria-label="Airport taxi hero">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20" aria-hidden="true" />
+      <section className="relative min-h-[76svh] overflow-hidden bg-[#0A0A0A] pt-32 pb-20 text-white md:min-h-[82svh] md:pt-40 md:pb-32" aria-label="Airport taxi hero">
+        <div className="absolute inset-0" aria-hidden="true">
+          <ResponsiveImage
+            {...pageHeroMedia.airportTaxi}
+            fill
+            className="opacity-62"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-[#0A0A0A]/30" />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold">24/7 Airport Transfers</p>
-          <h1 className="text-5xl md:text-7xl font-serif mb-6">Premium <span className="italic text-[#E5E4E2]">Airport</span> Taxi</h1>
-          <p className="text-white/70 max-w-2xl mx-auto text-lg mb-10">
+          <p className="text-[#E5E4E2] uppercase tracking-[0.14em] md:tracking-[0.2em] text-xs font-mono mb-6 font-bold">24/7 Airport Transfers</p>
+          <h1 className="mx-auto mb-6 max-w-[12ch] text-[clamp(3rem,13vw,5.8rem)] font-serif leading-[0.9] md:max-w-none md:text-7xl">
+            Premium <span className="italic text-[#E5E4E2]">Airport</span> Taxi
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/72 md:text-lg">
             Never miss a flight. Never wait at arrivals. Our specialized airport transfer service covers Delhi, Chandigarh, and Amritsar airports with flight tracking and door-to-terminal comfort.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href={getWhatsAppLink(whatsappMsg)} target="_blank" rel="noopener noreferrer" className="bg-[#E5E4E2] text-[#0A0A0A] px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A] hover:text-[#F5F5F5] transition-colors" aria-label="Book airport taxi on WhatsApp">
+          <div className="mx-auto mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
+            <a href={getWhatsAppLink(whatsappMsg)} target="_blank" rel="noopener noreferrer" className="flex min-h-12 items-center justify-center rounded-full bg-[#E5E4E2] px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-[#0A0A0A] transition-colors hover:bg-[#1A1A1A] hover:text-[#F5F5F5]" aria-label="Book airport taxi on WhatsApp">
               Book Airport Taxi
             </a>
-            <a href={getPhoneLink()} className="border border-white/30 text-white px-8 py-4 rounded-full uppercase tracking-wider text-sm font-semibold hover:bg-[#1A1A1A]/10 transition-colors" aria-label={`Call ${BUSINESS.phone}`}>
+            <a href={getPhoneLink()} className="flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#1A1A1A]/10" aria-label={`Call ${BUSINESS.phone}`}>
               Call {BUSINESS.phone}
             </a>
+          </div>
+          <div className="mx-auto mt-6 flex max-w-2xl flex-wrap justify-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white/72">
+            <span className="rounded-full border border-white/15 bg-black/25 px-3 py-2">Flight tracking</span>
+            <span className="rounded-full border border-white/15 bg-black/25 px-3 py-2">Terminal pickup</span>
+            <span className="rounded-full border border-white/15 bg-black/25 px-3 py-2">Punjab to DEL / IXC / ATQ</span>
           </div>
         </div>
       </section>

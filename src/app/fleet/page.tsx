@@ -10,6 +10,8 @@ import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
 import { Reveal } from '@/components/motion/Reveal';
+import { ResponsiveImage } from '@/components/media/ResponsiveImage';
+import { pageHeroMedia } from '@/data/airportlive-media';
 
 const COMPARISON_TABLE = [
   { vehicle: 'Premium Sedan', seats: '4', luggage: '2 Large + 1 Cabin', airport: '✓', outstation: '✓', best: 'Solo / Couples' },
@@ -25,25 +27,32 @@ export default function FleetPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-40 pb-32 bg-[#0A0A0A] text-white" aria-label="Fleet page hero">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10" aria-hidden="true" />
+      <section className="relative min-h-[72svh] overflow-hidden bg-[#0A0A0A] pt-32 pb-20 text-white md:min-h-[78svh] md:pt-40 md:pb-32" aria-label="Fleet page hero">
+        <div className="absolute inset-0" aria-hidden="true">
+          <ResponsiveImage
+            {...pageHeroMedia.fleet}
+            fill
+            className="opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/72 to-[#0A0A0A]/32" />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.14em] md:tracking-[0.2em] text-xs font-mono mb-6 font-bold"
           >
             100+ Vehicles Network
           </motion.p>
-          <h1 className="text-5xl md:text-7xl font-serif mb-6">
+          <h1 className="mx-auto mb-6 max-w-[12ch] text-[clamp(3rem,13vw,5.8rem)] font-serif leading-[0.9] md:max-w-none md:text-7xl">
             <SplitTextReveal text="Our Premium Fleet" highlight="Premium" />
           </h1>
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: motionEases.mainEase }}
-            className="text-white/70 max-w-2xl mx-auto text-lg mb-10"
+            className="text-white/72 max-w-2xl mx-auto text-base leading-relaxed md:text-lg mb-10"
           >
             Choose comfort for every journey. From executive sedans to spacious Tempo Travellers, our vehicles are impeccably maintained and driven by professionals.
           </motion.p>

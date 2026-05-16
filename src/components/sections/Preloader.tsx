@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BUSINESS } from "@/lib/constants";
 
 export function Preloader() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -48,8 +48,8 @@ export function Preloader() {
           }}
           className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#0A0A0A]"
         >
-          {/* Grain overlay for luxury feel */}
-          <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png')] opacity-10 mix-blend-overlay pointer-events-none" />
+          {/* Grain overlay — local SVG noise, no external dep */}
+          <div className="grain-overlay" aria-hidden="true" />
 
           <div className="relative z-10 text-center w-full max-w-sm px-8">
             <motion.div
@@ -57,7 +57,7 @@ export function Preloader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="font-serif text-5xl md:text-7xl text-white mb-2 tracking-tighter">
+              <h1 className="font-serif text-5xl md:text-7xl text-white mb-2 tracking-tighter drop-shadow-[0_2px_32px_rgba(229,228,226,0.55)]">
                 {BUSINESS.brand.toUpperCase()}
               </h1>
               <p className="font-mono text-[10px] uppercase tracking-[0.5em] text-[#E5E4E2] mb-12">
@@ -78,7 +78,7 @@ export function Preloader() {
             </div>
 
             {/* Progress bar */}
-            <div className="mt-8 w-full h-[1px] bg-[#1A1A1A]/10 relative overflow-hidden">
+            <div className="mt-8 w-full h-[1px] bg-white/10 relative overflow-hidden">
               <motion.div 
                 className="absolute top-0 left-0 h-full bg-[#E5E4E2]"
                 initial={{ width: 0 }}
