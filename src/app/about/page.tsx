@@ -40,7 +40,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-6 font-bold"
           >
             Our Legacy
           </motion.p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 bg-[#1A1A1A]" aria-label="Company story">
         <div className="max-w-4xl mx-auto px-4">
           <Reveal className="text-center mb-12">
-            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">The V3 Story</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">The V3 Story</p>
             <h2 className="text-4xl md:text-5xl font-serif mb-8">
               <SplitTextReveal text="From One Car to 100+" highlight="100+" />
             </h2>
@@ -105,7 +105,7 @@ export default function AboutPage() {
       <section className="py-24 bg-[#141414]" aria-label="Our values">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal className="text-center mb-16">
-            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Why V3</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">Why V3</p>
             <h2 className="text-4xl md:text-5xl font-serif">
               <SplitTextReveal text="What Makes Us Different" highlight="Different" />
             </h2>

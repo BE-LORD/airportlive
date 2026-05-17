@@ -102,7 +102,7 @@ export function SwipeCarousel({
             <span
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
-                selected === index ? "w-7 bg-[#E5E4E2]" : "w-2 bg-[#DEDBD2]"
+                selected === index ? "w-7 bg-[#E5E4E2]" : "w-2 bg-white/20"
               )}
             />
           </button>

@@ -3,7 +3,7 @@ import FAQ from '@/components/sections/FAQ';
 import Footer from '@/components/layout/Footer';
 import { BUSINESS } from '@/lib/constants';
 import { Metadata } from 'next';
-import { Plane, Clock, MapPin, Shield, Phone, Luggage } from 'lucide-react';
+import { Plane, Clock, MapPin, Shield, Phone, BaggageClaim } from 'lucide-react';
 import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import Link from 'next/link';
 import { ResponsiveImage } from '@/components/media/ResponsiveImage';
@@ -28,7 +28,7 @@ const PROCESS_STEPS = [
   { icon: Clock, title: 'Flight Tracking Activated', desc: 'For airport pickups, we monitor your flight status. If delayed, we adjust pickup time automatically.' },
   { icon: MapPin, title: 'Driver Reaches Early', desc: 'Your chauffeur arrives 15–30 minutes before scheduled time. Tracking link shared on WhatsApp.' },
   { icon: Shield, title: 'Safe & Comfortable Ride', desc: 'Clean vehicle, professional driver, AC always on, luggage assistance, and a smooth highway experience.' },
-  { icon: Luggage, title: 'Terminal Drop / Pickup', desc: 'For drops: we drop at your terminal gate. For pickups: driver waits at arrivals with a name board.' },
+  { icon: BaggageClaim, title: 'Terminal Drop / Pickup', desc: 'For drops: we drop at your terminal gate. For pickups: driver waits at arrivals with a name board.' },
   { icon: Plane, title: 'Done — Book Again Anytime', desc: 'We save your preferences. Next booking is even faster. Most customers become regulars.' },
 ];
 
@@ -50,7 +50,7 @@ export default function AirportTaxiPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-[#0A0A0A]/30" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#E5E4E2] uppercase tracking-[0.14em] md:tracking-[0.2em] text-xs font-mono mb-6 font-bold">24/7 Airport Transfers</p>
+          <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-6 font-bold">24/7 Airport Transfers</p>
           <h1 className="mx-auto mb-6 max-w-[12ch] text-[clamp(3rem,13vw,5.8rem)] font-serif leading-[0.9] md:max-w-none md:text-7xl">
             Premium <span className="italic text-[#E5E4E2]">Airport</span> Taxi
           </h1>
@@ -77,7 +77,7 @@ export default function AirportTaxiPage() {
       <section className="py-24 bg-[#1A1A1A]" aria-label="Airports we serve">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-16 text-center">
-            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Airports We Serve</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">Airports We Serve</p>
             <h2 className="text-4xl md:text-5xl font-serif">Three Airports, <span className="italic text-[#E5E4E2]">One Call</span></h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -108,7 +108,7 @@ export default function AirportTaxiPage() {
       <section className="py-24 bg-[#141414]" aria-label="How airport taxi booking works">
         <div className="max-w-5xl mx-auto px-4">
           <div className="mb-16 text-center">
-            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Simple Process</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">Simple Process</p>
             <h2 className="text-4xl md:text-5xl font-serif">How Airport <span className="italic text-[#E5E4E2]">Transfers</span> Work</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

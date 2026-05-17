@@ -1,74 +1,73 @@
-'use client';
-import { useRef } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { BUSINESS } from '@/lib/constants';
-import { Clock, ArrowRight, Plane, Phone } from 'lucide-react';
-import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
-import { ResponsiveImage } from '@/components/media/ResponsiveImage';
-import { routeMedia } from '@/data/airportlive-media';
-import { motionEases } from '@/lib/motion';
-import { RouteCard } from '@/components/routes/RouteCard';
-
+"use client";
+import { useRef } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { BUSINESS } from "@/lib/constants";
+import { Clock, ArrowRight, Plane, Phone } from "lucide-react";
+import { getWhatsAppLink, getPhoneLink } from "@/lib/links";
+import { routeMedia } from "@/data/airportlive-media";
+import { motionEases } from "@/lib/motion";
+import { RouteCard } from "@/components/routes/RouteCard";
+import { VideoBackground } from "@/components/media/VideoBackground";
 export const ROUTES = [
   {
     id: 1,
-    from: 'Ludhiana',
-    to: 'Delhi Airport (DEL)',
-    distance: '310 km',
-    time: '5.5h',
-    visual: 'from-[#1E2B4A] via-[#111111] to-[#0A0A0A]',
-    tag: 'Popular',
-    mediaKey: 'ludhianaDelhiAirport',
-    desc: 'Terminal drop-off at T3, T2, or T1 with flight-synced scheduling.',
+    from: "Ludhiana",
+    to: "Delhi Airport (DEL)",
+    distance: "310 km",
+    time: "5.5h",
+    visual: "from-[#1E2B4A] via-[#111111] to-[#0A0A0A]",
+    tag: "Popular",
+    mediaKey: "ludhianaDelhiAirport",
+    desc: "Terminal drop-off at T3, T2, or T1 with flight-synced scheduling.",
   },
   {
     id: 2,
-    from: 'Chandigarh',
-    to: 'Delhi Airport (DEL)',
-    distance: '250 km',
-    time: '4h',
-    visual: 'from-[#2D3E6A] via-[#111111] to-[#0A0A0A]',
-    tag: 'Corporate',
-    mediaKey: 'chandigarhDelhiAirport',
-    desc: 'Express highway transit for business professionals and family travelers.',
+    from: "Chandigarh",
+    to: "Delhi Airport (DEL)",
+    distance: "250 km",
+    time: "4h",
+    visual: "from-[#2D3E6A] via-[#111111] to-[#0A0A0A]",
+    tag: "Corporate",
+    mediaKey: "chandigarhDelhiAirport",
+    desc: "Express highway transit for business professionals and family travelers.",
   },
   {
     id: 3,
-    from: 'Jalandhar',
-    to: 'Delhi Airport (DEL)',
-    distance: '370 km',
-    time: '6.5h',
-    visual: 'from-[#4B3827] via-[#111111] to-[#0A0A0A]',
-    tag: 'NRI Priority',
-    mediaKey: 'jalandharDelhiAirport',
-    desc: 'Spacious vehicles and reliable long-distance airport timing.',
+    from: "Jalandhar",
+    to: "Delhi Airport (DEL)",
+    distance: "370 km",
+    time: "6.5h",
+    visual: "from-[#4B3827] via-[#111111] to-[#0A0A0A]",
+    tag: "NRI Priority",
+    mediaKey: "jalandharDelhiAirport",
+    desc: "Spacious vehicles and reliable long-distance airport timing.",
   },
   {
     id: 4,
-    from: 'Patiala',
-    to: 'Delhi Airport (DEL)',
-    distance: '260 km',
-    time: '4.5h',
-    visual: 'from-[#2d2d2d] via-[#111111] to-[#0A0A0A]',
-    tag: 'Airport',
-    mediaKey: 'patialaDelhiAirport',
-    desc: 'Direct connection from Patiala to IGI Airport with comfortable cabins.',
+    from: "Patiala",
+    to: "Delhi Airport (DEL)",
+    distance: "260 km",
+    time: "4.5h",
+    visual: "from-[#2d2d2d] via-[#111111] to-[#0A0A0A]",
+    tag: "Airport",
+    mediaKey: "patialaDelhiAirport",
+    desc: "Direct connection from Patiala to IGI Airport with comfortable cabins.",
   },
   {
     id: 5,
-    from: 'Ludhiana',
-    to: 'Chandigarh (IXC)',
-    distance: '110 km',
-    time: '2h',
-    visual: 'from-[#D98A32]/35 via-[#111111] to-[#0A0A0A]',
-    tag: 'Regional',
-    mediaKey: 'ludhianaChandigarhAirport',
-    desc: 'Swift airport connections from Ludhiana to Mohali and Chandigarh Airport.',
+    from: "Ludhiana",
+    to: "Chandigarh (IXC)",
+    distance: "110 km",
+    time: "2h",
+    visual: "from-[#D98A32]/35 via-[#111111] to-[#0A0A0A]",
+    tag: "Regional",
+    mediaKey: "ludhianaChandigarhAirport",
+    desc: "Swift airport connections from Ludhiana to Mohali and Chandigarh Airport.",
   },
 ] as const;
 
-export type Route = typeof ROUTES[number];
+export type Route = (typeof ROUTES)[number];
 
 function RouteRow({ route }: { route: Route }) {
   const corridorRef = useRef<HTMLDivElement>(null);
@@ -82,14 +81,17 @@ function RouteRow({ route }: { route: Route }) {
       aria-label={`Route corridor showcasing ${route.from} to ${route.to}`}
     >
       <div className="absolute inset-0 md:inset-[-20%] z-0">
-        <ResponsiveImage
-          {...media}
-          fill
-          sizes="100vw"
-          className="opacity-70 transition-transform duration-1000 ease-in-out group-hover:scale-[1.02]"
+        <VideoBackground
+          desktopMp4="/media/video/airportlive-route-corridor.mp4"
+          poster={media.src}
+          preload="none"
+          lazy
+          pauseWhenNotVisible
+          objectPosition="center center"
+          videoClassName="opacity-70 transition-transform duration-1000 ease-in-out group-hover:scale-[1.02]"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.12),transparent_30%),linear-gradient(135deg,transparent_0%,rgba(229,228,226,0.08)_45%,transparent_46%)]" />
-        <div className="absolute inset-0 bg-black/76 group-hover:bg-black/66 transition-colors duration-1000" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.12),transparent_30%),linear-gradient(135deg,transparent_0%,rgba(229,228,226,0.08)_45%,transparent_46%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-black/76 group-hover:bg-black/66 transition-colors duration-1000 pointer-events-none" />
       </div>
 
       <div className="relative z-10 max-w-4xl px-4 text-center">
@@ -99,13 +101,15 @@ function RouteRow({ route }: { route: Route }) {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <span className="mb-6 inline-block rounded-full bg-[#E5E4E2] px-6 py-2 text-[10px] font-mono uppercase tracking-[0.3em] text-[#0A0A0A]">
+          <span className="mb-6 inline-block rounded-full bg-[#E5E4E2] px-6 py-2 text-[10px] font-mono uppercase tracking-[0.12em] text-[#0A0A0A]">
             {route.tag}
           </span>
         </motion.div>
 
         <h3 className="mb-6 font-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl md:text-6xl lg:text-8xl">
-          <span className="block opacity-60 drop-shadow-md transition-opacity duration-700 group-hover:opacity-100">{route.from}</span>
+          <span className="block opacity-60 drop-shadow-md transition-opacity duration-700 group-hover:opacity-100">
+            {route.from}
+          </span>
           <span className="px-4 italic text-[#E5E4E2] drop-shadow-md">to</span>
           <span className="block drop-shadow-md">{route.to}</span>
         </h3>
@@ -133,7 +137,7 @@ function RouteRow({ route }: { route: Route }) {
           data-cursor="Book"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-4 rounded-full bg-[#1A1A1A] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#F5F5F5] transition-colors hover:bg-[#E5E4E2] hover:text-[#0A0A0A]"
+          className="inline-flex items-center gap-4 rounded-full bg-[#1A1A1A] px-8 py-4 text-xs font-bold uppercase tracking-[0.12em] text-[#F5F5F5] transition-colors hover:bg-[#E5E4E2] hover:text-[#0A0A0A]"
         >
           Request Fare Quote <ArrowRight className="h-4 w-4" />
         </motion.a>
@@ -162,13 +166,15 @@ function CompactRoutePlanner() {
           transition={{ duration: 0.5, ease: motionEases.mainEase }}
           className="relative min-h-[310px] overflow-hidden rounded-[22px] border border-white/10 bg-[#111111] p-5 md:min-h-[520px] md:rounded-[24px] md:p-8"
         >
-          <ResponsiveImage
-            {...routeMedia.ludhianaDelhiAirport}
-            fill
-            sizes="(max-width: 1024px) 92vw, 48vw"
-            className="opacity-65"
+          <VideoBackground
+            desktopMp4="/media/video/airportlive-route-corridor.mp4"
+            poster="/media/posters/airportlive-route-corridor-poster.webp"
+            preload="metadata"
+            pauseWhenNotVisible
+            objectPosition="center center"
+            videoClassName="opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/68 to-[#0A0A0A]/8" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/68 to-[#0A0A0A]/8 pointer-events-none" />
           <div className="relative z-10 flex h-full flex-col justify-between">
             <div>
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-[#E5E4E2]">
@@ -182,19 +188,27 @@ function CompactRoutePlanner() {
               <div className="mb-5 grid grid-cols-3 gap-3 border-y border-white/10 py-5 text-center">
                 <div>
                   <p className="font-serif text-2xl text-white">5.5h</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/55">{featured.from}</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/55">
+                    {featured.from}
+                  </p>
                 </div>
                 <div>
                   <p className="font-serif text-2xl text-white">310</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/55">km</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/55">
+                    km
+                  </p>
                 </div>
                 <div>
                   <p className="font-serif text-2xl text-white">24/7</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/55">booking</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/55">
+                    booking
+                  </p>
                 </div>
               </div>
               <p className="max-w-lg text-sm leading-relaxed text-white/72">
-                Fixed-fare airport transfers for Delhi, Chandigarh, and nearby airport drops. Route, vehicle, and pickup timing are confirmed directly by our team.
+                Fixed-fare airport transfers for Delhi, Chandigarh, and nearby
+                airport drops. Route, vehicle, and pickup timing are confirmed
+                directly by our team.
               </p>
             </div>
           </div>
@@ -203,8 +217,12 @@ function CompactRoutePlanner() {
         <div className="rounded-[24px] border border-white/10 bg-[#111111] p-4 md:p-5">
           <div className="mb-4 flex items-center justify-between gap-4 px-1">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E5E4E2]">Fare-ready routes</p>
-              <p className="mt-1 text-sm text-white/58">Tap a route for a WhatsApp quote.</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#E5E4E2]">
+                Fare-ready routes
+              </p>
+              <p className="mt-1 text-sm text-white/58">
+                Tap a route for a WhatsApp quote.
+              </p>
             </div>
             <Link
               href="/routes"
@@ -242,11 +260,14 @@ function CompactRoutePlanner() {
 
 type RouteCorridorProps = {
   hideHeader?: boolean;
-  variant?: 'immersive' | 'compact';
+  variant?: "immersive" | "compact";
 };
 
-export default function RouteCorridor({ hideHeader = false, variant = 'immersive' }: RouteCorridorProps) {
-  if (variant === 'compact') {
+export default function RouteCorridor({
+  hideHeader = false,
+  variant = "immersive",
+}: RouteCorridorProps) {
+  if (variant === "compact") {
     return <CompactRoutePlanner />;
   }
 
@@ -257,7 +278,7 @@ export default function RouteCorridor({ hideHeader = false, variant = 'immersive
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="mb-6 font-mono text-xs uppercase tracking-[0.3em] text-[#E5E4E2]"
+            className="mb-6 font-mono text-xs uppercase tracking-[0.12em] text-[#E5E4E2]"
           >
             The Transit Network
           </motion.p>
@@ -266,31 +287,29 @@ export default function RouteCorridor({ hideHeader = false, variant = 'immersive
             whileInView={{ opacity: 1, y: 0 }}
             className="font-serif text-5xl text-white md:text-8xl"
           >
-            Mastering the <span className="italic text-[#E5E4E2]">Corridor</span>
+            Mastering the{" "}
+            <span className="italic text-[#E5E4E2]">Corridor</span>
           </motion.h2>
         </div>
       )}
 
-      <div className="relative hidden md:block">
+      <div className="relative">
         {ROUTES.map((route) => (
           <RouteRow key={route.id} route={route} />
         ))}
       </div>
 
-      <div className="grid gap-4 px-4 py-8 md:hidden">
-        {ROUTES.map((route) => (
-          <RouteCard key={route.id} route={route} />
-        ))}
-      </div>
-
       <div className="bg-[#0A0A0A] px-4 py-20 pb-36 text-center md:py-32">
-        <h4 className="mb-8 font-serif text-3xl text-[#F5F5F5] md:text-5xl">Traveling elsewhere?</h4>
+        <h4 className="mb-8 font-serif text-3xl text-[#F5F5F5] md:text-5xl">
+          Traveling elsewhere?
+        </h4>
         <p className="mx-auto mb-12 max-w-xl px-4 text-[#A3A3A3]">
-          We cover all of North India including Shimla, Manali, Jaipur, and beyond. Custom travel plans available on request.
+          We cover all of North India including Shimla, Manali, Jaipur, and
+          beyond. Custom travel plans available on request.
         </p>
         <a
           href={getPhoneLink()}
-          className="inline-block rounded-full bg-[#E5E4E2] px-10 py-5 font-mono text-sm font-bold uppercase tracking-[0.2em] text-[#0A0A0A] transition-colors hover:bg-[#D1D1D1]"
+          className="inline-block rounded-full bg-[#E5E4E2] px-10 py-5 font-mono text-sm font-bold uppercase tracking-[0.12em] text-[#0A0A0A] transition-colors hover:bg-[#D1D1D1]"
         >
           Custom Inquiry
         </a>

@@ -16,7 +16,7 @@ export function SectionLabel({ children, className, dark }: SectionLabelProps) {
       <span className="h-px w-8 bg-[#D1D1D1]" />
       <span
         className={cn(
-          "font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-medium uppercase tracking-[0.2em]",
+          "font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-medium uppercase tracking-[0.12em]",
           dark ? "text-[#FFFFFF]" : "text-[#A08B72]"
         )}
       >

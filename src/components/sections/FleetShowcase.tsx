@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { BUSINESS } from '@/lib/constants';
-import { Users, Luggage, Star } from 'lucide-react';
+import { Users, BaggageClaim, Star } from 'lucide-react';
 import { getWhatsAppLink } from '@/lib/links';
 import { Reveal } from '@/components/motion/Reveal';
 import { MotionCard } from '@/components/motion/MotionCard';
@@ -135,7 +135,7 @@ function FleetCard({ vehicle }: { vehicle: FleetDetail }) {
               <span className="text-xs">{vehicle.seats}</span>
             </div>
             <div className="text-sm text-white/70">
-              <span className="mb-1 flex items-center gap-2 text-white"><Luggage className="h-4 w-4 text-[#E5E4E2]" /> Luggage</span>
+              <span className="mb-1 flex items-center gap-2 text-white"><BaggageClaim className="h-4 w-4 text-[#E5E4E2]" /> Luggage</span>
               <span className="text-xs">{vehicle.luggage}</span>
             </div>
             <div className="col-span-2 text-sm text-white/70">
@@ -195,7 +195,7 @@ export default function FleetShowcase() {
     <section id="fleet" className="relative overflow-hidden bg-[#0A0A0A] pt-12 pb-32 text-white md:py-32" data-cursor="Swipe">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <Reveal className="mb-12" y={24}>
-          <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">
+          <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">
             Swipe to Explore
           </p>
           <h2 className="text-5xl md:text-7xl font-serif mb-6">

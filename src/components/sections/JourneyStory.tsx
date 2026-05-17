@@ -1,12 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CheckCircle2, Clock3, Luggage, MessageCircle, ShieldCheck } from 'lucide-react';
+import { BaggageClaim, CheckCircle2, Clock3, MessageCircle, ShieldCheck } from 'lucide-react';
 import { ResponsiveImage } from '@/components/media/ResponsiveImage';
-import { journeyMedia, proofMedia } from '@/data/airportlive-media';
+import { proofMedia } from '@/data/airportlive-media';
 import { MotionButton } from '@/components/motion/MotionButton';
 import { getWhatsAppLink } from '@/lib/links';
 import { motionEases } from '@/lib/motion';
+
+import { VideoBackground } from '@/components/media/VideoBackground';
 
 const journeyBeats = [
   {
@@ -22,7 +24,7 @@ const journeyBeats = [
   {
     label: 'Luggage handled',
     copy: 'Clean vehicle, careful loading, and cabin space matched to your group.',
-    icon: Luggage,
+    icon: BaggageClaim,
   },
   {
     label: 'On-time arrival',
@@ -44,14 +46,18 @@ export default function JourneyStory() {
           transition={{ duration: 0.5, ease: motionEases.mainEase }}
           className="relative min-h-[280px] overflow-hidden rounded-[22px] border border-white/10 bg-[#111111] md:min-h-[520px]"
         >
-          <ResponsiveImage
-            {...journeyMedia.driverAssigned}
-            fill
-            className="opacity-82"
+          <VideoBackground
+            desktopMp4="/media/video/airportlive-terminal-journey.mp4"
+            poster="/media/posters/airportlive-terminal-journey-poster.webp"
+            preload="metadata"
+            pauseWhenNotVisible
+            objectPosition="center center"
+            threshold={0.12}
+            videoClassName="opacity-82"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/42 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/42 to-transparent pointer-events-none" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#E5E4E2]">Handled end to end</p>
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[#E5E4E2]">Handled end to end</p>
             <h2 className="max-w-lg font-serif text-3xl leading-tight text-white md:text-6xl">
               From booking to terminal, no chaos in between.
             </h2>
@@ -64,7 +70,7 @@ export default function JourneyStory() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, ease: motionEases.mainEase }}
-            className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#E5E4E2]"
+            className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-[#E5E4E2]"
           >
             Journey Proof
           </motion.p>

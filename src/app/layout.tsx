@@ -8,23 +8,27 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import CustomCursor from "@/components/layout/CustomCursor";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ScrollProgressBar } from "@/components/motion/ScrollProgressBar";
+import { IntroLoader } from "@/components/motion/IntroLoader";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-cormorant",
+  display: 'swap',
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   variable: "--font-dm-sans",
+  display: 'swap',
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-jetbrains-mono",
+  display: 'swap',
 });
 
 export const metadata = constructMetadata();
@@ -55,6 +59,7 @@ export default function RootLayout({
         <SmoothScroll>
           <ScrollProgressBar />
           <div className="grain-overlay" aria-hidden="true" />
+          <IntroLoader />
           <PageTransition>{children}</PageTransition>
           <WhatsAppFloat />
           <MobileStickyCTA />

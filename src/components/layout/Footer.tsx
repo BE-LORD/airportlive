@@ -51,7 +51,7 @@ export default function Footer() {
           {/* Contact Column */}
           <div className="space-y-6">
             <div>
-              <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.3em] mb-6 font-bold">Inquiries</p>
+              <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.12em] mb-6 font-bold">Inquiries</p>
               <div className="space-y-4">
                 <a
                   href={getPhoneLink()} 
@@ -77,7 +77,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="hidden md:block">
-            <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.3em] mb-5 md:mb-8 font-bold">Navigation</p>
+            <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.12em] mb-5 md:mb-8 font-bold">Navigation</p>
             <ul className="grid grid-cols-2 gap-x-5 gap-y-3 sm:block sm:space-y-4">
               {exploreLinks.map((link) => (
                 <li key={link.name}>
@@ -92,7 +92,7 @@ export default function Footer() {
 
           {/* Popular Routes */}
           <div>
-            <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.3em] mb-5 md:mb-8 font-bold">Top Corridors</p>
+            <p className="text-[#E5E4E2] font-mono text-[10px] uppercase tracking-[0.12em] mb-5 md:mb-8 font-bold">Top Corridors</p>
             <ul className="space-y-3 md:space-y-4">
               {routeLinks.map((route) => (
                 <li key={route}>

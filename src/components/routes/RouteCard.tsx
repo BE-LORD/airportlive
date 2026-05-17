@@ -36,10 +36,13 @@ export function RouteCard({ route }: RouteCardProps) {
         </span>
 
         <h3 className="font-serif text-2xl leading-tight text-white">
-          {route.from} <span className="italic text-[#E5E4E2]">to</span> {route.to}
+          {route.from} <span className="italic text-[#E5E4E2]">to</span>{" "}
+          {route.to}
         </h3>
 
-        <p className="mt-2 text-sm leading-relaxed text-white/62">{route.desc}</p>
+        <p className="mt-2 text-sm leading-relaxed text-white/62">
+          {route.desc}
+        </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-white/68">
           <span className="inline-flex items-center gap-1.5">
@@ -49,7 +52,8 @@ export function RouteCard({ route }: RouteCardProps) {
             <MapPin className="h-4 w-4 text-[#E5E4E2]" /> {route.distance}
           </span>
           <span className="inline-flex items-center gap-1.5 text-[#E5E4E2]">
-            Quote <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            Quote{" "}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
       </div>

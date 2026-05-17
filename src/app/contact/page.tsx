@@ -31,7 +31,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.14em] md:tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-6 font-bold"
           >
             Get In Touch
           </motion.p>

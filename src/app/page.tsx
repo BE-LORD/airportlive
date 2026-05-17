@@ -1,17 +1,17 @@
-import Header from '@/components/layout/Header';
-import Hero from '@/components/sections/Hero';
-import TrustStrip from '@/components/sections/TrustStrip';
-import Services from '@/components/sections/Services';
-import JourneyStory from '@/components/sections/JourneyStory';
-import RouteCorridor from '@/components/sections/RouteCorridor';
-import FleetShowcase from '@/components/sections/FleetShowcase';
-import WhyChooseUs from '@/components/sections/WhyChooseUs';
-import Gallery from '@/components/sections/Gallery';
-import InquirySection from '@/components/sections/InquirySection';
-import Footer from '@/components/layout/Footer';
-import { ScrollColorMatrix } from '@/components/effects/ScrollColorMatrix';
-import { SectionBlend } from '@/components/effects/SectionBlend';
-import { HOME_METADATA } from '@/lib/homepage-metadata';
+import Header from "@/components/layout/Header";
+import Hero from "@/components/sections/Hero";
+import TrustStrip from "@/components/sections/TrustStrip";
+import Services from "@/components/sections/Services";
+import JourneyStory from "@/components/sections/JourneyStory";
+import RouteCorridor from "@/components/sections/RouteCorridor";
+import FleetShowcase from "@/components/sections/FleetShowcase";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Gallery from "@/components/sections/Gallery";
+import InquirySection from "@/components/sections/InquirySection";
+import Footer from "@/components/layout/Footer";
+import { ScrollColorMatrix } from "@/components/effects/ScrollColorMatrix";
+import { SectionBlend } from "@/components/effects/SectionBlend";
+import { HOME_METADATA } from "@/lib/homepage-metadata";
 
 export const metadata = HOME_METADATA;
 

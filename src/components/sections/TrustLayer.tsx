@@ -185,7 +185,7 @@ export function TrustLayer() {
               <p className="font-[family-name:var(--font-cormorant)] text-4xl font-bold text-[#FFFFFF] sm:text-5xl">
                 {stat.value}
               </p>
-              <p className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-white/50">
+              <p className="mt-2 font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.12em] text-white/50">
                 {stat.label}
               </p>
             </div>

@@ -41,7 +41,7 @@ export default function FleetPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.14em] md:tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-6 font-bold"
           >
             100+ Vehicles Network
           </motion.p>
@@ -65,7 +65,7 @@ export default function FleetPage() {
       <section className="py-24 bg-[#0A0A0A]" aria-label="Vehicle comparison table">
         <div className="max-w-5xl mx-auto px-4">
           <Reveal className="mb-12 text-center">
-            <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Quick Compare</p>
+            <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">Quick Compare</p>
             <h2 className="text-3xl md:text-4xl font-serif">
               <SplitTextReveal text="Vehicle Comparison" highlight="Comparison" />
             </h2>

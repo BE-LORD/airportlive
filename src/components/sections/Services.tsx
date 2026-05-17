@@ -117,7 +117,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, ease: motionEases.mainEase }}
-              className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#E5E4E2]"
+              className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-[#E5E4E2]"
             >
               Signature Services
             </motion.p>

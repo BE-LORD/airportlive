@@ -28,7 +28,7 @@ export default function InquirySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: motionEases.mainEase }}
-          className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-6 font-bold"
+          className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-6 font-bold"
         >
           Available 24/7
         </motion.p>

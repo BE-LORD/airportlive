@@ -77,7 +77,7 @@ export function Navbar() {
             </span>
             <span
               className={cn(
-                "hidden font-[family-name:var(--font-jetbrains-mono)] text-[9px] uppercase tracking-[0.2em] transition-colors duration-300 sm:block",
+                "hidden font-[family-name:var(--font-jetbrains-mono)] text-[9px] uppercase tracking-[0.12em] transition-colors duration-300 sm:block",
                 scrolled ? "text-[#D1D1D1]" : "text-[#FFFFFF]"
               )}
             >
@@ -205,7 +205,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <p className="px-8 pb-8 text-center font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-[#A08B72]">
+        <p className="px-8 pb-8 text-center font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.12em] text-[#A08B72]">
           {BUSINESS.tagline}
         </p>
       </div>

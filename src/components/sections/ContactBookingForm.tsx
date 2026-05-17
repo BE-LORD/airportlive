@@ -51,7 +51,7 @@ export default function ContactBookingForm() {
     <section className="py-20 bg-[#0A0A0A]" aria-label="Booking inquiry form" id="booking-form">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Online Booking Inquiry</p>
+          <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">Online Booking Inquiry</p>
           <h2 className="text-3xl md:text-4xl font-serif text-[#F5F5F5] mb-3">Send Booking Request</h2>
           <p className="text-[#A3A3A3] text-sm max-w-lg mx-auto">Fill out the form below and your booking details will be sent to our team on WhatsApp for instant confirmation.</p>
         </div>

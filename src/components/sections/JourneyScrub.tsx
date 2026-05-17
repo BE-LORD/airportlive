@@ -167,7 +167,7 @@ export function JourneyScrub() {
               className="absolute left-0 top-0 h-full w-full origin-left scale-x-0 bg-[#D1D1D1]"
             />
           </div>
-          <div className="mt-4 flex justify-between font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.2em] text-white/40">
+          <div className="mt-4 flex justify-between font-[family-name:var(--font-jetbrains-mono)] text-[10px] uppercase tracking-[0.12em] text-white/40">
             <span>Ludhiana</span>
             <span>Airport</span>
           </div>

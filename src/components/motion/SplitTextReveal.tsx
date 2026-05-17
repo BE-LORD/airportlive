@@ -35,7 +35,7 @@ export function SplitTextReveal({
           <span key={`${line}-${index}`} className="block overflow-hidden">
             <motion.span
               className={cn("motion-static-on-reduce block", lineClassName)}
-              initial={reducedMotion ? { opacity: 0 } : { y: "105%", opacity: 0 }}
+              initial={false}
               animate={{ y: 0, opacity: 1 }}
               transition={{
                 delay: reducedMotion ? 0 : delay + index * (isMobile ? 0.08 : 0.12),

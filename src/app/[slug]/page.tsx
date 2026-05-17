@@ -101,7 +101,7 @@ export default async function SeoPage({ params }: Props) {
         <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/80">
+            <span className="text-xs uppercase tracking-[0.12em] font-bold text-white/80">
               {isPSEO ? 'Priority Airport Corridor' : 'Premium Service Tier'}
             </span>
           </div>
@@ -257,7 +257,7 @@ export default async function SeoPage({ params }: Props) {
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif text-white mb-4 italic">Frequently Asked</h2>
-            <p className="text-white/40 uppercase tracking-[0.3em] text-[10px] font-bold">Transparent answers for peaceful travel</p>
+            <p className="text-white/40 uppercase tracking-[0.12em] text-[10px] font-bold">Transparent answers for peaceful travel</p>
           </div>
           
           <div className="space-y-4">

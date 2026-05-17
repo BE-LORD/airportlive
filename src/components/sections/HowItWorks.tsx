@@ -155,7 +155,7 @@ export function HowItWorks() {
               <div className="relative z-10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D1D1D1]/10 text-[#D1D1D1] ring-1 ring-[#D1D1D1]/20 transition-all duration-300 group-hover:bg-[#D1D1D1] group-hover:text-white group-hover:ring-[#D1D1D1] group-hover:scale-110">
                 {step.icon}
               </div>
-              <span className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-bold uppercase tracking-[0.2em] text-[#D1D1D1]">
+              <span className="font-[family-name:var(--font-jetbrains-mono)] text-[10px] font-bold uppercase tracking-[0.12em] text-[#D1D1D1]">
                 Step {step.number}
               </span>
               <h3 className="mt-4 text-xl font-semibold text-[#1E2B4A]">

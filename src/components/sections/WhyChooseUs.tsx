@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold"
           >
             The {BUSINESS.name} Standard
           </motion.p>
@@ -77,7 +77,7 @@ export default function WhyChooseUs() {
                   </div>
                   <div>
                     <p className="font-bold text-[#F5F5F5] text-sm mb-0.5">{pillar.title}</p>
-                    <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[#A3A3A3]">{pillar.desc}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-[#A3A3A3]">{pillar.desc}</p>
                   </div>
                 </motion.div>
               );

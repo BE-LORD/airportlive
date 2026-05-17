@@ -34,7 +34,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: motionEases.mainEase }}
-            className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+            className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold"
           >
             Real Feedback
           </motion.p>

@@ -12,7 +12,7 @@ export default function FAQ() {
     <section id="faq" className="py-24 bg-[#111111]">
       <div className="max-w-3xl mx-auto px-4">
         <Reveal className="text-center mb-16" y={20}>
-          <p className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold">Common Questions</p>
+          <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">Common Questions</p>
           <h2 className="text-4xl md:text-5xl font-serif text-[#F5F5F5]">
             <SplitTextReveal text="Frequently Asked" highlight="Asked" />
           </h2>

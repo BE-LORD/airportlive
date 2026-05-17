@@ -20,7 +20,7 @@ export default function BookingFlow() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-[#E5E4E2] uppercase tracking-[0.2em] text-xs font-mono mb-4 font-bold"
+          className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold"
         >
           How It Works
         </motion.p>
