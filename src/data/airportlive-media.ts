@@ -306,9 +306,9 @@ export const galleryMedia = {
     sizes: gallerySizes,
     objectPosition: "center center",
   },
-  luggageHandled: {
-    src: "/media/proof/airportlive-luggage-loading.webp",
-    alt: "AirportLive chauffeur loading luggage for airport pickup and drop service",
+  routeReady: {
+    src: "/media/routes/airportlive-ludhiana-delhi-airport-route.webp",
+    alt: "Premium AirportLive cab on the Ludhiana to Delhi Airport route",
     section: "Visual Proof",
     sizes: gallerySizes,
     objectPosition: "center center",

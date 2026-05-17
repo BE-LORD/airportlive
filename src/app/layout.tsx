@@ -46,20 +46,6 @@ export default function RootLayout({
       className={`${cormorant.variable} ${dmSans.variable} ${jetbrains.variable}`}
     >
       <head>
-        <link
-          rel="preload"
-          as="video"
-          href="/media/video/airportlive-remotion-intro-desktop.mp4"
-          type="video/mp4"
-          media="(min-width: 768px)"
-        />
-        <link
-          rel="preload"
-          as="video"
-          href="/media/video/airportlive-remotion-intro-mobile.mp4"
-          type="video/mp4"
-          media="(max-width: 767px)"
-        />
         {schemas.map((schema, i) => (
           <script
             key={i}

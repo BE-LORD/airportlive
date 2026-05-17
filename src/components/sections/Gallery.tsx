@@ -17,8 +17,8 @@ const GALLERY_IMAGES = [
     image: galleryMedia.airportPickupProof,
   },
   {
-    label: 'Luggage Handled',
-    image: galleryMedia.luggageHandled,
+    label: 'Route Ready',
+    image: galleryMedia.routeReady,
   },
   {
     label: 'Fleet Lineup',
