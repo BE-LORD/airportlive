@@ -10,7 +10,13 @@ import { MessageCircle, Phone, ChevronDown, ShieldCheck, Star, Clock, MapPin, Ch
 import { buildAllSchemas } from '@/lib/schema';
 import Script from 'next/script';
 import { ResponsiveImage } from '@/components/media/ResponsiveImage';
-import { pageHeroMedia } from '@/data/airportlive-media';
+import {
+  fleetMedia,
+  pageHeroMedia,
+  routeMedia,
+  serviceMedia,
+  type AirportLiveImage,
+} from '@/data/airportlive-media';
 
 type SeoRenderablePage = SeoPageData | RouteDetail;
 
@@ -18,6 +24,32 @@ interface Props {
   params: Promise<{
     slug: string;
   }>;
+}
+
+const legacyHeroMediaBySlug: Record<string, AirportLiveImage> = {
+  'outstation-taxi': serviceMedia.outstationTaxi,
+  'corporate-travel': serviceMedia.corporateTravel,
+  'family-tours': serviceMedia.familyTours,
+  'tempo-traveller-booking': serviceMedia.eventTransport,
+  'innova-crysta-taxi': fleetMedia.find((vehicle) => vehicle.id === 'innova-crysta')?.exterior ?? pageHeroMedia.fleet,
+  'delhi-airport-taxi': serviceMedia.airportPickup,
+  'chandigarh-airport-taxi': serviceMedia.airportPickup,
+  'amritsar-airport-taxi': serviceMedia.airportPickup,
+  'ludhiana-to-delhi-airport-taxi': routeMedia.ludhianaDelhiAirport,
+  'jalandhar-to-delhi-airport-taxi': routeMedia.jalandharDelhiAirport,
+  'patiala-to-delhi-airport-taxi': routeMedia.patialaDelhiAirport,
+};
+
+const routeHeroMediaBySlug: Record<string, AirportLiveImage> = {
+  'ludhiana-to-delhi-airport-taxi': routeMedia.ludhianaDelhiAirport,
+  'chandigarh-to-delhi-airport-taxi': routeMedia.chandigarhDelhiAirport,
+  'jalandhar-to-delhi-airport-taxi': routeMedia.jalandharDelhiAirport,
+  'patiala-to-delhi-airport-taxi': routeMedia.patialaDelhiAirport,
+};
+
+function getSeoHeroMedia(slug: string, isPSEO: boolean): AirportLiveImage {
+  if (isPSEO) return routeHeroMediaBySlug[slug] ?? pageHeroMedia.airportTaxi;
+  return legacyHeroMediaBySlug[slug] ?? pageHeroMedia.contact;
 }
 
 // Generate static params for all defined SEO and pSEO pages
@@ -71,6 +103,7 @@ export default async function SeoPage({ params }: Props) {
   const isPSEO = !!pSEOPage;
   const overview = pSEOPage?.content.overview ?? legacyPage?.content.overview ?? '';
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book the ${page.h1} service.`;
+  const heroMedia = getSeoHeroMedia(slug, isPSEO);
   
   // Build dynamic schema for this specific page
   const schemas = buildAllSchemas();
@@ -90,9 +123,9 @@ export default async function SeoPage({ params }: Props) {
       <section className="relative overflow-hidden pt-40 pb-28 md:pt-48 md:pb-36">
         <div className="absolute inset-0 scale-105" aria-hidden="true">
           <ResponsiveImage
-            {...(isPSEO ? pageHeroMedia.airportTaxi : pageHeroMedia.contact)}
+            {...heroMedia}
             fill
-            priority={false}
+            priority
             className="opacity-42"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0A0A0A]/60 to-[#0A0A0A]" />

@@ -451,6 +451,11 @@ html.lenis, html.lenis body {
   .grain-overlay { animation: none !important; }
 }
 
+body[data-intro-loading="true"] .airportlive-custom-cursor {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 @media (max-width: 767px), (pointer: coarse) {
   .grain-overlay,
   .noise-overlay {

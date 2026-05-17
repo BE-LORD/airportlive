@@ -5,8 +5,7 @@ import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import { motion } from 'framer-motion';
 import { SplitTextReveal } from '@/components/motion/SplitTextReveal';
 import { motionEases } from '@/lib/motion';
-import { ResponsiveImage } from '@/components/media/ResponsiveImage';
-import { ctaMedia } from '@/data/airportlive-media';
+import { VideoBackground } from '@/components/media/VideoBackground';
 
 export default function InquirySection() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
@@ -14,13 +13,19 @@ export default function InquirySection() {
   return (
     <section id="final-cta" className="relative overflow-hidden bg-[#0A0A0A] px-4 py-16 pb-28 text-center text-white md:py-20" aria-label="Final booking call to action">
       <div className="absolute inset-0" aria-hidden="true">
-        <ResponsiveImage
-          {...ctaMedia}
-          fill
-          className="opacity-55"
+        <VideoBackground
+          desktopMp4="/media/video/airportlive-ready-takeoff-desktop.mp4"
+          mobileMp4="/media/video/airportlive-ready-takeoff-mobile.mp4"
+          poster="/media/posters/airportlive-ready-takeoff-poster.webp"
+          objectPosition="center center"
+          preload="metadata"
+          lazy
+          pauseWhenNotVisible
+          threshold={0.2}
         />
-        <div className="absolute inset-0 bg-[#0A0A0A]/76" />
+        <div className="absolute inset-0 bg-[#0A0A0A]/62 md:bg-[#0A0A0A]/58" />
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#0A0A0A] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
       </div>
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.p 

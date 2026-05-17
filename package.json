@@ -29,6 +29,8 @@
     "three": "^0.184.0"
   },
   "devDependencies": {
+    "@remotion/cli": "^4.0.462",
+    "@remotion/media": "^4.0.462",
     "@tailwindcss/postcss": "^4",
     "@types/axe-core": "^2.0.2",
     "@types/node": "^20",
@@ -40,6 +42,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "jsdom": "^25.0.1",
+    "playwright-core": "^1.60.0",
+    "remotion": "^4.0.462",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.6"
