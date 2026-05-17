@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Volume2 } from "lucide-react";
 
 const exitEase: [number, number, number, number] = [0.76, 0, 0.24, 1];
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
@@ -30,7 +29,6 @@ export function IntroLoader() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isClosingRef = useRef(false);
   const [loading, setLoading] = useState(true);
-  const [soundBlocked, setSoundBlocked] = useState(false);
   const reducedMotion = useSyncExternalStore(
     subscribeToReducedMotion,
     getReducedMotionSnapshot,
@@ -46,25 +44,6 @@ export function IntroLoader() {
     if (isClosingRef.current) return;
     isClosingRef.current = true;
     setLoading(false);
-  }, []);
-
-  const unlockSound = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.defaultMuted = false;
-    video.muted = false;
-    video.volume = 0.72;
-
-    video
-      .play()
-      .then(() => setSoundBlocked(false))
-      .catch(() => {
-        video.defaultMuted = true;
-        video.muted = true;
-        setSoundBlocked(true);
-        video.play().catch(() => {});
-      });
   }, []);
 
   useEffect(() => {
@@ -90,15 +69,41 @@ export function IntroLoader() {
     if (!video) return;
 
     let animationFrame = 0;
+    let removeUnlockListeners = () => {};
     video.volume = 0.72;
+
+    const requestSoundPlayback = () => {
+      video.defaultMuted = false;
+      video.muted = false;
+      video.volume = 0.72;
+      return video.play();
+    };
+
+    const armHiddenSoundUnlock = () => {
+      removeUnlockListeners();
+
+      const unlock = () => {
+        requestSoundPlayback().catch(() => {});
+        removeUnlockListeners();
+      };
+
+      window.addEventListener("pointerdown", unlock, { once: true, passive: true });
+      window.addEventListener("touchstart", unlock, { once: true, passive: true });
+      window.addEventListener("keydown", unlock, { once: true });
+      removeUnlockListeners = () => {
+        window.removeEventListener("pointerdown", unlock);
+        window.removeEventListener("touchstart", unlock);
+        window.removeEventListener("keydown", unlock);
+      };
+    };
 
     const keepPlaying = () => {
       if (isClosingRef.current || video.ended) return;
 
-      video.play().catch(() => {
+      requestSoundPlayback().catch(() => {
         video.defaultMuted = true;
         video.muted = true;
-        setSoundBlocked(true);
+        armHiddenSoundUnlock();
         video.play().catch(() => {});
       });
     };
@@ -114,17 +119,12 @@ export function IntroLoader() {
       animationFrame = window.requestAnimationFrame(closeBeforeLastFrame);
     };
 
-    video.defaultMuted = false;
-    video.muted = false;
-    video
-      .play()
-      .then(() => setSoundBlocked(false))
-      .catch(() => {
-        video.defaultMuted = true;
-        video.muted = true;
-        setSoundBlocked(true);
-        video.play().catch(() => {});
-      });
+    requestSoundPlayback().catch(() => {
+      video.defaultMuted = true;
+      video.muted = true;
+      armHiddenSoundUnlock();
+      video.play().catch(() => {});
+    });
 
     video.addEventListener("pause", keepPlaying);
     video.addEventListener("ended", closeIntro);
@@ -132,6 +132,7 @@ export function IntroLoader() {
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
+      removeUnlockListeners();
       video.removeEventListener("pause", keepPlaying);
       video.removeEventListener("ended", closeIntro);
     };
@@ -168,18 +169,6 @@ export function IntroLoader() {
               />
               <source src="/media/video/airportlive-remotion-intro-desktop.mp4" type="video/mp4" />
             </video>
-          )}
-
-          {soundBlocked && !reducedMotion && (
-            <button
-              type="button"
-              aria-label="Enable intro sound"
-              className="absolute bottom-7 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-white/25 bg-black/35 text-white shadow-[0_12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md transition hover:bg-white/15"
-              onClick={unlockSound}
-              onPointerDown={unlockSound}
-            >
-              <Volume2 aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
-            </button>
           )}
         </motion.div>
       )}
