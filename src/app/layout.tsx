@@ -9,6 +9,7 @@ import CustomCursor from "@/components/layout/CustomCursor";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ScrollProgressBar } from "@/components/motion/ScrollProgressBar";
 import { IntroLoader } from "@/components/motion/IntroLoader";
+import { Analytics } from "@vercel/analytics/next";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -64,6 +65,7 @@ export default function RootLayout({
           <WhatsAppFloat />
           <MobileStickyCTA />
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
