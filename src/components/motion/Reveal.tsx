@@ -5,8 +5,8 @@ import { cn } from "@/lib/cn";
 import { buildRevealVariants, motionDurations, motionTokens } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-interface RevealProps extends React.HTMLAttributes<any> {
-  as?: keyof React.JSX.IntrinsicElements;
+interface RevealProps extends Omit<React.ComponentPropsWithoutRef<typeof motion.div>, "as"> {
+  as?: string;
   children: React.ReactNode;
   className?: string;
   delay?: number;
