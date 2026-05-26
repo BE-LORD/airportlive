@@ -106,11 +106,14 @@ function RouteRow({ route }: { route: Route }) {
           </span>
         </motion.div>
 
-        <h3 className="mb-6 font-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl md:text-6xl lg:text-8xl">
+        <h3
+          aria-label={`${route.from} to ${route.to}`}
+          className="mb-6 font-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl md:text-6xl lg:text-8xl"
+        >
           <span className="block opacity-60 drop-shadow-md transition-opacity duration-700 group-hover:opacity-100">
             {route.from}
           </span>
-          <span className="px-4 italic text-[#E5E4E2] drop-shadow-md">to</span>
+          <span className="my-2 block px-4 italic text-[#E5E4E2] drop-shadow-md">to</span>
           <span className="block drop-shadow-md">{route.to}</span>
         </h3>
 

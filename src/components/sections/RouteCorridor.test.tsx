@@ -14,3 +14,12 @@ describe("RouteCorridor compact mode", () => {
     expect(html).not.toContain("md:h-[80svh]");
   });
 });
+
+describe("RouteCorridor route title readability", () => {
+  it("gives immersive route titles readable labels with spaces around the connector", () => {
+    const html = renderToStaticMarkup(<RouteCorridor hideHeader />);
+
+    expect(html).toContain('aria-label="Ludhiana to Delhi Airport (DEL)"');
+    expect(html).toContain("my-2 block px-4");
+  });
+});

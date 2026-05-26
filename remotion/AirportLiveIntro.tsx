@@ -91,10 +91,11 @@ function PlaneClouds({ layout }: AirportLiveIntroProps) {
   );
 }
 
-function AirTypography({ layout }: AirportLiveIntroProps) {
+function BrandTypography({ layout }: AirportLiveIntroProps) {
   const frame = useCurrentFrame();
   const { width, height, durationInFrames } = useVideoConfig();
   const mobile = layout === "mobile";
+  const brandLines = ["V3 TOUR", "AND TRAVELS"];
   const enter = phase(frame, 0, 26, snap);
   const hold = fadeOut(frame, durationInFrames - 30, durationInFrames - 1, easeIn);
   const breathing = Math.sin(frame * 0.055) * 0.008;
@@ -103,10 +104,15 @@ function AirTypography({ layout }: AirportLiveIntroProps) {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const tracking = interpolate(enter, [0, 1], [mobile ? 20 : 30, mobile ? 1.5 : 2.5], {
+  const tracking = interpolate(enter, [0, 1], [mobile ? 10 : 16, mobile ? 1.2 : 2], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
+  const fontSize = mobile
+    ? Math.min(width * 0.105, height * 0.052)
+    : Math.min(width * 0.122, height * 0.17);
+  const lineGap = fontSize * (mobile ? 0.96 : 0.88);
+  const textY = mobile ? height * 0.5 : height * 0.53;
   const fillOpacity = interpolate(frame, [0, 26, 82, durationInFrames - 1], [0, 0.2, 0.12, 0], {
     easing: easeOut,
     extrapolateLeft: "clamp",
@@ -142,7 +148,7 @@ function AirTypography({ layout }: AirportLiveIntroProps) {
         </defs>
         <text
           x="50%"
-          y={mobile ? "50%" : "53%"}
+          y={textY}
           textAnchor="middle"
           dominantBaseline="middle"
           fill={mist}
@@ -152,17 +158,21 @@ function AirTypography({ layout }: AirportLiveIntroProps) {
           strokeWidth={mobile ? 3.4 : 3}
           paintOrder="stroke"
           fontFamily="Arial Black, Impact, Arial, sans-serif"
-          fontSize={mobile ? height * 0.17 : height * 0.36}
+          fontSize={fontSize}
           fontWeight={900}
           letterSpacing={tracking}
           filter="url(#air-soft-glow)"
           transform={`translate(${width / 2} ${height / 2}) translate(0 ${y}) scale(${scale}) translate(${-width / 2} ${-height / 2})`}
         >
-          AIR
+          {brandLines.map((line, index) => (
+            <tspan key={line} x="50%" dy={index === 0 ? -lineGap / 2 : lineGap}>
+              {line}
+            </tspan>
+          ))}
         </text>
         <text
           x="50%"
-          y={mobile ? "50%" : "53%"}
+          y={textY}
           textAnchor="middle"
           dominantBaseline="middle"
           fill="transparent"
@@ -170,12 +180,16 @@ function AirTypography({ layout }: AirportLiveIntroProps) {
           strokeOpacity={strokeOpacity * 0.46}
           strokeWidth={mobile ? 1.2 : 1}
           fontFamily="Arial Black, Impact, Arial, sans-serif"
-          fontSize={mobile ? height * 0.17 : height * 0.36}
+          fontSize={fontSize}
           fontWeight={900}
           letterSpacing={tracking}
           transform={`translate(${width / 2} ${height / 2}) translate(0 ${y}) scale(${scale * 1.006}) translate(${-width / 2} ${-height / 2})`}
         >
-          AIR
+          {brandLines.map((line, index) => (
+            <tspan key={line} x="50%" dy={index === 0 ? -lineGap / 2 : lineGap}>
+              {line}
+            </tspan>
+          ))}
         </text>
       </svg>
       <div
@@ -210,7 +224,7 @@ export function AirportLiveIntro({ layout }: AirportLiveIntroProps) {
   return (
     <AbsoluteFill style={{ backgroundColor: ink, overflow: "hidden" }}>
       <PlaneClouds layout={layout} />
-      <AirTypography layout={layout} />
+      <BrandTypography layout={layout} />
       <EdgeFade />
     </AbsoluteFill>
   );

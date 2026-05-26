@@ -194,14 +194,14 @@ export default function FleetShowcase() {
   return (
     <section id="fleet" className="relative overflow-hidden bg-[#0A0A0A] pt-12 pb-32 text-white md:py-32" data-cursor="Swipe">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <Reveal className="mb-12" y={24}>
+        <Reveal className="mb-12 text-center md:text-left" y={24} data-fleet-intro="true">
           <p className="text-[#E5E4E2] uppercase tracking-[0.12em] text-xs font-mono mb-4 font-bold">
             Swipe to Explore
           </p>
           <h2 className="text-5xl md:text-7xl font-serif mb-6">
             Choose Your <span className="italic text-[#E5E4E2]">Ride</span>
           </h2>
-          <p className="max-w-xl text-base md:text-lg text-white/55 font-sans">
+          <p className="mx-auto md:mx-0 max-w-xl text-base md:text-lg text-white/55 font-sans">
             Swipe to explore the fleet. Tap a vehicle to reveal details, then choose your ride on WhatsApp.
           </p>
         </Reveal>

@@ -23,6 +23,14 @@ const routeLinks = [
 
 export default function Footer() {
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.`;
+  const footerBrandWords = BUSINESS.brand.toUpperCase().split(/\s+/);
+  const footerBrandTextStyle = {
+    WebkitTextStroke: '1px rgba(255,255,255,0.14)',
+    WebkitTextFillColor: 'transparent',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    backgroundImage: 'linear-gradient(to top, rgba(229,228,226,0.28) 0%, rgba(255,255,255,0.08) 100%)',
+  };
 
   return (
     <footer className="bg-[#0A0A0A] text-white pt-10 md:pt-24 pb-36 md:pb-0 overflow-hidden relative">
@@ -30,21 +38,19 @@ export default function Footer() {
       
       <div className="max-w-7xl mx-auto px-4">
         {/* Massive Branding Reveal — Hollow to Gold Fill */}
-        <div className="mb-10 md:mb-20 overflow-hidden">
-          <motion.h2 
-            initial={{ y: "100%" }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            className="max-w-full whitespace-normal break-words font-serif text-[15vw] leading-[0.86] tracking-normal select-none motion-gold-shine sm:whitespace-nowrap md:text-[14vw]"
-            style={{
-              WebkitTextStroke: '1px rgba(255,255,255,0.08)',
-              WebkitTextFillColor: 'transparent',
-              backgroundImage: 'linear-gradient(to top, rgba(200,200,220,0.15) 0%, rgba(255,255,255,0.05) 100%)',
-              backgroundClip: 'text',
-            }}
+        <div className="mb-12 overflow-hidden text-center md:mb-20">
+          <motion.div
+            data-footer-brand="true"
+            aria-hidden="true"
+            initial={false}
+            className="mx-auto flex max-w-full flex-col items-center justify-center gap-0 overflow-hidden text-center font-serif text-[clamp(5.35rem,22vw,8.8rem)] leading-[0.78] tracking-normal select-none drop-shadow-[0_18px_46px_rgba(255,255,255,0.04)] sm:text-[18vw] md:flex-row md:gap-[0.22em] md:text-[14vw] md:leading-[0.82]"
           >
-            {BUSINESS.brand.toUpperCase()}
-          </motion.h2>
+            {footerBrandWords.map((word) => (
+              <span key={word} className="block" style={footerBrandTextStyle}>
+                {word}
+              </span>
+            ))}
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 md:gap-12 lg:grid-cols-4 mb-10 md:mb-20">

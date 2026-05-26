@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { buildRevealVariants, motionDurations, motionTokens } from "@/lib/motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-interface RevealProps {
+interface RevealProps extends React.HTMLAttributes<any> {
   as?: keyof React.JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
@@ -23,6 +23,7 @@ export function Reveal({
   duration = motionDurations.sectionReveal,
   y = motionTokens.distance.section,
   once = true,
+  ...props
 }: RevealProps) {
   const reducedMotion = useReducedMotion();
   const Component = motion[as as "div"] ?? motion.div;
@@ -34,6 +35,7 @@ export function Reveal({
       initial="hidden"
       whileInView="visible"
       viewport={{ once, amount: 0.05, margin: "0px" }}
+      {...props}
     >
       {children}
     </Component>
