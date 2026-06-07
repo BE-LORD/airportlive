@@ -9,6 +9,7 @@ import CustomCursor from "@/components/layout/CustomCursor";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ScrollProgressBar } from "@/components/motion/ScrollProgressBar";
 import { IntroLoader } from "@/components/motion/IntroLoader";
+import Script from "next/script";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -55,6 +56,19 @@ export default function RootLayout({
         ))}
       </head>
       <body className="font-sans bg-sona-cream text-sona-text antialiased" suppressHydrationWarning>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-5CBMPMVBQP"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-5CBMPMVBQP');
+          `}
+        </Script>
         <CustomCursor />
         <SmoothScroll>
           <ScrollProgressBar />
