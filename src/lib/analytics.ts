@@ -49,8 +49,10 @@ export function trackEvent(
     if (process.env.NODE_ENV === "development") {
       console.log("[Analytics]", event, params);
     }
-  } catch {
-    // Silently fail if analytics is not available
+  } catch (err) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("[Analytics] trackEvent failed:", err);
+    }
   }
 }
 

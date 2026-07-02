@@ -43,7 +43,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       };
     }
 
-    initLenis();
+    initLenis().catch((err) => {
+      if (process.env.NODE_ENV === "development") {
+        console.warn("SmoothScroll: failed to initialize Lenis", err);
+      }
+    });
 
     return () => {
       destroyed = true;

@@ -113,8 +113,10 @@ export function VideoBackground({
       const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
 
       if (isVisible) {
-        video.play().catch(() => {
-          // Autoplay can be blocked; the poster remains visible.
+        video.play().catch((err) => {
+          if (process.env.NODE_ENV === "development") {
+            console.warn("VideoBackground: autoplay blocked", err);
+          }
         });
       } else {
         video.pause();
@@ -148,8 +150,10 @@ export function VideoBackground({
             if (pauseWhenNotVisible && videoRef.current) {
               // Only attempt play if not reduced motion and video has loaded
               if (!reducedMotion) {
-                videoRef.current.play().catch(() => {
-                  // Autoplay might be blocked, silent catch
+                videoRef.current.play().catch((err) => {
+                  if (process.env.NODE_ENV === "development") {
+                    console.warn("VideoBackground: autoplay blocked (IntersectionObserver)", err);
+                  }
                 });
               }
             }

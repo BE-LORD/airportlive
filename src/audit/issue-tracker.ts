@@ -320,6 +320,11 @@ export class IssueTracker {
       }
     } catch (e) {
       console.error("Failed to load issues from storage:", e);
+      try {
+        localStorage.removeItem(this.storageKey);
+      } catch {
+        // Storage may be completely unavailable; nothing more to do.
+      }
     }
   }
 

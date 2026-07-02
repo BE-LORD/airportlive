@@ -83,7 +83,11 @@ export function IntroLoader() {
       removeUnlockListeners();
 
       const unlock = () => {
-        requestSoundPlayback().catch(() => {});
+        requestSoundPlayback().catch((err) => {
+          if (process.env.NODE_ENV === "development") {
+            console.warn("IntroLoader: sound unlock playback failed", err);
+          }
+        });
         removeUnlockListeners();
       };
 
@@ -104,7 +108,11 @@ export function IntroLoader() {
         video.defaultMuted = true;
         video.muted = true;
         armHiddenSoundUnlock();
-        video.play().catch(() => {});
+        video.play().catch((err) => {
+          if (process.env.NODE_ENV === "development") {
+            console.warn("IntroLoader: muted video play failed in keepPlaying", err);
+          }
+        });
       });
     };
 
@@ -123,7 +131,11 @@ export function IntroLoader() {
       video.defaultMuted = true;
       video.muted = true;
       armHiddenSoundUnlock();
-      video.play().catch(() => {});
+      video.play().catch((err) => {
+        if (process.env.NODE_ENV === "development") {
+          console.warn("IntroLoader: muted video play failed on init", err);
+        }
+      });
     });
 
     video.addEventListener("pause", keepPlaying);

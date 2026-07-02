@@ -141,7 +141,7 @@ export class PerformanceMonitor {
       inpObserver.observe({ type: "event", buffered: true });
       this.observers.push(inpObserver);
     } catch (e) {
-      // INP is a newer metric, may not be supported
+      console.warn("INP observer not supported:", e);
     }
   }
 

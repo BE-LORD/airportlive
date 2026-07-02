@@ -9,6 +9,7 @@ export const runtime = "edge";
  */
 
 export async function GET() {
+  try {
   return new ImageResponse(
     (
       <div
@@ -170,4 +171,8 @@ export async function GET() {
       height: 630,
     }
   );
+  } catch (error) {
+    console.error("OG image generation failed:", error);
+    return new Response("Failed to generate OG image", { status: 500 });
+  }
 }
