@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGsapScrollAnimation, ScrollTrigger } from "@/hooks/useGsapScrollAnimation";
 
 /**
  * JourneyScrub — Spec: 04_ARCHITECTURE.md #5.5, Addon Pack #6.5
@@ -45,81 +42,68 @@ const beats = [
 ];
 
 export function JourneyScrub() {
-  const containerRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
+  const containerRef = useGsapScrollAnimation(({ gsap }) => {
+    ScrollTrigger.create({
+      trigger: triggerRef.current,
+      start: "top top",
+      end: "+=300%",
+      pin: true,
+      scrub: true,
+    });
 
-    const ctx = gsap.context(() => {
-      // Pin the section
-      ScrollTrigger.create({
+    const beatElements = gsap.utils.toArray<HTMLElement>("[data-beat]");
+    beatElements.forEach((beat, i) => {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: `${i * 25}% top`,
+          end: `${(i + 1) * 25}% top`,
+          scrub: 1,
+        },
+      });
+
+      timeline
+        .fromTo(
+          beat,
+          {
+            opacity: 0,
+            scale: 0.85,
+            y: 60,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          }
+        )
+        .to(
+          beat,
+          {
+            opacity: 0,
+            scale: 1.15,
+            y: -40,
+            duration: 0.6,
+            ease: "power2.in",
+          },
+          "+=0.2"
+        );
+    });
+
+    gsap.to("[data-journey-progress]", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
         trigger: triggerRef.current,
         start: "top top",
         end: "+=300%",
-        pin: true,
         scrub: true,
-      });
-
-      // Animate beats — smooth crossfade with gentle scale
-      const beatElements = gsap.utils.toArray<HTMLElement>("[data-beat]");
-      beatElements.forEach((beat, i) => {
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: triggerRef.current,
-            start: `${i * 25}% top`,
-            end: `${(i + 1) * 25}% top`,
-            scrub: 1,
-          },
-        });
-
-        // Smooth crossfade with gentle motion
-        timeline
-          .fromTo(
-            beat,
-            {
-              opacity: 0,
-              scale: 0.85,
-              y: 60,
-            },
-            {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.4,
-              ease: "power2.out",
-            }
-          )
-          .to(
-            beat,
-            {
-              opacity: 0,
-              scale: 1.15,
-              y: -40,
-              duration: 0.6,
-              ease: "power2.in",
-            },
-            "+=0.2"
-          );
-      });
-
-      // Progress bar
-      gsap.to("[data-journey-progress]", {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: triggerRef.current,
-          start: "top top",
-          end: "+=300%",
-          scrub: true,
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+      },
+    });
+  });
 
   return (
     <section ref={containerRef} className="relative">

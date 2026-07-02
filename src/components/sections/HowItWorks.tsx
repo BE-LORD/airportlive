@@ -1,15 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { BUSINESS } from "@/lib/constants";
 import { getWhatsAppLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { MessageSquare, ClipboardCheck, CarFront, MessageCircle } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGsapScrollAnimation, ScrollTrigger } from "@/hooks/useGsapScrollAnimation";
 
 /**
  * How It Works — Spec: 04_ARCHITECTURE.md #7, 06_CONTENT_BRIEF.md #7
@@ -44,85 +41,70 @@ const steps = [
 ];
 
 export function HowItWorks() {
-  const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+  const sectionRef = useGsapScrollAnimation(({ gsap }) => {
+    gsap.from("[data-hiw-header]", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
 
-    const ctx = gsap.context(() => {
-      // Header entry
-      gsap.from("[data-hiw-header]", {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "expo.out",
+    gsap.fromTo(
+      "[data-connector-line]",
+      { scaleX: 0, transformOrigin: "left center" },
+      {
+        scaleX: 1,
+        duration: 1.5,
+        ease: "power3.inOut",
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: gridRef.current,
           start: "top 80%",
+          end: "bottom center",
+          scrub: 1,
+        },
+      }
+    );
+
+    if (gridRef.current) {
+      const cards = gridRef.current.querySelectorAll("[data-hiw-card]");
+
+      gsap.from(cards, {
+        y: 60,
+        scale: 0.85,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "back.out(1.4)",
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top 85%",
         },
       });
 
-      // Connector line drawing
-      gsap.fromTo(
-        "[data-connector-line]",
-        { scaleX: 0, transformOrigin: "left center" },
-        {
-          scaleX: 1,
-          duration: 1.5,
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 80%",
-            end: "bottom center",
-            scrub: 1,
-          },
-        }
-      );
+      ScrollTrigger.create({
+        trigger: gridRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        onUpdate: (self) => {
+          const velocity = self.getVelocity();
+          const skewAmount = gsap.utils.clamp(-4, 4, velocity / 400);
 
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll("[data-hiw-card]");
-
-        // Elastic pop-in (clean, no broken rotationZ)
-        gsap.from(cards, {
-          y: 60,
-          scale: 0.85,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "back.out(1.4)",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 85%",
-          },
-        });
-
-        // Gentle velocity skew
-        ScrollTrigger.create({
-          trigger: gridRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate: (self) => {
-            const velocity = self.getVelocity();
-            const skewAmount = gsap.utils.clamp(-4, 4, velocity / 400);
-
-            gsap.to(cards, {
-              skewX: skewAmount,
-              duration: 0.4,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+          gsap.to(cards, {
+            skewX: skewAmount,
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        },
+      });
+    }
+  });
 
   const whatsappMsg = `Hi ${BUSINESS.name}, I want to book an airport transfer.\nPickup:\nDrop:\nDate & Time:\nFlight Number:\nPassengers:`;
 

@@ -1,5 +1,6 @@
 'use client';
 import { BUSINESS } from '@/lib/constants';
+import { getWhatsAppLink, getPhoneLink } from '@/lib/links';
 import { useEffect, useState } from 'react';
 import { Phone, MessageCircle, CalendarCheck } from 'lucide-react';
 
@@ -14,9 +15,7 @@ export default function MobileBookingBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const whatsappMsg = encodeURIComponent(
-    `Hi ${BUSINESS.name}, I want to book a ride.\n\nPickup: \nDrop: \nDate: \nPassengers: `
-  );
+  const whatsappMsg = `Hi ${BUSINESS.name}, I want to book a ride.\n\nPickup: \nDrop: \nDate: \nPassengers: `;
 
   return (
     <div
@@ -29,7 +28,7 @@ export default function MobileBookingBar() {
       <div className="bg-[#0A0A0A] px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-2">
         <div className="grid grid-cols-3 gap-2">
           <a
-            href={`https://wa.me/91${BUSINESS.whatsapp}?text=${whatsappMsg}`}
+            href={getWhatsAppLink(whatsappMsg)}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center justify-center gap-1 rounded-xl bg-[#25D366] py-3 text-white active:scale-95 transition-transform min-h-[52px]"
@@ -39,7 +38,7 @@ export default function MobileBookingBar() {
             <span className="text-[10px] font-bold uppercase tracking-wider">WhatsApp</span>
           </a>
           <a
-            href={`tel:+91${BUSINESS.phone}`}
+            href={getPhoneLink()}
             className="flex flex-col items-center justify-center gap-1 rounded-xl bg-[#1A1A1A]/10 py-3 text-white active:scale-95 transition-transform min-h-[52px]"
             aria-label="Call now"
           >

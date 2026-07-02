@@ -1,15 +1,12 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { BUSINESS } from "@/lib/constants";
 import { getWhatsAppLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { MapPin, Clock, MessageCircle, ArrowRight, Plane } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGsapScrollAnimation } from "@/hooks/useGsapScrollAnimation";
 
 /**
  * Route Corridor — Spec: 04_ARCHITECTURE.md, 06_CONTENT_BRIEF.md #3
@@ -61,65 +58,53 @@ const routes = [
 ];
 
 export function RouteMap() {
-  const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<SVGPathElement>(null);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+  const sectionRef = useGsapScrollAnimation(({ gsap }) => {
+    gsap.from("[data-route-header]", {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
 
-    const ctx = gsap.context(() => {
-      gsap.from("[data-route-header]", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
+    if (lineRef.current) {
+      const length = lineRef.current.getTotalLength();
+      gsap.set(lineRef.current, {
+        strokeDasharray: length,
+        strokeDashoffset: length,
+      });
+      gsap.to(lineRef.current, {
+        strokeDashoffset: 0,
+        duration: 2,
+        ease: "power2.inOut",
         scrollTrigger: {
           trigger: sectionRef.current,
+          start: "top 70%",
+        },
+      });
+    }
+
+    if (cardsRef.current) {
+      const cards = cardsRef.current.querySelectorAll("[data-route-card]");
+      gsap.from(cards, {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: cardsRef.current,
           start: "top 80%",
         },
       });
-
-      // SVG line draw animation
-      if (lineRef.current) {
-        const length = lineRef.current.getTotalLength();
-        gsap.set(lineRef.current, {
-          strokeDasharray: length,
-          strokeDashoffset: length,
-        });
-        gsap.to(lineRef.current, {
-          strokeDashoffset: 0,
-          duration: 2,
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-          },
-        });
-      }
-
-      if (cardsRef.current) {
-        const cards = cardsRef.current.querySelectorAll("[data-route-card]");
-        gsap.from(cards, {
-          y: 60,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 80%",
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    }
+  });
 
   return (
     <section id="routes" ref={sectionRef} className="bg-[#EDE6D6] py-28 sm:py-36">

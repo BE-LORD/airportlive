@@ -1,16 +1,12 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BUSINESS } from "@/lib/constants";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
 import { getWhatsAppLink, getPhoneLink, getEmailLink } from "@/lib/links";
 import { trackEvent } from "@/lib/analytics";
 import { MessageCircle, Phone, Mail, ArrowRight } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGsapScrollAnimation } from "@/hooks/useGsapScrollAnimation";
 
 /**
  * Final CTA — Spec: 04_ARCHITECTURE.md #10
@@ -21,43 +17,29 @@ gsap.registerPlugin(ScrollTrigger);
 export function FinalCTA() {
   const whatsappMessage = `Hi ${BUSINESS.name}, I want to book an airport transfer.\nPickup:\nDrop:\nDate & Time:\nFlight Number:\nPassengers:`;
 
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useGsapScrollAnimation(({ gsap }) => {
+    gsap.to(".cta-glow", {
+      scale: 1.15,
+      opacity: 0.12,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      stagger: 0.5,
+    });
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const ctx = gsap.context(() => {
-      // Ambient background breathing (subtle)
-      gsap.to(".cta-glow", {
-        scale: 1.15,
-        opacity: 0.12,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: 0.5,
-      });
-
-      // Cinematic content entry
-      gsap.from("[data-cta-content] > *", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    gsap.from("[data-cta-content] > *", {
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.12,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 75%",
+      },
+    });
+  });
 
   return (
     <section ref={sectionRef} className="relative bg-[#1E2B4A] py-28 sm:py-36 overflow-hidden">

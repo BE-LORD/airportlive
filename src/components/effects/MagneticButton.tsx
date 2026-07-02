@@ -13,6 +13,7 @@
 
 import { useEffect, useRef, ReactNode, MouseEvent } from 'react';
 import { useAnimationController } from '@/hooks/useAnimationController';
+import { isTouchDevice } from '@/lib/device';
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -34,9 +35,7 @@ export function MagneticButton({
   const isEnabled = useRef(true);
 
   useEffect(() => {
-    // Disable on touch devices
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    isEnabled.current = !isTouchDevice && !prefersReducedMotion;
+    isEnabled.current = !isTouchDevice() && !prefersReducedMotion;
   }, [prefersReducedMotion]);
 
   const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {

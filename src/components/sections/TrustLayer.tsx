@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Shield, Clock, Users, ThumbsUp, Car, HeadphonesIcon } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGsapScrollAnimation, ScrollTrigger } from "@/hooks/useGsapScrollAnimation";
 
 /**
  * Trust Layer — Spec: 04_ARCHITECTURE.md #6, 06_CONTENT_BRIEF.md #6
@@ -55,100 +52,84 @@ const trustPoints = [
 ];
 
 export function TrustLayer() {
-  const sectionRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+  const sectionRef = useGsapScrollAnimation(({ gsap }) => {
+    gsap.from("[data-trust-header]", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
 
-    const ctx = gsap.context(() => {
-      // Header entry
-      gsap.from("[data-trust-header]", {
+    if (statsRef.current) {
+      const items = statsRef.current.querySelectorAll("[data-stat]");
+      gsap.from(items, {
         y: 50,
+        rotationX: -40,
+        transformOrigin: "50% 0%",
         opacity: 0,
-        duration: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "back.out(1.5)",
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: "top 85%",
+        },
+      });
+    }
+
+    if (gridRef.current) {
+      const cards = gridRef.current.querySelectorAll("[data-trust-card]");
+
+      gsap.from(cards, {
+        y: 60,
+        opacity: 0,
+        filter: "blur(6px)",
+        duration: 0.9,
+        stagger: 0.08,
         ease: "expo.out",
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
-
-      // Stats flip-in (clean, no conflicting float)
-      if (statsRef.current) {
-        const items = statsRef.current.querySelectorAll("[data-stat]");
-        gsap.from(items, {
-          y: 50,
-          rotationX: -40,
-          transformOrigin: "50% 0%",
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "back.out(1.5)",
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: "top 85%",
-          },
-        });
-      }
-
-      // Trust cards — clean stagger entry
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll("[data-trust-card]");
-
-        gsap.from(cards, {
-          y: 60,
-          opacity: 0,
-          filter: "blur(6px)",
-          duration: 0.9,
-          stagger: 0.08,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 85%",
-          },
-        });
-
-        // Gentle velocity skew
-        ScrollTrigger.create({
           trigger: gridRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          onUpdate: (self) => {
-            const velocity = self.getVelocity();
-            const skewAmount = gsap.utils.clamp(-4, 4, velocity / 400);
-
-            gsap.to(cards, {
-              skewY: skewAmount,
-              duration: 0.4,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          },
-        });
-      }
-
-      // Subtle parallax glow
-      gsap.to("[data-trust-glow]", {
-        scale: 1.2,
-        opacity: 0.12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
+          start: "top 85%",
         },
       });
-    }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+      ScrollTrigger.create({
+        trigger: gridRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        onUpdate: (self) => {
+          const velocity = self.getVelocity();
+          const skewAmount = gsap.utils.clamp(-4, 4, velocity / 400);
+
+          gsap.to(cards, {
+            skewY: skewAmount,
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        },
+      });
+    }
+
+    gsap.to("[data-trust-glow]", {
+      scale: 1.2,
+      opacity: 0.12,
+      ease: "none",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  });
 
   return (
     <section id="trust" ref={sectionRef} className="bg-[#1E2B4A] py-28 sm:py-36 overflow-hidden relative">

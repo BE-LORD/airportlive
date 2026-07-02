@@ -1,38 +1,16 @@
 'use client';
 
-import { useEffect, useState, useRef, useSyncExternalStore } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, useSpring } from 'framer-motion';
-
-function canUseFineCursor() {
-  if (typeof window === 'undefined') return false;
-  return (
-    window.matchMedia('(pointer: fine)').matches &&
-    window.matchMedia('(min-width: 768px)').matches &&
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  );
-}
-
-function subscribeCursorCapability(onChange: () => void) {
-  if (typeof window === 'undefined') return () => {};
-  const pointerQuery = window.matchMedia('(pointer: fine)');
-  const widthQuery = window.matchMedia('(min-width: 768px)');
-  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  pointerQuery.addEventListener('change', onChange);
-  widthQuery.addEventListener('change', onChange);
-  motionQuery.addEventListener('change', onChange);
-
-  return () => {
-    pointerQuery.removeEventListener('change', onChange);
-    widthQuery.removeEventListener('change', onChange);
-    motionQuery.removeEventListener('change', onChange);
-  };
-}
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [hoverText, setHoverText] = useState('');
-  const enabled = useSyncExternalStore(subscribeCursorCapability, canUseFineCursor, () => false);
+  const finePointer = useMediaQuery('(pointer: fine)');
+  const wideScreen = useMediaQuery('(min-width: 768px)');
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const enabled = finePointer && wideScreen && !reducedMotion;
   
   const cursorRef = useRef<HTMLDivElement>(null);
 

@@ -12,6 +12,7 @@
 
 import { useEffect, useRef, useState, ReactNode } from 'react';
 import { detectDeviceTier, isFeatureEnabled } from '@/lib/three';
+import { isTouchDevice } from '@/lib/device';
 
 interface Card3DTiltProps {
   children: ReactNode;
@@ -37,8 +38,7 @@ export function Card3DTilt({
     const frame = window.requestAnimationFrame(() => {
       const tier = detectDeviceTier();
       const enabled = isFeatureEnabled('enable3DCardTilt', tier);
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      setIsEnabled(enabled && !isTouchDevice);
+      setIsEnabled(enabled && !isTouchDevice());
     });
 
     return () => window.cancelAnimationFrame(frame);
