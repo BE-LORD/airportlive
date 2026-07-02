@@ -206,14 +206,17 @@ export function createWebGLFallbackElement(): HTMLDivElement {
   `;
   
   const message = document.createElement('div');
-  message.innerHTML = `
-    <h3 style="margin: 0 0 1rem 0; font-size: 1.5rem; font-weight: 600;">
-      3D Graphics Not Available
-    </h3>
-    <p style="margin: 0; font-size: 1rem; opacity: 0.8; max-width: 400px;">
-      ${getWebGLErrorMessage()}
-    </p>
-  `;
+
+  const heading = document.createElement('h3');
+  heading.style.cssText = 'margin: 0 0 1rem 0; font-size: 1.5rem; font-weight: 600;';
+  heading.textContent = '3D Graphics Not Available';
+
+  const paragraph = document.createElement('p');
+  paragraph.style.cssText = 'margin: 0; font-size: 1rem; opacity: 0.8; max-width: 400px;';
+  paragraph.textContent = getWebGLErrorMessage();
+
+  message.appendChild(heading);
+  message.appendChild(paragraph);
   
   fallback.appendChild(message);
   return fallback;

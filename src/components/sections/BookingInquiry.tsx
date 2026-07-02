@@ -93,7 +93,7 @@ export function BookingInquiry() {
       vehicle: form.message || "Any", // Map appropriately
     });
     const url = getWhatsAppLink(message);
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
     setSubmitted(true);
   };
 
