@@ -5,24 +5,26 @@ import { useIsMobile } from "./useIsMobile";
 
 describe("useIsMobile", () => {
   let changeHandler: ((e: { matches: boolean }) => void) | null = null;
-  let currentMatches = false;
+  let mockMediaQuery: { matches: boolean; media: string; onchange: null; addListener: ReturnType<typeof vi.fn>; removeListener: ReturnType<typeof vi.fn>; addEventListener: ReturnType<typeof vi.fn>; removeEventListener: ReturnType<typeof vi.fn>; dispatchEvent: ReturnType<typeof vi.fn> };
 
   beforeEach(() => {
     changeHandler = null;
-    currentMatches = false;
 
-    vi.mocked(window.matchMedia).mockImplementation((query: string) => ({
-      matches: currentMatches,
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn((_event: string, handler: any) => {
-        changeHandler = handler;
-      }),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }));
+    vi.mocked(window.matchMedia).mockImplementation((query: string) => {
+      mockMediaQuery = {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn((_event: string, handler: any) => {
+          changeHandler = handler;
+        }),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      };
+      return mockMediaQuery;
+    });
   });
 
   it("returns false for desktop viewport by default", () => {
@@ -31,7 +33,22 @@ describe("useIsMobile", () => {
   });
 
   it("returns true when matchMedia reports mobile width", () => {
-    currentMatches = true;
+    vi.mocked(window.matchMedia).mockImplementation((query: string) => {
+      mockMediaQuery = {
+        matches: true,
+        media: query,
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn((_event: string, handler: any) => {
+          changeHandler = handler;
+        }),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      };
+      return mockMediaQuery;
+    });
+
     const { result } = renderHook(() => useIsMobile());
     expect(result.current).toBe(true);
   });
@@ -60,10 +77,13 @@ describe("useIsMobile", () => {
     expect(result.current).toBe(false);
 
     act(() => {
+      mockMediaQuery.matches = true;
       if (changeHandler) {
         changeHandler({ matches: true });
       }
     });
+
+    expect(result.current).toBe(true);
   });
 
   it("removes event listener on unmount", () => {

@@ -81,16 +81,18 @@ function setNavigatorProps(props: {
   });
 }
 
-describe("detectDeviceTier", () => {
-  beforeEach(() => {
-    vi.restoreAllMocks();
-    setNavigatorProps({
-      userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
-      deviceMemory: undefined,
-      hardwareConcurrency: 8,
-      connection: undefined,
-    });
+// Top-level reset ensures no navigator property leaks between describe blocks
+beforeEach(() => {
+  vi.restoreAllMocks();
+  setNavigatorProps({
+    userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+    deviceMemory: undefined,
+    hardwareConcurrency: 8,
+    connection: undefined,
   });
+});
+
+describe("detectDeviceTier", () => {
 
   it("returns 'low' for mobile user agents", () => {
     setNavigatorProps({
@@ -242,15 +244,6 @@ describe("getTargetFPS", () => {
 });
 
 describe("shouldReduceQuality", () => {
-  beforeEach(() => {
-    vi.restoreAllMocks();
-    setNavigatorProps({
-      userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
-      deviceMemory: undefined,
-      hardwareConcurrency: 8,
-      connection: undefined,
-    });
-  });
 
   it("returns true when WebGL is unsupported", () => {
     mockWebGL({ supported: false });
