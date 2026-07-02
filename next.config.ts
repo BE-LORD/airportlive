@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
           "style-src 'self' 'unsafe-inline'",
           "img-src 'self' data: blob: https://upload.wikimedia.org https://www.google-analytics.com https://www.googletagmanager.com",
           "font-src 'self' data:",
-          "connect-src 'self' https://www.google-analytics.com https://analytics.google.com",
+          "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com",
           "frame-ancestors 'none'",
           "base-uri 'self'",
           "form-action 'self' mailto:",

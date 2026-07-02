@@ -107,7 +107,6 @@ function RouteRow({ route }: { route: Route }) {
         </motion.div>
 
         <h3
-          aria-label={`${route.from} to ${route.to}`}
           className="mb-6 font-serif text-3xl leading-tight text-white drop-shadow-2xl sm:text-4xl md:text-6xl lg:text-8xl"
         >
           <span className="block opacity-60 drop-shadow-md transition-opacity duration-700 group-hover:opacity-100">

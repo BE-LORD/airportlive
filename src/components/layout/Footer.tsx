@@ -45,8 +45,8 @@ export default function Footer() {
             initial={false}
             className="mx-auto flex max-w-full flex-col items-center justify-center gap-0 overflow-hidden text-center font-serif text-[clamp(5.35rem,22vw,8.8rem)] leading-[0.78] tracking-normal select-none drop-shadow-[0_18px_46px_rgba(255,255,255,0.04)] sm:text-[18vw] md:flex-row md:gap-[0.22em] md:text-[14vw] md:leading-[0.82]"
           >
-            {footerBrandWords.map((word) => (
-              <span key={word} className="block" style={footerBrandTextStyle}>
+            {footerBrandWords.map((word, index) => (
+              <span key={`${word}-${index}`} className="block" style={footerBrandTextStyle}>
                 {word}
               </span>
             ))}

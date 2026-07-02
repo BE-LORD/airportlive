@@ -6,7 +6,7 @@ import { buildRevealVariants, motionDurations, motionTokens } from "@/lib/motion
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface RevealProps extends Omit<React.ComponentPropsWithoutRef<typeof motion.div>, "as"> {
-  as?: string;
+  as?: keyof React.JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
   delay?: number;
@@ -26,7 +26,7 @@ export function Reveal({
   ...props
 }: RevealProps) {
   const reducedMotion = useReducedMotion();
-  const Component = motion[as as "div"] ?? motion.div;
+  const Component = (motion[as as keyof typeof motion] ?? motion.div) as typeof motion.div;
 
   return (
     <Component
