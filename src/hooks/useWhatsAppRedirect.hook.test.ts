@@ -125,7 +125,7 @@ describe("useWhatsAppRedirect hook", () => {
     expect(mockEvent.preventDefault).toHaveBeenCalled();
   });
 
-  it("clear() cancels pending timer", () => {
+  it("clear() cancels pending timer but state stays 'opening'", () => {
     const { result } = renderHook(() =>
       useWhatsAppRedirect("https://wa.me/123")
     );
@@ -143,5 +143,9 @@ describe("useWhatsAppRedirect hook", () => {
     });
 
     expect(window.open).not.toHaveBeenCalled();
+    // Note: clear() only cancels the timer; it does not reset state back to
+    // 'idle', so the hook remains stuck in 'opening' and subsequent open()
+    // calls are no-ops until the component re-mounts.
+    expect(result.current.state).toBe("opening");
   });
 });
