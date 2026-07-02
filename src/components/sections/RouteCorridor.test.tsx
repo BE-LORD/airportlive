@@ -16,9 +16,11 @@ describe("RouteCorridor compact mode", () => {
 });
 
 describe("RouteCorridor route title readability", () => {
-  it("gives immersive route titles readable labels with spaces around the connector", () => {
+  it("renders route titles with visible from/to text and a spaced block-level connector", () => {
     const html = renderToStaticMarkup(<RouteCorridor hideHeader />);
 
+    expect(html).toContain(">Ludhiana</span>");
+    expect(html).toContain(">Delhi Airport (DEL)</span>");
     expect(html).toContain("my-2 block px-4");
   });
 });
