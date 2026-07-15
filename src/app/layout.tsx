@@ -1,0 +1,93 @@
+import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import { constructMetadata } from "@/lib/seo";
+import { buildAllSchemas } from "@/lib/schema";
+import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
+import MobileStickyCTA from "@/components/layout/MobileStickyCTA";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import CustomCursor from "@/components/layout/CustomCursor";
+import { PageTransition } from "@/components/motion/PageTransition";
+import { ScrollProgressBar } from "@/components/motion/ScrollProgressBar";
+import { IntroLoader } from "@/components/motion/IntroLoader";
+import Script from "next/script";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-cormorant",
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-dm-sans",
+  display: 'swap',
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-jetbrains-mono",
+  display: 'swap',
+});
+
+export const metadata = constructMetadata();
+
+// Google Analytics — configurable via env, falls back to the project's
+// measurement ID. Scripts only render when an ID is present.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-5CBMPMVBQP";
+const IS_PROD = process.env.NODE_ENV === "production";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const schemas = buildAllSchemas();
+
+  return (
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${dmSans.variable} ${jetbrains.variable}`}
+    >
+      <head>
+        {schemas.map((schema, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
+      </head>
+      <body className="font-sans bg-sona-cream text-sona-text antialiased" suppressHydrationWarning>
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_ID}'${IS_PROD ? "" : ", { 'debug_mode': true }"});
+          `}
+            </Script>
+          </>
+        )}
+        <CustomCursor />
+        <SmoothScroll>
+          <ScrollProgressBar />
+          <div className="grain-overlay" aria-hidden="true" />
+          <IntroLoader />
+          <PageTransition>{children}</PageTransition>
+          <WhatsAppFloat />
+          <MobileStickyCTA />
+        </SmoothScroll>
+      </body>
+    </html>
+  );
+}

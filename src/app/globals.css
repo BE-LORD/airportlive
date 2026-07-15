@@ -1,0 +1,464 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ═══════════════════════════════════════════════════════════
+     SONA CORRIDOR 2.0 — Full Design System Tokens
+     Master Spec: FRAMER_PREMIUM_FRONTEND_REDESIGN_MASTER.md
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── Background Palette ── */
+  --color-sona-cream: #111111;
+  --color-sona-cream-dark: #0F0F0F;
+  --color-sona-cream-soft: #141414;
+  --color-sona-cream-warm: #121212;
+  --color-sona-card: #1A1A1A;
+
+  /* ── Dark Backgrounds ── */
+  --color-sona-dark: #1A1208;
+  --color-sona-indigo: #1E2B4A;
+  --color-sona-indigo-mid: #2D3E6A;
+  --color-sona-ink: #17110A;
+
+  /* ── Gold & Saffron ── */
+  --color-sona-gold: #E5E4E2;
+  --color-sona-gold-bright: #FFFFFF;
+  --color-sona-gold-pale: #F0F0F0;
+  --color-sona-gold-soft: #E2B866;
+  --color-sona-saffron: #E8943A;
+  --color-sona-saffron-muted: #D98A32;
+
+  /* ── Text Palette ── */
+  --color-sona-text: #F5F5F5;
+  --color-sona-text-secondary: #A0A0A0;
+  --color-sona-text-muted: #777777;
+  --color-sona-text-on-dark: #F6F1E7;
+  --color-sona-text-gold: #E5E4E2;
+
+  /* ── Charcoal & Brown ── */
+  --color-sona-charcoal: #2d2d2d;
+  --color-sona-brown: #4B3827;
+
+  /* ── Borders ── */
+  --color-sona-border: rgba(26, 18, 8, 0.08);
+  --color-sona-border-strong: rgba(26, 18, 8, 0.16);
+  --color-sona-border-gold: rgba(200, 120, 10, 0.34);
+
+  /* ── Base Mapping ── */
+  --color-background: #0A0A0A;
+  --color-foreground: #F5F5F5;
+
+  /* ── Font Families ── */
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* ── Shadows ── */
+  --shadow-sona-soft: 0 24px 80px rgba(26, 18, 8, 0.08);
+  --shadow-sona-card: 0 16px 50px rgba(23, 17, 10, 0.08);
+  --shadow-sona-deep: 0 40px 120px rgba(26, 18, 8, 0.18);
+
+  /* ── Animations ── */
+  --animate-fade-in: fade-in 0.8s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+}
+
+/* ═══════════════════════════════════════════════
+   Display Typography Scale (clamp-based fluid)
+   ═══════════════════════════════════════════════ */
+:root {
+  --display-sm: clamp(2.8rem, 6vw, 5rem);
+  --display-md: clamp(4rem, 10vw, 8.5rem);
+  --display-lg: clamp(5.5rem, 15vw, 13rem);
+  --display-xl: clamp(7rem, 18vw, 16rem);
+  --glow-gold: rgba(240, 180, 41, 0.24);
+
+  /* ── Spacing Tokens ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+
+  /* ── Radius Tokens ── */
+  --radius-sm: 0.75rem;
+  --radius-md: 1.25rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-pill: 999px;
+
+  /* ── Premium Motion Tokens ── */
+  --ease-main: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quick: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-micro: 140ms;
+  --duration-tap: 120ms;
+  --duration-focus: 180ms;
+  --duration-card: 220ms;
+  --duration-section: 520ms;
+}
+
+/* ═══════════════════════════════════════════════
+   Keyframe Animations
+   ═══════════════════════════════════════════════ */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gold-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes scale-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes premium-shine {
+  0% { transform: translateX(-120%) skewX(-14deg); opacity: 0; }
+  35% { opacity: 0.22; }
+  100% { transform: translateX(140%) skewX(-14deg); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════ */
+
+/* NOTE: No scroll-behavior: smooth here.
+   Lenis handles smooth scrolling. CSS smooth-scroll
+   would cause double-interpolation and sluggishness. */
+
+body {
+  background-color: var(--color-sona-cream);
+  color: var(--color-sona-text);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-padding-top: 88px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-sona-gold);
+  color: white;
+}
+
+/* ═══════════════════════════════════════════════
+   Grain Overlay — Animated Film Texture
+   Subtle position drift for cinematic realism
+   ═══════════════════════════════════════════════ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+  animation: grain-drift 8s steps(10) infinite;
+}
+
+@keyframes grain-drift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -1%); }
+  20% { transform: translate(1%, 2%); }
+  30% { transform: translate(-1%, -2%); }
+  40% { transform: translate(2%, 1%); }
+  50% { transform: translate(-2%, 2%); }
+  60% { transform: translate(1%, -1%); }
+  70% { transform: translate(-1%, 2%); }
+  80% { transform: translate(2%, -2%); }
+  90% { transform: translate(-2%, -1%); }
+}
+
+/* ═══════════════════════════════════════════════
+   Reduced Motion — Accessibility (WCAG AA)
+   ═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .motion-static-on-reduce {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.motion-gold-shine {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.motion-gold-shine::after {
+  animation: premium-shine 900ms var(--ease-soft) 1150ms 1 both;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-120%) skewX(-14deg);
+}
+
+.premium-link-underline {
+  background-image: linear-gradient(#E5E4E2, #E5E4E2);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size var(--duration-card) var(--ease-main), color var(--duration-card) var(--ease-main);
+}
+
+.premium-link-underline:hover,
+.premium-link-underline:focus-visible,
+.premium-link-underline[data-active="true"] {
+  background-size: 100% 1px;
+}
+
+.premium-tap {
+  transition: transform var(--duration-tap) var(--ease-quick), background-color var(--duration-card) var(--ease-main), border-color var(--duration-card) var(--ease-main);
+}
+
+.premium-tap:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-gold-shine::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   Focus Visible — Gold ring (WCAG AA)
+   ═══════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid var(--color-sona-gold);
+  outline-offset: 4px;
+}
+
+/* ═══════════════════════════════════════════════
+   Custom Scrollbar — Editorial warm
+   ═══════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sona-cream-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sona-gold);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sona-saffron);
+}
+
+/* ═══════════════════════════════════════════════
+   Typography Helpers
+   ═══════════════════════════════════════════════ */
+.display-font {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.mono-accent {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════
+   Gold Glow Effects
+   ═══════════════════════════════════════════════ */
+.gold-glow {
+  box-shadow: 0 0 40px var(--glow-gold);
+}
+
+.gold-glow-hover:hover {
+  box-shadow: 0 8px 40px var(--glow-gold);
+}
+
+/* ═══════════════════════════════════════════════
+   Lenis & Custom Cursor Styles
+   ═══════════════════════════════════════════════ */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hide default cursor on desktop devices when CustomCursor is active */
+@media (pointer: fine) {
+  body, a, button, [role="button"], input, select, textarea, [data-cursor] {
+    cursor: none !important;
+  }
+}
+
+/* Luxury Noise Texture Overlay — using local SVG noise (no external deps) */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Kinetic reveal animations */
+.kinetic-reveal {
+  overflow: hidden;
+}
+
+.kinetic-reveal > span {
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════
+   1000000x Luxury Atmospheric Effects
+   ═══════════════════════════════════════════════ */
+
+/* Breathing CTA Glow — 4s organic pulse */
+.breathing-glow {
+  animation: breathe-glow 4s ease-in-out infinite;
+}
+
+@keyframes breathe-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(200, 120, 10, 0.15), 0 0 60px rgba(200, 120, 10, 0.05); }
+  50% { box-shadow: 0 0 30px rgba(200, 120, 10, 0.3), 0 0 80px rgba(200, 120, 10, 0.1); }
+}
+
+/* Gold Text Shimmer — Animated gradient text */
+.gold-text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #D1D1D1 0%,
+    #FFFFFF 25%,
+    #F0F0F0 50%,
+    #FFFFFF 75%,
+    #D1D1D1 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-flow 3s linear infinite;
+}
+
+@keyframes shimmer-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Iridescent Card Holographic Sheen */
+.holographic-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.holographic-sheen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.03) 35%,
+    rgba(200, 120, 10, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 65%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.holographic-sheen:hover::before {
+  opacity: 1;
+}
+
+/* Section Vignette — Subtle edge darkening */
+.section-vignette {
+  position: relative;
+}
+
+.section-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.06) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathing-glow { animation: none !important; }
+  .gold-text-shimmer { animation: none !important; }
+  .grain-overlay { animation: none !important; }
+}
+
+body[data-intro-loading="true"] .airportlive-custom-cursor {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+@media (max-width: 767px), (pointer: coarse) {
+  .grain-overlay,
+  .noise-overlay {
+    display: none;
+  }
+}

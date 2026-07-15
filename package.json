@@ -1,0 +1,58 @@
+{
+  "name": "v3-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@remotion/google-fonts": "4.0.462",
+    "@remotion/three": "4.0.462",
+    "@remotion/transitions": "4.0.462",
+    "@use-gesture/react": "^10.3.1",
+    "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.38.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.23",
+    "lucide-react": "^1.14.0",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@remotion/cli": "^4.0.462",
+    "@remotion/media": "^4.0.462",
+    "@tailwindcss/postcss": "^4",
+    "@types/axe-core": "^2.0.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.184.1",
+    "@vitest/ui": "^4.1.6",
+    "axe-core": "^4.11.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "jsdom": "^25.0.1",
+    "playwright-core": "^1.60.0",
+    "remotion": "^4.0.462",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.6"
+  },
+  "overrides": {
+    "esbuild": "0.28.0",
+    "postcss": "8.5.14"
+  }
+}

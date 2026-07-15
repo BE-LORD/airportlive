@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__canva__start-editing-transaction",
+      "mcp__canva__copy-design",
+      "mcp__canva__get-design-content",
+      "mcp__canva__generate-design",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npx vitest *)",
+      "Bash(node node_modules/@remotion/cli/remotion-cli.js versions)",
+      "Bash(echo \"EXIT: $?\")",
+      "Read(//tmp/**)",
+      "Bash(read -r ref)",
+      "Bash([ -f \"public$ref\" ])",
+      "Bash(cd \"C:/Users/pr7n8/.claude/skills\"; echo \"=== available skills ===\"; ls; echo \"\"; echo \"=== remotion-markup ===\"; cat remotion-markup/SKILL.md 2>/dev/null | head -200)",
+      "Bash(npx eslint *)",
+      "Bash(echo \"=== EXIT: $? ===\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"=== TSC EXIT: $? ===\")",
+      "Bash(cd \"C:/Users/pr7n8/Downloads/airportlive-main \\(4\\)/airportlive-main\" *)",
+      "Bash(awk '{print $9}')",
+      "Bash(grep -v \"^$\")",
+      "Bash(ls node_modules/@remotion/three/package.json)",
+      "Bash(ls node_modules/three/package.json)",
+      "Bash(node node_modules/@remotion/cli/remotion-cli.js add @remotion/three)",
+      "Bash(npm i *)",
+      "Bash(node -e \"const p=require\\('./node_modules/@remotion/google-fonts/package.json'\\); console.log\\(JSON.stringify\\(p.exports ? Object.keys\\(p.exports\\).slice\\(0,5\\) : 'no exports field'\\)\\); console.log\\('main:', p.main, 'module:', p.module\\);\")",
+      "Bash(node node_modules/@remotion/cli/remotion-cli.js studio remotion/index.ts --no-open --port 3999)",
+      "Bash(curl -s -o /dev/null \"http://localhost:3001/\")",
+      "Bash(curl -s -o /dev/null -w \"homepage: HTTP %{http_code} | %{size_download} bytes | %{time_total}s\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"warm:     HTTP %{http_code} | %{time_total}s\\\\n\" http://localhost:3001/)"
+    ]
+  }
+}
